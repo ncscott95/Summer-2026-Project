@@ -41,15 +41,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Retrieve",
-                    "type": "Button",
-                    "id": "7795a5f1-7f07-4142-b08c-b3e9079720d8",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -225,7 +216,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Spin",
+                    "action": "Cast",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -236,18 +227,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cast",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6bad57f2-eaa3-4981-9361-66e2e2d76771",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Retrieve",
+                    "action": "Spin",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

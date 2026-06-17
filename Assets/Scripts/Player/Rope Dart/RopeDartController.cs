@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RopeDartController : Singleton<RopeDartController>
 {
@@ -17,28 +18,23 @@ public class RopeDartController : Singleton<RopeDartController>
     [SerializeField] private Transform origin;
     [SerializeField] private Transform flag;
 
-    [Header("Basic Settings")]
-    [SerializeField] private float spinLength;
-    [SerializeField] private float maxLength;
-
-    [Header("Spin Settings")]
-    [SerializeField] private float baseSpinSpeed;
-    [SerializeField] private float spinAcceleration;
-
-    [Header("Retrieval Settings")]
-    [SerializeField] private float retrievalSpeed;
-    [SerializeField] private float retrievalAcceleration;
-    [SerializeField] private float retrievalFinishThreshold;
+    [Header("Current Rope Data")]
+    [SerializeField] private RopeDartData data;
 
     private float currentVelocity = 0f;
     private Vector3 currentDirection = Vector3.zero;
     private float currentRadius = 0f;
-    private bool isClockwise = false;
+    private bool isClockwise = true;
     private RopeDartState currentState = RopeDartState.Idle;
     private Coroutine currentCoroutine;
+    private Stack<BindPoint> wrappedPoints = new Stack<BindPoint>();
+
+    private Vector3 retrieveTarget;
+    private bool isTryingToSpin = false;
 
     void Start()
     {
+        retrieveTarget = origin.position - Vector3.up * data.SpinLength;
         Idle();
     }
 
@@ -48,14 +44,61 @@ public class RopeDartController : Singleton<RopeDartController>
         LookAtDir2D(flag, currentDirection);
     }
 
+    // Input Disambiguation Methods
+
+    public void HandleSpinRetrieveInput()
+    {
+        isTryingToSpin = true;
+
+        if (currentState == RopeDartState.Idle)
+        {
+            StartSpin();
+        }
+        else if (currentState == RopeDartState.Extended || currentState == RopeDartState.Casting)
+        {
+            Retrieve();
+        }
+    }
+
+    public void HandleSpinInputEnd()
+    {
+        isTryingToSpin = false;
+
+        if (currentState == RopeDartState.Spinning)
+        {
+            StopSpin();
+        }
+    }
+
+    // public void HandleCastRetrieveInput()
+    // {
+    //     if (currentState == RopeDartState.Spinning)
+    //     {
+    //         Cast();
+    //     }
+    //     else if (currentState == RopeDartState.Extended || currentState == RopeDartState.Casting)
+    //     {
+    //         Retrieve();
+    //     }
+    // }
+
     // State Control Methods
 
     public void StartSpin()
     {
-        if (currentState != RopeDartState.Idle)
+        if (currentState != RopeDartState.Idle
+                && currentState != RopeDartState.Retrieving)
         {
             return;
         }
+
+        if (currentState == RopeDartState.Idle)
+        {
+            // default to a wheel plane down spin
+            isClockwise = true;
+        }
+
+        // wrappedPoints.Push(null);
 
         currentCoroutine = StartCoroutine(SpinCoroutine());
         currentState = RopeDartState.Spinning;
@@ -112,13 +155,34 @@ public class RopeDartController : Singleton<RopeDartController>
         currentCoroutine = StartCoroutine(RetrieveCoroutine());
     }
 
+    private void OnEndRetrieve()
+    {
+        if (currentDirection.x < 0)
+        {
+            isClockwise = true;
+        }
+        else
+        {
+            isClockwise = false;
+        }
+
+        if (isTryingToSpin)
+        {
+            StartSpin();
+        }
+        else
+        {
+            Idle();
+        }
+    }
+
     private void Idle()
     {
-        head.localPosition = new Vector3(0, -spinLength, 0);
+        head.localPosition = retrieveTarget - origin.position;
         currentDirection = Vector3.up;
         LookAtDir2D(head, Vector3.down);
         currentVelocity = 0f;
-        currentRadius = spinLength;
+        currentRadius = data.SpinLength;
         currentState = RopeDartState.Idle;
     }
 
@@ -126,15 +190,17 @@ public class RopeDartController : Singleton<RopeDartController>
 
     private IEnumerator SpinCoroutine()
     {
+        currentVelocity = LinearToAngularSpeed(currentVelocity, data.SpinLength);
+
         while (true)
         {
-            if (currentVelocity < baseSpinSpeed)
+            if (currentVelocity < data.BaseSpinSpeed)
             {
-                currentVelocity += spinAcceleration * Time.deltaTime;
-                if (currentVelocity > baseSpinSpeed) currentVelocity = baseSpinSpeed;
+                currentVelocity += data.SpinAcceleration * Time.deltaTime;
+                if (currentVelocity > data.BaseSpinSpeed) currentVelocity = data.BaseSpinSpeed;
             }
 
-            head.RotateAround(origin.position, Vector3.forward, currentVelocity * Time.deltaTime);
+            head.RotateAround(origin.position, Vector3.forward, currentVelocity * Time.deltaTime * (isClockwise ? -1 : 1));
             LookAtPoint2D(head, origin);
             currentDirection = isClockwise ? -head.right : head.right;
             yield return null;
@@ -143,9 +209,9 @@ public class RopeDartController : Singleton<RopeDartController>
 
     private IEnumerator CastCoroutine()
     {
-        currentVelocity = SpinToCastVelocity(currentVelocity, spinLength);
+        currentVelocity = AngularToLinearSpeed(currentVelocity, data.SpinLength);
 
-        while (Vector3.Distance(head.position, origin.position) < maxLength)
+        while (Vector3.Distance(head.position, origin.position) < data.MaxLength)
         {
             head.position += currentDirection * currentVelocity * Time.deltaTime;
             LookAtDir2D(head, currentDirection);
@@ -158,15 +224,15 @@ public class RopeDartController : Singleton<RopeDartController>
 
     private IEnumerator RetrieveCoroutine()
     {
-        currentDirection = (origin.position - head.position).normalized;
+        currentDirection = (retrieveTarget - head.position).normalized;
         // currentVelocity = 0f;
 
-        while (Vector3.Distance(head.position, origin.position) > retrievalFinishThreshold)
+        while (Vector3.Distance(head.position, retrieveTarget) > data.RetrievalFinishThreshold)
         {
-            if (currentVelocity < retrievalSpeed)
+            if (currentVelocity < data.RetrievalSpeed)
             {
-                currentVelocity += retrievalAcceleration * Time.deltaTime;
-                if (currentVelocity > retrievalSpeed) currentVelocity = retrievalSpeed;
+                currentVelocity += data.RetrievalAcceleration * Time.deltaTime;
+                if (currentVelocity > data.RetrievalSpeed) currentVelocity = data.RetrievalSpeed;
             }
 
             head.position += currentDirection * currentVelocity * Time.deltaTime;
@@ -174,15 +240,20 @@ public class RopeDartController : Singleton<RopeDartController>
             yield return null;
         }
 
-        Idle();
         currentCoroutine = null;
+        OnEndRetrieve();
     }
 
     // Helper Methods
 
-    private float SpinToCastVelocity(float spinVelocity, float radius)
+    private float AngularToLinearSpeed(float angularSpeed, float radius)
     {
-        return Mathf.Deg2Rad * spinVelocity * radius;
+        return Mathf.Deg2Rad * angularSpeed * radius;
+    }
+
+    private float LinearToAngularSpeed(float linearSpeed, float radius)
+    {
+        return linearSpeed * Mathf.Rad2Deg / radius;
     }
 
     private void LookAtPoint2D(Transform from, Transform to)

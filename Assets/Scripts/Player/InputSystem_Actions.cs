@@ -127,15 +127,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Retrieve"",
-                    ""type"": ""Button"",
-                    ""id"": ""7795a5f1-7f07-4142-b08c-b3e9079720d8"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -311,7 +302,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Spin"",
+                    ""action"": ""Cast"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -322,18 +313,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Cast"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6bad57f2-eaa3-4981-9361-66e2e2d76771"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Retrieve"",
+                    ""action"": ""Spin"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -925,7 +905,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Spin = m_Player.FindAction("Spin", throwIfNotFound: true);
         m_Player_Cast = m_Player.FindAction("Cast", throwIfNotFound: true);
-        m_Player_Retrieve = m_Player.FindAction("Retrieve", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1023,7 +1002,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Spin;
     private readonly InputAction m_Player_Cast;
-    private readonly InputAction m_Player_Retrieve;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1051,10 +1029,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Cast".
         /// </summary>
         public InputAction @Cast => m_Wrapper.m_Player_Cast;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/Retrieve".
-        /// </summary>
-        public InputAction @Retrieve => m_Wrapper.m_Player_Retrieve;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1093,9 +1067,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Cast.started += instance.OnCast;
             @Cast.performed += instance.OnCast;
             @Cast.canceled += instance.OnCast;
-            @Retrieve.started += instance.OnRetrieve;
-            @Retrieve.performed += instance.OnRetrieve;
-            @Retrieve.canceled += instance.OnRetrieve;
         }
 
         /// <summary>
@@ -1119,9 +1090,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Cast.started -= instance.OnCast;
             @Cast.performed -= instance.OnCast;
             @Cast.canceled -= instance.OnCast;
-            @Retrieve.started -= instance.OnRetrieve;
-            @Retrieve.performed -= instance.OnRetrieve;
-            @Retrieve.canceled -= instance.OnRetrieve;
         }
 
         /// <summary>
@@ -1450,13 +1418,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCast(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Retrieve" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnRetrieve(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
