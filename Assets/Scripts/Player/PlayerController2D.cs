@@ -38,6 +38,11 @@ public class PlayerController2D : PlayerControllerBase
         Actions.Player.Jump.performed += ctx => Jump();
         Actions.Player.Jump.canceled += ctx => StopJump();
         _airJumpsRemaining = _airJumpsMax;
+
+        Actions.Player.Spin.performed += ctx => RopeDartController.Instance.StartSpin();
+        Actions.Player.Spin.canceled += ctx => RopeDartController.Instance.StopSpin();
+        Actions.Player.Cast.performed += ctx => RopeDartController.Instance.Cast();
+        Actions.Player.Retrieve.performed += ctx => RopeDartController.Instance.Retrieve();
     }
 
     public override void OnDisable()
@@ -46,6 +51,11 @@ public class PlayerController2D : PlayerControllerBase
 
         Actions.Player.Jump.performed -= ctx => Jump();
         Actions.Player.Jump.canceled -= ctx => StopJump();
+
+        Actions.Player.Spin.performed -= ctx => RopeDartController.Instance.StartSpin();
+        Actions.Player.Spin.canceled -= ctx => RopeDartController.Instance.StopSpin();
+        Actions.Player.Cast.performed -= ctx => RopeDartController.Instance.Cast();
+        Actions.Player.Retrieve.performed -= ctx => RopeDartController.Instance.Retrieve();
     }
 
     public override void Update()
