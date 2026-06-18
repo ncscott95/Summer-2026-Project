@@ -1,22 +1,11 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-public class RopeDartController : Singleton<RopeDartController>
+public class RopeDartManager : Singleton<RopeDartManager>
 {
-    private enum RopeDartState
-    {
-        Idle,
-        Spinning,
-        Stalling,
-        Casting,
-        Extended,
-        Retrieving
-    }
 
     [Header("Object References")]
     [SerializeField] private Transform head;
-    [SerializeField] private Transform origin;
+    [SerializeField] private Transform startOrigin;
     [SerializeField] private Transform flag;
 
     [Header("Current Rope Data")]
@@ -26,45 +15,50 @@ public class RopeDartController : Singleton<RopeDartController>
     private Vector3 currentVelocity = Vector3.zero;
     private Vector3 currentDirection = Vector3.zero;
     private bool isClockwise = true;
-    private RopeDartState currentState = RopeDartState.Idle;
+    public RopeDartState CurrentState { get; private set; } = RopeDartState.Idle;
+    private Transform currentOrigin;
     private float currentRadius = 0f;
-    private Stack<BindPoint> wrappedPoints = new Stack<BindPoint>();
 
-    private Vector3 retrieveTarget;
+    private Vector3 retrieveTarget => currentOrigin.position - Vector3.up * currentRadius;
     private bool isTryingToSpin = false;
 
     void Start()
     {
+        currentOrigin = startOrigin;
         currentRadius = data.SpinLength;
-        retrieveTarget = origin.position - Vector3.up * currentRadius;
         Reset();
+        
+        BindPointObject point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.AnchorHand);
+        RopeRenderer.Instance.AddPointBeforeHead(point);
+        point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.LeadHand);
+        RopeRenderer.Instance.AddPointBeforeHead(point);
     }
 
     void Update()
     {
         // apply acceleration based on current state
-        if (currentState == RopeDartState.Spinning)
+        if (CurrentState == RopeDartState.Spinning)
         {
             ApplySpinMotion(true);
         }
-        else if (currentState == RopeDartState.Stalling)
+        else if (CurrentState == RopeDartState.Stalling)
         {
             ApplySpinMotion(false);
         }
         else
         {
-            if (currentState == RopeDartState.Casting) currentVelocity += CalculateGravityAcceleration();
+            if (CurrentState == RopeDartState.Casting) currentVelocity += CalculateGravityAcceleration();
             head.position += currentVelocity * Time.deltaTime;
         }
 
         // check for state transitions
         if (IsMaxLengthExceeded())
         {
-            if (currentState == RopeDartState.Casting) OnEndCast();
+            if (CurrentState == RopeDartState.Casting) OnEndCast();
             else OnMaxLength();
         }
 
-        if (currentState == RopeDartState.Retrieving && IsRetrievalFinished())
+        if (CurrentState == RopeDartState.Retrieving && IsRetrievalFinished())
         {
             OnEndRetrieve();
         }
@@ -90,8 +84,8 @@ public class RopeDartController : Singleton<RopeDartController>
         }
 
         float angularSpeed = LinearToAngularSpeed(currentSpeed, currentRadius);
-        head.RotateAround(origin.position, Vector3.forward, (isClockwise ? -1 : 1) * angularSpeed * Time.deltaTime);
-        LookAtPoint2D(head, origin);
+        head.RotateAround(currentOrigin.position, Vector3.forward, (isClockwise ? -1 : 1) * angularSpeed * Time.deltaTime);
+        LookAtPoint2D(head, currentOrigin.position);
         currentDirection = isClockwise ? -head.right : head.right;
         currentVelocity = currentDirection * currentSpeed;
 
@@ -104,66 +98,47 @@ public class RopeDartController : Singleton<RopeDartController>
 
     private Vector3 CalculateGravityAcceleration()
     {
-        if (currentState == RopeDartState.Idle || currentState == RopeDartState.Spinning || currentState == RopeDartState.Retrieving)
+        if (CurrentState == RopeDartState.Idle || CurrentState == RopeDartState.Spinning || CurrentState == RopeDartState.Retrieving)
             return Vector3.zero;
 
         return data.Gravity * Time.deltaTime * Vector3.down;
-    }
-
-    // Input Disambiguation Methods
-
-    public void HandleSpinRetrieveInput()
-    {
-        isTryingToSpin = true;
-
-        if (currentState == RopeDartState.Idle || currentState == RopeDartState.Stalling) StartSpin();
-        else if (currentState == RopeDartState.Extended || currentState == RopeDartState.Casting) Retrieve();
-    }
-
-    public void HandleSpinInputEnd()
-    {
-        isTryingToSpin = false;
-
-        if (currentState == RopeDartState.Spinning) StopSpin();
     }
 
     // State Control Methods
 
     public void StartSpin()
     {
-        if (currentState != RopeDartState.Idle && currentState != RopeDartState.Retrieving && currentState != RopeDartState.Stalling)
+        if (CurrentState != RopeDartState.Idle && CurrentState != RopeDartState.Retrieving && CurrentState != RopeDartState.Stalling)
             return;
 
-        if (currentState == RopeDartState.Idle)
+        if (CurrentState == RopeDartState.Idle)
         {
             // default to a wheel plane down spin
             isClockwise = true;
         }
-        else if (currentState == RopeDartState.Stalling)
+        else if (CurrentState == RopeDartState.Stalling)
         {
             // flip spin direction when starting a new spin during stall
             isClockwise = !isClockwise;
         }
 
-        // wrappedPoints.Push(null);
-
-        currentState = RopeDartState.Spinning;
+        CurrentState = RopeDartState.Spinning;
     }
 
     public void StopSpin()
     {
-        if (currentState != RopeDartState.Spinning)
+        if (CurrentState != RopeDartState.Spinning)
             return;
 
-        currentState = RopeDartState.Stalling;
+        CurrentState = RopeDartState.Stalling;
     }
 
     public void Cast()
     {
-        if (currentState != RopeDartState.Spinning)
+        if (CurrentState != RopeDartState.Spinning)
             return;
 
-        currentState = RopeDartState.Casting;
+        CurrentState = RopeDartState.Casting;
     }
 
     private void OnEndCast()
@@ -171,18 +146,39 @@ public class RopeDartController : Singleton<RopeDartController>
         OnMaxLength();
     }
 
+    public void TwineSimple()
+    {
+        // TODO: pick an elbow depending on which side the player is spinning on (lead/anchor)
+        Twine(BindPointID.LeadElbow);
+    }
+
+    public void Twine(BindPointID pointID)
+    {
+        if (CurrentState != RopeDartState.Spinning)
+            return;
+        
+        BindPointObject point = BindPointStack.Instance.TryPushWrappedPoint(pointID);
+        if (point == null)
+            return;
+        
+        Debug.Log($"Twining to {pointID} at position {point.Position}");
+
+        currentOrigin = point.transform;
+        RopeRenderer.Instance.AddPointBeforeHead(point);
+    }
+
     private void OnMaxLength()
     {
         currentVelocity = Vector3.zero;
-        currentState = RopeDartState.Extended;
+        CurrentState = RopeDartState.Extended;
     }
 
     public void Retrieve()
     {
-        if (currentState != RopeDartState.Extended && currentState != RopeDartState.Casting)
+        if (CurrentState != RopeDartState.Extended && CurrentState != RopeDartState.Casting)
             return;
 
-        currentState = RopeDartState.Retrieving;
+        CurrentState = RopeDartState.Retrieving;
 
         Vector3 toTarget = (retrieveTarget - head.position).normalized;
         currentVelocity = toTarget * data.RetrievalSpeed;
@@ -199,13 +195,25 @@ public class RopeDartController : Singleton<RopeDartController>
 
     private void Reset()
     {
-        head.localPosition = retrieveTarget - origin.position;
+        // TODO: maybe temp for testing twining
+        // currentOrigin = startOrigin;
+        head.position = retrieveTarget;
         currentDirection = Vector3.up;
         LookAtDir2D(head, Vector3.down);
         currentSpeed = 0f;
         currentVelocity = Vector3.zero;
         currentRadius = data.SpinLength;
-        currentState = RopeDartState.Idle;
+        CurrentState = RopeDartState.Idle;
+    }
+
+    public void FailCombo()
+    {
+        Reset();
+    }
+
+    public void ToggleTryingToSpin(bool value)
+    {
+        isTryingToSpin = value;
     }
 
     // Helper Methods
@@ -225,6 +233,11 @@ public class RopeDartController : Singleton<RopeDartController>
         LookAtDir2D(from, to.position - from.position);
     }
 
+    private void LookAtPoint2D(Transform from, Vector3 to)
+    {
+        LookAtDir2D(from, to - from.position);
+    }
+
     private void LookAtDir2D(Transform from, Vector3 direction)
     {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
@@ -233,11 +246,26 @@ public class RopeDartController : Singleton<RopeDartController>
 
     private bool IsMaxLengthExceeded()
     {
-        return Vector3.Distance(head.position, origin.position) >= data.MaxLength;
+        return Vector3.Distance(head.position, currentOrigin.position) >= data.MaxLength;
     }
 
     private bool IsRetrievalFinished()
     {
         return Vector3.Distance(head.position, retrieveTarget) <= data.RetrievalFinishThreshold;
     }
+
+    public Vector3 GetHeadPosition()
+    {
+        return head.position;
+    }
+}
+
+public enum RopeDartState
+{
+    Idle,
+    Spinning,
+    Stalling,
+    Casting,
+    Extended,
+    Retrieving
 }

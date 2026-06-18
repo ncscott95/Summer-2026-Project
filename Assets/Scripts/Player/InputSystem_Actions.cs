@@ -127,6 +127,33 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Twine"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d8f00b2-9bbb-46c0-b411-df212f13d2c2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Wrap"",
+                    ""type"": ""Button"",
+                    ""id"": ""193d614e-fe89-420d-a8b4-6cc43beec9be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DartDirection"",
+                    ""type"": ""Value"",
+                    ""id"": ""da54bb88-558f-4de2-a813-6e9aedccd62a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -303,6 +330,50 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Spin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8661db7-c954-459f-b11e-c6f1d9c4d598"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Twine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d719667-6a49-438c-880d-81fc330bf5d6"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Twine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f0aae59-74bb-45fb-9e43-153d90f6c822"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wrap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c21db115-4da0-441d-8afa-3e905e292b52"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DartDirection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -894,6 +965,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Spin = m_Player.FindAction("Spin", throwIfNotFound: true);
         m_Player_Cast = m_Player.FindAction("Cast", throwIfNotFound: true);
+        m_Player_Twine = m_Player.FindAction("Twine", throwIfNotFound: true);
+        m_Player_Wrap = m_Player.FindAction("Wrap", throwIfNotFound: true);
+        m_Player_DartDirection = m_Player.FindAction("DartDirection", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -991,6 +1065,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Spin;
     private readonly InputAction m_Player_Cast;
+    private readonly InputAction m_Player_Twine;
+    private readonly InputAction m_Player_Wrap;
+    private readonly InputAction m_Player_DartDirection;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1018,6 +1095,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Cast".
         /// </summary>
         public InputAction @Cast => m_Wrapper.m_Player_Cast;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Twine".
+        /// </summary>
+        public InputAction @Twine => m_Wrapper.m_Player_Twine;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Wrap".
+        /// </summary>
+        public InputAction @Wrap => m_Wrapper.m_Player_Wrap;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/DartDirection".
+        /// </summary>
+        public InputAction @DartDirection => m_Wrapper.m_Player_DartDirection;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1056,6 +1145,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Cast.started += instance.OnCast;
             @Cast.performed += instance.OnCast;
             @Cast.canceled += instance.OnCast;
+            @Twine.started += instance.OnTwine;
+            @Twine.performed += instance.OnTwine;
+            @Twine.canceled += instance.OnTwine;
+            @Wrap.started += instance.OnWrap;
+            @Wrap.performed += instance.OnWrap;
+            @Wrap.canceled += instance.OnWrap;
+            @DartDirection.started += instance.OnDartDirection;
+            @DartDirection.performed += instance.OnDartDirection;
+            @DartDirection.canceled += instance.OnDartDirection;
         }
 
         /// <summary>
@@ -1079,6 +1177,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Cast.started -= instance.OnCast;
             @Cast.performed -= instance.OnCast;
             @Cast.canceled -= instance.OnCast;
+            @Twine.started -= instance.OnTwine;
+            @Twine.performed -= instance.OnTwine;
+            @Twine.canceled -= instance.OnTwine;
+            @Wrap.started -= instance.OnWrap;
+            @Wrap.performed -= instance.OnWrap;
+            @Wrap.canceled -= instance.OnWrap;
+            @DartDirection.started -= instance.OnDartDirection;
+            @DartDirection.performed -= instance.OnDartDirection;
+            @DartDirection.canceled -= instance.OnDartDirection;
         }
 
         /// <summary>
@@ -1407,6 +1514,27 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCast(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Twine" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTwine(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Wrap" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWrap(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DartDirection" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDartDirection(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

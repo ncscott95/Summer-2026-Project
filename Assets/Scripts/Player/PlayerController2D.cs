@@ -39,9 +39,13 @@ public class PlayerController2D : PlayerControllerBase
         Actions.Player.Jump.canceled += ctx => StopJump();
         _airJumpsRemaining = _airJumpsMax;
 
-        Actions.Player.Spin.performed += ctx => RopeDartController.Instance.HandleSpinRetrieveInput();
-        Actions.Player.Spin.canceled += ctx => RopeDartController.Instance.HandleSpinInputEnd();
-        Actions.Player.Cast.performed += ctx => RopeDartController.Instance.Cast();
+        Actions.Player.Spin.performed += ctx => RopeDartInputController.Instance.HandleSpinRetrieveInput();
+        Actions.Player.Spin.canceled += ctx => RopeDartInputController.Instance.HandleSpinInputEnd();
+        Actions.Player.Cast.performed += ctx => RopeDartInputController.Instance.HandleCastInput();
+        Actions.Player.Twine.performed += ctx => RopeDartInputController.Instance.HandleTwineInput();
+        Actions.Player.Wrap.performed += ctx => RopeDartInputController.Instance.HandleWrapInput();
+        Actions.Player.Wrap.canceled += ctx => RopeDartInputController.Instance.HandleWrapInputEnd();
+        Actions.Player.DartDirection.performed += ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
     }
 
     public override void OnDisable()
@@ -51,9 +55,13 @@ public class PlayerController2D : PlayerControllerBase
         Actions.Player.Jump.performed -= ctx => Jump();
         Actions.Player.Jump.canceled -= ctx => StopJump();
 
-        Actions.Player.Spin.performed -= ctx => RopeDartController.Instance.HandleSpinRetrieveInput();
-        Actions.Player.Spin.canceled -= ctx => RopeDartController.Instance.HandleSpinInputEnd();
-        Actions.Player.Cast.performed -= ctx => RopeDartController.Instance.Cast();
+        Actions.Player.Spin.performed -= ctx => RopeDartInputController.Instance.HandleSpinRetrieveInput();
+        Actions.Player.Spin.canceled -= ctx => RopeDartInputController.Instance.HandleSpinInputEnd();
+        Actions.Player.Cast.performed -= ctx => RopeDartInputController.Instance.HandleCastInput();
+        Actions.Player.Twine.performed -= ctx => RopeDartInputController.Instance.HandleTwineInput();
+        Actions.Player.Wrap.performed -= ctx => RopeDartInputController.Instance.HandleWrapInput();
+        Actions.Player.Wrap.canceled -= ctx => RopeDartInputController.Instance.HandleWrapInputEnd();
+        Actions.Player.DartDirection.performed -= ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
     }
 
     public override void Update()
