@@ -8,9 +8,13 @@ public class RopeDartData : ScriptableObject
     public float SpinLength;
     public float MaxLength;
 
+    [Header("Gravity Settings")]
+    public float Gravity;
+
     [Header("Spin Settings")]
-    public float BaseSpinSpeed;
     public float SpinAcceleration;
+    public float SpinLinearSpeed;
+    public float SpinDeceleration;
 
     [Header("Retrieval Settings")]
     public float RetrievalSpeed;

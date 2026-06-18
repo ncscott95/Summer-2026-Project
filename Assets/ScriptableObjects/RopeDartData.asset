@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RopeDartData
   SpinLength: 1.2
   MaxLength: 5
-  BaseSpinSpeed: 900
-  SpinAcceleration: 900
-  RetrievalSpeed: 10
-  RetrievalAcceleration: 10
+  Gravity: 20
+  SpinAcceleration: 15
+  SpinLinearSpeed: 15
+  SpinDeceleration: 30
+  RetrievalSpeed: 15
+  RetrievalAcceleration: 15
   RetrievalFinishThreshold: 0.1
