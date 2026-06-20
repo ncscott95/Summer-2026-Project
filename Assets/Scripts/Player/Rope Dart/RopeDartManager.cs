@@ -211,6 +211,14 @@ public class RopeDartManager : Singleton<RopeDartManager>
         Reset();
     }
 
+    public void CollideWithGround()
+    {
+        currentDirection = Vector3.up;
+        currentSpeed = 0f;
+        currentVelocity = Vector3.zero;
+        CurrentState = RopeDartState.Extended;
+    }
+
     public void ToggleTryingToSpin(bool value)
     {
         isTryingToSpin = value;

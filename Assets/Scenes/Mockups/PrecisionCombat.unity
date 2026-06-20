@@ -1596,6 +1596,7 @@ GameObject:
   - component: {fileID: 1210149100}
   - component: {fileID: 1210149102}
   - component: {fileID: 1210149103}
+  - component: {fileID: 1210149104}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -1685,7 +1686,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210149099}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1708,7 +1709,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1727,6 +1728,18 @@ SortingGroup:
   m_SortingOrder: 2
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
+--- !u!114 &1210149104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210149099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c09575368bd9804e94cd07a7eb670ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DartHead
 --- !u!1 &1260698203
 GameObject:
   m_ObjectHideFlags: 0
