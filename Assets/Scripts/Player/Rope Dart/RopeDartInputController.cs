@@ -1,17 +1,27 @@
 using UnityEngine;
-using System.Collections;
 
 public class RopeDartInputController : Singleton<RopeDartInputController>
 {
-    [SerializeField] private RopeDartControlData data;
+    private const float ReleaseSpinBufferDuration = 0.1f;
+    private const float DartDirectionBufferDuration = 0.1f;
+    private const float CastBufferDuration = 0.1f;
+    private const float TwineBufferDuration = 0.1f;
 
-    private Coroutine dartDirectionBufferCoroutine;
-    private bool isBufferingDartDirection = false;
-    private Vector2 lastDartDirectionInput = Vector2.zero;
+    private readonly InputBuffer releaseSpinBuffer = new(ReleaseSpinBufferDuration, () => RopeDartManager.Instance.StopSpin());
+    private readonly InputBuffer<Vector2> dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
+    private readonly InputBuffer castBuffer = new(CastBufferDuration, () => RopeDartManager.Instance.Cast());
+    private readonly InputBuffer twineBuffer = new(TwineBufferDuration, () => RopeDartManager.Instance.TwineSimple());
+
+    void Update()
+    {
+        InputBufferList.TickAll(Time.deltaTime);
+    }
 
     public void HandleSpinRetrieveInput()
     {
         RopeDartManager.Instance.ToggleTryingToSpin(true);
+
+        releaseSpinBuffer.TryForceEnd();
 
         if (RopeDartManager.Instance.CurrentState == RopeDartState.Idle || RopeDartManager.Instance.CurrentState == RopeDartState.Stalling) 
         {
@@ -26,35 +36,37 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     public void HandleSpinInputEnd()
     {
         RopeDartManager.Instance.ToggleTryingToSpin(false);
-
-        if (RopeDartManager.Instance.CurrentState == RopeDartState.Spinning) RopeDartManager.Instance.StopSpin();
+        
+        if (RopeDartManager.Instance.CurrentState == RopeDartState.Spinning)
+        {
+            releaseSpinBuffer.StartBuffer();
+        }
     }
 
     public void HandleCastInput()
     {
-        if (isBufferingDartDirection)
-        {
-            // TODO: cast with modifier based on lastDartDirectionInput
-            StopCoroutine(dartDirectionBufferCoroutine);
-            dartDirectionBufferCoroutine = null;
-        }
+        releaseSpinBuffer.Interrupt();
 
-        dartDirectionBufferCoroutine = StartCoroutine(DartDirectionBufferCoroutine(2));
+        if (dartDirectionBuffer.Interrupt())
+        {
+            // TODO: cast with modifier based on dartDirectionBuffer.GetLastBufferedInput()
+        }
+        else
+        {
+            castBuffer.StartBuffer();
+        }
     }
 
     public void HandleTwineInput()
     {
-        // if (isBufferingDartDirection && lastDartDirectionInput != Vector2.zero)
-        // {
-        //     // TODO: twine with modifier based on lastDartDirectionInput
-        //     StopCoroutine(dartDirectionBufferCoroutine);
-        //     dartDirectionBufferCoroutine = null;
-        // }
-
-        // dartDirectionBufferCoroutine = StartCoroutine(DartDirectionBufferCoroutine(1));
-        
-        // TODO: TEMPORARY
-        RopeDartManager.Instance.TwineSimple();
+        if (dartDirectionBuffer.Interrupt())
+        {
+            // TODO: twine with modifier based on dartDirectionBuffer.GetLastBufferedInput()
+        }
+        else
+        {
+            twineBuffer.StartBuffer();
+        }
     }
 
     public void HandleWrapInput()
@@ -72,45 +84,17 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         if (input.magnitude < 0.5f)
             return;
 
-        if (isBufferingDartDirection)
+        if (castBuffer.Interrupt())
         {
-            // TODO: modify buffered twine or cast
-            StopCoroutine(dartDirectionBufferCoroutine);
-            dartDirectionBufferCoroutine = null;
+            // TODO: modify cast based on input
         }
-
-        lastDartDirectionInput = input;
-        dartDirectionBufferCoroutine = StartCoroutine(DartDirectionBufferCoroutine(0));
-    }
-
-    // startedBy: 0 = direction change, 1 = twine, 2 = cast
-    private IEnumerator DartDirectionBufferCoroutine(int startedBy)
-    {
-        isBufferingDartDirection = true;
-        yield return new WaitForSeconds(data.DartDirectionBufferTime);
-        lastDartDirectionInput = Vector2.zero;
-        isBufferingDartDirection = false;
-
-        switch (startedBy)
+        else if (twineBuffer.Interrupt())
         {
-            // twine without direction input
-            case 0:
-                RopeDartManager.Instance.TwineSimple();
-                break;
-
-            // change spin orientation
-            case 1:
-                break;
-
-            // cast with no modifier
-            case 2:
-                RopeDartManager.Instance.Cast();
-                break;
-
-            default:
-                break;
+            // TODO: modify twine based on input
         }
-
-        dartDirectionBufferCoroutine = null;
+        else
+        {
+            dartDirectionBuffer.StartBuffer(input);
+        }
     }
 }

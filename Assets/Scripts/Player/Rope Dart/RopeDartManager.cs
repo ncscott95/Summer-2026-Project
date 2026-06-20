@@ -167,6 +167,11 @@ public class RopeDartManager : Singleton<RopeDartManager>
         RopeRenderer.Instance.AddPointBeforeHead(point);
     }
 
+    public void ShiftPlane(Vector2 direction)
+    {
+        // TODO
+    }
+
     private void OnMaxLength()
     {
         currentVelocity = Vector3.zero;
