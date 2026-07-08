@@ -6,6 +6,7 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     private const float DartDirectionBufferDuration = 0.1f;
     private const float CastBufferDuration = 0.1f;
     private const float TwineBufferDuration = 0.1f;
+    private const float DirectionDeadzone = 0.5f;
 
     private readonly InputBuffer releaseSpinBuffer = new(ReleaseSpinBufferDuration, () => RopeDartManager.Instance.StopSpin());
     private readonly InputBuffer<Vector2> dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
@@ -50,6 +51,7 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         if (dartDirectionBuffer.Interrupt())
         {
             // TODO: cast with modifier based on dartDirectionBuffer.GetLastBufferedInput()
+            HelperCastWithDirection(dartDirectionBuffer.GetLastBufferedInput());
         }
         else
         {
@@ -61,7 +63,7 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     {
         if (dartDirectionBuffer.Interrupt())
         {
-            // TODO: twine with modifier based on dartDirectionBuffer.GetLastBufferedInput()
+            HelperTwineWithDirection(dartDirectionBuffer.GetLastBufferedInput());
         }
         else
         {
@@ -81,20 +83,87 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleDartDirectionInput(Vector2 input)
     {
-        if (input.magnitude < 0.5f)
+        if (input.magnitude < DirectionDeadzone)
             return;
 
         if (castBuffer.Interrupt())
         {
             // TODO: modify cast based on input
+            HelperCastWithDirection(input);
         }
         else if (twineBuffer.Interrupt())
         {
             // TODO: modify twine based on input
+            HelperTwineWithDirection(input);
         }
         else
         {
             dartDirectionBuffer.StartBuffer(input);
+        }
+    }
+
+    private void HelperTwineWithDirection(Vector2 direction)
+    {
+        BindPointID pointID = BindPointID.LeadElbow;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360f;
+
+        if (angle <= 22.5f || angle > 337.5f)
+        {
+            // right
+            pointID = BindPointID.LeadElbow;
+        }
+        else if (angle > 22.5f && angle <= 67.5f)
+        {
+            // up-right
+            pointID = BindPointID.LeadArmpit;
+        }
+        else if (angle > 67.5f && angle <= 112.5f)
+        {
+            // up
+            pointID = BindPointID.Neck;
+        }
+        else if (angle > 112.5f && angle <= 157.5f)
+        {
+            // up-left
+            pointID = BindPointID.AnchorArmpit;
+        }
+        else if (angle > 157.5f && angle <= 202.5f)
+        {
+            // left
+            pointID = BindPointID.AnchorElbow;
+        }
+
+        // down-left and down-right are currently extended to override straight down
+        else if (angle > 202.5f && angle <= 270f)
+        {
+            // down-left
+            pointID = BindPointID.AnchorKnee;
+        }
+        else if (angle > 270f && angle <= 337.5f)
+        {
+            // down-right
+            pointID = BindPointID.LeadKnee;
+        }
+
+        RopeDartManager.Instance.Twine(pointID);
+    }
+
+    private void HelperCastWithDirection(Vector2 direction)
+    {
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360f;
+        
+        if (angle > 247.5f && angle <= 292.5f)
+        {
+            // down
+            // TODO: cast with foot
+        }
+        else
+        {
+            // all other inputs
+            // TODO: cast with hand
         }
     }
 }

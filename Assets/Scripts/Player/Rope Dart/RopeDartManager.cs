@@ -21,17 +21,14 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     private Vector3 retrieveTarget => currentOrigin.position - Vector3.up * currentRadius;
     private bool isTryingToSpin = false;
+    private bool isBinding = false;
 
     void Start()
     {
         currentOrigin = startOrigin;
         currentRadius = data.SpinLength;
         Reset();
-        
-        BindPointObject point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.AnchorHand);
-        RopeRenderer.Instance.AddPointBeforeHead(point);
-        point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.LeadHand);
-        RopeRenderer.Instance.AddPointBeforeHead(point);
+        ResetRopeToHands();
     }
 
     void Update()
@@ -137,6 +134,14 @@ public class RopeDartManager : Singleton<RopeDartManager>
     {
         if (CurrentState != RopeDartState.Spinning)
             return;
+        
+        if (!isBinding)
+        {
+            // if player is not binding, unravel all twined bind points and reset the origin to the start origin
+            BindPointStack.Instance.ClearWrappedPoints();
+            ResetRopeToHands();
+            currentOrigin = startOrigin;
+        }
 
         CurrentState = RopeDartState.Casting;
     }
@@ -163,8 +168,12 @@ public class RopeDartManager : Singleton<RopeDartManager>
         
         Debug.Log($"Twining to {pointID} at position {point.Position}");
 
+        currentRadius = currentRadius - Vector3.Distance(point.Position, currentOrigin.position);
+        if (currentRadius <= 0) currentRadius = 0;
         currentOrigin = point.transform;
         RopeRenderer.Instance.AddPointBeforeHead(point);
+        
+        if (currentRadius == 0) Reset();
     }
 
     public void ShiftPlane(Vector2 direction)
@@ -265,6 +274,15 @@ public class RopeDartManager : Singleton<RopeDartManager>
     private bool IsRetrievalFinished()
     {
         return Vector3.Distance(head.position, retrieveTarget) <= data.RetrievalFinishThreshold;
+    }
+
+    private void ResetRopeToHands()
+    {
+        RopeRenderer.Instance.Reset();
+        BindPointObject point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.AnchorHand);
+        RopeRenderer.Instance.AddPointBeforeHead(point);
+        point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.LeadHand);
+        RopeRenderer.Instance.AddPointBeforeHead(point);
     }
 
     public Vector3 GetHeadPosition()

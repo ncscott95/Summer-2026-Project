@@ -15,24 +15,26 @@ public class BindPointStack : Singleton<BindPointStack>
     // For example, UnitCostGrid[(int)BindPointID.LeadHand, (int)BindPointID.AnchorFoot] gives 
     // the cost of binding from the lead hand to the anchor foot.
     // A cost of null indicates that the transition is not allowed.
-    public readonly int?[,] UnitCostGrid = new int?[13, 13]
+    public readonly int?[,] UnitCostGrid = new int?[14, 14]
     {
-        //   R    LH    LS    LA    LE    LK    LF    AH    AS    AA    AE    AK    AF
-        { null,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0 }, // Root
+        //   R    LH    LS    LA    LE    LK    LF    AH    AS    AA    AE    AK    AF    N
+        { null,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0 }, // Root
 
-        { null, null,    1,    1,    1,    1,    2, null,    1,    1,    1,    1,    2 }, // LeadHand
-        { null, null, null, null, null, null, null,    1, null,    1, null, null, null }, // LeadShoulder
-        { null, null, null, null, null, null, null,    1,    1, null, null, null, null }, // LeadArmpit
-        { null, null, null, null,    1, null, null, null, null, null, null, null, null }, // LeadElbow
-        { null, null, null, null, null, null, null, null, null, null, null, null, null }, // LeadKnee
-        { null, null, null, null, null, null, null, null, null, null, null, null, null }, // LeadFoot
+        { null, null,    1,    1,    1,    1,    2, null,    1,    1,    1,    1,    2, null }, // LeadHand
+        { null, null, null, null, null, null, null,    1, null,    1, null, null, null, null }, // LeadShoulder
+        { null, null, null, null, null, null, null,    1,    1, null, null, null, null, null }, // LeadArmpit
+        { null, null, null, null,    1, null, null, null, null, null, null, null, null, null }, // LeadElbow
+        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }, // LeadKnee
+        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }, // LeadFoot
 
-        { null,    1, null, null, null, null, null, null, null, null, null, null, null }, // AnchorHand
-        { null, null, null,    1, null, null, null,    1, null, null, null, null, null }, // AnchorShoulder
-        { null, null,    1, null, null, null, null,    1, null, null, null, null, null }, // AnchorArmpit
-        { null, null, null, null, null, null, null, null, null, null,    1, null, null }, // AnchorElbow
-        { null, null, null, null, null, null, null, null, null, null, null, null, null }, // AnchorKnee
-        { null, null, null, null, null, null, null, null, null, null, null, null, null }, // AnchorFoot
+        { null,    1, null, null, null, null, null, null, null, null, null, null, null, null }, // AnchorHand
+        { null, null, null,    1, null, null, null,    1, null, null, null, null, null, null }, // AnchorShoulder
+        { null, null,    1, null, null, null, null,    1, null, null, null, null, null, null }, // AnchorArmpit
+        { null, null, null, null, null, null, null, null, null, null,    1, null, null, null }, // AnchorElbow
+        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }, // AnchorKnee
+        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }, // AnchorFoot
+
+        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }  // Neck
     };
 
     [SerializeField] private List<BindPointObject> bindPointObjects = new List<BindPointObject>(13);

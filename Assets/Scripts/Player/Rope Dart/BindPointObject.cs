@@ -20,5 +20,6 @@ public enum BindPointID
     AnchorArmpit,
     AnchorElbow,
     AnchorKnee,
-    AnchorFoot
+    AnchorFoot,
+    Neck
 }
