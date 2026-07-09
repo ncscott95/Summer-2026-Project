@@ -120,7 +120,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
             isClockwise = !isClockwise;
         }
 
-        BindPointStack.Instance.TryPushWrappedBinding("Spin " + (isClockwise ? "Down" : "Up"));
+        BindingStack.Instance.TryPushWrappedBinding("Spin " + (isClockwise ? "Down" : "Up"));
 
         CurrentState = RopeDartState.Spinning;
     }
@@ -130,7 +130,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
         if (CurrentState != RopeDartState.Spinning)
             return;
         
-        BindPointStack.Instance.PopWrappedBinding();
+        BindingStack.Instance.PopWrappedBinding();
 
         CurrentState = RopeDartState.Stalling;
     }
@@ -167,7 +167,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
         if (CurrentState != RopeDartState.Spinning)
             return;
 
-        List<BindPointObject> points = BindPointStack.Instance.TryPushWrappedBinding(bindingInput);
+        List<BindPointObject> points = BindingStack.Instance.TryPushWrappedBinding(bindingInput);
         if (points == null || points.Count == 0)
             return;
 
@@ -290,8 +290,8 @@ public class RopeDartManager : Singleton<RopeDartManager>
         // point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.LeadHand);
         // RopeRenderer.Instance.AddPointBeforeHead(point);
 
-        BindPointStack.Instance.ClearWrappedBindings();
-        List<BindPointObject> points = BindPointStack.Instance.TryPushWrappedBinding("Idle");
+        BindingStack.Instance.ClearWrappedBindings();
+        List<BindPointObject> points = BindingStack.Instance.TryPushWrappedBinding("Idle");
         RopeRenderer.Instance.AddPointsBeforeHead(points);
     }
 

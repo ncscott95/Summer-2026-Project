@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class BindPointStack : Singleton<BindPointStack>
+public class BindingStack : Singleton<BindingStack>
 {
     public Stack<BindingStackElement> WrappedBindings { get; private set; } = new Stack<BindingStackElement>();
 
