@@ -3,116 +3,129 @@ using System.Collections.Generic;
 
 public class BindPointStack : Singleton<BindPointStack>
 {
-    public Stack<BindPointStackElement> WrappedPoints { get; private set; } = new Stack<BindPointStackElement>();
+    public Stack<BindingStackElement> WrappedBindings { get; private set; } = new Stack<BindingStackElement>();
 
     // Units are used only for calculating behind-the-scenes "costs" of wrapping and binding.
     // These are not the same as physical length, but will be directly proportional to it.
     // I am working on the relatively arbitrary assumption that a normal swinging length is 3.
     public const int MaxBindUnits = 15;
 
-    // Represents the cost of transitioning from one BindPointID to another. 
-    // The first index is the starting point, the second index is the ending point.
-    // For example, UnitCostGrid[(int)BindPointID.LeadHand, (int)BindPointID.AnchorFoot] gives 
-    // the cost of binding from the lead hand to the anchor foot.
-    // A cost of null indicates that the transition is not allowed.
-    public readonly int?[,] UnitCostGrid = new int?[14, 14]
+    public BindingGraphData BindingGraph { get; private set; }
+
+    // This dictionary maps binding names to the corresponding BindPointIDs that should be used for that binding.
+    // These are the points that the rope physically travels through when the player usese that binding.
+    public readonly Dictionary<string, BindPointID[]> BindingToPointsLookup = new Dictionary<string, BindPointID[]>
     {
-        //   R    LH    LS    LA    LE    LK    LF    AH    AS    AA    AE    AK    AF    N
-        { null,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0 }, // Root
-
-        { null, null,    1,    1,    1,    1,    2, null,    1,    1,    1,    1,    2, null }, // LeadHand
-        { null, null, null, null, null, null, null,    1, null,    1, null, null, null, null }, // LeadShoulder
-        { null, null, null, null, null, null, null,    1,    1, null, null, null, null, null }, // LeadArmpit
-        { null, null, null, null,    1, null, null, null, null, null, null, null, null, null }, // LeadElbow
-        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }, // LeadKnee
-        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }, // LeadFoot
-
-        { null,    1, null, null, null, null, null, null, null, null, null, null, null, null }, // AnchorHand
-        { null, null, null,    1, null, null, null,    1, null, null, null, null, null, null }, // AnchorShoulder
-        { null, null,    1, null, null, null, null,    1, null, null, null, null, null, null }, // AnchorArmpit
-        { null, null, null, null, null, null, null, null, null, null,    1, null, null, null }, // AnchorElbow
-        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }, // AnchorKnee
-        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }, // AnchorFoot
-
-        { null, null, null, null, null, null, null, null, null, null, null, null, null, null }  // Neck
+        { "Idle",                           new BindPointID[] { BindPointID.AnchorHand, BindPointID.LeadHand } },
+        { "Lead Down Spin",                 new BindPointID[] { BindPointID.LeadHand }},
+        { "Lead Up Spin",                   new BindPointID[] { BindPointID.LeadHand }},
+        { "Anchor Down Spin",               new BindPointID[] { BindPointID.LeadHand }},
+        { "Anchor Up Spin",                 new BindPointID[] { BindPointID.LeadHand }},
+        { "Lead Elbow",                     new BindPointID[] { BindPointID.LeadElbow }},
+        { "Anchor Elbow",                   new BindPointID[] { BindPointID.AnchorElbow }},
+        { "Dragon",                         new BindPointID[] { BindPointID.LeadArmpit, BindPointID.AnchorShoulder }},
+        { "Dark Dragon",                    new BindPointID[] { BindPointID.AnchorArmpit, BindPointID.LeadShoulder }},
+        { "Scorpion",                       new BindPointID[] { BindPointID.LeadShoulder, BindPointID.AnchorArmpit }},
+        { "Dark Scorpion",                  new BindPointID[] { BindPointID.AnchorShoulder, BindPointID.LeadArmpit }},
+        { "Lead Thigh Saddle",              new BindPointID[] { BindPointID.LeadKnee }},
+        { "Anchor Thigh Holster",           new BindPointID[] { BindPointID.AnchorKnee }},
     };
 
     [SerializeField] private List<BindPointObject> bindPointObjects = new List<BindPointObject>(13);
 
-    public BindPointObject TryPushWrappedPoint(BindPointID pointID)
+    public override void Awake()
     {
-        Debug.Log($"Trying to push {pointID}, count: {WrappedPoints.Count}");
+        base.Awake();
 
-        BindPointObject point = bindPointObjects[(int)pointID];
-        if (point == null)
-        {
-            Debug.LogWarning($"Bind point {pointID} not found. Make sure it is registered correctly.");
-            return null;
-        }
+        BindingGraph = JsonUtility.FromJson<BindingGraphData>(Resources.Load<TextAsset>("BindingGraph").text);
+        Debug.Log(BindingGraph.nodes.Count);
+    }
 
-        if (WrappedPoints.Count == 0)
+    public List<BindPointObject> TryPushWrappedBinding(string bindingInput)
+    {
+        string newBindingId = "";
+
+        if (WrappedBindings.Count > 0)
         {
-            BindPointStackElement nullElement = new BindPointStackElement
+            string lastBindingId = WrappedBindings.Peek().Point;
+            BindingGraphData.BindingGraphNode lastBindingNode = BindingGraph.nodes.Find(n => n.nodeId == lastBindingId);
+
+            string lastBindingConnections = lastBindingNode.connections != null ? string.Join(", ", lastBindingNode.connections.ConvertAll(c => $"{c.input} -> {c.nodeId} (Cost: {c.unitCost})")) : "No connections";
+
+            BindingGraphData.BindingGraphConnection connection = lastBindingNode.connections.Find(c => c.input == bindingInput);
+            if (connection == null)
             {
-                Point = bindPointObjects[(int)BindPointID.Root],
+                Debug.LogWarning($"Cannot bind from lastBindingId {lastBindingId} with {bindingInput}. Transition not allowed.");
+                return null;
+            }
+
+            if (GetRemainingUnits() < connection.unitCost)
+            {
+                Debug.LogWarning($"Cannot bind with {bindingInput}. Unit cost {connection.unitCost} exceeds remaining units {GetRemainingUnits()}.");
+                return null;
+            }
+
+            BindingStackElement element = new BindingStackElement
+            {
+                Point = connection.nodeId,
+                UnitCost = connection.unitCost
+            };
+            WrappedBindings.Push(element);
+
+            newBindingId = connection.nodeId;
+        }
+        else
+        {
+            BindingStackElement element = new BindingStackElement
+            {
+                Point = bindingInput,
                 UnitCost = 0
             };
-            WrappedPoints.Push(nullElement);
+            WrappedBindings.Push(element);
+
+            newBindingId = bindingInput;
         }
 
-        BindPointObject lastPoint = WrappedPoints.Count > 0 ? WrappedPoints.Peek().Point : null;
-        Debug.Log($"Attempting to wrap from {lastPoint.ID} to {point.ID}");
-
-        int? unitCost = UnitCostGrid[(int)lastPoint.ID, (int)point.ID];
-        if (unitCost == null)
+        // get and return the list of BindPointObjects corresponding to the given nodeId, to get transform references
+        List<BindPointObject> points = new List<BindPointObject>();
+        foreach (BindPointID pointID in BindingToPointsLookup[newBindingId])
         {
-            Debug.LogWarning($"Cannot wrap from {lastPoint.ID} to {point.ID}. Transition not allowed.");
-            return null;
+            BindPointObject point = bindPointObjects[(int)pointID];
+            points.Add(point);
         }
 
-        if (GetRemainingUnits() < unitCost.Value)
-        {
-            Debug.LogWarning($"Cannot wrap to {point.ID}. Unit cost {unitCost.Value} exceeds remaining units {GetRemainingUnits()}.");
-            return null;
-        }
-
-        BindPointStackElement element = new BindPointStackElement
-        {
-            Point = point,
-            UnitCost = unitCost.Value
-        };
-        WrappedPoints.Push(element);
-
-        return point;
+        return points;
     }
 
-    public BindPointObject PopWrappedPoint()
+    public BindingGraphData.BindingGraphNode PopWrappedBinding()
     {
-        if (WrappedPoints.Count > 0)
+        if (WrappedBindings.Count > 0)
         {
-            return WrappedPoints.Pop().Point;
+            string nodeID = WrappedBindings.Pop().Point;
+            return BindingGraph.nodes.Find(n => n.nodeId == nodeID);
         }
         return null;
     }
 
-    public void ClearWrappedPoints()
+    public BindingGraphData.BindingGraphNode PeekWrappedBinding()
     {
-        WrappedPoints.Clear();
-    }
-
-    public BindPointObject PeekWrappedPoint()
-    {
-        if (WrappedPoints.Count > 0)
+        if (WrappedBindings.Count > 0)
         {
-            return WrappedPoints.Peek().Point;
+            string nodeID = WrappedBindings.Peek().Point;
+            return BindingGraph.nodes.Find(n => n.nodeId == nodeID);
         }
         return null;
+    }
+
+    public void ClearWrappedBindings()
+    {
+        WrappedBindings.Clear();
     }
 
     public int GetTotalUnitCost()
     {
         int totalCost = 0;
-        foreach (var point in WrappedPoints)
+        foreach (var point in WrappedBindings)
         {
             totalCost += point.UnitCost;
         }
@@ -126,8 +139,8 @@ public class BindPointStack : Singleton<BindPointStack>
 }
 
 [System.Serializable]
-public struct BindPointStackElement
+public struct BindingStackElement
 {
-    public BindPointObject Point;
+    public string Point;
     public int UnitCost;
 }

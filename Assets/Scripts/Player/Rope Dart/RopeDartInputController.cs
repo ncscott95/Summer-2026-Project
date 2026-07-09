@@ -104,7 +104,7 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     private void HelperTwineWithDirection(Vector2 direction)
     {
-        BindPointID pointID = BindPointID.LeadElbow;
+        string bindingInput = "";
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
@@ -112,42 +112,45 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         if (angle <= 22.5f || angle > 337.5f)
         {
             // right
-            pointID = BindPointID.LeadElbow;
+            bindingInput = "Bind Lead";
         }
         else if (angle > 22.5f && angle <= 67.5f)
         {
             // up-right
-            pointID = BindPointID.LeadArmpit;
+            bindingInput = "Bind Lead Up";
         }
         else if (angle > 67.5f && angle <= 112.5f)
         {
             // up
-            pointID = BindPointID.Neck;
+            bindingInput = "Bind Up";
         }
         else if (angle > 112.5f && angle <= 157.5f)
         {
             // up-left
-            pointID = BindPointID.AnchorArmpit;
+            bindingInput = "Bind Anchor Up";
         }
         else if (angle > 157.5f && angle <= 202.5f)
         {
             // left
-            pointID = BindPointID.AnchorElbow;
+            bindingInput = "Bind Anchor";
         }
-
-        // down-left and down-right are currently extended to override straight down
-        else if (angle > 202.5f && angle <= 270f)
+        else if (angle > 202.5f && angle <= 247.5f)
         {
             // down-left
-            pointID = BindPointID.AnchorKnee;
+            bindingInput = "Bind Anchor Down";
         }
-        else if (angle > 270f && angle <= 337.5f)
+        else if (angle > 247.5f && angle <= 292.5f)
+        {
+            // down
+            bindingInput = "Bind Down";
+        }
+        else if (angle > 292.5f && angle <= 337.5f)
         {
             // down-right
-            pointID = BindPointID.LeadKnee;
+            bindingInput = "Bind Lead Down";
         }
 
-        RopeDartManager.Instance.Twine(pointID);
+        RopeDartManager.Instance.Twine(bindingInput);
     }
 
     private void HelperCastWithDirection(Vector2 direction)

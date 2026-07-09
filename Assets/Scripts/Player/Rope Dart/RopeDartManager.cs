@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RopeDartManager : Singleton<RopeDartManager>
@@ -119,6 +120,8 @@ public class RopeDartManager : Singleton<RopeDartManager>
             isClockwise = !isClockwise;
         }
 
+        BindPointStack.Instance.TryPushWrappedBinding("Spin " + (isClockwise ? "Down" : "Up"));
+
         CurrentState = RopeDartState.Spinning;
     }
 
@@ -126,6 +129,8 @@ public class RopeDartManager : Singleton<RopeDartManager>
     {
         if (CurrentState != RopeDartState.Spinning)
             return;
+        
+        BindPointStack.Instance.PopWrappedBinding();
 
         CurrentState = RopeDartState.Stalling;
     }
@@ -138,7 +143,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
         if (!isBinding)
         {
             // if player is not binding, unravel all twined bind points and reset the origin to the start origin
-            BindPointStack.Instance.ClearWrappedPoints();
+            // TODO: if the player is holding a wrap, only reset to the last wrapped bind point instead of the start origin
             ResetRopeToHands();
             currentOrigin = startOrigin;
         }
@@ -154,25 +159,26 @@ public class RopeDartManager : Singleton<RopeDartManager>
     public void TwineSimple()
     {
         // TODO: pick an elbow depending on which side the player is spinning on (lead/anchor)
-        Twine(BindPointID.LeadElbow);
+        Twine("Bind Lead");
     }
 
-    public void Twine(BindPointID pointID)
+    public void Twine(string bindingInput)
     {
         if (CurrentState != RopeDartState.Spinning)
             return;
-        
-        BindPointObject point = BindPointStack.Instance.TryPushWrappedPoint(pointID);
-        if (point == null)
+
+        List<BindPointObject> points = BindPointStack.Instance.TryPushWrappedBinding(bindingInput);
+        if (points == null || points.Count == 0)
             return;
-        
-        Debug.Log($"Twining to {pointID} at position {point.Position}");
+
+        BindPointObject point = points[points.Count - 1];
+        Debug.Log($"Twining to {point.ID} at position {point.Position}");
 
         currentRadius = currentRadius - Vector3.Distance(point.Position, currentOrigin.position);
         if (currentRadius <= 0) currentRadius = 0;
         currentOrigin = point.transform;
-        RopeRenderer.Instance.AddPointBeforeHead(point);
-        
+        RopeRenderer.Instance.AddPointsBeforeHead(points);
+
         if (currentRadius == 0) Reset();
     }
 
@@ -279,10 +285,14 @@ public class RopeDartManager : Singleton<RopeDartManager>
     private void ResetRopeToHands()
     {
         RopeRenderer.Instance.Reset();
-        BindPointObject point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.AnchorHand);
-        RopeRenderer.Instance.AddPointBeforeHead(point);
-        point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.LeadHand);
-        RopeRenderer.Instance.AddPointBeforeHead(point);
+        // BindPointObject point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.AnchorHand);
+        // RopeRenderer.Instance.AddPointBeforeHead(point);
+        // point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.LeadHand);
+        // RopeRenderer.Instance.AddPointBeforeHead(point);
+
+        BindPointStack.Instance.ClearWrappedBindings();
+        List<BindPointObject> points = BindPointStack.Instance.TryPushWrappedBinding("Idle");
+        RopeRenderer.Instance.AddPointsBeforeHead(points);
     }
 
     public Vector3 GetHeadPosition()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RopeRenderer : Singleton<RopeRenderer>
@@ -14,6 +15,17 @@ public class RopeRenderer : Singleton<RopeRenderer>
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, RopeDartManager.Instance.GetHeadPosition());
         lineRenderer.enabled = true;
+    }
+
+    public void AddPointsBeforeHead(List<BindPointObject> points)
+    {
+        if (points == null || points.Count == 0)
+            return;
+
+        foreach (BindPointObject point in points)
+        {
+            AddPointBeforeHead(point);
+        }
     }
 
     public void AddPointBeforeHead(BindPointObject point)
