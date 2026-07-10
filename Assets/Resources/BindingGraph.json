@@ -179,8 +179,13 @@
             "canTurn": false,
             "connections": [
                 {
-                    "input": "Spin",
+                    "input": "Spin Down",
                     "nodeId": "Lead Down Spin",
+                    "unitCost": 1
+                },
+                {
+                    "input": "Spin Up",
+                    "nodeId": "Lead Up Spin",
                     "unitCost": 1
                 }
             ]
@@ -193,8 +198,13 @@
             "canTurn": false,
             "connections": [
                 {
-                    "input": "Spin",
+                    "input": "Spin Down",
                     "nodeId": "Lead Down Spin",
+                    "unitCost": 1
+                },
+                {
+                    "input": "Spin Up",
+                    "nodeId": "Lead Up Spin",
                     "unitCost": 1
                 }
             ]
@@ -207,7 +217,12 @@
             "canTurn": false,
             "connections": [
                 {
-                    "input": "Spin",
+                    "input": "Spin Down",
+                    "nodeId": "Lead Down Spin",
+                    "unitCost": 1
+                },
+                {
+                    "input": "Spin Up",
                     "nodeId": "Lead Up Spin",
                     "unitCost": 1
                 }
@@ -221,7 +236,12 @@
             "canTurn": false,
             "connections": [
                 {
-                    "input": "Spin",
+                    "input": "Spin Down",
+                    "nodeId": "Lead Down Spin",
+                    "unitCost": 1
+                },
+                {
+                    "input": "Spin Up",
                     "nodeId": "Lead Up Spin",
                     "unitCost": 1
                 }
@@ -235,8 +255,13 @@
             "canTurn": false,
             "connections": [
                 {
-                    "input": "Spin",
+                    "input": "Spin Down",
                     "nodeId": "Lead Down Spin",
+                    "unitCost": 1
+                },
+                {
+                    "input": "Spin Up",
+                    "nodeId": "Lead Up Spin",
                     "unitCost": 1
                 }
             ]
@@ -249,8 +274,13 @@
             "canTurn": false,
             "connections": [
                 {
-                    "input": "Spin",
+                    "input": "Spin Down",
                     "nodeId": "Lead Down Spin",
+                    "unitCost": 1
+                },
+                {
+                    "input": "Spin Up",
+                    "nodeId": "Lead Up Spin",
                     "unitCost": 1
                 }
             ]

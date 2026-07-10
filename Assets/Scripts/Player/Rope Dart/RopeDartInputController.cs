@@ -73,12 +73,12 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleWrapInput()
     {
-        
+        RopeDartManager.Instance.TryStartWrap();
     }
 
     public void HandleWrapInputEnd()
     {
-        
+        RopeDartManager.Instance.EndWrap();
     }
 
     public void HandleDartDirectionInput(Vector2 input)

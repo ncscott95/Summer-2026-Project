@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class RopeDartManager : Singleton<RopeDartManager>
 {
@@ -120,7 +121,8 @@ public class RopeDartManager : Singleton<RopeDartManager>
             isClockwise = !isClockwise;
         }
 
-        BindingStack.Instance.TryPushWrappedBinding("Spin " + (isClockwise ? "Down" : "Up"));
+        currentOrigin = BindingStack.Instance.TryPushBinding("Spin " + (isClockwise ? "Down" : "Up"))[^1].transform;
+        UpdateRopeRenderer();
 
         CurrentState = RopeDartState.Spinning;
     }
@@ -130,7 +132,8 @@ public class RopeDartManager : Singleton<RopeDartManager>
         if (CurrentState != RopeDartState.Spinning)
             return;
         
-        BindingStack.Instance.PopWrappedBinding();
+        BindingStack.Instance.PopBinding();
+        UpdateRopeRenderer();
 
         CurrentState = RopeDartState.Stalling;
     }
@@ -139,14 +142,11 @@ public class RopeDartManager : Singleton<RopeDartManager>
     {
         if (CurrentState != RopeDartState.Spinning)
             return;
-        
-        if (!isBinding)
-        {
-            // if player is not binding, unravel all twined bind points and reset the origin to the start origin
-            // TODO: if the player is holding a wrap, only reset to the last wrapped bind point instead of the start origin
-            ResetRopeToHands();
-            currentOrigin = startOrigin;
-        }
+
+        Debug.Log("Casting");
+
+        currentOrigin = BindingStack.Instance.GetBindPointObject(BindingStack.Instance.RevertToLastWrappedBinding()?.nodeId).transform;
+        UpdateRopeRenderer();
 
         CurrentState = RopeDartState.Casting;
     }
@@ -167,7 +167,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
         if (CurrentState != RopeDartState.Spinning)
             return;
 
-        List<BindPointObject> points = BindingStack.Instance.TryPushWrappedBinding(bindingInput);
+        List<BindPointObject> points = BindingStack.Instance.TryPushBinding(bindingInput);
         if (points == null || points.Count == 0)
             return;
 
@@ -177,9 +177,69 @@ public class RopeDartManager : Singleton<RopeDartManager>
         currentRadius = currentRadius - Vector3.Distance(point.Position, currentOrigin.position);
         if (currentRadius <= 0) currentRadius = 0;
         currentOrigin = point.transform;
-        RopeRenderer.Instance.AddPointsBeforeHead(points);
+        UpdateRopeRenderer();
 
         if (currentRadius == 0) Reset();
+    }
+
+    public void TryStartWrap()
+    {
+        BindingGraphData.BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
+
+        if (currentBinding == null)
+        {
+            Debug.LogWarning("Cannot start wrap: no current binding.");
+            return;
+        }
+
+        if (!currentBinding.canWrap)
+        {
+            Debug.LogWarning($"Cannot start wrap: current binding {currentBinding.nodeId} does not allow wrapping.");
+            return;
+        }
+
+        HandleWrapBuff(currentBinding.nodeId);
+
+        BindingStack.Instance.MarkCurrentBindingAsWrapPoint(true);
+
+        if (isTryingToSpin)
+        {
+            // keep spinning from lead hand
+            // TODO: there's probably a simplification here
+            currentOrigin = startOrigin;
+            currentRadius = data.SpinLength;
+            BindingStack.Instance.TryPushBinding("Spin " + (isClockwise ? "Down" : "Up"));
+            UpdateRopeRenderer();
+        }
+    }
+
+    // TODO: this should probably be moved out to a separate class eventually
+    private void HandleWrapBuff(string bindingId)
+    {
+        switch (bindingId)
+        {
+            case "Dragon":
+                Debug.Log("Starting wrap buff for Dragon");
+                break;
+            case "Dark Dragon":
+                Debug.Log("Starting wrap buff for Dark Dragon");
+                break;
+            case "Scorpion":
+                Debug.Log("Starting wrap buff for Scorpion");
+                break;
+            case "Dark Scorpion":
+                Debug.Log("Starting wrap buff for Dark Scorpion");
+                break;
+            default:
+                Debug.LogWarning($"No wrap buff defined for binding {bindingId}");
+                break;
+        }
+    }
+
+    public void EndWrap()
+    {
+        // TODO: implement wrap ending logic
+        BindingStack.Instance.MarkCurrentBindingAsWrapPoint(false);
     }
 
     public void ShiftPlane(Vector2 direction)
@@ -284,14 +344,17 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     private void ResetRopeToHands()
     {
-        RopeRenderer.Instance.Reset();
-        // BindPointObject point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.AnchorHand);
-        // RopeRenderer.Instance.AddPointBeforeHead(point);
-        // point = BindPointStack.Instance.TryPushWrappedPoint(BindPointID.LeadHand);
-        // RopeRenderer.Instance.AddPointBeforeHead(point);
+        BindingStack.Instance.ClearBindings();
+        BindingStack.Instance.TryPushBinding("Idle");
+        UpdateRopeRenderer();
+    }
 
-        BindingStack.Instance.ClearWrappedBindings();
-        List<BindPointObject> points = BindingStack.Instance.TryPushWrappedBinding("Idle");
+    private void UpdateRopeRenderer()
+    {
+        List<BindPointObject> points = BindingStack.Instance.GetAllBindObjects();
+        Debug.Log($"Current bindings: {BindingStack.Instance.CurrentBindingsToString()}");
+        Debug.Log($"Updating rope renderer with points: {string.Join(", ", points.Select(p => p.ID))}");
+        RopeRenderer.Instance.Reset();
         RopeRenderer.Instance.AddPointsBeforeHead(points);
     }
 

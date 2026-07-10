@@ -528,8 +528,8 @@ MonoBehaviour:
   bindPointObjects:
   - {fileID: 143011114}
   - {fileID: 960135486}
-  - {fileID: 1584094626}
   - {fileID: 1041180344}
+  - {fileID: 1584094626}
   - {fileID: 2058300788}
   - {fileID: 1826221564}
   - {fileID: 754352797}
@@ -551,7 +551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af51b113f6a9dd4e84525383857e9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RopeDartInputController
-  data: {fileID: 11400000, guid: 584f8d555ab455d46843be04633830ce, type: 2}
 --- !u!114 &143011114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56631e5c3380a44cb73cc5ee1d8d78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BindPoint
-  ID: 7
+  ID: 8
 --- !u!1 &618652711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,7 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56631e5c3380a44cb73cc5ee1d8d78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BindPoint
-  ID: 0
+  ID: 3
 --- !u!212 &1584094627
 SpriteRenderer:
   serializedVersion: 2
