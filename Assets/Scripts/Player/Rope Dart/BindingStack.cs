@@ -8,8 +8,7 @@ public class BindingStack : Singleton<BindingStack>
 
     // Units are used only for calculating behind-the-scenes "costs" of wrapping and binding.
     // These are not the same as physical length, but will be directly proportional to it.
-    // I am working on the relatively arbitrary assumption that a normal swinging length is 3.
-    public const int MaxBindUnits = 15;
+    public const int MaxBindUnits = 10;
 
     public BindingGraphData BindingGraph { get; private set; }
 

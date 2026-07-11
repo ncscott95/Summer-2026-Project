@@ -122,6 +122,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
         currentOrigin = BindingStack.Instance.TryPushBinding("Spin " + (isClockwise ? "Down" : "Up"))[^1].transform;
         UpdateRopeRenderer();
+        RopeDartStatusUI.Instance.UpdateStatusUI();
 
         CurrentState = RopeDartState.Spinning;
     }
@@ -133,6 +134,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
         currentOrigin = BindingStack.Instance.GetBindPointObject(BindingStack.Instance.RevertToLastWrappedBinding()?.nodeId).transform;
         UpdateRopeRenderer();
+        RopeDartStatusUI.Instance.UpdateStatusUI();
 
         CurrentState = RopeDartState.Stalling;
     }
@@ -154,6 +156,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
         currentOrigin = BindingStack.Instance.GetBindPointObject(BindingStack.Instance.RevertToLastWrappedBinding()?.nodeId).transform;
         UpdateRopeRenderer();
+        RopeDartStatusUI.Instance.UpdateStatusUI();
 
         CurrentState = RopeDartState.Casting;
     }
@@ -185,6 +188,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
         if (currentRadius <= 0) currentRadius = 0;
         currentOrigin = point.transform;
         UpdateRopeRenderer();
+        RopeDartStatusUI.Instance.UpdateStatusUI();
 
         if (currentRadius == 0) Reset();
     }
@@ -217,6 +221,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
             currentRadius = data.SpinLength;
             BindingStack.Instance.TryPushBinding("Spin " + (isClockwise ? "Down" : "Up"));
             UpdateRopeRenderer();
+            RopeDartStatusUI.Instance.UpdateStatusUI();
         }
     }
 
@@ -245,10 +250,10 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     public void EndWrap()
     {
-        // TODO: implement wrap ending logic
-        // unsure what should happen if you release a wrap while still spinning
+        // TODO: unsure what should happen if you release a wrap while still spinning
         BindingStack.Instance.UnmarkOutermostWrappedBinding();
         UpdateRopeRenderer();
+        RopeDartStatusUI.Instance.UpdateStatusUI();
     }
 
     public void ShiftPlane(Vector2 direction)
@@ -356,6 +361,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
         BindingStack.Instance.ClearBindings();
         BindingStack.Instance.TryPushBinding("Idle");
         UpdateRopeRenderer();
+        RopeDartStatusUI.Instance.UpdateStatusUI();
     }
 
     private void UpdateRopeRenderer()

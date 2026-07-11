@@ -10,12 +10,12 @@
                 {
                     "input": "Spin Down",
                     "nodeId": "Lead Down Spin",
-                    "unitCost": 0
+                    "unitCost": 1
                 },
                 {
                     "input": "Spin Up",
                     "nodeId": "Lead Up Spin",
-                    "unitCost": 0
+                    "unitCost": 1
                 }
             ]
         },

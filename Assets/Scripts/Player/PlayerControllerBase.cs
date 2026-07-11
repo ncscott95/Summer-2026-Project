@@ -70,8 +70,8 @@ public abstract class PlayerControllerBase : Singleton<PlayerControllerBase>
     {
         Actions.Player.Enable();
 
-        Actions.Player.Move.performed += OnMove;
-        Actions.Player.Move.canceled += OnMove;
+        // Actions.Player.Move.performed += OnMove;
+        // Actions.Player.Move.canceled += OnMove;
         // Actions.Player.ShowGrid.performed += ctx => ToggleGridUI();
     }
 
@@ -79,8 +79,8 @@ public abstract class PlayerControllerBase : Singleton<PlayerControllerBase>
     {
         Actions.Player.Disable();
 
-        Actions.Player.Move.performed -= OnMove;
-        Actions.Player.Move.canceled -= OnMove;
+        // Actions.Player.Move.performed -= OnMove;
+        // Actions.Player.Move.canceled -= OnMove;
         // Actions.Player.ShowGrid.performed -= ctx => ToggleGridUI();
     }
 
