@@ -23,7 +23,6 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     private Vector3 retrieveTarget => currentOrigin.position - Vector3.up * currentRadius;
     private bool isTryingToSpin = false;
-    private bool isBinding = false;
 
     void Start()
     {
@@ -131,8 +130,8 @@ public class RopeDartManager : Singleton<RopeDartManager>
     {
         if (CurrentState != RopeDartState.Spinning)
             return;
-        
-        BindingStack.Instance.PopBinding();
+
+        currentOrigin = BindingStack.Instance.GetBindPointObject(BindingStack.Instance.RevertToLastWrappedBinding()?.nodeId).transform;
         UpdateRopeRenderer();
 
         CurrentState = RopeDartState.Stalling;
@@ -142,6 +141,14 @@ public class RopeDartManager : Singleton<RopeDartManager>
     {
         if (CurrentState != RopeDartState.Spinning)
             return;
+        
+        BindingGraphData.BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
+        if (currentBinding == null || !currentBinding.canCast)
+        {
+            // TODO: maybe cause a failure state if the player tries to cast from a binding that doesn't allow it
+            Debug.LogWarning($"Cannot cast: current binding {currentBinding?.nodeId ?? "null"} does not allow casting.");
+            return;
+        }
 
         Debug.Log("Casting");
 
@@ -200,7 +207,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
         HandleWrapBuff(currentBinding.nodeId);
 
-        BindingStack.Instance.MarkCurrentBindingAsWrapPoint(true);
+        BindingStack.Instance.MarkCurrentBindingAsWrapped();
 
         if (isTryingToSpin)
         {
@@ -239,7 +246,9 @@ public class RopeDartManager : Singleton<RopeDartManager>
     public void EndWrap()
     {
         // TODO: implement wrap ending logic
-        BindingStack.Instance.MarkCurrentBindingAsWrapPoint(false);
+        // unsure what should happen if you release a wrap while still spinning
+        BindingStack.Instance.UnmarkOutermostWrappedBinding();
+        UpdateRopeRenderer();
     }
 
     public void ShiftPlane(Vector2 direction)

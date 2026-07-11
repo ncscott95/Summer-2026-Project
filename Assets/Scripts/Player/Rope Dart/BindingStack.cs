@@ -68,7 +68,8 @@ public class BindingStack : Singleton<BindingStack>
             {
                 Point = connection.nodeId,
                 UnitCost = connection.unitCost,
-                IsWrapPoint = false
+                IsWrapPoint = false,
+                IsRootPoint = false
             };
             CurrentBindings.Add(element);
 
@@ -80,8 +81,9 @@ public class BindingStack : Singleton<BindingStack>
             {
                 Point = bindingInput,
                 UnitCost = 0,
-                // first binding is always considered a wrap point
-                IsWrapPoint = true
+                IsWrapPoint = false,
+                // mark the first binding as a root point, which behaves as a wrap point that can't be unmarked
+                IsRootPoint = true
             };
             CurrentBindings.Add(element);
 
@@ -123,20 +125,36 @@ public class BindingStack : Singleton<BindingStack>
         return null;
     }
 
-    public void MarkCurrentBindingAsWrapPoint(bool isWrapPoint)
+    public void MarkCurrentBindingAsWrapped()
     {
         if (CurrentBindings.Count > 0)
         {
             int lastIndex = CurrentBindings.Count - 1;
             BindingStackElement lastBinding = CurrentBindings[lastIndex];
-            lastBinding.IsWrapPoint = isWrapPoint;
+            lastBinding.IsWrapPoint = true;
             CurrentBindings[lastIndex] = lastBinding;
-            Debug.Log($"Set binding as wrap point {isWrapPoint}: {CurrentBindings[CurrentBindings.Count - 1].Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
+            Debug.Log($"Set binding as wrapped: {CurrentBindings[CurrentBindings.Count - 1].Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
+        }
+    }
+
+    public void UnmarkOutermostWrappedBinding()
+    {
+        for (int i = CurrentBindings.Count - 1; i >= 0; i--)
+        {
+            if (CurrentBindings[i].IsWrapPoint)
+            {
+                BindingStackElement binding = CurrentBindings[i];
+                binding.IsWrapPoint = false;
+                CurrentBindings[i] = binding;
+                Debug.Log($"Unmarked outermost wrapped binding: {binding.Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
+                return;
+            }
         }
     }
 
     // Removes bindings from the stack until it finds a wrapped point and returns it
     // If no points are wrapped, all points are removed and null is returned
+    // This should never return null since Idle is always a wrapped point
     public BindingGraphData.BindingGraphNode RevertToLastWrappedBinding()
     {
         while (CurrentBindings.Count > 0)
@@ -148,13 +166,18 @@ public class BindingStack : Singleton<BindingStack>
                 Debug.Log($"Reverted to last wrapped binding: {lastBinding.Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
                 return BindingGraph.nodes.Find(n => n.nodeId == lastBinding.Point);
             }
+            else if (lastBinding.IsRootPoint)
+            {
+                Debug.Log($"Reverted to root binding: {lastBinding.Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
+                return BindingGraph.nodes.Find(n => n.nodeId == lastBinding.Point);
+            }
             else
             {
                 CurrentBindings.RemoveAt(CurrentBindings.Count - 1);
             }
         }
 
-        Debug.Log($"No wrapped bindings to revert to. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
+        Debug.LogWarning($"No wrapped bindings to revert to. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
         return null;
     }
 
@@ -209,7 +232,7 @@ public class BindingStack : Singleton<BindingStack>
     // returns a string representing the current stack of bindings, with wrap points indicated by an asterisk (*)
     public string CurrentBindingsToString()
     {
-        return string.Join(", ", CurrentBindings.Select(b => b.IsWrapPoint ? $"{b.Point}*" : b.Point));
+        return string.Join(", ", CurrentBindings.Select(b => b.IsWrapPoint ? $"{b.Point}*" : b.IsRootPoint ? $"{b.Point}**" : b.Point));
     }
 }
 
@@ -219,4 +242,5 @@ public struct BindingStackElement
     public string Point;
     public int UnitCost;
     public bool IsWrapPoint;
+    public bool IsRootPoint;
 }

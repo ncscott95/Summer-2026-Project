@@ -22,7 +22,7 @@
         {
             "nodeId": "Lead Down Spin",
             "isStable": true,
-            "canCast": false,
+            "canCast": true,
             "canWrap": false,
             "canTurn": true,
             "connections": [
@@ -100,7 +100,7 @@
         {
             "nodeId": "Anchor Down Spin",
             "isStable": true,
-            "canCast": false,
+            "canCast": true,
             "canWrap": false,
             "canTurn": true,
             "connections": [
