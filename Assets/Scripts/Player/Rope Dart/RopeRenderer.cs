@@ -14,7 +14,7 @@ public class RopeRenderer : Singleton<RopeRenderer>
             lineRenderer.SetPosition(i, currentBindPoints[i].Position);
         }
 
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, RopeDartManager.Instance.GetHeadPosition());
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, RopeDartVisualManager.Instance.GetHeadPosition());
     }
 
     public void Reset()
@@ -22,7 +22,7 @@ public class RopeRenderer : Singleton<RopeRenderer>
         currentBindPoints.Clear();
 
         lineRenderer.positionCount = 1;
-        lineRenderer.SetPosition(0, RopeDartManager.Instance.GetHeadPosition());
+        lineRenderer.SetPosition(0, RopeDartVisualManager.Instance.GetHeadPosition());
         lineRenderer.enabled = true;
     }
 
@@ -45,7 +45,7 @@ public class RopeRenderer : Singleton<RopeRenderer>
 
         lineRenderer.positionCount += 1;
 
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, RopeDartManager.Instance.GetHeadPosition());
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, RopeDartVisualManager.Instance.GetHeadPosition());
         // use count-2 to adjust so that the last point is always the head position
         lineRenderer.SetPosition(lineRenderer.positionCount - 2, point.Position);
     }
@@ -57,7 +57,7 @@ public class RopeRenderer : Singleton<RopeRenderer>
             currentBindPoints.RemoveAt(currentBindPoints.Count - 1);
 
             lineRenderer.positionCount -= 1;
-            lineRenderer.SetPosition(lineRenderer.positionCount - 1, RopeDartManager.Instance.GetHeadPosition());
+            lineRenderer.SetPosition(lineRenderer.positionCount - 1, RopeDartVisualManager.Instance.GetHeadPosition());
         }
     }
 }

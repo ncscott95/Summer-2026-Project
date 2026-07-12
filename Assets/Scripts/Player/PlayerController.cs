@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class PlayerController : Singleton<PlayerController>
+public class PlayerController : Singleton<PlayerController>
 {
     public Transform Camera { get; protected set; }
     public InputSystem_Actions Actions { get; private set; }
@@ -18,25 +18,25 @@ public abstract class PlayerController : Singleton<PlayerController>
     {
         Actions.Player.Enable();
 
-        Actions.Player.Spin.performed += ctx => RopeDartInputController.Instance.HandleSpinRetrieveInput();
-        Actions.Player.Spin.canceled += ctx => RopeDartInputController.Instance.HandleSpinInputEnd();
-        Actions.Player.Cast.performed += ctx => RopeDartInputController.Instance.HandleCastInput();
-        Actions.Player.Twine.performed += ctx => RopeDartInputController.Instance.HandleTwineInput();
-        Actions.Player.Wrap.performed += ctx => RopeDartInputController.Instance.HandleWrapInput();
-        Actions.Player.Wrap.canceled += ctx => RopeDartInputController.Instance.HandleWrapInputEnd();
-        Actions.Player.DartDirection.performed += ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
+        Actions.Player.Spin.performed += ctx => RopeDartInputControllerNew.Instance.HandleSpinRetrieveInput();
+        Actions.Player.Spin.canceled += ctx => RopeDartInputControllerNew.Instance.HandleSpinInputEnd();
+        Actions.Player.Cast.performed += ctx => RopeDartInputControllerNew.Instance.HandleCastInput();
+        Actions.Player.Twine.performed += ctx => RopeDartInputControllerNew.Instance.HandleTwineInput();
+        Actions.Player.Wrap.performed += ctx => RopeDartInputControllerNew.Instance.HandleWrapInput();
+        Actions.Player.Wrap.canceled += ctx => RopeDartInputControllerNew.Instance.HandleWrapInputEnd();
+        Actions.Player.DartDirection.performed += ctx => RopeDartInputControllerNew.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
     }
 
     public void OnDisable()
     {
         Actions.Player.Disable();
 
-        Actions.Player.Spin.performed -= ctx => RopeDartInputController.Instance.HandleSpinRetrieveInput();
-        Actions.Player.Spin.canceled -= ctx => RopeDartInputController.Instance.HandleSpinInputEnd();
-        Actions.Player.Cast.performed -= ctx => RopeDartInputController.Instance.HandleCastInput();
-        Actions.Player.Twine.performed -= ctx => RopeDartInputController.Instance.HandleTwineInput();
-        Actions.Player.Wrap.performed -= ctx => RopeDartInputController.Instance.HandleWrapInput();
-        Actions.Player.Wrap.canceled -= ctx => RopeDartInputController.Instance.HandleWrapInputEnd();
-        Actions.Player.DartDirection.performed -= ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
+        Actions.Player.Spin.performed -= ctx => RopeDartInputControllerNew.Instance.HandleSpinRetrieveInput();
+        Actions.Player.Spin.canceled -= ctx => RopeDartInputControllerNew.Instance.HandleSpinInputEnd();
+        Actions.Player.Cast.performed -= ctx => RopeDartInputControllerNew.Instance.HandleCastInput();
+        Actions.Player.Twine.performed -= ctx => RopeDartInputControllerNew.Instance.HandleTwineInput();
+        Actions.Player.Wrap.performed -= ctx => RopeDartInputControllerNew.Instance.HandleWrapInput();
+        Actions.Player.Wrap.canceled -= ctx => RopeDartInputControllerNew.Instance.HandleWrapInputEnd();
+        Actions.Player.DartDirection.performed -= ctx => RopeDartInputControllerNew.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
     }
 }

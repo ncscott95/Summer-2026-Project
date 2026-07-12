@@ -56,7 +56,7 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
         }
 
         // set the next up to 3 segments to the spin color if the player is currently spinning or idle
-        if (RopeDartManager.Instance.CurrentState == RopeDartState.Spinning || RopeDartManager.Instance.CurrentState == RopeDartState.Idle)
+        if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Spinning || RopeDartManagerNew.Instance.CurrentState == RopeDartState.Idle)
         {
             for (int i = 0; i < 3; i++)
             {
