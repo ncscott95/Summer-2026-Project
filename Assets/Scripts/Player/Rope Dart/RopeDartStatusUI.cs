@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
 {
     [SerializeField] private GameObject _barSegmentContainer;
+    [SerializeField] private Transform _angleIndicator;
+    [SerializeField] private TextMeshProUGUI _bindingStackText;
+    [SerializeField] private TextMeshProUGUI _stateText;
 
     public readonly Dictionary<string, Color32> BindingToColorLookup = new Dictionary<string, Color32>
     {
         { "Idle",                           new Color32(0, 0, 0, 255) },
-        { "Lead Down Spin",                 new Color32(0, 255, 0, 255) },
-        { "Lead Up Spin",                   new Color32(0, 255, 0, 255) },
-        { "Anchor Down Spin",               new Color32(0, 255, 0, 255) },
-        { "Anchor Up Spin",                 new Color32(0, 255, 0, 255) },
+        { "Down Spin",                      new Color32(0, 255, 0, 255) },
+        { "Up Spin",                        new Color32(0, 255, 0, 255) },
         { "Lead Elbow",                     new Color32(255, 165, 0, 255) },
         { "Anchor Elbow",                   new Color32(0, 165, 255, 255) },
         { "Dragon",                         new Color32(128, 0, 128, 255) },
@@ -37,6 +39,9 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
     void Update()
     {
         UpdateStatusUI();
+        _angleIndicator.localRotation = Quaternion.Euler(0f, 0f, -RopeDartManagerNew.Instance.RawAngle);
+        _bindingStackText.text = $"Binding: {BindingStack.Instance.CurrentBindingsToString()}";
+        _stateText.text = $"State: {RopeDartManagerNew.Instance.CurrentState}";
     }
 
     public void UpdateStatusUI()

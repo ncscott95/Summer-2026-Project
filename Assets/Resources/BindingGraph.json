@@ -2,155 +2,214 @@
     "nodes": [
         {
             "nodeId": "Idle",
-            "isStable": true,
+            "isStable": false,
+            "doesDecay": false,
             "canCast": false,
-            "canWrap": false,
-            "canTurn": true,
+            "canTurn": false,
+            "bindPoints": [
+                "AnchorHand",
+                "LeadHand"
+            ],
             "connections": [
                 {
+                    "nodeId": "Down Spin",
                     "input": "Spin Down",
-                    "nodeId": "Lead Down Spin",
                     "unitCost": 1
                 },
                 {
+                    "nodeId": "Up Spin",
                     "input": "Spin Up",
-                    "nodeId": "Lead Up Spin",
                     "unitCost": 1
                 }
             ]
         },
         {
-            "nodeId": "Lead Down Spin",
-            "isStable": true,
-            "canCast": true,
-            "canWrap": false,
-            "canTurn": true,
+            "nodeId": "Lead Retrieval",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
             "connections": [
                 {
-                    "input": "Spin Up",
-                    "nodeId": "Lead Up Spin",
+                    "nodeId": "Idle",
+                    "input": "",
                     "unitCost": 0
                 },
                 {
-                    "input": "Cross",
-                    "nodeId": "Anchor Down Spin",
+                    "nodeId": "Anchor Retrieval",
+                    "input": "(Nothing)",
                     "unitCost": 0
                 },
                 {
-                    "input": "Bind Lead",
-                    "nodeId": "Lead Elbow",
-                    "unitCost": 1
+                    "nodeId": "Lead Dark Retrieval",
+                    "input": "",
+                    "unitCost": 0
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Retrieval",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "",
+                    "unitCost": 0
                 },
                 {
+                    "nodeId": "Lead Retrieval",
+                    "input": "(Nothing)",
+                    "unitCost": 0
+                },
+                {
+                    "nodeId": "Anchor Dark Retrieval",
+                    "input": "",
+                    "unitCost": 0
+                }
+            ]
+        },
+        {
+            "nodeId": "Lead Dark Retrieval",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
+            "connections": [
+                {
+                    "nodeId": "Anchor Dark Elbow",
                     "input": "Bind Anchor",
-                    "nodeId": "Anchor Elbow",
                     "unitCost": 1
-                },
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Dark Retrieval",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
+            "connections": [
                 {
-                    "input": "Bind Lead Up",
+                    "nodeId": "Lead Dark Elbow",
+                    "input": "Bind Lead",
+                    "unitCost": 1
+                }
+            ]
+        },
+        {
+            "nodeId": "Down Spin",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "LeadHand"
+            ],
+            "connections": [
+                {
                     "nodeId": "Dragon",
-                    "unitCost": 2
-                },
-                {
-                    "input": "Bind Anchor Up",
-                    "nodeId": "Dark Dragon",
-                    "unitCost": 2
-                }
-            ]
-        },
-        {
-            "nodeId": "Lead Up Spin",
-            "isStable": true,
-            "canCast": true,
-            "canWrap": false,
-            "canTurn": true,
-            "connections": [
-                {
-                    "input": "Spin Down",
-                    "nodeId": "Lead Down Spin",
-                    "unitCost": 0
-                },
-                {
-                    "input": "Cross",
-                    "nodeId": "Anchor Up Spin",
-                    "unitCost": 0
-                },
-                {
-                    "input": "Bind Lead",
-                    "nodeId": "Lead Elbow",
-                    "unitCost": 1
-                },
-                {
-                    "input": "Bind Anchor",
-                    "nodeId": "Anchor Elbow",
-                    "unitCost": 1
-                },
-                {
                     "input": "Bind Lead Up",
-                    "nodeId": "Scorpion",
                     "unitCost": 2
                 },
                 {
+                    "nodeId": "Dark Dragon",
                     "input": "Bind Anchor Up",
-                    "nodeId": "Dark Scorpion",
                     "unitCost": 2
+                },
+                {
+                    "nodeId": "Neck",
+                    "input": "Bind Up",
+                    "unitCost": 1
+                },
+                {
+                    "nodeId": "Lead Elbow",
+                    "input": "Bind Lead",
+                    "unitCost": 1
+                },
+                {
+                    "nodeId": "Anchor Elbow",
+                    "input": "Bind Anchor",
+                    "unitCost": 1
+                },
+                {
+                    "nodeId": "Lead Saddle",
+                    "input": "Bind Lead Down",
+                    "unitCost": 1
+                },
+                {
+                    "nodeId": "Anchor Holster",
+                    "input": "Bind Anchor Down",
+                    "unitCost": 1
                 }
             ]
         },
         {
-            "nodeId": "Anchor Down Spin",
-            "isStable": true,
+            "nodeId": "Up Spin",
+            "isStable": false,
+            "doesDecay": false,
             "canCast": true,
-            "canWrap": false,
             "canTurn": true,
+            "bindPoints": [
+                "LeadHand"
+            ],
             "connections": [
                 {
-                    "input": "Stall",
-                    "nodeId": "Anchor Up Spin",
-                    "unitCost": 0
+                    "nodeId": "Scorpion",
+                    "input": "Bind Lead Up",
+                    "unitCost": 2
                 },
                 {
-                    "input": "Cross",
-                    "nodeId": "Lead Down Spin",
-                    "unitCost": 0
+                    "nodeId": "Dark Scorpion",
+                    "input": "Bind Anchor Up",
+                    "unitCost": 2
                 },
                 {
-                    "input": "Bind Lead",
-                    "nodeId": "Lead Elbow",
+                    "nodeId": "Lead Holster",
+                    "input": "Bind Lead Down",
                     "unitCost": 1
                 },
                 {
-                    "input": "Bind Anchor",
+                    "nodeId": "Anchor Saddle",
+                    "input": "Bind Anchor Down",
+                    "unitCost": 1
+                },
+                {
+                    "nodeId": "Neck",
+                    "input": "Bind Up",
+                    "unitCost": 1
+                },
+                {
+                    "nodeId": "Lead Elbow",
+                    "input": "Bind Lead",
+                    "unitCost": 1
+                },
+                {
                     "nodeId": "Anchor Elbow",
+                    "input": "Bind Anchor",
                     "unitCost": 1
                 }
             ]
         },
         {
-            "nodeId": "Anchor Up Spin",
-            "isStable": true,
-            "canCast": true,
-            "canWrap": false,
+            "nodeId": "Neck",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": false,
             "canTurn": true,
+            "bindPoints": [
+                "Neck"
+            ],
             "connections": [
                 {
-                    "input": "Stall",
-                    "nodeId": "Anchor Down Spin",
-                    "unitCost": 0
-                },
-                {
-                    "input": "Cross",
-                    "nodeId": "Lead Up Spin",
-                    "unitCost": 0
-                },
-                {
-                    "input": "Bind Lead",
-                    "nodeId": "Lead Elbow",
-                    "unitCost": 1
-                },
-                {
-                    "input": "Bind Anchor",
-                    "nodeId": "Anchor Elbow",
+                    "nodeId": "Idle",
+                    "input": "Wrap",
                     "unitCost": 1
                 }
             ]
@@ -158,34 +217,163 @@
         {
             "nodeId": "Lead Elbow",
             "isStable": false,
+            "doesDecay": true,
             "canCast": true,
-            "canWrap": false,
             "canTurn": true,
+            "bindPoints": [
+                "LeadElbow"
+            ],
             "connections": []
         },
         {
             "nodeId": "Anchor Elbow",
             "isStable": false,
+            "doesDecay": true,
             "canCast": true,
-            "canWrap": false,
             "canTurn": true,
+            "bindPoints": [
+                "AnchorElbow"
+            ],
             "connections": []
+        },
+        {
+            "nodeId": "Lead Dark Elbow",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "LeadElbow"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Anchor Dark Elbow",
+                    "input": "Bind Anchor",
+                    "unitCost": 2
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Dark Elbow",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "AnchorElbow"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Lead Dark Elbow",
+                    "input": "Bind Lead",
+                    "unitCost": 2
+                }
+            ]
+        },
+        {
+            "nodeId": "Lead Foot",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "LeadFoot"
+            ],
+            "connections": []
+        },
+        {
+            "nodeId": "Anchor Foot",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "AnchorFoot"
+            ],
+            "connections": []
+        },
+        {
+            "nodeId": "Lead Saddle",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "LeadKnee"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Holster",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "AnchorKnee"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1
+                }
+            ]
+        },
+        {
+            "nodeId": "Lead Holster",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "LeadKnee"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Saddle",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "AnchorKnee"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1
+                }
+            ]
         },
         {
             "nodeId": "Dragon",
             "isStable": false,
-            "canCast": false,
-            "canWrap": true,
+            "doesDecay": false,
+            "canCast": true,
             "canTurn": false,
+            "bindPoints": [
+                "LeadArmpit",
+                "AnchorShoulder"
+            ],
             "connections": [
                 {
-                    "input": "Spin Down",
-                    "nodeId": "Lead Down Spin",
-                    "unitCost": 1
-                },
-                {
-                    "input": "Spin Up",
-                    "nodeId": "Lead Up Spin",
+                    "nodeId": "Idle",
+                    "input": "Wrap",
                     "unitCost": 1
                 }
             ]
@@ -193,18 +381,17 @@
         {
             "nodeId": "Dark Dragon",
             "isStable": false,
-            "canCast": false,
-            "canWrap": true,
+            "doesDecay": false,
+            "canCast": true,
             "canTurn": false,
+            "bindPoints": [
+                "AnchorArmpit",
+                "LeadShoulder"
+            ],
             "connections": [
                 {
-                    "input": "Spin Down",
-                    "nodeId": "Lead Down Spin",
-                    "unitCost": 1
-                },
-                {
-                    "input": "Spin Up",
-                    "nodeId": "Lead Up Spin",
+                    "nodeId": "Idle",
+                    "input": "Wrap",
                     "unitCost": 1
                 }
             ]
@@ -212,18 +399,17 @@
         {
             "nodeId": "Scorpion",
             "isStable": false,
-            "canCast": false,
-            "canWrap": true,
+            "doesDecay": false,
+            "canCast": true,
             "canTurn": false,
+            "bindPoints": [
+                "LeadShoulder",
+                "AnchorArmpit"
+            ],
             "connections": [
                 {
-                    "input": "Spin Down",
-                    "nodeId": "Lead Down Spin",
-                    "unitCost": 1
-                },
-                {
-                    "input": "Spin Up",
-                    "nodeId": "Lead Up Spin",
+                    "nodeId": "Idle",
+                    "input": "Wrap",
                     "unitCost": 1
                 }
             ]
@@ -231,59 +417,53 @@
         {
             "nodeId": "Dark Scorpion",
             "isStable": false,
-            "canCast": false,
-            "canWrap": true,
+            "doesDecay": false,
+            "canCast": true,
             "canTurn": false,
+            "bindPoints": [
+                "AnchorShoulder",
+                "LeadArmpit"
+            ],
             "connections": [
                 {
-                    "input": "Spin Down",
-                    "nodeId": "Lead Down Spin",
-                    "unitCost": 1
-                },
-                {
-                    "input": "Spin Up",
-                    "nodeId": "Lead Up Spin",
+                    "nodeId": "Idle",
+                    "input": "Wrap",
                     "unitCost": 1
                 }
             ]
         },
         {
-            "nodeId": "Lead Thigh Saddle",
+            "nodeId": "Belt",
             "isStable": false,
+            "doesDecay": false,
             "canCast": false,
-            "canWrap": true,
             "canTurn": false,
-            "connections": [
-                {
-                    "input": "Spin Down",
-                    "nodeId": "Lead Down Spin",
-                    "unitCost": 1
-                },
-                {
-                    "input": "Spin Up",
-                    "nodeId": "Lead Up Spin",
-                    "unitCost": 1
-                }
-            ]
+            "bindPoints": [],
+            "connections": []
         },
         {
-            "nodeId": "Anchor Thigh Holster",
+            "nodeId": "Butterfly",
             "isStable": false,
+            "doesDecay": false,
             "canCast": false,
-            "canWrap": true,
             "canTurn": false,
-            "connections": [
-                {
-                    "input": "Spin Down",
-                    "nodeId": "Lead Down Spin",
-                    "unitCost": 1
-                },
-                {
-                    "input": "Spin Up",
-                    "nodeId": "Lead Up Spin",
-                    "unitCost": 1
-                }
-            ]
+            "bindPoints": [
+                "LeadShoulder",
+                "LeadArmpit"
+            ],
+            "connections": []
+        },
+        {
+            "nodeId": "Dark Butterfly",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [
+                "AnchorShoulder",
+                "AnchorArmpit"
+            ],
+            "connections": []
         }
     ]
 }

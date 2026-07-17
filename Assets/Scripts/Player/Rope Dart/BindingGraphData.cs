@@ -9,17 +9,18 @@ public class BindingGraphData
     {
         public string nodeId;
         public bool isStable;
+        public bool doesDecay;
         public bool canCast;
-        public bool canWrap;
         public bool canTurn;
+        public List<string> bindPoints;
         public List<BindingGraphConnection> connections;
     }
 
     [Serializable]
     public class BindingGraphConnection
     {
-        public string input;
         public string nodeId;
+        public string input;
         public int unitCost;
     }
 

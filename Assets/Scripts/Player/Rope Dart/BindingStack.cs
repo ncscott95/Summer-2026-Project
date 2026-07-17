@@ -12,25 +12,6 @@ public class BindingStack : Singleton<BindingStack>
 
     public BindingGraphData BindingGraph { get; private set; }
 
-    // This dictionary maps binding names to the corresponding BindPointIDs that should be used for that binding.
-    // These are the points that the rope physically travels through when the player usese that binding.
-    public readonly Dictionary<string, BindPointID[]> BindingToPointsLookup = new Dictionary<string, BindPointID[]>
-    {
-        { "Idle",                           new BindPointID[] { BindPointID.AnchorHand, BindPointID.LeadHand } },
-        { "Lead Down Spin",                 new BindPointID[] { BindPointID.LeadHand }},
-        { "Lead Up Spin",                   new BindPointID[] { BindPointID.LeadHand }},
-        { "Anchor Down Spin",               new BindPointID[] { BindPointID.LeadHand }},
-        { "Anchor Up Spin",                 new BindPointID[] { BindPointID.LeadHand }},
-        { "Lead Elbow",                     new BindPointID[] { BindPointID.LeadElbow }},
-        { "Anchor Elbow",                   new BindPointID[] { BindPointID.AnchorElbow }},
-        { "Dragon",                         new BindPointID[] { BindPointID.LeadArmpit, BindPointID.AnchorShoulder }},
-        { "Dark Dragon",                    new BindPointID[] { BindPointID.AnchorArmpit, BindPointID.LeadShoulder }},
-        { "Scorpion",                       new BindPointID[] { BindPointID.LeadShoulder, BindPointID.AnchorArmpit }},
-        { "Dark Scorpion",                  new BindPointID[] { BindPointID.AnchorShoulder, BindPointID.LeadArmpit }},
-        { "Lead Thigh Saddle",              new BindPointID[] { BindPointID.LeadKnee }},
-        { "Anchor Thigh Holster",           new BindPointID[] { BindPointID.AnchorKnee }},
-    };
-
     [SerializeField] private List<BindPointObject> bindPointObjects = new List<BindPointObject>(13);
 
     public override void Awake()
@@ -38,7 +19,6 @@ public class BindingStack : Singleton<BindingStack>
         base.Awake();
 
         BindingGraph = JsonUtility.FromJson<BindingGraphData>(Resources.Load<TextAsset>("BindingGraph").text);
-        Debug.Log(BindingGraph.nodes.Count);
     }
 
     public List<BindPointObject> TryPushBinding(string bindingInput)
@@ -89,15 +69,17 @@ public class BindingStack : Singleton<BindingStack>
             newBindingId = bindingInput;
         }
 
+        BindingGraphData.BindingGraphNode newBindingNode = BindingGraph.nodes.Find(n => n.nodeId == newBindingId);
+
         // return the list of BindPointObjects corresponding to the given nodeId, can be used to get transform references
         List<BindPointObject> points = new List<BindPointObject>();
-        foreach (BindPointID pointID in BindingToPointsLookup[newBindingId])
+        foreach (BindPointID pointID in newBindingNode.bindPoints
+                .Select(bp => (BindPointID)System.Enum.Parse(typeof(BindPointID), bp, true)))
         {
             BindPointObject point = bindPointObjects[(int)pointID];
             points.Add(point);
         }
 
-        Debug.Log($"Pushed binding: {newBindingId}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
         return points;
     }
 
@@ -108,7 +90,6 @@ public class BindingStack : Singleton<BindingStack>
             string nodeID = CurrentBindings[CurrentBindings.Count - 1].Point;
             CurrentBindings.RemoveAt(CurrentBindings.Count - 1);
 
-            Debug.Log($"Popped binding: {nodeID}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
             return BindingGraph.nodes.Find(n => n.nodeId == nodeID);
         }
         return null;
@@ -132,7 +113,6 @@ public class BindingStack : Singleton<BindingStack>
             BindingStackElement lastBinding = CurrentBindings[lastIndex];
             lastBinding.IsWrapPoint = true;
             CurrentBindings[lastIndex] = lastBinding;
-            Debug.Log($"Set binding as wrapped: {CurrentBindings[CurrentBindings.Count - 1].Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
         }
     }
 
@@ -145,7 +125,6 @@ public class BindingStack : Singleton<BindingStack>
                 BindingStackElement binding = CurrentBindings[i];
                 binding.IsWrapPoint = false;
                 CurrentBindings[i] = binding;
-                Debug.Log($"Unmarked outermost wrapped binding: {binding.Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
                 return;
             }
         }
@@ -162,12 +141,10 @@ public class BindingStack : Singleton<BindingStack>
 
             if (lastBinding.IsWrapPoint)
             {
-                Debug.Log($"Reverted to last wrapped binding: {lastBinding.Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
                 return BindingGraph.nodes.Find(n => n.nodeId == lastBinding.Point);
             }
             else if (lastBinding.IsRootPoint)
             {
-                Debug.Log($"Reverted to root binding: {lastBinding.Point}. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
                 return BindingGraph.nodes.Find(n => n.nodeId == lastBinding.Point);
             }
             else
@@ -176,14 +153,12 @@ public class BindingStack : Singleton<BindingStack>
             }
         }
 
-        Debug.LogWarning($"No wrapped bindings to revert to. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
         return null;
     }
 
     public void ClearBindings()
     {
         CurrentBindings.Clear();
-        Debug.Log($"Clearing all bindings. Current stack: {CurrentBindingsToString()}. Remaining units: {GetRemainingUnits()}");
     }
 
     public int GetTotalUnitCost()
@@ -206,26 +181,35 @@ public class BindingStack : Singleton<BindingStack>
         List<BindPointObject> points = new List<BindPointObject>();
         foreach (var binding in CurrentBindings)
         {
-            if (BindingToPointsLookup.TryGetValue(binding.Point, out BindPointID[] pointIDs))
+            BindingGraphData.BindingGraphNode bindingNode = BindingGraph.nodes.Find(n => n.nodeId == binding.Point);
+            if (bindingNode != null)
             {
-                foreach (BindPointID pointID in pointIDs)
+                foreach (BindPointID pointID in bindingNode.bindPoints
+                        .Select(bp => (BindPointID)System.Enum.Parse(typeof(BindPointID), bp, true)))
                 {
-                    BindPointObject point = bindPointObjects[(int)pointID];
-                    points.Add(point);
+                    if ((int)pointID >= 0 && (int)pointID < bindPointObjects.Count)
+                    {
+                        BindPointObject point = bindPointObjects[(int)pointID];
+                        points.Add(point);
+                    }
                 }
             }
         }
         return points;
     }
-    
+
     public BindPointObject GetBindPointObject(string bindingId)
     {
-        if (BindingToPointsLookup.TryGetValue(bindingId, out BindPointID[] pointIDs))
+        BindingGraphData.BindingGraphNode bindingNode = BindingGraph.nodes.Find(n => n.nodeId == bindingId);
+
+        if (bindingNode == null || bindingNode.bindPoints == null || bindingNode.bindPoints.Count == 0)
         {
-            // return the last BindPointObject for the given bindingId
-            return bindPointObjects[(int)pointIDs[pointIDs.Length - 1]];
+            return null;
         }
-        return null;
+
+        // return the last BindPointObject for the given bindingId
+        string lastValidBindPoint = bindingNode.bindPoints.Last();
+        return bindPointObjects[(int)System.Enum.Parse(typeof(BindPointID), lastValidBindPoint, true)];
     }
 
     // returns a string representing the current stack of bindings, with wrap points indicated by an asterisk (*)

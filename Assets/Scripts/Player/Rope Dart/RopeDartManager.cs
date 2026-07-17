@@ -203,11 +203,12 @@ public class RopeDartManager : Singleton<RopeDartManager>
             return;
         }
 
-        if (!currentBinding.canWrap)
-        {
-            Debug.LogWarning($"Cannot start wrap: current binding {currentBinding.nodeId} does not allow wrapping.");
-            return;
-        }
+        // TODO: replaced canWrap with a specific binding for a wrap, search if connections has a binding with wrap
+        // if (!currentBinding.canWrap)
+        // {
+        //     Debug.LogWarning($"Cannot start wrap: current binding {currentBinding.nodeId} does not allow wrapping.");
+        //     return;
+        // }
 
         HandleWrapBuff(currentBinding.nodeId);
 

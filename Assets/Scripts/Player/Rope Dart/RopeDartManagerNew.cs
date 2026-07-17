@@ -4,8 +4,9 @@ using System.Linq;
 
 public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 {
+    // disable warnings for unreachable code
     #pragma warning disable CS0162
-    private const bool DEBUG_IsUsingRopeDartVisualManager = true;
+    private const bool DEBUG_IsUsingRopeDartVisualManager = false;
 
     public RopeDartData Data;
 
@@ -14,13 +15,15 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     public float RawAngle { get; private set; } = 0f;
 
     private bool isTryingToSpin = false;
-    private bool isRetrieveFromRight = true;
+    private float debugTimer = 0f;
+    private float debugCastDuration = 0.5f;
 
     void Start()
     {
         if (!DEBUG_IsUsingRopeDartVisualManager)
         {
-            GetComponent<RopeDartVisualManager>().enabled = false;
+            RopeDartVisualManager.Instance.enabled = false;
+            RopeRenderer.Instance.enabled = false;
         }
 
         if (DEBUG_IsUsingRopeDartVisualManager) RopeDartVisualManager.Instance.Initialize();
@@ -28,20 +31,59 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         ResetRopeToHands();
     }
 
+    void Update()
+    {
+        if (CurrentState == RopeDartState.Spinning)
+        {
+            float oldAngle = RawAngle;
+            // TODO: should be scaled by current spin radius
+            RawAngle += (IsClockwise ? 1 : -1) * Data.SpinLinearSpeed * Time.deltaTime;
+            RawAngle = Mathf.Repeat(RawAngle, 360f);
+
+            // detection for additional "beats"
+            if (oldAngle < 180f && RawAngle >= 180f)
+            {
+                Debug.Log("Spin beat");
+            }
+        }
+        else if (CurrentState == RopeDartState.Casting)
+        {
+            debugTimer += Time.deltaTime;
+            if (debugTimer >= debugCastDuration)
+            {
+                debugTimer = 0f;
+                OnEndCast();
+            }
+        }
+        else if (CurrentState == RopeDartState.Retrieving)
+        {
+            debugTimer += Time.deltaTime;
+            if (debugTimer >= debugCastDuration)
+            {
+                debugTimer = 0f;
+                OnEndRetrieve();
+            }
+        }
+    }
+
     public void StartSpin()
     {
-        if (CurrentState != RopeDartState.Idle && CurrentState != RopeDartState.Retrieving && CurrentState != RopeDartState.Stalling)
+        if (CurrentState != RopeDartState.Idle && CurrentState != RopeDartState.Retrieving)
             return;
+
+        // TODO: this won't work since you can get stuck in a permanent state of idle, need to make sure you can cast or reverse spin from this state to release slack
+        // if (BindingStack.Instance.GetRemainingUnits() <= 0)
+        // {
+        //     // out of slack units, cannot spin
+        //     // this is "holding" the dart in place
+        //     Debug.LogWarning("Cannot start spin: no remaining units.");
+        //     return;
+        // }
 
         if (CurrentState == RopeDartState.Idle)
         {
             // default to a wheel plane down spin
             IsClockwise = true;
-        }
-        else if (CurrentState == RopeDartState.Stalling)
-        {
-            // flip spin direction when starting a new spin during stall
-            IsClockwise = !IsClockwise;
         }
 
         List<BindPointObject> newOriginPoints = BindingStack.Instance.TryPushBinding("Spin " + (IsClockwise ? "Down" : "Up"));
@@ -54,18 +96,6 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         RopeDartStatusUI.Instance.UpdateStatusUI();
 
         CurrentState = RopeDartState.Spinning;
-    }
-
-    public void StopSpin()
-    {
-        if (CurrentState != RopeDartState.Spinning)
-            return;
-
-        if (DEBUG_IsUsingRopeDartVisualManager) RopeDartVisualManager.Instance.SetOrigin(BindingStack.Instance.GetBindPointObject(BindingStack.Instance.RevertToLastWrappedBinding()?.nodeId).transform);
-        UpdateRopeRenderer();
-        RopeDartStatusUI.Instance.UpdateStatusUI();
-
-        CurrentState = RopeDartState.Stalling;
     }
 
     public void Cast()
@@ -83,11 +113,18 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 
         Debug.Log("Casting");
 
-        if (DEBUG_IsUsingRopeDartVisualManager) RopeDartVisualManager.Instance.SetOrigin(BindingStack.Instance.GetBindPointObject(BindingStack.Instance.RevertToLastWrappedBinding()?.nodeId).transform);
+        BindingGraphData.BindingGraphNode newOriginNode = BindingStack.Instance.RevertToLastWrappedBinding();
+        if (newOriginNode != null)
+        {
+            Transform newOrigin = BindingStack.Instance.GetBindPointObject(newOriginNode.nodeId).transform;
+            if (DEBUG_IsUsingRopeDartVisualManager) RopeDartVisualManager.Instance.SetOrigin(newOrigin);
+        }
+
         UpdateRopeRenderer();
         RopeDartStatusUI.Instance.UpdateStatusUI();
 
         CurrentState = RopeDartState.Casting;
+        debugTimer = 0f;
     }
 
     public void OnEndCast()
@@ -111,8 +148,6 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
             return;
 
         BindPointObject point = points[points.Count - 1];
-        Debug.Log($"Twining to {point.ID} at position {point.Position}");
-
         if (DEBUG_IsUsingRopeDartVisualManager)
         {
             RopeDartVisualManager.Instance.SetRadius(Vector3.Distance(point.Position, RopeDartVisualManager.Instance.CurrentOrigin.position));
@@ -121,8 +156,6 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 
         UpdateRopeRenderer();
         RopeDartStatusUI.Instance.UpdateStatusUI();
-
-        if (RopeDartVisualManager.Instance.CurrentRadius == 0) Reset();
     }
 
     public void TryStartWrap()
@@ -135,11 +168,12 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
             return;
         }
 
-        if (!currentBinding.canWrap)
-        {
-            Debug.LogWarning($"Cannot start wrap: current binding {currentBinding.nodeId} does not allow wrapping.");
-            return;
-        }
+        // TODO: replaced canWrap with a specific binding for a wrap, search if connections has a binding with wrap
+        // if (!currentBinding.canWrap)
+        // {
+        //     Debug.LogWarning($"Cannot start wrap: current binding {currentBinding.nodeId} does not allow wrapping.");
+        //     return;
+        // }
 
         HandleWrapBuff(currentBinding.nodeId);
 
@@ -202,6 +236,8 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     {
         if (CurrentState != RopeDartState.Extended && CurrentState != RopeDartState.Casting)
             return;
+        
+        IsClockwise = RawAngle > 0f && RawAngle < 180f;
 
         CurrentState = RopeDartState.Retrieving;
 
@@ -222,6 +258,7 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         // currentOrigin = startOrigin;
         if (DEBUG_IsUsingRopeDartVisualManager) RopeDartVisualManager.Instance.OnReset();
         CurrentState = RopeDartState.Idle;
+        RawAngle = 180f;
     }
 
     public void FailCombo()
@@ -251,8 +288,6 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     private void UpdateRopeRenderer()
     {
         List<BindPointObject> points = BindingStack.Instance.GetAllBindObjects();
-        Debug.Log($"Current bindings: {BindingStack.Instance.CurrentBindingsToString()}");
-        Debug.Log($"Updating rope renderer with points: {string.Join(", ", points.Select(p => p.ID))}");
         RopeRenderer.Instance.Reset();
         RopeRenderer.Instance.AddPointsBeforeHead(points);
     }
@@ -262,7 +297,6 @@ public enum RopeDartStateNew
 {
     Idle,
     Spinning,
-    Stalling,
     Casting,
     Extended,
     Retrieving

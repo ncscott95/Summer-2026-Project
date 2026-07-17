@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
 {
-    private const float ReleaseSpinBufferDuration = 0.1f;
     private const float DartDirectionBufferDuration = 0.1f;
     private const float CastBufferDuration = 0.1f;
     private const float TwineBufferDuration = 0.1f;
     private const float DirectionDeadzone = 0.5f;
 
-    private readonly InputBuffer releaseSpinBuffer = new(ReleaseSpinBufferDuration, () => RopeDartManagerNew.Instance.StopSpin());
     private readonly InputBuffer<Vector2> dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManagerNew.Instance.ShiftPlane(direction));
     private readonly InputBuffer castBuffer = new(CastBufferDuration, () => RopeDartManagerNew.Instance.Cast());
     private readonly InputBuffer twineBuffer = new(TwineBufferDuration, () => RopeDartManagerNew.Instance.TwineSimple());
@@ -22,9 +20,7 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
     {
         RopeDartManagerNew.Instance.ToggleTryingToSpin(true);
 
-        releaseSpinBuffer.TryForceEnd();
-
-        if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Idle || RopeDartManagerNew.Instance.CurrentState == RopeDartState.Stalling) 
+        if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Idle) 
         {
             RopeDartManagerNew.Instance.StartSpin();
         }
@@ -34,20 +30,8 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
         }
     }
 
-    public void HandleSpinInputEnd()
-    {
-        RopeDartManagerNew.Instance.ToggleTryingToSpin(false);
-        
-        if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Spinning)
-        {
-            releaseSpinBuffer.StartBuffer();
-        }
-    }
-
     public void HandleCastInput()
     {
-        releaseSpinBuffer.Interrupt();
-
         if (dartDirectionBuffer.Interrupt())
         {
             // TODO: cast with modifier based on dartDirectionBuffer.GetLastBufferedInput()
