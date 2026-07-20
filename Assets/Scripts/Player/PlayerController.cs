@@ -19,11 +19,9 @@ public class PlayerController : Singleton<PlayerController>
         Actions.Player.Enable();
 
         Actions.Player.Spin.performed += ctx => RopeDartInputControllerNew.Instance.HandleSpinRetrieveInput();
-        // Actions.Player.Spin.canceled += ctx => RopeDartInputControllerNew.Instance.HandleSpinInputEnd();
         Actions.Player.Cast.performed += ctx => RopeDartInputControllerNew.Instance.HandleCastInput();
         Actions.Player.Twine.performed += ctx => RopeDartInputControllerNew.Instance.HandleTwineInput();
         Actions.Player.Wrap.performed += ctx => RopeDartInputControllerNew.Instance.HandleWrapInput();
-        // Actions.Player.Wrap.canceled += ctx => RopeDartInputControllerNew.Instance.HandleWrapInputEnd();
         Actions.Player.DartDirection.performed += ctx => RopeDartInputControllerNew.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
     }
 
@@ -32,11 +30,9 @@ public class PlayerController : Singleton<PlayerController>
         Actions.Player.Disable();
 
         Actions.Player.Spin.performed -= ctx => RopeDartInputControllerNew.Instance.HandleSpinRetrieveInput();
-        // Actions.Player.Spin.canceled -= ctx => RopeDartInputControllerNew.Instance.HandleSpinInputEnd();
         Actions.Player.Cast.performed -= ctx => RopeDartInputControllerNew.Instance.HandleCastInput();
         Actions.Player.Twine.performed -= ctx => RopeDartInputControllerNew.Instance.HandleTwineInput();
         Actions.Player.Wrap.performed -= ctx => RopeDartInputControllerNew.Instance.HandleWrapInput();
-        // Actions.Player.Wrap.canceled -= ctx => RopeDartInputControllerNew.Instance.HandleWrapInputEnd();
         Actions.Player.DartDirection.performed -= ctx => RopeDartInputControllerNew.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
     }
 }

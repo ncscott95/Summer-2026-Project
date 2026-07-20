@@ -105,6 +105,14 @@ public class BindingStack : Singleton<BindingStack>
         return null;
     }
 
+    public void RemoveBindingAtIndex(int index)
+    {
+        if (index >= 0 && index < CurrentBindings.Count)
+        {
+            CurrentBindings.RemoveAt(index);
+        }
+    }
+
     public void MarkCurrentBindingAsWrapped()
     {
         if (CurrentBindings.Count > 0)
@@ -156,9 +164,39 @@ public class BindingStack : Singleton<BindingStack>
         return null;
     }
 
+    public BindingGraphData.BindingGraphNode RevertToRootBinding()
+    {
+        while (CurrentBindings.Count > 0)
+        {
+            BindingStackElement lastBinding = CurrentBindings[CurrentBindings.Count - 1];
+
+            if (lastBinding.IsRootPoint)
+            {
+                return BindingGraph.nodes.Find(n => n.nodeId == lastBinding.Point);
+            }
+            else
+            {
+                CurrentBindings.RemoveAt(CurrentBindings.Count - 1);
+            }
+        }
+
+        return null;
+    }
+
     public void ClearBindings()
     {
         CurrentBindings.Clear();
+    }
+
+    public void UpdateCurrentBindingUnitCost(int deltaCost)
+    {
+        if (CurrentBindings.Count > 0)
+        {
+            int lastIndex = CurrentBindings.Count - 1;
+            BindingStackElement lastBinding = CurrentBindings[lastIndex];
+            lastBinding.UnitCost += deltaCost;
+            CurrentBindings[lastIndex] = lastBinding;
+        }
     }
 
     public int GetTotalUnitCost()

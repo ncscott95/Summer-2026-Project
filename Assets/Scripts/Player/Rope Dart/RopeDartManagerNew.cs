@@ -44,10 +44,16 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
             if (oldAngle < 180f && RawAngle >= 180f)
             {
                 Debug.Log("Spin beat");
+                BindingGraphData.BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
+                if (currentBinding != null && currentBinding.doesDecay)
+                {
+                    BindingStack.Instance.UpdateCurrentBindingUnitCost(1);
+                }
             }
         }
         else if (CurrentState == RopeDartState.Casting)
         {
+            // TODO: placeholder timer, replace with logic for detecting when the dart has reached max length
             debugTimer += Time.deltaTime;
             if (debugTimer >= debugCastDuration)
             {
@@ -57,6 +63,7 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         }
         else if (CurrentState == RopeDartState.Retrieving)
         {
+            // TODO: placeholder timer, replace with logic for detecting when the dart has reached max length
             debugTimer += Time.deltaTime;
             if (debugTimer >= debugCastDuration)
             {
@@ -113,7 +120,8 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 
         Debug.Log("Casting");
 
-        BindingGraphData.BindingGraphNode newOriginNode = BindingStack.Instance.RevertToLastWrappedBinding();
+        // BindingGraphData.BindingGraphNode newOriginNode = BindingStack.Instance.RevertToLastWrappedBinding();
+        BindingGraphData.BindingGraphNode newOriginNode = BindingStack.Instance.RevertToRootBinding();
         if (newOriginNode != null)
         {
             Transform newOrigin = BindingStack.Instance.GetBindPointObject(newOriginNode.nodeId).transform;
@@ -147,6 +155,9 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         if (points == null || points.Count == 0)
             return;
 
+        // TODO: temp, always pop the binding before this one to get rid of the extra spin binding
+        BindingStack.Instance.RemoveBindingAtIndex(BindingStack.Instance.CurrentBindings.Count - 2);
+
         BindPointObject point = points[points.Count - 1];
         if (DEBUG_IsUsingRopeDartVisualManager)
         {
@@ -174,6 +185,10 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         //     Debug.LogWarning($"Cannot start wrap: current binding {currentBinding.nodeId} does not allow wrapping.");
         //     return;
         // }
+
+        List<BindPointObject> points = BindingStack.Instance.TryPushBinding("Wrap");
+        if (points == null || points.Count == 0)
+            return;
 
         HandleWrapBuff(currentBinding.nodeId);
 
