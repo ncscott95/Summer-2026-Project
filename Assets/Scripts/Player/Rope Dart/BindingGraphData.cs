@@ -22,6 +22,7 @@ public class BindingGraphData
         public string nodeId;
         public string input;
         public int unitCost;
+        public string animation;
     }
 
     public List<BindingGraphNode> nodes = new List<BindingGraphNode>();

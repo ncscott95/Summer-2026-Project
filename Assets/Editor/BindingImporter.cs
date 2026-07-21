@@ -8,7 +8,12 @@ using UnityEngine;
 
 public class BindingImporter : EditorWindow
 {
-    private string sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=46302082#gid=46302082";
+    // old Graph tab
+    // private string sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=1907152520#gid=1907152520";
+    
+    // new Limited Graph tab
+    private string sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=1907152520#gid=1907152520";
+
     private string outputPath = "Assets/Resources/BindingGraph.json";
 
     [MenuItem("Tools/Rope Dart/Binding Importer")]
@@ -157,12 +162,14 @@ public class BindingImporter : EditorWindow
                 {
                     cost = parsedCost;
                 }
+                string animation = columns.Length > 12 ? columns[12].Trim() : "";
 
                 node.connections.Add(new BindingGraphData.BindingGraphConnection
                 {
                     nodeId = targetNode,
                     input = binding,
-                    unitCost = cost
+                    unitCost = cost,
+                    animation = animation
                 });
             }
         }

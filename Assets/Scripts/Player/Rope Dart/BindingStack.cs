@@ -83,6 +83,63 @@ public class BindingStack : Singleton<BindingStack>
         return points;
     }
 
+    public BindingGraphData.BindingGraphConnection TryPushBindingNew(string bindingInput)
+    {
+        string newBindingId = "";
+
+        if (CurrentBindings.Count > 0)
+        {
+            string lastBindingId = CurrentBindings[CurrentBindings.Count - 1].Point;
+            BindingGraphData.BindingGraphNode lastBindingNode = BindingGraph.nodes.Find(n => n.nodeId == lastBindingId);
+
+            BindingGraphData.BindingGraphConnection connection = lastBindingNode.connections.Find(c => c.input == bindingInput);
+            if (connection == null)
+            {
+                Debug.LogWarning($"Cannot bind from {lastBindingId} with {bindingInput}. Transition not allowed.");
+                return null;
+            }
+
+            if (GetRemainingUnits() < connection.unitCost)
+            {
+                Debug.LogWarning($"Cannot bind from {lastBindingId} with {bindingInput}. Unit cost {connection.unitCost} exceeds remaining units {GetRemainingUnits()}.");
+                return null;
+            }
+
+            BindingStackElement element = new BindingStackElement
+            {
+                Point = connection.nodeId,
+                UnitCost = connection.unitCost,
+                IsWrapPoint = false,
+                IsRootPoint = false
+            };
+            CurrentBindings.Add(element);
+
+            newBindingId = connection.nodeId;
+
+            return connection;
+        }
+        else
+        {
+            BindingStackElement element = new BindingStackElement
+            {
+                Point = bindingInput,
+                UnitCost = 0,
+                IsWrapPoint = false,
+                // mark the first binding as a root point, which behaves as a wrap point that can't be unmarked
+                IsRootPoint = true
+            };
+            CurrentBindings.Add(element);
+
+            newBindingId = bindingInput;
+
+            return null;
+        }
+
+        // BindingGraphData.BindingGraphNode newBindingNode = BindingGraph.nodes.Find(n => n.nodeId == newBindingId);
+
+        // return newBindingNode;
+    }
+    
     public BindingGraphData.BindingGraphNode PopBinding()
     {
         if (CurrentBindings.Count > 0)
