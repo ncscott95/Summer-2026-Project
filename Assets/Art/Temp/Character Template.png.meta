@@ -1,25 +1,13 @@
 fileFormatVersion: 2
-guid: 63b36a848629ec9499070c6433edaa6d
+guid: c6662a05c74e0f14382545022a04a685
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1819038306529262264
-    second: Animation Sandbox-Sheet_0
+      213: 2931627858034274094
+    second: Character Template_0
   - first:
-      213: -2144300112918308435
-    second: Animation Sandbox-Sheet_1
-  - first:
-      213: -8955336194085609754
-    second: Animation Sandbox-Sheet_2
-  - first:
-      213: -7150793412947396153
-    second: Animation Sandbox-Sheet_3
-  - first:
-      213: 4808406679969948555
-    second: Animation Sandbox-Sheet_4
-  - first:
-      213: -4479903271417126915
-    second: Animation Sandbox-Sheet_5
+      213: -2961128975881141258
+    second: Character Template_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -61,12 +49,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -115,89 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Animation Sandbox-Sheet_0
+      name: Character Template_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 18
         y: 0
-        width: 64
-        height: 64
+        width: 29
+        height: 33
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8ba318db3b58e3910800000000000000
-      internalID: 1819038306529262264
+      spriteID: e2fa5c3210c3fa820800000000000000
+      internalID: 2931627858034274094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Animation Sandbox-Sheet_1
+      name: Character Template_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
+        x: 28
+        y: 32
+        width: 14
+        height: 14
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: da99ca5886aed32e0800000000000000
-      internalID: -2144300112918308435
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Animation Sandbox-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6ee145bcd2148b380800000000000000
-      internalID: -8955336194085609754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Animation Sandbox-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7c93117074743cc90800000000000000
-      internalID: -7150793412947396153
+      spriteID: 6f30d7a92e4f7e6d0800000000000000
+      internalID: -2961128975881141258
       vertices: []
       indices: 
       edges: []
@@ -206,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2a27e9e04218ec64da1b311d60c97359
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -214,15 +158,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Animation Sandbox-Sheet_0: 1819038306529262264
-      Animation Sandbox-Sheet_1: -2144300112918308435
-      Animation Sandbox-Sheet_2: -8955336194085609754
-      Animation Sandbox-Sheet_3: -7150793412947396153
-      Animation Sandbox-Sheet_4: 4808406679969948555
+      Character Template_0: 2931627858034274094
+      Character Template_1: -2961128975881141258
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
