@@ -7,8 +7,9 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     public RopeDartData Data;
 
     public RopeDartState CurrentState { get; private set; } = RopeDartState.Idle;
-    public bool IsClockwise { get; private set; } = true;
+    public bool IsLeadSide { get; private set; } = true;
     public bool IsFrontPlane { get; private set; } = true;
+    public bool IsClockwise { get; private set; } = true;
 
     // 0 = down, 90 = right, 180 = up, 270 = left
     public float RawAngle { get; private set; } = 0f;
@@ -128,7 +129,7 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 
         // UpdateRopeRenderer();
         bool isCastRight = RawAngle > 0f && RawAngle < 180f;
-        _ropeDartVisualManager.UpdateVisuals("Cast_" + (isCastRight ? "Right" : "Left"));
+        _ropeDartVisualManager.UpdateVisuals("Cast_" + (isCastRight ? "East" : "West"));
 
         RopeDartStatusUI.Instance.UpdateStatusUI();
 

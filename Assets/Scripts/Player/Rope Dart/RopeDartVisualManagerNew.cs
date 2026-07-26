@@ -23,6 +23,12 @@ public class RopeDartVisualManagerNew : MonoBehaviour
     {
         string output = "Player@" + bindingConnectionAnimation;
         output += RopeDartManagerNew.Instance.IsFrontPlane ? "_Front" : "_Back";
+
+        if (!bindingConnectionAnimation.StartsWith("Cast")) output += RopeDartManagerNew.Instance.IsClockwise ? "_CW" : "_CCW";
+
+        // TODO: temp add "_Loop"
+        output += "_Loop";
+
         return output;
     }
 }
