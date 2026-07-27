@@ -149,14 +149,15 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 
         // BindingGraphData.BindingGraphNode newOriginNode = BindingStack.Instance.RevertToLastWrappedBinding();
         BindingGraphData.BindingGraphNode newOriginNode = BindingStack.Instance.RevertToRootBinding();
-        if (newOriginNode != null)
-        {
-            Transform newOrigin = BindingStack.Instance.GetBindPointObject(newOriginNode.nodeId).transform;
-            // if (DEBUG_IsUsingRopeDartVisualManager) RopeDartVisualManager.Instance.SetOrigin(newOrigin);
-        }
+        // if (newOriginNode != null)
+        // {
+        //     Transform newOrigin = BindingStack.Instance.GetBindPointObject(newOriginNode.nodeId).transform;
+        //     // if (DEBUG_IsUsingRopeDartVisualManager) RopeDartVisualManager.Instance.SetOrigin(newOrigin);
+        // }
 
         // UpdateRopeRenderer();
-        bool isCastRight = RawAngle > 0f && RawAngle < 180f;
+        // bool isCastRight = RawAngle > 315 || RawAngle > 0f && RawAngle < 135f;
+        bool isCastRight = IsClockwise ? RawAngle > 315 || RawAngle > 0f && RawAngle < 135f : RawAngle > 45f && RawAngle < 225f;
         _ropeDartVisualManager.UpdateVisuals("Cast_" + (isCastRight ? "East" : "West"));
 
         IsLeadSide = IsFrontPlane ? isCastRight : !isCastRight;

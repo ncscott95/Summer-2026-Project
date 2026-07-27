@@ -5,8 +5,8 @@ using TMPro;
 
 public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
 {
-    [SerializeField] private GameObject _barSegmentContainer;
-    [SerializeField] private Transform _angleIndicator;
+    // [SerializeField] private GameObject _barSegmentContainer;
+    // [SerializeField] private Transform _angleIndicator;
     [SerializeField] private TextMeshProUGUI _bindingStackText;
     [SerializeField] private TextMeshProUGUI _stateText;
 
@@ -33,13 +33,13 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
     {
         base.Awake();
 
-        _bindingImages = new List<Image>(_barSegmentContainer.GetComponentsInChildren<Image>());
+        // _bindingImages = new List<Image>(_barSegmentContainer.GetComponentsInChildren<Image>());
     }
 
     void Update()
     {
         UpdateStatusUI();
-        _angleIndicator.localRotation = Quaternion.Euler(0f, 0f, -RopeDartManagerNew.Instance.RawAngle);
+        // _angleIndicator.localRotation = Quaternion.Euler(0f, 0f, -RopeDartManagerNew.Instance.RawAngle);
         _bindingStackText.text = $"Binding: {BindingStack.Instance.CurrentBindingsToString()}";
         _stateText.text = $"State: {RopeDartManagerNew.Instance.CurrentState}";
     }
