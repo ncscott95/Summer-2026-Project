@@ -11,6 +11,8 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
     private readonly InputBuffer castBuffer = new(CastBufferDuration, () => RopeDartManagerNew.Instance.Cast());
     private readonly InputBuffer twineBuffer = new(TwineBufferDuration, () => RopeDartManagerNew.Instance.TwineSimple());
 
+    private bool isDirectionConsumed = false;
+
     void Update()
     {
         InputBufferList.TickAll(Time.deltaTime);
@@ -20,11 +22,11 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
     {
         RopeDartManagerNew.Instance.ToggleTryingToSpin(true);
 
-        if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Idle) 
+        if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Idle)
         {
             RopeDartManagerNew.Instance.StartSpin();
         }
-        else if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Extended || RopeDartManagerNew.Instance.CurrentState == RopeDartState.Casting) 
+        else if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Extended || RopeDartManagerNew.Instance.CurrentState == RopeDartState.Casting)
         {
             RopeDartManagerNew.Instance.Retrieve();
         }
@@ -34,8 +36,8 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
     {
         if (dartDirectionBuffer.Interrupt())
         {
-            // TODO: cast with modifier based on dartDirectionBuffer.GetLastBufferedInput()
             HelperCastWithDirection(dartDirectionBuffer.GetLastBufferedInput());
+            isDirectionConsumed = true;
         }
         else
         {
@@ -48,6 +50,7 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
         if (dartDirectionBuffer.Interrupt())
         {
             HelperTwineWithDirection(dartDirectionBuffer.GetLastBufferedInput());
+            isDirectionConsumed = true;
         }
         else
         {
@@ -68,17 +71,23 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
     public void HandleDartDirectionInput(Vector2 input)
     {
         if (input.magnitude < DirectionDeadzone)
+        {
+            isDirectionConsumed = false;
+            return;
+        }
+
+        if (isDirectionConsumed)
             return;
 
         if (castBuffer.Interrupt())
         {
-            // TODO: modify cast based on input
             HelperCastWithDirection(input);
+            isDirectionConsumed = true;
         }
         else if (twineBuffer.Interrupt())
         {
-            // TODO: modify twine based on input
             HelperTwineWithDirection(input);
+            isDirectionConsumed = true;
         }
         else
         {
@@ -93,46 +102,14 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
 
-        if (angle <= 22.5f || angle > 337.5f)
-        {
-            // right
-            bindingInput = "Bind Lead";
-        }
-        else if (angle > 22.5f && angle <= 67.5f)
-        {
-            // up-right
-            bindingInput = "Bind Lead Up";
-        }
-        else if (angle > 67.5f && angle <= 112.5f)
-        {
-            // up
-            bindingInput = "Bind Up";
-        }
-        else if (angle > 112.5f && angle <= 157.5f)
-        {
-            // up-left
-            bindingInput = "Bind Anchor Up";
-        }
-        else if (angle > 157.5f && angle <= 202.5f)
-        {
-            // left
-            bindingInput = "Bind Anchor";
-        }
-        else if (angle > 202.5f && angle <= 247.5f)
-        {
-            // down-left
-            bindingInput = "Bind Anchor Down";
-        }
-        else if (angle > 247.5f && angle <= 292.5f)
-        {
-            // down
-            bindingInput = "Bind Down";
-        }
-        else if (angle > 292.5f && angle <= 337.5f)
-        {
-            // down-right
-            bindingInput = "Bind Lead Down";
-        }
+        if (angle <= 22.5f || angle > 337.5f) bindingInput = "Bind Lead";
+        else if (angle > 22.5f && angle <= 67.5f) bindingInput = "Bind Lead Up";
+        else if (angle > 67.5f && angle <= 112.5f) bindingInput = "Bind Up";
+        else if (angle > 112.5f && angle <= 157.5f) bindingInput = "Bind Anchor Up";
+        else if (angle > 157.5f && angle <= 202.5f) bindingInput = "Bind Anchor";
+        else if (angle > 202.5f && angle <= 247.5f) bindingInput = "Bind Anchor Down";
+        else if (angle > 247.5f && angle <= 292.5f) bindingInput = "Bind Down";
+        else if (angle > 292.5f && angle <= 337.5f) bindingInput = "Bind Lead Down";
 
         RopeDartManagerNew.Instance.Twine(bindingInput);
     }
@@ -141,7 +118,7 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
     {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
-        
+
         if (angle > 247.5f && angle <= 292.5f)
         {
             // down

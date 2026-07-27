@@ -7,16 +7,26 @@ public class RopeDartVisualManagerNew : MonoBehaviour
 
     public void UpdateVisuals(BindingGraphData.BindingGraphConnection bindingConnection)
     {
-        string fullAnimationClip = CreatePlayerClipString(bindingConnection.animation);
-        Debug.Log($"Playing animation clip: {fullAnimationClip}");
-        _playerAnimator.Play(fullAnimationClip);
+        UpdateVisuals(bindingConnection.animation);
     }
 
     public void UpdateVisuals(string animationClip)
     {
-        string fullAnimationClip = CreatePlayerClipString(animationClip);
-        Debug.Log($"Playing animation clip: {fullAnimationClip}");
-        _playerAnimator.Play(fullAnimationClip);
+        string playerClip = CreatePlayerClipString(animationClip);
+        string ropeDartClip = CreateRopeDartClipString(animationClip);
+        Debug.Log($"Playing animation clips: {playerClip}, {ropeDartClip}");
+
+        _playerAnimator.Play(playerClip);
+        _ropeDartAnimator.Play(ropeDartClip);
+
+        if (RopeDartManagerNew.Instance.IsFrontPlane)
+        {
+            _ropeDartAnimator.transform.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
+        else
+        {
+            _ropeDartAnimator.transform.GetComponent<SpriteRenderer>().sortingOrder = -1;
+        }
     }
 
     private string CreatePlayerClipString(string bindingConnectionAnimation)
@@ -26,8 +36,36 @@ public class RopeDartVisualManagerNew : MonoBehaviour
 
         if (!bindingConnectionAnimation.StartsWith("Cast")) output += RopeDartManagerNew.Instance.IsClockwise ? "_CW" : "_CCW";
 
-        // TODO: temp add "_Loop"
+        // TODO: temp add "_Loop", eventually replace with "_Start" clip
         output += "_Loop";
+
+        return output;
+    }
+
+    private string CreateRopeDartClipString(string bindingConnectionAnimation)
+    {
+        string output = "Rope@";
+
+        if (bindingConnectionAnimation.StartsWith("Spin"))
+        {
+            output += "Spin";
+            output += RopeDartManagerNew.Instance.IsClockwise ? "_CW" : "_CCW";
+
+            // TODO: temp add "_Loop", eventually replace with "_Start" clip
+            output += "_Loop";
+        }
+        else if (bindingConnectionAnimation.StartsWith("Cast"))
+        {
+            output += bindingConnectionAnimation;
+
+            // TODO: temp add "_Loop", eventually replace with "_Start" clip
+            output += "_Loop";
+        }
+        else
+        {
+            output += "Decay";
+            output += RopeDartManagerNew.Instance.IsClockwise ? "_CW" : "_CCW";
+        }
 
         return output;
     }

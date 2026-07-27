@@ -5,13 +5,14 @@ using System.Linq;
 public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 {
     public RopeDartData Data;
+    private const float BaseSpinSpeed = 360f;
 
     public RopeDartState CurrentState { get; private set; } = RopeDartState.Idle;
     public bool IsLeadSide { get; private set; } = true;
     public bool IsFrontPlane { get; private set; } = true;
     public bool IsClockwise { get; private set; } = true;
 
-    // 0 = down, 90 = right, 180 = up, 270 = left
+    // 0 = up, 90 = right, 180 = down, 270 = left
     public float RawAngle { get; private set; } = 0f;
 
     [SerializeField] private RopeDartVisualManagerNew _ropeDartVisualManager;
@@ -19,6 +20,12 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     private bool isTryingToSpin = false;
     private float debugTimer = 0f;
     private float debugCastDuration = 0.5f;
+    
+    private bool isSpiraling = false;
+    private float spiralTimer = 0f;
+    private float spiralStartAngle = 0f;
+    private const float SpiralDuration = 1.5f;
+    private bool isStalled = false;
 
     void Start()
     {
@@ -31,9 +38,26 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         if (CurrentState == RopeDartState.Spinning)
         {
             float oldAngle = RawAngle;
-            // TODO: should be scaled by current spin radius
-            RawAngle += (IsClockwise ? 1 : -1) * Data.SpinLinearSpeed * Time.deltaTime;
-            RawAngle = Mathf.Repeat(RawAngle, 360f);
+
+            if (!isSpiraling && !isStalled)
+            {
+                RawAngle += (IsClockwise ? 1 : -1) * BaseSpinSpeed * Time.deltaTime;
+                RawAngle = Mathf.Repeat(RawAngle, 360f);
+            }
+            else
+            {
+                spiralTimer += Time.deltaTime;
+                spiralTimer = Mathf.Min(spiralTimer, SpiralDuration);
+                float degreesTraversed = 360f * (3f - Mathf.Sqrt(9f - 6f * spiralTimer));
+                float directionMultiplier = IsClockwise ? 1f : -1f;
+                RawAngle = Mathf.Repeat(spiralStartAngle + directionMultiplier * degreesTraversed, 360f);
+
+                if (spiralTimer >= SpiralDuration)
+                {
+                    isSpiraling = false;
+                    isStalled = true;
+                }
+            }
 
             // detection for additional "beats"
             if (oldAngle < 180f && RawAngle >= 180f)
@@ -97,8 +121,12 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         // UpdateRopeRenderer();
 
         BindingGraphData.BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBindingNew("Spin " + (IsClockwise ? "Down" : "Up"));
-        _ropeDartVisualManager.UpdateVisuals(bindingConnection);
-
+        _ropeDartVisualManager.UpdateVisuals("Spin" + (IsLeadSide ? "_Lead" : "_Anchor"));
+    
+        isSpiraling = false;
+        isStalled = false;
+        // TODO: not sure if this is a good idea or not
+        RawAngle = 180f;
         RopeDartStatusUI.Instance.UpdateStatusUI();
 
         CurrentState = RopeDartState.Spinning;
@@ -108,7 +136,7 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     {
         if (CurrentState != RopeDartState.Spinning)
             return;
-        
+
         BindingGraphData.BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
         if (currentBinding == null || !currentBinding.canCast)
         {
@@ -130,6 +158,8 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         // UpdateRopeRenderer();
         bool isCastRight = RawAngle > 0f && RawAngle < 180f;
         _ropeDartVisualManager.UpdateVisuals("Cast_" + (isCastRight ? "East" : "West"));
+
+        IsLeadSide = IsFrontPlane ? isCastRight : !isCastRight;
 
         RopeDartStatusUI.Instance.UpdateStatusUI();
 
@@ -170,7 +200,14 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
         //     RopeDartVisualManager.Instance.SetRadius(Vector3.Distance(point.Position, RopeDartVisualManager.Instance.CurrentOrigin.position));
         //     RopeDartVisualManager.Instance.SetOrigin(point.transform);
         // }
-        
+
+        if (BindingStack.Instance.PeekBinding().doesDecay)
+        {
+            isSpiraling = true;
+            spiralTimer = 0f;
+            spiralStartAngle = 180f;
+        }
+
         _ropeDartVisualManager.UpdateVisuals(bindingConnection);
 
         // UpdateRopeRenderer();
@@ -250,7 +287,36 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 
     public void ShiftPlane(Vector2 direction)
     {
-        // TODO
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360f;
+
+        if (angle <= 45f || angle > 315f)
+        {
+            // right
+            // if (IsFrontPlane) IsLeadSide = true;
+            // else if (!IsFrontPlane) IsLeadSide = false;
+
+            IsLeadSide = IsFrontPlane;
+        }
+        else if (angle > 45f && angle <= 135f)
+        {
+            // up
+            if (IsFrontPlane) IsLeadSide = !IsLeadSide;
+            IsFrontPlane = false;
+        }
+        else if (angle > 135f && angle <= 225f)
+        {
+            // left
+            IsLeadSide = !IsFrontPlane;
+        }
+        else if (angle > 225f && angle <= 315f)
+        {
+            // down
+            if (!IsFrontPlane) IsLeadSide = !IsLeadSide;
+            IsFrontPlane = true;
+        }
+
+        _ropeDartVisualManager.UpdateVisuals("Spin" + (IsLeadSide ? "_Lead" : "_Anchor"));
     }
 
     public void OnMaxLength()
@@ -263,7 +329,7 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     {
         if (CurrentState != RopeDartState.Extended && CurrentState != RopeDartState.Casting)
             return;
-        
+
         IsClockwise = RawAngle > 0f && RawAngle < 180f;
 
         CurrentState = RopeDartState.Retrieving;
