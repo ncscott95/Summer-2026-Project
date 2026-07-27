@@ -1,0 +1,413 @@
+{
+    "nodes": [
+        {
+            "nodeId": "Idle",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [
+                "AnchorHand",
+                "LeadHand"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Down Spin",
+                    "input": "Spin Down",
+                    "unitCost": 1,
+                    "animation": "Spin_Lead"
+                },
+                {
+                    "nodeId": "Up Spin",
+                    "input": "Spin Up",
+                    "unitCost": 1,
+                    "animation": "Spin_Lead"
+                }
+            ]
+        },
+        {
+            "nodeId": "Cast",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
+            "connections": [
+                {
+                    "nodeId": "Lead Retrieval",
+                    "input": "",
+                    "unitCost": 0,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Anchor Retrieval",
+                    "input": "",
+                    "unitCost": 0,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Lead Dark Retrieval",
+                    "input": "",
+                    "unitCost": 0,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Anchor Dark Retrieval",
+                    "input": "",
+                    "unitCost": 0,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Lead Retrieval",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "",
+                    "unitCost": 0,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Anchor Retrieval",
+                    "input": "(Nothing)",
+                    "unitCost": 0,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Lead Dark Retrieval",
+                    "input": "",
+                    "unitCost": 0,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Retrieval",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "",
+                    "unitCost": 0,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Lead Retrieval",
+                    "input": "(Nothing)",
+                    "unitCost": 0,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Anchor Dark Retrieval",
+                    "input": "",
+                    "unitCost": 0,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Lead Dark Retrieval",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
+            "connections": [
+                {
+                    "nodeId": "Anchor Dark Elbow",
+                    "input": "Bind Anchor",
+                    "unitCost": 1,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Dark Retrieval",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": false,
+            "canTurn": false,
+            "bindPoints": [],
+            "connections": [
+                {
+                    "nodeId": "Lead Dark Elbow",
+                    "input": "Bind Lead",
+                    "unitCost": 1,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Down Spin",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "LeadHand"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Dragon",
+                    "input": "Bind Lead Up",
+                    "unitCost": 2,
+                    "animation": "Dragon"
+                },
+                {
+                    "nodeId": "Dark Dragon",
+                    "input": "Bind Anchor Up",
+                    "unitCost": 2,
+                    "animation": "DragonDark"
+                },
+                {
+                    "nodeId": "Neck",
+                    "input": "Bind Up",
+                    "unitCost": 1,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Lead Elbow",
+                    "input": "Bind Lead",
+                    "unitCost": 1,
+                    "animation": "Elbow_Lead"
+                },
+                {
+                    "nodeId": "Anchor Elbow",
+                    "input": "Bind Anchor",
+                    "unitCost": 1,
+                    "animation": "Elbow_Anchor"
+                }
+            ]
+        },
+        {
+            "nodeId": "Up Spin",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "LeadHand"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Scorpion",
+                    "input": "Bind Lead Up",
+                    "unitCost": 2,
+                    "animation": "Scorpion"
+                },
+                {
+                    "nodeId": "Dark Scorpion",
+                    "input": "Bind Anchor Up",
+                    "unitCost": 2,
+                    "animation": "ScorpionDark"
+                },
+                {
+                    "nodeId": "Neck",
+                    "input": "Bind Up",
+                    "unitCost": 1,
+                    "animation": ""
+                },
+                {
+                    "nodeId": "Lead Elbow",
+                    "input": "Bind Lead",
+                    "unitCost": 1,
+                    "animation": "Elbow_Lead"
+                },
+                {
+                    "nodeId": "Anchor Elbow",
+                    "input": "Bind Anchor",
+                    "unitCost": 1,
+                    "animation": "Elbow_Anchor"
+                }
+            ]
+        },
+        {
+            "nodeId": "Neck",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": false,
+            "canTurn": true,
+            "bindPoints": [
+                "Neck"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Lead Elbow",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "LeadElbow"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Cast",
+                    "input": "Cast",
+                    "unitCost": 0,
+                    "animation": "Cast"
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Elbow",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": true,
+            "bindPoints": [
+                "AnchorElbow"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Cast",
+                    "input": "Cast",
+                    "unitCost": 0,
+                    "animation": "Cast"
+                }
+            ]
+        },
+        {
+            "nodeId": "Lead Dark Elbow",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "LeadElbow"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Cast",
+                    "input": "Cast",
+                    "unitCost": 0,
+                    "animation": "Cast"
+                },
+                {
+                    "nodeId": "Anchor Dark Elbow",
+                    "input": "Bind Anchor",
+                    "unitCost": 2,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Anchor Dark Elbow",
+            "isStable": false,
+            "doesDecay": true,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "AnchorElbow"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Cast",
+                    "input": "Cast",
+                    "unitCost": 0,
+                    "animation": "Cast"
+                },
+                {
+                    "nodeId": "Lead Dark Elbow",
+                    "input": "Bind Lead",
+                    "unitCost": 2,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Dragon",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "LeadArmpit",
+                "AnchorShoulder"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Dark Dragon",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "AnchorArmpit",
+                "LeadShoulder"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Scorpion",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "LeadShoulder",
+                "AnchorArmpit"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1,
+                    "animation": ""
+                }
+            ]
+        },
+        {
+            "nodeId": "Dark Scorpion",
+            "isStable": false,
+            "doesDecay": false,
+            "canCast": true,
+            "canTurn": false,
+            "bindPoints": [
+                "AnchorShoulder",
+                "LeadArmpit"
+            ],
+            "connections": [
+                {
+                    "nodeId": "Idle",
+                    "input": "Wrap",
+                    "unitCost": 1,
+                    "animation": ""
+                }
+            ]
+        }
+    ]
+}
