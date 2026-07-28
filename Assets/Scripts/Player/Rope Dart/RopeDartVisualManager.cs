@@ -7,7 +7,7 @@ public class RopeDartVisualManager : MonoBehaviour
 
     public void UpdateVisuals(BindingGraphData.BindingGraphConnection bindingConnection)
     {
-        UpdateVisuals(bindingConnection.animation);
+        UpdateVisuals(bindingConnection.Animation);
     }
 
     public void UpdateVisuals(string animationClip)

@@ -7,11 +7,11 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     private const float TwineBufferDuration = 0.1f;
     private const float DirectionDeadzone = 0.5f;
 
-    private readonly InputBuffer<Vector2> dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
-    private readonly InputBuffer castBuffer = new(CastBufferDuration, () => RopeDartManager.Instance.Cast());
-    private readonly InputBuffer twineBuffer = new(TwineBufferDuration, () => RopeDartManager.Instance.TwineSimple());
+    private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
+    private readonly InputBuffer _castBuffer = new(CastBufferDuration, () => RopeDartManager.Instance.Cast());
+    private readonly InputBuffer _twineBuffer = new(TwineBufferDuration, () => RopeDartManager.Instance.TwineSimple());
 
-    private bool isDirectionConsumed = false;
+    private bool _isDirectionConsumed = false;
 
     void Update()
     {
@@ -32,27 +32,27 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleCastInput()
     {
-        if (dartDirectionBuffer.Interrupt())
+        if (_dartDirectionBuffer.Interrupt())
         {
-            HelperCastWithDirection(dartDirectionBuffer.GetLastBufferedInput());
-            isDirectionConsumed = true;
+            HelperCastWithDirection(_dartDirectionBuffer.GetLastBufferedInput());
+            _isDirectionConsumed = true;
         }
         else
         {
-            castBuffer.StartBuffer();
+            _castBuffer.StartBuffer();
         }
     }
 
     public void HandleTwineInput()
     {
-        if (dartDirectionBuffer.Interrupt())
+        if (_dartDirectionBuffer.Interrupt())
         {
-            HelperTwineWithDirection(dartDirectionBuffer.GetLastBufferedInput());
-            isDirectionConsumed = true;
+            HelperTwineWithDirection(_dartDirectionBuffer.GetLastBufferedInput());
+            _isDirectionConsumed = true;
         }
         else
         {
-            twineBuffer.StartBuffer();
+            _twineBuffer.StartBuffer();
         }
     }
 
@@ -70,26 +70,26 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     {
         if (input.magnitude < DirectionDeadzone)
         {
-            isDirectionConsumed = false;
+            _isDirectionConsumed = false;
             return;
         }
 
-        if (isDirectionConsumed)
+        if (_isDirectionConsumed)
             return;
 
-        if (castBuffer.Interrupt())
+        if (_castBuffer.Interrupt())
         {
             HelperCastWithDirection(input);
-            isDirectionConsumed = true;
+            _isDirectionConsumed = true;
         }
-        else if (twineBuffer.Interrupt())
+        else if (_twineBuffer.Interrupt())
         {
             HelperTwineWithDirection(input);
-            isDirectionConsumed = true;
+            _isDirectionConsumed = true;
         }
         else
         {
-            dartDirectionBuffer.StartBuffer(input);
+            _dartDirectionBuffer.StartBuffer(input);
         }
     }
 

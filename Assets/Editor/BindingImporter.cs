@@ -12,9 +12,9 @@ public class BindingImporter : EditorWindow
     // private string sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=1907152520#gid=1907152520";
     
     // new Limited Graph tab
-    private string sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=1907152520#gid=1907152520";
+    private string _sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=1907152520#gid=1907152520";
 
-    private string outputPath = "Assets/Resources/BindingGraph.json";
+    private string _outputPath = "Assets/Resources/BindingGraph.json";
 
     [MenuItem("Tools/Rope Dart/Binding Importer")]
     public static void ShowWindow()
@@ -28,8 +28,8 @@ public class BindingImporter : EditorWindow
         
         EditorGUILayout.Space();
         
-        sheetUrl = EditorGUILayout.TextField("Google Sheet URL", sheetUrl);
-        outputPath = EditorGUILayout.TextField("Output JSON Path", outputPath);
+        _sheetUrl = EditorGUILayout.TextField("Google Sheet URL", _sheetUrl);
+        _outputPath = EditorGUILayout.TextField("Output JSON Path", _outputPath);
 
         EditorGUILayout.Space();
 
@@ -46,10 +46,10 @@ public class BindingImporter : EditorWindow
             string sheetId = "";
             string gid = "0";
 
-            Match idMatch = Regex.Match(sheetUrl, @"/d/([a-zA-Z0-9-_]+)");
+            Match idMatch = Regex.Match(_sheetUrl, @"/d/([a-zA-Z0-9-_]+)");
             if (idMatch.Success) sheetId = idMatch.Groups[1].Value;
 
-            Match gidMatch = Regex.Match(sheetUrl, @"[#&]gid=([0-9]+)");
+            Match gidMatch = Regex.Match(_sheetUrl, @"[#&]gid=([0-9]+)");
             if (gidMatch.Success) gid = gidMatch.Groups[1].Value;
 
             if (string.IsNullOrEmpty(sheetId))
@@ -100,27 +100,27 @@ public class BindingImporter : EditorWindow
                 {
                     currentNode = new BindingGraphData.BindingGraphNode();
 
-                    currentNode.nodeId = nodeName;
-                    currentNode.isStable = ParseBool(columns[2]);
-                    currentNode.doesDecay = ParseBool(columns[3]);
-                    currentNode.canCast = ParseBool(columns[4]);
-                    currentNode.canTurn = ParseBool(columns[5]);
+                    currentNode.NodeId = nodeName;
+                    currentNode.IsStable = ParseBool(columns[2]);
+                    currentNode.DoesDecay = ParseBool(columns[3]);
+                    currentNode.CanCast = ParseBool(columns[4]);
+                    currentNode.CanTurn = ParseBool(columns[5]);
 
-                    currentNode.bindPoints = new List<string>();
+                    currentNode.BindPoints = new List<string>();
                     if (!string.IsNullOrEmpty(columns.Length > 6 ? columns[6].Trim() : ""))
                     {
-                        currentNode.bindPoints.Add(columns.Length > 6 ? columns[6].Trim() : "");
+                        currentNode.BindPoints.Add(columns.Length > 6 ? columns[6].Trim() : "");
                     }
                     if (!string.IsNullOrEmpty(columns.Length > 7 ? columns[7].Trim() : ""))
                     {
-                        currentNode.bindPoints.Add(columns.Length > 7 ? columns[7].Trim() : "");
+                        currentNode.BindPoints.Add(columns.Length > 7 ? columns[7].Trim() : "");
                     }
                     if (!string.IsNullOrEmpty(columns.Length > 8 ? columns[8].Trim() : ""))
                     {
-                        currentNode.bindPoints.Add(columns.Length > 8 ? columns[8].Trim() : "");
+                        currentNode.BindPoints.Add(columns.Length > 8 ? columns[8].Trim() : "");
                     }
 
-                    currentNode.connections = new List<BindingGraphData.BindingGraphConnection>();
+                    currentNode.Connections = new List<BindingGraphData.BindingGraphConnection>();
 
                     AddConnectionIfValid(currentNode, columns);
                     nodes.Add(currentNode);
@@ -137,10 +137,10 @@ public class BindingImporter : EditorWindow
             GraphWrapper wrapper = new GraphWrapper { nodes = nodes };
             string jsonOutput = JsonUtility.ToJson(wrapper, true);
 
-            File.WriteAllText(outputPath, jsonOutput);
+            File.WriteAllText(_outputPath, jsonOutput);
             AssetDatabase.Refresh();
 
-            EditorUtility.DisplayDialog("Success", $"Downloaded and converted successfully!\nSaved at: {outputPath}", "OK");
+            EditorUtility.DisplayDialog("Success", $"Downloaded and converted successfully!\nSaved at: {_outputPath}", "OK");
         }
         catch (Exception ex)
         {
@@ -164,12 +164,12 @@ public class BindingImporter : EditorWindow
                 }
                 string animation = columns.Length > 12 ? columns[12].Trim() : "";
 
-                node.connections.Add(new BindingGraphData.BindingGraphConnection
+                node.Connections.Add(new BindingGraphData.BindingGraphConnection
                 {
-                    nodeId = targetNode,
-                    input = binding,
-                    unitCost = cost,
-                    animation = animation
+                    NodeId = targetNode,
+                    Input = binding,
+                    UnitCost = cost,
+                    Animation = animation
                 });
             }
         }

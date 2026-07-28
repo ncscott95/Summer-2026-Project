@@ -9,40 +9,40 @@ public interface IInputBuffer
 
 public class InputBuffer : IInputBuffer
 {
-    private Action onBufferEnd;
+    private Action _onBufferEnd;
 
-    private bool isActive = false;
-    private float duration;
-    private float timer;
+    private bool _isActive = false;
+    private float _duration;
+    private float _timer;
 
     public InputBuffer(float duration, Action onBufferEnd)
     {
-        this.duration = duration;
-        this.onBufferEnd = onBufferEnd;
+        _duration = duration;
+        _onBufferEnd = onBufferEnd;
     }
 
     public void StartBuffer()
     {
-        timer = duration;
-        isActive = true;
+        _timer = _duration;
+        _isActive = true;
         InputBufferList.AddBuffer(this);
     }
 
     public void Tick(float deltaTime)
     {
-        if (!isActive) return;
+        if (!_isActive) return;
 
-        timer -= deltaTime;
-        if (timer <= 0f)
+        _timer -= deltaTime;
+        if (_timer <= 0f)
         {
-            onBufferEnd?.Invoke();
+            _onBufferEnd?.Invoke();
             EndBuffer();
         }
     }
 
     public bool Interrupt()
     {
-        if (!isActive) return false;
+        if (!_isActive) return false;
 
         EndBuffer();
         return true;
@@ -50,59 +50,59 @@ public class InputBuffer : IInputBuffer
 
     public bool TryForceEnd()
     {
-        if (!isActive) return false;
+        if (!_isActive) return false;
 
-        onBufferEnd?.Invoke();
+        _onBufferEnd?.Invoke();
         EndBuffer();
         return true;
     }
 
     private void EndBuffer()
     {
-        isActive = false;
-        timer = 0f;
+        _isActive = false;
+        _timer = 0f;
         InputBufferList.RemoveBuffer(this);
     }
 }
 
 public class InputBuffer<T> : IInputBuffer
 {
-    private Action<T> onBufferEnd;
-    private T bufferedInput;
+    private Action<T> _onBufferEnd;
+    private T _bufferedInput;
 
-    private bool isActive = false;
-    private float duration;
-    private float timer;
+    private bool _isActive = false;
+    private float _duration;
+    private float _timer;
 
     public InputBuffer(float duration, Action<T> onBufferEnd)
     {
-        this.duration = duration;
-        this.onBufferEnd = onBufferEnd;
+        _duration = duration;
+        _onBufferEnd = onBufferEnd;
     }
 
     public void StartBuffer(T bufferedInput)
     {
-        this.bufferedInput = bufferedInput;
-        timer = duration;
-        isActive = true;
+        this._bufferedInput = bufferedInput;
+        _timer = _duration;
+        _isActive = true;
         InputBufferList.AddBuffer(this);
     }
 
     public void Tick(float deltaTime)
     {
-        if (!isActive) return;
+        if (!_isActive) return;
 
-        timer -= deltaTime;
-        if (timer <= 0f)
+        _timer -= deltaTime;
+        if (_timer <= 0f)
         {
-            onBufferEnd?.Invoke(bufferedInput);
+            _onBufferEnd?.Invoke(_bufferedInput);
             EndBuffer();
         }
     }
 
     public bool Interrupt()
     {
-        if (!isActive) return false;
+        if (!_isActive) return false;
 
         EndBuffer();
         return true;
@@ -110,22 +110,22 @@ public class InputBuffer<T> : IInputBuffer
 
     public bool TryForceEnd()
     {
-        if (!isActive) return false;
+        if (!_isActive) return false;
 
-        onBufferEnd?.Invoke(bufferedInput);
+        _onBufferEnd?.Invoke(_bufferedInput);
         EndBuffer();
         return true;
     }
 
     private void EndBuffer()
     {
-        isActive = false;
-        timer = 0f;
+        _isActive = false;
+        _timer = 0f;
         InputBufferList.RemoveBuffer(this);
     }
 
     public T GetLastBufferedInput()
     {
-        return bufferedInput;
+        return _bufferedInput;
     }
 }

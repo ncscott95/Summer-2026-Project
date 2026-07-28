@@ -26,31 +26,31 @@ public class BindingStack : Singleton<BindingStack>
         if (CurrentBindings.Count > 0)
         {
             string lastBindingId = CurrentBindings[CurrentBindings.Count - 1].Point;
-            BindingGraphData.BindingGraphNode lastBindingNode = BindingGraph.nodes.Find(n => n.nodeId == lastBindingId);
+            BindingGraphData.BindingGraphNode lastBindingNode = BindingGraph.Nodes.Find(n => n.NodeId == lastBindingId);
 
-            BindingGraphData.BindingGraphConnection connection = lastBindingNode.connections.Find(c => c.input == bindingInput);
+            BindingGraphData.BindingGraphConnection connection = lastBindingNode.Connections.Find(c => c.Input == bindingInput);
             if (connection == null)
             {
                 Debug.LogWarning($"Cannot bind from {lastBindingId} with {bindingInput}. Transition not allowed.");
                 return null;
             }
 
-            if (GetRemainingUnits() < connection.unitCost)
+            if (GetRemainingUnits() < connection.UnitCost)
             {
-                Debug.LogWarning($"Cannot bind from {lastBindingId} with {bindingInput}. Unit cost {connection.unitCost} exceeds remaining units {GetRemainingUnits()}.");
+                Debug.LogWarning($"Cannot bind from {lastBindingId} with {bindingInput}. Unit cost {connection.UnitCost} exceeds remaining units {GetRemainingUnits()}.");
                 return null;
             }
 
             BindingStackElement element = new BindingStackElement
             {
-                Point = connection.nodeId,
-                UnitCost = connection.unitCost,
+                Point = connection.NodeId,
+                UnitCost = connection.UnitCost,
                 IsWrapPoint = false,
                 IsRootPoint = false
             };
             CurrentBindings.Add(element);
 
-            newBindingId = connection.nodeId;
+            newBindingId = connection.NodeId;
 
             return connection;
         }
@@ -77,7 +77,7 @@ public class BindingStack : Singleton<BindingStack>
         if (CurrentBindings.Count > 0)
         {
             string nodeID = CurrentBindings[CurrentBindings.Count - 1].Point;
-            return BindingGraph.nodes.Find(n => n.nodeId == nodeID);
+            return BindingGraph.Nodes.Find(n => n.NodeId == nodeID);
         }
         return null;
     }
@@ -126,11 +126,11 @@ public class BindingStack : Singleton<BindingStack>
 
             if (lastBinding.IsWrapPoint)
             {
-                return BindingGraph.nodes.Find(n => n.nodeId == lastBinding.Point);
+                return BindingGraph.Nodes.Find(n => n.NodeId == lastBinding.Point);
             }
             else if (lastBinding.IsRootPoint)
             {
-                return BindingGraph.nodes.Find(n => n.nodeId == lastBinding.Point);
+                return BindingGraph.Nodes.Find(n => n.NodeId == lastBinding.Point);
             }
             else
             {
@@ -149,7 +149,7 @@ public class BindingStack : Singleton<BindingStack>
 
             if (lastBinding.IsRootPoint)
             {
-                return BindingGraph.nodes.Find(n => n.nodeId == lastBinding.Point);
+                return BindingGraph.Nodes.Find(n => n.NodeId == lastBinding.Point);
             }
             else
             {

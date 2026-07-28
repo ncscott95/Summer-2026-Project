@@ -3,50 +3,50 @@ using System.Collections.Generic;
 
 public static class InputBufferList
 {
-    private static readonly List<IInputBuffer> activeBuffers = new List<IInputBuffer>();
-    private static readonly List<IInputBuffer> buffersToAdd = new List<IInputBuffer>();
-    private static readonly List<IInputBuffer> buffersToRemove = new List<IInputBuffer>();
+    private static readonly List<IInputBuffer> _activeBuffers = new List<IInputBuffer>();
+    private static readonly List<IInputBuffer> _buffersToAdd = new List<IInputBuffer>();
+    private static readonly List<IInputBuffer> _buffersToRemove = new List<IInputBuffer>();
 
     public static void TickAll(float deltaTime)
     {
-        foreach (IInputBuffer buffer in activeBuffers)
+        foreach (IInputBuffer buffer in _activeBuffers)
         {
             buffer.Tick(deltaTime);
         }
 
-        foreach (IInputBuffer buffer in buffersToRemove)
+        foreach (IInputBuffer buffer in _buffersToRemove)
         {
-            if (activeBuffers.Contains(buffer))
+            if (_activeBuffers.Contains(buffer))
             {
-                activeBuffers.Remove(buffer);
+                _activeBuffers.Remove(buffer);
             }
         }
 
-        foreach (IInputBuffer buffer in buffersToAdd)
+        foreach (IInputBuffer buffer in _buffersToAdd)
         {
-            if (!activeBuffers.Contains(buffer))
+            if (!_activeBuffers.Contains(buffer))
             {
-                activeBuffers.Add(buffer);
+                _activeBuffers.Add(buffer);
             }
         }
 
-        buffersToAdd.Clear();
-        buffersToRemove.Clear();
+        _buffersToAdd.Clear();
+        _buffersToRemove.Clear();
     }
 
     public static void AddBuffer(IInputBuffer buffer)
     {
-        if (!activeBuffers.Contains(buffer))
+        if (!_activeBuffers.Contains(buffer))
         {
-            buffersToAdd.Add(buffer);
+            _buffersToAdd.Add(buffer);
         }
     }
 
     public static void RemoveBuffer(IInputBuffer buffer)
     {
-        if (activeBuffers.Contains(buffer))
+        if (_activeBuffers.Contains(buffer))
         {
-            buffersToRemove.Add(buffer);
+            _buffersToRemove.Add(buffer);
         }
     }
 }
