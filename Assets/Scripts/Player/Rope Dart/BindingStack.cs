@@ -70,10 +70,6 @@ public class BindingStack : Singleton<BindingStack>
 
             return null;
         }
-
-        // BindingGraphData.BindingGraphNode newBindingNode = BindingGraph.nodes.Find(n => n.nodeId == newBindingId);
-
-        // return newBindingNode;
     }
 
     public BindingGraphData.BindingGraphNode PeekBinding()

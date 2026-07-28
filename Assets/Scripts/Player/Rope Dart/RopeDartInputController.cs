@@ -20,8 +20,6 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleSpinRetrieveInput()
     {
-        RopeDartManager.Instance.ToggleTryingToSpin(true);
-
         if (RopeDartManager.Instance.CurrentState == RopeDartState.Idle)
         {
             RopeDartManager.Instance.StartSpin();

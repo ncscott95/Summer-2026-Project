@@ -223,7 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b785fcd3de01f247aaa87f2dc9b3164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RopeDartManagerNew
-  Data: {fileID: 11400000, guid: e95189c31b7a4c2469248c214a89c66b, type: 2}
   _ropeDartVisualManager: {fileID: 143011118}
 --- !u!114 &143011116
 MonoBehaviour:
@@ -830,6 +829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a778817153f5140b96ac2967fb0070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RopeDartStatusUI
+  _barSegmentContainer: {fileID: 2106875603}
+  _angleIndicator: {fileID: 606814183}
   _bindingStackText: {fileID: 1863311580}
   _stateText: {fileID: 1936901121}
 --- !u!1 &461046677
