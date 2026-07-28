@@ -4,7 +4,6 @@ using System.Linq;
 
 public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
 {
-    public RopeDartData Data;
     private const float BaseSpinSpeed = 360f;
 
     public RopeDartState CurrentState { get; private set; } = RopeDartState.Idle;
@@ -389,11 +388,12 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     // }
 }
 
-public enum RopeDartStateNew
+public enum RopeDartState
 {
     Idle,
     Spinning,
     Casting,
     Extended,
-    Retrieving
+    Retrieving,
+    Stalling
 }

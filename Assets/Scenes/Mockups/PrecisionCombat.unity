@@ -525,20 +525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314bb9cf3f68ffc49abbbf9b5910122b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RopeDartBindStack
-  bindPointObjects:
-  - {fileID: 143011114}
-  - {fileID: 960135486}
-  - {fileID: 1041180344}
-  - {fileID: 1584094626}
-  - {fileID: 2058300788}
-  - {fileID: 1826221564}
-  - {fileID: 754352797}
-  - {fileID: 1103919257}
-  - {fileID: 268536483}
-  - {fileID: 76844727}
-  - {fileID: 22861615}
-  - {fileID: 1823334286}
-  - {fileID: 618652714}
 --- !u!114 &143011113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a778817153f5140b96ac2967fb0070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RopeDartStatusUI
-  _barSegmentContainer: {fileID: 2106875603}
+  _bindingStackText: {fileID: 0}
+  _stateText: {fileID: 0}
 --- !u!1 &461046677
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,75 +12,11 @@ public class BindingStack : Singleton<BindingStack>
 
     public BindingGraphData BindingGraph { get; private set; }
 
-    [SerializeField] private List<BindPointObject> bindPointObjects = new List<BindPointObject>(13);
-
     public override void Awake()
     {
         base.Awake();
 
         BindingGraph = JsonUtility.FromJson<BindingGraphData>(Resources.Load<TextAsset>("BindingGraph").text);
-    }
-
-    public List<BindPointObject> TryPushBinding(string bindingInput)
-    {
-        string newBindingId = "";
-
-        if (CurrentBindings.Count > 0)
-        {
-            string lastBindingId = CurrentBindings[CurrentBindings.Count - 1].Point;
-            BindingGraphData.BindingGraphNode lastBindingNode = BindingGraph.nodes.Find(n => n.nodeId == lastBindingId);
-
-            BindingGraphData.BindingGraphConnection connection = lastBindingNode.connections.Find(c => c.input == bindingInput);
-            if (connection == null)
-            {
-                Debug.LogWarning($"Cannot bind from {lastBindingId} with {bindingInput}. Transition not allowed.");
-                return null;
-            }
-
-            if (GetRemainingUnits() < connection.unitCost)
-            {
-                Debug.LogWarning($"Cannot bind from {lastBindingId} with {bindingInput}. Unit cost {connection.unitCost} exceeds remaining units {GetRemainingUnits()}.");
-                return null;
-            }
-
-            BindingStackElement element = new BindingStackElement
-            {
-                Point = connection.nodeId,
-                UnitCost = connection.unitCost,
-                IsWrapPoint = false,
-                IsRootPoint = false
-            };
-            CurrentBindings.Add(element);
-
-            newBindingId = connection.nodeId;
-        }
-        else
-        {
-            BindingStackElement element = new BindingStackElement
-            {
-                Point = bindingInput,
-                UnitCost = 0,
-                IsWrapPoint = false,
-                // mark the first binding as a root point, which behaves as a wrap point that can't be unmarked
-                IsRootPoint = true
-            };
-            CurrentBindings.Add(element);
-
-            newBindingId = bindingInput;
-        }
-
-        BindingGraphData.BindingGraphNode newBindingNode = BindingGraph.nodes.Find(n => n.nodeId == newBindingId);
-
-        // return the list of BindPointObjects corresponding to the given nodeId, can be used to get transform references
-        List<BindPointObject> points = new List<BindPointObject>();
-        foreach (BindPointID pointID in newBindingNode.bindPoints
-                .Select(bp => (BindPointID)System.Enum.Parse(typeof(BindPointID), bp, true)))
-        {
-            BindPointObject point = bindPointObjects[(int)pointID];
-            points.Add(point);
-        }
-
-        return points;
     }
 
     public BindingGraphData.BindingGraphConnection TryPushBindingNew(string bindingInput)
@@ -138,18 +74,6 @@ public class BindingStack : Singleton<BindingStack>
         // BindingGraphData.BindingGraphNode newBindingNode = BindingGraph.nodes.Find(n => n.nodeId == newBindingId);
 
         // return newBindingNode;
-    }
-    
-    public BindingGraphData.BindingGraphNode PopBinding()
-    {
-        if (CurrentBindings.Count > 0)
-        {
-            string nodeID = CurrentBindings[CurrentBindings.Count - 1].Point;
-            CurrentBindings.RemoveAt(CurrentBindings.Count - 1);
-
-            return BindingGraph.nodes.Find(n => n.nodeId == nodeID);
-        }
-        return null;
     }
 
     public BindingGraphData.BindingGraphNode PeekBinding()
@@ -269,42 +193,6 @@ public class BindingStack : Singleton<BindingStack>
     public int GetRemainingUnits()
     {
         return MaxBindUnits - GetTotalUnitCost();
-    }
-
-    public List<BindPointObject> GetAllBindObjects()
-    {
-        List<BindPointObject> points = new List<BindPointObject>();
-        foreach (var binding in CurrentBindings)
-        {
-            BindingGraphData.BindingGraphNode bindingNode = BindingGraph.nodes.Find(n => n.nodeId == binding.Point);
-            if (bindingNode != null)
-            {
-                foreach (BindPointID pointID in bindingNode.bindPoints
-                        .Select(bp => (BindPointID)System.Enum.Parse(typeof(BindPointID), bp, true)))
-                {
-                    if ((int)pointID >= 0 && (int)pointID < bindPointObjects.Count)
-                    {
-                        BindPointObject point = bindPointObjects[(int)pointID];
-                        points.Add(point);
-                    }
-                }
-            }
-        }
-        return points;
-    }
-
-    public BindPointObject GetBindPointObject(string bindingId)
-    {
-        BindingGraphData.BindingGraphNode bindingNode = BindingGraph.nodes.Find(n => n.nodeId == bindingId);
-
-        if (bindingNode == null || bindingNode.bindPoints == null || bindingNode.bindPoints.Count == 0)
-        {
-            return null;
-        }
-
-        // return the last BindPointObject for the given bindingId
-        string lastValidBindPoint = bindingNode.bindPoints.Last();
-        return bindPointObjects[(int)System.Enum.Parse(typeof(BindPointID), lastValidBindPoint, true)];
     }
 
     // returns a string representing the current stack of bindings, with wrap points indicated by an asterisk (*)

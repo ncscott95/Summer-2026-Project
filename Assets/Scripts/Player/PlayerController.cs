@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : Singleton<PlayerController>
 {
     public Transform Camera { get; protected set; }
