@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RopeDartVisualManagerNew : MonoBehaviour
+public class RopeDartVisualManager : MonoBehaviour
 {
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private Animator _ropeDartAnimator;
@@ -19,7 +19,7 @@ public class RopeDartVisualManagerNew : MonoBehaviour
         _playerAnimator.Play(playerClip);
         _ropeDartAnimator.Play(ropeDartClip);
 
-        if (RopeDartManagerNew.Instance.IsFrontPlane)
+        if (RopeDartManager.Instance.IsFrontPlane)
         {
             _ropeDartAnimator.transform.GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
@@ -32,9 +32,9 @@ public class RopeDartVisualManagerNew : MonoBehaviour
     private string CreatePlayerClipString(string bindingConnectionAnimation)
     {
         string output = "Player@" + bindingConnectionAnimation;
-        output += RopeDartManagerNew.Instance.IsFrontPlane ? "_Front" : "_Back";
+        output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
 
-        if (!bindingConnectionAnimation.StartsWith("Cast")) output += RopeDartManagerNew.Instance.IsClockwise ? "_CW" : "_CCW";
+        if (!bindingConnectionAnimation.StartsWith("Cast")) output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
 
         // TODO: temp add "_Loop", eventually replace with "_Start" clip
         output += "_Loop";
@@ -49,7 +49,7 @@ public class RopeDartVisualManagerNew : MonoBehaviour
         if (bindingConnectionAnimation.StartsWith("Spin"))
         {
             output += "Spin";
-            output += RopeDartManagerNew.Instance.IsClockwise ? "_CW" : "_CCW";
+            output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
 
             // TODO: temp add "_Loop", eventually replace with "_Start" clip
             output += "_Loop";
@@ -64,7 +64,7 @@ public class RopeDartVisualManagerNew : MonoBehaviour
         else
         {
             output += "Decay";
-            output += RopeDartManagerNew.Instance.IsClockwise ? "_CW" : "_CCW";
+            output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
         }
 
         return output;

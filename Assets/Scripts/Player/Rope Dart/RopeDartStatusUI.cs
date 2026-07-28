@@ -41,7 +41,7 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
         UpdateStatusUI();
         // _angleIndicator.localRotation = Quaternion.Euler(0f, 0f, -RopeDartManagerNew.Instance.RawAngle);
         _bindingStackText.text = $"Binding: {BindingStack.Instance.CurrentBindingsToString()}";
-        _stateText.text = $"State: {RopeDartManagerNew.Instance.CurrentState}";
+        _stateText.text = $"State: {RopeDartManager.Instance.CurrentState}";
     }
 
     public void UpdateStatusUI()
@@ -61,7 +61,7 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
         }
 
         // set the next up to 3 segments to the spin color if the player is currently spinning or idle
-        if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Spinning || RopeDartManagerNew.Instance.CurrentState == RopeDartState.Idle)
+        if (RopeDartManager.Instance.CurrentState == RopeDartState.Spinning || RopeDartManager.Instance.CurrentState == RopeDartState.Idle)
         {
             for (int i = 0; i < 3; i++)
             {

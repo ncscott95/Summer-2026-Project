@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
+public class RopeDartManager : Singleton<RopeDartManager>
 {
     private const float BaseSpinSpeed = 360f;
 
@@ -14,7 +14,7 @@ public class RopeDartManagerNew : Singleton<RopeDartManagerNew>
     // 0 = up, 90 = right, 180 = down, 270 = left
     public float RawAngle { get; private set; } = 0f;
 
-    [SerializeField] private RopeDartVisualManagerNew _ropeDartVisualManager;
+    [SerializeField] private RopeDartVisualManager _ropeDartVisualManager;
 
     private bool isTryingToSpin = false;
     private float debugTimer = 0f;

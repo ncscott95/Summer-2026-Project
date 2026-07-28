@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
+public class RopeDartInputController : Singleton<RopeDartInputController>
 {
     private const float DartDirectionBufferDuration = 0.1f;
     private const float CastBufferDuration = 0.1f;
     private const float TwineBufferDuration = 0.1f;
     private const float DirectionDeadzone = 0.5f;
 
-    private readonly InputBuffer<Vector2> dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManagerNew.Instance.ShiftPlane(direction));
-    private readonly InputBuffer castBuffer = new(CastBufferDuration, () => RopeDartManagerNew.Instance.Cast());
-    private readonly InputBuffer twineBuffer = new(TwineBufferDuration, () => RopeDartManagerNew.Instance.TwineSimple());
+    private readonly InputBuffer<Vector2> dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
+    private readonly InputBuffer castBuffer = new(CastBufferDuration, () => RopeDartManager.Instance.Cast());
+    private readonly InputBuffer twineBuffer = new(TwineBufferDuration, () => RopeDartManager.Instance.TwineSimple());
 
     private bool isDirectionConsumed = false;
 
@@ -20,15 +20,15 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
 
     public void HandleSpinRetrieveInput()
     {
-        RopeDartManagerNew.Instance.ToggleTryingToSpin(true);
+        RopeDartManager.Instance.ToggleTryingToSpin(true);
 
-        if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Idle)
+        if (RopeDartManager.Instance.CurrentState == RopeDartState.Idle)
         {
-            RopeDartManagerNew.Instance.StartSpin();
+            RopeDartManager.Instance.StartSpin();
         }
-        else if (RopeDartManagerNew.Instance.CurrentState == RopeDartState.Extended || RopeDartManagerNew.Instance.CurrentState == RopeDartState.Casting)
+        else if (RopeDartManager.Instance.CurrentState == RopeDartState.Extended || RopeDartManager.Instance.CurrentState == RopeDartState.Casting)
         {
-            RopeDartManagerNew.Instance.Retrieve();
+            RopeDartManager.Instance.Retrieve();
         }
     }
 
@@ -60,12 +60,12 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
 
     public void HandleWrapInput()
     {
-        RopeDartManagerNew.Instance.TryStartWrap();
+        RopeDartManager.Instance.TryStartWrap();
     }
 
     public void HandleWrapInputEnd()
     {
-        RopeDartManagerNew.Instance.EndWrap();
+        RopeDartManager.Instance.EndWrap();
     }
 
     public void HandleDartDirectionInput(Vector2 input)
@@ -111,7 +111,7 @@ public class RopeDartInputControllerNew : Singleton<RopeDartInputControllerNew>
         else if (angle > 247.5f && angle <= 292.5f) bindingInput = "Bind Down";
         else if (angle > 292.5f && angle <= 337.5f) bindingInput = "Bind Lead Down";
 
-        RopeDartManagerNew.Instance.Twine(bindingInput);
+        RopeDartManager.Instance.Twine(bindingInput);
     }
 
     private void HelperCastWithDirection(Vector2 direction)
