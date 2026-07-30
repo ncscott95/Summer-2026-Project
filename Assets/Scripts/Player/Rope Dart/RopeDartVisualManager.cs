@@ -5,7 +5,7 @@ public class RopeDartVisualManager : MonoBehaviour
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private Animator _ropeDartAnimator;
 
-    public void UpdateVisuals(BindingGraphData.BindingGraphConnection bindingConnection)
+    public void UpdateVisuals(BindingGraphConnection bindingConnection)
     {
         UpdateVisuals(bindingConnection.Animation);
     }
@@ -14,7 +14,7 @@ public class RopeDartVisualManager : MonoBehaviour
     {
         string playerClip = CreatePlayerClipString(animationClip);
         string ropeDartClip = CreateRopeDartClipString(animationClip);
-        Debug.Log($"Playing animation clips: {playerClip}, {ropeDartClip}");
+        // Debug.Log($"Playing animation clips: {playerClip}, {ropeDartClip}");
 
         _playerAnimator.Play(playerClip);
         _ropeDartAnimator.Play(ropeDartClip);

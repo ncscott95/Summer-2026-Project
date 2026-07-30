@@ -19,26 +19,26 @@ public class BindingStack : Singleton<BindingStack>
         BindingGraph = JsonUtility.FromJson<BindingGraphData>(Resources.Load<TextAsset>("BindingGraph").text);
     }
 
-    public BindingGraphData.BindingGraphConnection TryPushBinding(string bindingInput)
+    public BindingGraphConnection TryPushBinding(string bindingInput)
     {
         if (CurrentBindings.Count > 0)
         {
             string lastBindingId = CurrentBindings[CurrentBindings.Count - 1].NodeId;
-            BindingGraphData.BindingGraphNode lastBindingNode = BindingGraph.Nodes.Find(n => n.NodeId == lastBindingId);
+            BindingGraphNode lastBindingNode = BindingGraph.Nodes.Find(n => n.NodeId == lastBindingId);
 
-            List<BindingGraphData.BindingGraphConnection> possibleConnections = lastBindingNode.Connections.FindAll(c => c.Input == bindingInput);
+            List<BindingGraphConnection> possibleConnections = lastBindingNode.Connections.FindAll(c => c.Input == bindingInput);
             if (possibleConnections.Count == 0)
             {
                 Debug.LogWarning($"No valid connections found for input {bindingInput} from binding {lastBindingId}.");
                 return null;
             }
 
-            foreach (BindingGraphData.BindingGraphConnection connection in possibleConnections)
+            foreach (BindingGraphConnection connection in possibleConnections)
             {
                 if (CanUseConnection(connection))
                 {
                     Debug.Log($"Using connection {connection.Nickname} from binding {lastBindingId} to {bindingInput}.");
-                    UseGraphConnection(connection);
+                    OnSuccessfulGraphConnection(connection);
                     return connection;
                 }
             }
@@ -54,7 +54,7 @@ public class BindingStack : Singleton<BindingStack>
         }
     }
 
-    private bool CanUseConnection(BindingGraphData.BindingGraphConnection connection)
+    private bool CanUseConnection(BindingGraphConnection connection)
     {
         if (GetRemainingUnits() < connection.UnitCost) return false;
         
@@ -68,7 +68,7 @@ public class BindingStack : Singleton<BindingStack>
         return meetsLeadReqs && meetsSpinReqs; // && meetsPlaneReqs;
     }
 
-    private void UseGraphConnection(BindingGraphData.BindingGraphConnection connection)
+    private void OnSuccessfulGraphConnection(BindingGraphConnection connection)
     {
         foreach (BindingStackElement nodeUnitCost in connection.NodeSequence)
         {
@@ -85,7 +85,7 @@ public class BindingStack : Singleton<BindingStack>
         if (connection.FlipsWallDark) RopeDartManager.Instance.FlipPlane();
     }
 
-    public BindingGraphData.BindingGraphNode PeekBinding()
+    public BindingGraphNode PeekBinding()
     {
         if (CurrentBindings.Count > 0)
         {
@@ -106,7 +106,7 @@ public class BindingStack : Singleton<BindingStack>
     // Removes bindings from the stack until it finds a wrapped point and returns it
     // If no points are wrapped, all points are removed and null is returned
     // This should never return null since Idle is always a wrapped point
-    public BindingGraphData.BindingGraphNode RevertToLastWrappedBinding()
+    public BindingGraphNode RevertToLastWrappedBinding()
     {
         while (CurrentBindings.Count > 0)
         {
@@ -125,7 +125,7 @@ public class BindingStack : Singleton<BindingStack>
         return null;
     }
 
-    public BindingGraphData.BindingGraphNode RevertToRootBinding()
+    public BindingGraphNode RevertToRootBinding()
     {
         CurrentBindings.Clear();
         CurrentBindings.Add(new BindingStackElement("Idle", 0));

@@ -66,7 +66,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
             if (oldAngle < 180f && RawAngle >= 180f)
             {
                 // Debug.Log("Spin beat");
-                BindingGraphData.BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
+                BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
                 if (currentBinding != null && currentBinding.DoesDecay)
                 {
                     BindingStack.Instance.UpdateCurrentBindingUnitCost(1);
@@ -115,7 +115,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
             IsClockwise = true;
         }
 
-        BindingGraphData.BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Spin");
+        BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Spin");
         _ropeDartVisualManager.UpdateVisuals("Spin" + (IsLeadSide ? "_Lead" : "_Anchor"));
     
         _isSpiraling = false;
@@ -132,15 +132,15 @@ public class RopeDartManager : Singleton<RopeDartManager>
         if (CurrentState != RopeDartState.Spinning)
             return;
 
-        BindingGraphData.BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Cast");
+        BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Cast");
         if (bindingConnection == null)
             return;
 
         Debug.Log("Casting");
 
-        // BindingGraphData.BindingGraphNode newOriginNode = BindingStack.Instance.RevertToLastWrappedBinding();
+        // BindingGraphNode newOriginNode = BindingStack.Instance.RevertToLastWrappedBinding();
         // assumes that casts always unwrap any wraps and revert to root
-        BindingGraphData.BindingGraphNode newOriginNode = BindingStack.Instance.RevertToRootBinding();
+        BindingGraphNode newOriginNode = BindingStack.Instance.RevertToRootBinding();
 
         _isLastCastRight = IsClockwise ? RawAngle > 315 || RawAngle > 0f && RawAngle < 135f : RawAngle > 45f && RawAngle < 225f;
 
@@ -168,7 +168,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
         if (CurrentState != RopeDartState.Spinning)
             return;
 
-        BindingGraphData.BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding(bindingInput);
+        BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding(bindingInput);
         if (bindingConnection == null)
             return;
 
@@ -188,7 +188,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     public void TryStartWrap()
     {
-        BindingGraphData.BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
+        BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
 
         if (currentBinding == null)
         {
@@ -196,7 +196,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
             return;
         }
 
-        BindingGraphData.BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Wrap");
+        BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Wrap");
         if (bindingConnection == null)
             return;
 

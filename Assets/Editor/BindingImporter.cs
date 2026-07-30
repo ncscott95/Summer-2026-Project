@@ -78,8 +78,8 @@ public class BindingImporter : EditorWindow
         try
         {
             string[] lines = csvText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            List<BindingGraphData.BindingGraphNode> nodes = new List<BindingGraphData.BindingGraphNode>();
-            BindingGraphData.BindingGraphNode currentNode = null;
+            List<BindingGraphNode> nodes = new List<BindingGraphNode>();
+            BindingGraphNode currentNode = null;
 
             for (int i = 1; i < lines.Length; i++)
             {
@@ -94,11 +94,11 @@ public class BindingImporter : EditorWindow
 
                 if (!string.IsNullOrEmpty(idString) && int.TryParse(idString, out _))
                 {
-                    currentNode = new BindingGraphData.BindingGraphNode
+                    currentNode = new BindingGraphNode
                     {
                         NodeId = nodeName,
                         DoesDecay = ParseBool(columns[2]),
-                        Connections = new List<BindingGraphData.BindingGraphConnection>()
+                        Connections = new List<BindingGraphConnection>()
                     };
 
                     AddConnectionIfValid(currentNode, columns);
@@ -128,9 +128,9 @@ public class BindingImporter : EditorWindow
         }
     }
 
-    private void AddConnectionIfValid(BindingGraphData.BindingGraphNode node, string[] columns)
+    private void AddConnectionIfValid(BindingGraphNode node, string[] columns)
     {
-        BindingGraphData.BindingGraphConnection currentConnection = new BindingGraphData.BindingGraphConnection
+        BindingGraphConnection currentConnection = new BindingGraphConnection
         {
             Nickname = columns[3].Trim(),
             Input = columns[4].Trim(),
@@ -199,6 +199,6 @@ public class BindingImporter : EditorWindow
     [Serializable]
     private class GraphWrapper
     {
-        public List<BindingGraphData.BindingGraphNode> Nodes;
+        public List<BindingGraphNode> Nodes;
     }
 }
