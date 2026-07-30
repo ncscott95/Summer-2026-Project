@@ -1,411 +1,1128 @@
 {
-    "nodes": [
+    "Nodes": [
         {
-            "nodeId": "Idle",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": false,
-            "canTurn": false,
-            "bindPoints": [
-                "AnchorHand",
-                "LeadHand"
-            ],
-            "connections": [
+            "NodeId": "Idle",
+            "DoesDecay": false,
+            "Connections": [
                 {
-                    "nodeId": "Down Spin",
-                    "input": "Spin Down",
-                    "unitCost": 1,
-                    "animation": "Spin_Lead"
-                },
-                {
-                    "nodeId": "Up Spin",
-                    "input": "Spin Up",
-                    "unitCost": 1,
-                    "animation": "Spin_Lead"
+                    "Nickname": "Spin",
+                    "Input": "Spin",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 }
             ]
         },
         {
-            "nodeId": "Cast",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": false,
-            "canTurn": false,
-            "bindPoints": [],
-            "connections": [
+            "NodeId": "Spin",
+            "DoesDecay": false,
+            "Connections": [
                 {
-                    "nodeId": "Lead Retrieval",
-                    "input": "",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Cast",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Anchor Retrieval",
-                    "input": "",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Cross",
+                    "Input": "Cross",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Lead Dark Retrieval",
-                    "input": "",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Turn",
+                    "Input": "Turn",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": true,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Anchor Dark Retrieval",
-                    "input": "",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Lead Elbow",
+                    "Input": "Bind Lead",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Anchor Elbow",
+                    "Input": "Bind Anchor",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Lead Neck",
+                    "Input": "Bind Up",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Lead Neck",
+                    "Input": "Bind Up",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Anchor Neck",
+                    "Input": "Bind Up",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Anchor Neck",
+                    "Input": "Bind Up",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Dragon",
+                    "Input": "Bind Lead Up",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadSide",
+                            "UnitCost": 0
+                        },
+                        {
+                            "NodeId": "AnchorNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Dark Dragon",
+                    "Input": "Bind Anchor Up",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorSide",
+                            "UnitCost": 0
+                        },
+                        {
+                            "NodeId": "LeadNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Scorpion",
+                    "Input": "Bind Lead Up",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadNeck",
+                            "UnitCost": 0
+                        },
+                        {
+                            "NodeId": "AnchorSide",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Dark Scorpion",
+                    "Input": "Bind Anchor Up",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorNeck",
+                            "UnitCost": 0
+                        },
+                        {
+                            "NodeId": "LeadSide",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 }
             ]
         },
         {
-            "nodeId": "Lead Retrieval",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": false,
-            "canTurn": false,
-            "bindPoints": [],
-            "connections": [
+            "NodeId": "Cast",
+            "DoesDecay": false,
+            "Connections": [
                 {
-                    "nodeId": "Idle",
-                    "input": "",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Toggle Dark Plane",
+                    "Input": "Dark",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": true,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorNeck",
+                            "UnitCost": 0
+                        },
+                        {
+                            "NodeId": "LeadNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Anchor Retrieval",
-                    "input": "(Nothing)",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Retrieval",
+                    "Input": "Retrieve",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Retrieval",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Lead Dark Retrieval",
-                    "input": "",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Dark Retrieval",
+                    "Input": "Retrieve",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Retrieval",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 }
             ]
         },
         {
-            "nodeId": "Anchor Retrieval",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": false,
-            "canTurn": false,
-            "bindPoints": [],
-            "connections": [
+            "NodeId": "Retrieval",
+            "DoesDecay": false,
+            "Connections": [
                 {
-                    "nodeId": "Idle",
-                    "input": "",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Spin",
+                    "Input": "Spin",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Lead Retrieval",
-                    "input": "(Nothing)",
-                    "unitCost": 0,
-                    "animation": ""
+                    "Nickname": "Pendulum",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Anchor Dark Retrieval",
-                    "input": "",
-                    "unitCost": 0,
-                    "animation": ""
-                }
-            ]
-        },
-        {
-            "nodeId": "Lead Dark Retrieval",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": false,
-            "canTurn": false,
-            "bindPoints": [],
-            "connections": [
-                {
-                    "nodeId": "Anchor Dark Elbow",
-                    "input": "Bind Anchor",
-                    "unitCost": 1,
-                    "animation": ""
-                }
-            ]
-        },
-        {
-            "nodeId": "Anchor Dark Retrieval",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": false,
-            "canTurn": false,
-            "bindPoints": [],
-            "connections": [
-                {
-                    "nodeId": "Lead Dark Elbow",
-                    "input": "Bind Lead",
-                    "unitCost": 1,
-                    "animation": ""
-                }
-            ]
-        },
-        {
-            "nodeId": "Down Spin",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": true,
-            "canTurn": true,
-            "bindPoints": [
-                "LeadHand"
-            ],
-            "connections": [
-                {
-                    "nodeId": "Dragon",
-                    "input": "Bind Lead Up",
-                    "unitCost": 2,
-                    "animation": "Dragon"
+                    "Nickname": "Lead Neck",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Dark Dragon",
-                    "input": "Bind Anchor Up",
-                    "unitCost": 2,
-                    "animation": "DragonDark"
+                    "Nickname": "Lead Side",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadSide",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Neck",
-                    "input": "Bind Up",
-                    "unitCost": 1,
-                    "animation": ""
+                    "Nickname": "Lead Elbow",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Lead Elbow",
-                    "input": "Bind Lead",
-                    "unitCost": 1,
-                    "animation": "Elbow_Lead"
+                    "Nickname": "Anchor Neck",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorNeck",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Anchor Elbow",
-                    "input": "Bind Anchor",
-                    "unitCost": 1,
-                    "animation": "Elbow_Anchor"
-                }
-            ]
-        },
-        {
-            "nodeId": "Up Spin",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": true,
-            "canTurn": true,
-            "bindPoints": [
-                "LeadHand"
-            ],
-            "connections": [
-                {
-                    "nodeId": "Scorpion",
-                    "input": "Bind Lead Up",
-                    "unitCost": 2,
-                    "animation": "Scorpion"
+                    "Nickname": "Anchor Side",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorSide",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Dark Scorpion",
-                    "input": "Bind Anchor Up",
-                    "unitCost": 2,
-                    "animation": "ScorpionDark"
+                    "Nickname": "Anchor Elbow",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "Wrap",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "Spin",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "LeadElbow",
+            "DoesDecay": true,
+            "Connections": [
+                {
+                    "Nickname": "Elbow Shot",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Neck",
-                    "input": "Bind Up",
-                    "unitCost": 1,
-                    "animation": ""
+                    "Nickname": "Elbow Turn",
+                    "Input": "Cross",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Lead Elbow",
-                    "input": "Bind Lead",
-                    "unitCost": 1,
-                    "animation": "Elbow_Lead"
+                    "Nickname": "Manacle Wrap",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Anchor Elbow",
-                    "input": "Bind Anchor",
-                    "unitCost": 1,
-                    "animation": "Elbow_Anchor"
+                    "Nickname": "Overlord Wrap",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 }
             ]
         },
         {
-            "nodeId": "Neck",
-            "isStable": false,
-            "doesDecay": true,
-            "canCast": false,
-            "canTurn": true,
-            "bindPoints": [
-                "Neck"
-            ],
-            "connections": [
+            "NodeId": "AnchorElbow",
+            "DoesDecay": true,
+            "Connections": [
                 {
-                    "nodeId": "Idle",
-                    "input": "Wrap",
-                    "unitCost": 1,
-                    "animation": ""
-                }
-            ]
-        },
-        {
-            "nodeId": "Lead Elbow",
-            "isStable": false,
-            "doesDecay": true,
-            "canCast": true,
-            "canTurn": true,
-            "bindPoints": [
-                "LeadElbow"
-            ],
-            "connections": [
-                {
-                    "nodeId": "Cast",
-                    "input": "Cast",
-                    "unitCost": 0,
-                    "animation": "Cast"
-                }
-            ]
-        },
-        {
-            "nodeId": "Anchor Elbow",
-            "isStable": false,
-            "doesDecay": true,
-            "canCast": true,
-            "canTurn": true,
-            "bindPoints": [
-                "AnchorElbow"
-            ],
-            "connections": [
-                {
-                    "nodeId": "Cast",
-                    "input": "Cast",
-                    "unitCost": 0,
-                    "animation": "Cast"
-                }
-            ]
-        },
-        {
-            "nodeId": "Lead Dark Elbow",
-            "isStable": false,
-            "doesDecay": true,
-            "canCast": true,
-            "canTurn": false,
-            "bindPoints": [
-                "LeadElbow"
-            ],
-            "connections": [
-                {
-                    "nodeId": "Cast",
-                    "input": "Cast",
-                    "unitCost": 0,
-                    "animation": "Cast"
+                    "Nickname": "Elbow Shot",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Anchor Dark Elbow",
-                    "input": "Bind Anchor",
-                    "unitCost": 2,
-                    "animation": ""
-                }
-            ]
-        },
-        {
-            "nodeId": "Anchor Dark Elbow",
-            "isStable": false,
-            "doesDecay": true,
-            "canCast": true,
-            "canTurn": false,
-            "bindPoints": [
-                "AnchorElbow"
-            ],
-            "connections": [
-                {
-                    "nodeId": "Cast",
-                    "input": "Cast",
-                    "unitCost": 0,
-                    "animation": "Cast"
+                    "Nickname": "Elbow Turn",
+                    "Input": "Retrieve",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 },
                 {
-                    "nodeId": "Lead Dark Elbow",
-                    "input": "Bind Lead",
-                    "unitCost": 2,
-                    "animation": ""
+                    "Nickname": "Manacle Wrap",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Overlord Wrap",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": true,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 }
             ]
         },
         {
-            "nodeId": "Dragon",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": true,
-            "canTurn": false,
-            "bindPoints": [
-                "LeadArmpit",
-                "AnchorShoulder"
-            ],
-            "connections": [
+            "NodeId": "LeadNeck",
+            "DoesDecay": true,
+            "Connections": [
                 {
-                    "nodeId": "Idle",
-                    "input": "Wrap",
-                    "unitCost": 1,
-                    "animation": ""
+                    "Nickname": "Spin",
+                    "Input": "Spin",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Wrap",
+                    "Input": "Wrap",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Wrap",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Neck Turn",
+                    "Input": "Cross",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Neck Shot",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "N-S Overlord Start",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": true,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 }
             ]
         },
         {
-            "nodeId": "Dark Dragon",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": true,
-            "canTurn": false,
-            "bindPoints": [
-                "AnchorArmpit",
-                "LeadShoulder"
-            ],
-            "connections": [
+            "NodeId": "AnchorNeck",
+            "DoesDecay": true,
+            "Connections": [
                 {
-                    "nodeId": "Idle",
-                    "input": "Wrap",
-                    "unitCost": 1,
-                    "animation": ""
+                    "Nickname": "Spin",
+                    "Input": "Spin",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Wrap",
+                    "Input": "Wrap",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Wrap",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Neck Turn",
+                    "Input": "Cross",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Neck Shot",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": ".",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "N-S Dark Overlord Start",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": true,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
                 }
             ]
         },
         {
-            "nodeId": "Scorpion",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": true,
-            "canTurn": false,
-            "bindPoints": [
-                "LeadShoulder",
-                "AnchorArmpit"
-            ],
-            "connections": [
+            "NodeId": "LeadSide",
+            "DoesDecay": false,
+            "Connections": [
                 {
-                    "nodeId": "Idle",
-                    "input": "Wrap",
-                    "unitCost": 1,
-                    "animation": ""
+                    "Nickname": "Spin",
+                    "Input": "Spin",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Wrap",
+                    "Input": "Wrap",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Wrap",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Pendulum",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [],
+                    "Animation": ""
                 }
             ]
         },
         {
-            "nodeId": "Dark Scorpion",
-            "isStable": false,
-            "doesDecay": false,
-            "canCast": true,
-            "canTurn": false,
-            "bindPoints": [
-                "AnchorShoulder",
-                "LeadArmpit"
-            ],
-            "connections": [
+            "NodeId": "AnchorSide",
+            "DoesDecay": false,
+            "Connections": [
                 {
-                    "nodeId": "Idle",
-                    "input": "Wrap",
-                    "unitCost": 1,
-                    "animation": ""
+                    "Nickname": "Spin",
+                    "Input": "Spin",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Wrap",
+                    "Input": "Wrap",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Wrap",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Pendulum",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [],
+                    "Animation": ""
                 }
             ]
         }

@@ -48,17 +48,18 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
     {
         int segmentIndex = 0;
 
-        foreach (BindingStackElement binding in BindingStack.Instance.CurrentBindings)
-        {
-            // set the next binding.UnitCost segments to the color of the binding
-            for (int i = 0; i < binding.UnitCost; i++)
-            {
-                if (segmentIndex >= _bindingImages.Count) break;
+        // TODO: broken by new binding naming system
+        // foreach (BindingStackElement binding in BindingStack.Instance.CurrentBindings)
+        // {
+        //     // set the next binding.UnitCost segments to the color of the binding
+        //     for (int i = 0; i < binding.UnitCost; i++)
+        //     {
+        //         if (segmentIndex >= _bindingImages.Count) break;
 
-                _bindingImages[segmentIndex].color = BindingToColorLookup[binding.Point];
-                segmentIndex++;
-            }
-        }
+        //         _bindingImages[segmentIndex].color = BindingToColorLookup[binding.NodeId];
+        //         segmentIndex++;
+        //     }
+        // }
 
         // set the next up to 3 segments to the spin color if the player is currently spinning or idle
         if (RopeDartManager.Instance.CurrentState == RopeDartState.Spinning || RopeDartManager.Instance.CurrentState == RopeDartState.Idle)

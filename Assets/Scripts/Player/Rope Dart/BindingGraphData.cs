@@ -8,20 +8,30 @@ public class BindingGraphData
     public class BindingGraphNode
     {
         public string NodeId;
-        public bool IsStable;
         public bool DoesDecay;
-        public bool CanCast;
-        public bool CanTurn;
-        public List<string> BindPoints;
         public List<BindingGraphConnection> Connections;
     }
 
     [Serializable]
     public class BindingGraphConnection
     {
-        public string NodeId;
+        public string Nickname;
         public string Input;
+
+        // Requirements
         public int UnitCost;
+        public bool IsLeadSideValid;
+        public bool IsAnchorSideValid;
+        public bool IsDownSpinValid;
+        public bool IsUpSpinValid;
+        public bool IsWallPlaneValid;
+        public bool IsDarkPlaneValid;
+
+        // Outcomes
+        public bool FlipsLeadAnchor;
+        public bool FlipsDownUp;
+        public bool FlipsWallDark;
+        public List<BindingStackElement> NodeSequence;
         public string Animation;
     }
 
