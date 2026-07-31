@@ -12,6 +12,8 @@ public class BindingStack : Singleton<BindingStack>
 
     public BindingGraphData BindingGraph { get; private set; }
 
+    [SerializeField] private RopeDartVisualManager _ropeDartVisualManager;
+
     public override void Awake()
     {
         base.Awake();
@@ -72,17 +74,34 @@ public class BindingStack : Singleton<BindingStack>
     {
         foreach (BindingStackElement nodeUnitCost in connection.NodeSequence)
         {
-            BindingStackElement element = new BindingStackElement
-            {
-                NodeId = nodeUnitCost.NodeId,
-                UnitCost = nodeUnitCost.UnitCost
-            };
-            CurrentBindings.Add(element);
+            // "." can be used as shorthand for no additional node, or a binding that doesn't add a node to the stack
+            if (nodeUnitCost.NodeId == ".") break;
+
+            CurrentBindings.Add(new BindingStackElement(nodeUnitCost.NodeId, nodeUnitCost.UnitCost));
         }
 
         if (connection.FlipsLeadAnchor) RopeDartManager.Instance.FlipLeadAnchor();
         if (connection.FlipsDownUp) RopeDartManager.Instance.FlipSpinDirection();
         if (connection.FlipsWallDark) RopeDartManager.Instance.FlipPlane();
+
+        if (connection.Input == "Spin")
+        {
+            RopeDartManager.Instance.StartSpin();
+        }
+        else if (connection.Input == "Cast")
+        {
+            RopeDartManager.Instance.Cast();
+        }
+        else if (connection.Input == "Retrieve")
+        {
+            RopeDartManager.Instance.Retrieve();
+        }
+        else if (connection.Input == "Wrap")
+        {
+            RopeDartManager.Instance.StartWrap();
+        }
+
+        _ropeDartVisualManager.UpdateVisuals(connection);
     }
 
     public BindingGraphNode PeekBinding()
@@ -112,7 +131,7 @@ public class BindingStack : Singleton<BindingStack>
         {
             BindingStackElement lastBinding = CurrentBindings[CurrentBindings.Count - 1];
 
-            if (lastBinding.NodeId.Equals("Wrap") || lastBinding.NodeId.Equals("Idle"))
+            if (lastBinding.NodeId == "Wrap" || lastBinding.NodeId == "Idle")
             {
                 return BindingGraph.Nodes.Find(n => n.NodeId == lastBinding.NodeId);
             }

@@ -14,7 +14,7 @@ public class RopeDartVisualManager : MonoBehaviour
     {
         string playerClip = CreatePlayerClipString(animationClip);
         string ropeDartClip = CreateRopeDartClipString(animationClip);
-        // Debug.Log($"Playing animation clips: {playerClip}, {ropeDartClip}");
+        Debug.Log($"Playing animation clips: {playerClip}, {ropeDartClip}");
 
         _playerAnimator.Play(playerClip);
         _ropeDartAnimator.Play(ropeDartClip);
@@ -32,9 +32,18 @@ public class RopeDartVisualManager : MonoBehaviour
     private string CreatePlayerClipString(string bindingConnectionAnimation)
     {
         string output = "Player@" + bindingConnectionAnimation;
-        output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
 
-        if (!bindingConnectionAnimation.StartsWith("Cast")) output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
+        if (!bindingConnectionAnimation.StartsWith("Cast"))
+        {
+            output += RopeDartManager.Instance.IsLeadSide ? "_Lead" : "_Anchor";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+            output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
+        }
+        else
+        {
+            output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+        }
 
         // TODO: temp add "_Loop", eventually replace with "_Start" clip
         output += "_Loop";
@@ -54,9 +63,10 @@ public class RopeDartVisualManager : MonoBehaviour
             // TODO: temp add "_Loop", eventually replace with "_Start" clip
             output += "_Loop";
         }
-        else if (bindingConnectionAnimation.StartsWith("Cast"))
+        else if (bindingConnectionAnimation.StartsWith("Cast") || bindingConnectionAnimation.StartsWith("Retrieve"))
         {
-            output += bindingConnectionAnimation;
+            output += "Cast";
+            output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";
 
             // TODO: temp add "_Loop", eventually replace with "_Start" clip
             output += "_Loop";

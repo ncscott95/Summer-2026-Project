@@ -7,9 +7,10 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     private const float TwineBufferDuration = 0.1f;
     private const float DirectionDeadzone = 0.5f;
 
-    private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
-    private readonly InputBuffer _castBuffer = new(CastBufferDuration, () => RopeDartManager.Instance.Cast());
-    private readonly InputBuffer _twineBuffer = new(TwineBufferDuration, () => RopeDartManager.Instance.TwineSimple());
+    // private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
+    private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, null);
+    private readonly InputBuffer _castBuffer = new(CastBufferDuration, () => TryCastBinding());
+    private readonly InputBuffer _twineBuffer = new(TwineBufferDuration, () => TryTwineSimple());
 
     private bool _isDirectionConsumed = false;
 
@@ -20,13 +21,13 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleSpinRetrieveInput()
     {
-        if (RopeDartManager.Instance.CurrentState == RopeDartState.Idle)
+        if (BindingStack.Instance.TryPushBinding("Spin") != null)
         {
-            RopeDartManager.Instance.StartSpin();
+            // successfully started a spin
         }
-        else if (RopeDartManager.Instance.CurrentState == RopeDartState.Extended || RopeDartManager.Instance.CurrentState == RopeDartState.Casting)
+        else if (BindingStack.Instance.TryPushBinding("Retrieve") != null)
         {
-            RopeDartManager.Instance.Retrieve();
+            // successfully started a retrieve
         }
     }
 
@@ -43,6 +44,14 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         }
     }
 
+    private static void TryCastBinding()
+    {
+        if (BindingStack.Instance.TryPushBinding("Cast") != null)
+        {
+            // successfully started a cast
+        }
+    }
+
     public void HandleTwineInput()
     {
         if (_dartDirectionBuffer.Interrupt())
@@ -56,14 +65,24 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         }
     }
 
-    public void HandleWrapInput()
+    private static void TryTwineSimple()
     {
-        RopeDartManager.Instance.TryStartWrap();
+        string bindingInput = RopeDartManager.Instance.IsLeadSide ? "Bind Lead" : "Bind Anchor";
+
+        if (BindingStack.Instance.TryPushBinding(bindingInput) != null)
+        {
+            // successfully started a twine
+        }
     }
 
-    public void HandleWrapInputEnd()
+    public void HandleWrapInput()
     {
-        RopeDartManager.Instance.EndWrap();
+        // RopeDartManager.Instance.TryStartWrap();
+
+        if (BindingStack.Instance.TryPushBinding("Wrap") != null)
+        {
+            // successfully started a wrap
+        }
     }
 
     public void HandleDartDirectionInput(Vector2 input)
@@ -109,7 +128,12 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         else if (angle > 247.5f && angle <= 292.5f) bindingInput = "Bind Down";
         else if (angle > 292.5f && angle <= 337.5f) bindingInput = "Bind Lead Down";
 
-        RopeDartManager.Instance.Twine(bindingInput);
+        // RopeDartManager.Instance.Twine(bindingInput);
+
+        if (BindingStack.Instance.TryPushBinding(bindingInput) != null)
+        {
+            // successfully started a twine
+        }
     }
 
     private void HelperCastWithDirection(Vector2 direction)
@@ -126,6 +150,22 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         {
             // all other inputs
             // TODO: cast with hand
+        }
+    }
+
+    public void HandleTurnInput()
+    {
+        if (BindingStack.Instance.TryPushBinding("Turn") != null)
+        {
+            // successfully started a turn
+        }
+    }
+
+    public void HandleCrossInput()
+    {
+        if (BindingStack.Instance.TryPushBinding("Cross") != null)
+        {
+            // successfully started a cross
         }
     }
 }

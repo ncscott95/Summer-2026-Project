@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314bb9cf3f68ffc49abbbf9b5910122b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RopeDartBindStack
+  _ropeDartVisualManager: {fileID: 143011118}
 --- !u!114 &143011115
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Spin"
                 }
             ]
         },
@@ -50,7 +50,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Cast"
                 },
                 {
                     "Nickname": "Cross",
@@ -71,7 +71,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Spin"
                 },
                 {
                     "Nickname": "Turn",
@@ -92,7 +92,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Spin"
                 },
                 {
                     "Nickname": "Lead Elbow",
@@ -113,7 +113,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Elbow"
                 },
                 {
                     "Nickname": "Anchor Elbow",
@@ -134,7 +134,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Elbow"
                 },
                 {
                     "Nickname": "Lead Neck",
@@ -356,7 +356,7 @@
                     "Input": "Retrieve",
                     "UnitCost": 0,
                     "IsLeadSideValid": true,
-                    "IsAnchorSideValid": false,
+                    "IsAnchorSideValid": true,
                     "IsDownSpinValid": true,
                     "IsUpSpinValid": true,
                     "IsWallPlaneValid": false,
@@ -370,14 +370,14 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Cast"
                 },
                 {
                     "Nickname": "Dark Retrieval",
                     "Input": "Retrieve",
                     "UnitCost": 0,
                     "IsLeadSideValid": true,
-                    "IsAnchorSideValid": false,
+                    "IsAnchorSideValid": true,
                     "IsDownSpinValid": true,
                     "IsUpSpinValid": true,
                     "IsWallPlaneValid": true,
@@ -418,7 +418,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Spin"
                 },
                 {
                     "Nickname": "Pendulum",
@@ -619,7 +619,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Cast"
                 },
                 {
                     "Nickname": "Elbow Turn",
@@ -640,7 +640,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Elbow"
                 },
                 {
                     "Nickname": "Manacle Wrap",
@@ -679,6 +679,27 @@
                     "NodeSequence": [
                         {
                             "NodeId": "AnchorElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Decay",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadElbow",
                             "UnitCost": 0
                         }
                     ],
@@ -709,11 +730,11 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Cast"
                 },
                 {
                     "Nickname": "Elbow Turn",
-                    "Input": "Retrieve",
+                    "Input": "Cross",
                     "UnitCost": 0,
                     "IsLeadSideValid": true,
                     "IsAnchorSideValid": true,
@@ -730,7 +751,7 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "Elbow"
                 },
                 {
                     "Nickname": "Manacle Wrap",
@@ -769,6 +790,27 @@
                     "NodeSequence": [
                         {
                             "NodeId": "LeadElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Decay",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorElbow",
                             "UnitCost": 0
                         }
                     ],
@@ -858,7 +900,7 @@
                     "FlipsWallDark": false,
                     "NodeSequence": [
                         {
-                            "NodeId": ".",
+                            "NodeId": "Cast",
                             "UnitCost": 0
                         }
                     ],
@@ -880,6 +922,27 @@
                     "NodeSequence": [
                         {
                             "NodeId": "LeadElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Decay",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "AnchorNeck",
                             "UnitCost": 0
                         }
                     ],
@@ -969,7 +1032,7 @@
                     "FlipsWallDark": false,
                     "NodeSequence": [
                         {
-                            "NodeId": ".",
+                            "NodeId": "Cast",
                             "UnitCost": 0
                         }
                     ],
@@ -991,6 +1054,27 @@
                     "NodeSequence": [
                         {
                             "NodeId": "AnchorElbow",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "Decay",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "LeadNeck",
                             "UnitCost": 0
                         }
                     ],
