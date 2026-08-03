@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class RopeDartManager : Singleton<RopeDartManager>
 {
@@ -13,9 +11,13 @@ public class RopeDartManager : Singleton<RopeDartManager>
     public bool IsClockwise { get; private set; } = true;
     public bool IsLastCastEast { get; private set; } = true;
 
-    // down spin = CW on lead side, CCW on anchor side
-    // up spin   = CCW on lead side, CW on anchor side
-    public bool IsDownSpin => IsClockwise == IsLeadSide;
+    // facing east = lead side on front plane, anchor side on back plane
+    // facing west = anchor side on front plane, lead side on back plane
+    public bool IsFacingEast => IsLeadSide == IsFrontPlane;
+
+    // down spin = CW facing east, CCW facing west
+    // up spin   = CCW facing east, CW facing west
+    public bool IsDownSpin => IsClockwise == IsFacingEast;
     public bool IsWallPlane => BindingStack.Instance.GetIsWallPlane();
 
     // 0 = up, 90 = right, 180 = down, 270 = left
@@ -61,6 +63,8 @@ public class RopeDartManager : Singleton<RopeDartManager>
                     _isStalled = true;
                 }
             }
+
+            // TODO: need to push "(Nothing)" bindings if current binding does decay and the rope has reached an angle specific to that binding
 
             // detection for additional "beats"
             if (oldAngle < 180f && RawAngle >= 180f)
@@ -151,42 +155,20 @@ public class RopeDartManager : Singleton<RopeDartManager>
             case "Dark Scorpion":
                 Debug.Log("Starting wrap buff for Dark Scorpion");
                 break;
+            case "Necklace":
+                Debug.Log("Starting wrap buff for Necklace");
+                break;
+            case "Belt":
+                Debug.Log("Starting wrap buff for Belt");
+                break;
+            case "Butterfly":
+                Debug.Log("Starting wrap buff for Butterfly");
+                break;
             default:
                 Debug.LogWarning($"No wrap buff defined for binding {wrapId}");
                 break;
         }
     }
-
-    // public void ShiftPlane(Vector2 direction)
-    // {
-    //     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    //     if (angle < 0) angle += 360f;
-
-    //     if (angle <= 45f || angle > 315f)
-    //     {
-    //         // right
-    //         IsLeadSide = IsFrontPlane;
-    //     }
-    //     else if (angle > 45f && angle <= 135f)
-    //     {
-    //         // up
-    //         if (IsFrontPlane) IsLeadSide = !IsLeadSide;
-    //         IsFrontPlane = false;
-    //     }
-    //     else if (angle > 135f && angle <= 225f)
-    //     {
-    //         // left
-    //         IsLeadSide = !IsFrontPlane;
-    //     }
-    //     else if (angle > 225f && angle <= 315f)
-    //     {
-    //         // down
-    //         if (!IsFrontPlane) IsLeadSide = !IsLeadSide;
-    //         IsFrontPlane = true;
-    //     }
-
-    //     _ropeDartVisualManager.UpdateVisuals("Spin" + (IsLeadSide ? "_Lead" : "_Anchor"));
-    // }
 
     public void OnMaxLength()
     {

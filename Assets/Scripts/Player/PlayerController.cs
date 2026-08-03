@@ -22,8 +22,6 @@ public class PlayerController : Singleton<PlayerController>
         Actions.Player.Twine.performed += ctx => RopeDartInputController.Instance.HandleTwineInput();
         Actions.Player.Wrap.performed += ctx => RopeDartInputController.Instance.HandleWrapInput();
         Actions.Player.DartDirection.performed += ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
-        // Actions.Player.Turn.performed += ctx => RopeDartInputController.Instance.HandleTurnInput();
-        // Actions.Player.Cross.performed += ctx => RopeDartInputController.Instance.HandleCrossInput();
     }
 
     public void OnDisable()
@@ -35,7 +33,5 @@ public class PlayerController : Singleton<PlayerController>
         Actions.Player.Twine.performed -= ctx => RopeDartInputController.Instance.HandleTwineInput();
         Actions.Player.Wrap.performed -= ctx => RopeDartInputController.Instance.HandleWrapInput();
         Actions.Player.DartDirection.performed -= ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
-        // Actions.Player.Turn.performed -= ctx => RopeDartInputController.Instance.HandleTurnInput();
-        // Actions.Player.Cross.performed -= ctx => RopeDartInputController.Instance.HandleCrossInput();
     }
 }

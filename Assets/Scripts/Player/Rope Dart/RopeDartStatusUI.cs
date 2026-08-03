@@ -41,7 +41,7 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
         UpdateStatusUI();
         if (_angleIndicator != null) _angleIndicator.localRotation = Quaternion.Euler(0f, 0f, -RopeDartManager.Instance.RawAngle);
         if (_bindingStackText != null) _bindingStackText.text = $"Binding: {BindingStack.Instance.CurrentBindingsToString()}";
-        string stateText = $"State: {RopeDartManager.Instance.CurrentState}, {(RopeDartManager.Instance.IsLeadSide ? "L" : "A")}/{(RopeDartManager.Instance.IsFrontPlane ? "F" : "B")}/{(RopeDartManager.Instance.IsClockwise ? "CW" : "CCW")}/{(RopeDartManager.Instance.IsLastCastEast ? "E" : "W")}";
+        string stateText = $"State: {RopeDartManager.Instance.CurrentState}, {(RopeDartManager.Instance.IsFrontPlane ? "F" : "B")}/{(RopeDartManager.Instance.IsLeadSide ? "L" : "A")}/{(RopeDartManager.Instance.IsDownSpin ? "D" : "U")}/{(RopeDartManager.Instance.IsClockwise ? "CW" : "CCW")}/{(RopeDartManager.Instance.IsLastCastEast ? "E" : "W")}";
         if (_stateText != null) _stateText.text = stateText;
     }
 

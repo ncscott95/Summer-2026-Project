@@ -2,14 +2,11 @@ using UnityEngine;
 
 public class RopeDartInputController : Singleton<RopeDartInputController>
 {
-    private const float DartDirectionBufferDuration = 0.1f;
-    private const float CastBufferDuration = 0.1f;
-    private const float TwineBufferDuration = 0.1f;
+    private const float DartDirectionBufferDuration = 0.2f;
+    private const float TwineBufferDuration = 0.2f;
     private const float DirectionDeadzone = 0.5f;
 
-    // private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
-    private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, null);
-    private readonly InputBuffer _castBuffer = new(CastBufferDuration, () => TryCastBinding());
+    private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => TryTurn(direction));
     private readonly InputBuffer _twineBuffer = new(TwineBufferDuration, () => TryTwineSimple());
 
     private bool _isDirectionConsumed = false;
@@ -21,39 +18,19 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleSpinRetrieveInput()
     {
-        if (BindingStack.Instance.TryPushBinding("Spin") != null)
-        {
-            // successfully started a spin
-        }
-        else if (BindingStack.Instance.TryPushBinding("Retrieve") != null)
-        {
-            // successfully started a retrieve
-        }
+        if (BindingStack.Instance.TryPushBinding("Spin") != null) return;
+
+        BindingStack.Instance.TryPushBinding("Retrieve");
     }
 
     public void HandleCastInput()
     {
-        if (_dartDirectionBuffer.Interrupt())
-        {
-            HelperCastWithDirection(_dartDirectionBuffer.GetLastBufferedInput());
-            _isDirectionConsumed = true;
-        }
-        else
-        {
-            _castBuffer.StartBuffer();
-        }
-    }
-
-    private static void TryCastBinding()
-    {
-        if (BindingStack.Instance.TryPushBinding("Cast") != null)
-        {
-            // successfully started a cast
-        }
+        BindingStack.Instance.TryPushBinding("Cast");
     }
 
     public void HandleTwineInput()
     {
+        Debug.Log("Twine input received");
         if (_dartDirectionBuffer.Interrupt())
         {
             HelperTwineWithDirection(_dartDirectionBuffer.GetLastBufferedInput());
@@ -67,26 +44,19 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     private static void TryTwineSimple()
     {
-        string bindingInput = RopeDartManager.Instance.IsLeadSide ? "Bind Lead" : "Bind Anchor";
-
-        if (BindingStack.Instance.TryPushBinding(bindingInput) != null)
-        {
-            // successfully started a twine
-        }
+        BindingStack.Instance.TryPushBinding("Twine");
     }
 
     public void HandleWrapInput()
     {
-        if (BindingStack.Instance.TryPushBinding("Wrap") != null)
-        {
-            // successfully started a wrap
-        }
+        BindingStack.Instance.TryPushBinding("Wrap");
     }
 
     public void HandleDartDirectionInput(Vector2 input)
     {
         if (input.magnitude < DirectionDeadzone)
         {
+            // TODO: this could be problematic
             _isDirectionConsumed = false;
             return;
         }
@@ -94,12 +64,7 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         if (_isDirectionConsumed)
             return;
 
-        if (_castBuffer.Interrupt())
-        {
-            HelperCastWithDirection(input);
-            _isDirectionConsumed = true;
-        }
-        else if (_twineBuffer.Interrupt())
+        if (_twineBuffer.Interrupt())
         {
             HelperTwineWithDirection(input);
             _isDirectionConsumed = true;
@@ -114,54 +79,41 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     {
         string bindingInput = "";
 
+        // 0 = right, 90 = up, 180 = left, 270 = down
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
 
-        if (angle <= 22.5f || angle > 337.5f) bindingInput = "Bind Lead";
-        else if (angle > 22.5f && angle <= 67.5f) bindingInput = "Bind Lead Up";
-        else if (angle > 67.5f && angle <= 112.5f) bindingInput = "Bind Up";
-        else if (angle > 112.5f && angle <= 157.5f) bindingInput = "Bind Anchor Up";
-        else if (angle > 157.5f && angle <= 202.5f) bindingInput = "Bind Anchor";
-        else if (angle > 202.5f && angle <= 247.5f) bindingInput = "Bind Anchor Down";
-        else if (angle > 247.5f && angle <= 292.5f) bindingInput = "Bind Down";
-        else if (angle > 292.5f && angle <= 337.5f) bindingInput = "Bind Lead Down";
+        // perfect 45 degree bindings default to lead and anchor
+        if (angle <= 45f || angle >= 315f) bindingInput = "Twine Lead";
+        else if (angle > 45f && angle < 135f) bindingInput = "Twine Up";
+        else if (angle >= 135f && angle <= 225f) bindingInput = "Twine Anchor";
+        else if (angle > 225f && angle < 315f) bindingInput = "Twine Down";
 
-        if (BindingStack.Instance.TryPushBinding(bindingInput) != null)
-        {
-            // successfully started a twine
-        }
+        BindingStack.Instance.TryPushBinding(bindingInput);
     }
 
-    private void HelperCastWithDirection(Vector2 direction)
+    private static void TryTurn(Vector2 direction)
     {
+        // 0 = right, 90 = up, 180 = left, 270 = down
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
 
-        if (angle > 247.5f && angle <= 292.5f)
+        if ((angle > 45f && angle < 135f) || (angle > 225f && angle < 315f))
         {
-            // down
-            // TODO: cast with foot
+            // input is not east or west, do nothing
+            return;
+        }
+
+        // after above check, input must be either east or west
+        bool tryTurnEast = angle <= 45f || angle >= 315f;
+
+        if (RopeDartManager.Instance.IsFacingEast == tryTurnEast)
+        {
+            BindingStack.Instance.TryPushBinding("Cross");
         }
         else
         {
-            // all other inputs
-            // TODO: cast with hand
-        }
-    }
-
-    public void HandleTurnInput()
-    {
-        if (BindingStack.Instance.TryPushBinding("Turn") != null)
-        {
-            // successfully started a turn
-        }
-    }
-
-    public void HandleCrossInput()
-    {
-        if (BindingStack.Instance.TryPushBinding("Cross") != null)
-        {
-            // successfully started a cross
+            BindingStack.Instance.TryPushBinding("Turn");
         }
     }
 }

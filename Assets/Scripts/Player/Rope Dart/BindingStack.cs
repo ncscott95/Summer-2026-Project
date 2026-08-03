@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Rendering;
 
 public class BindingStack : Singleton<BindingStack>
 {
@@ -20,7 +19,12 @@ public class BindingStack : Singleton<BindingStack>
         new KeyValuePair<List<string>, string>(new List<string> { "LeadSide", "AnchorNeck" }, "Dragon"),
         new KeyValuePair<List<string>, string>(new List<string> { "AnchorSide", "LeadNeck" }, "Dark Dragon"),
         new KeyValuePair<List<string>, string>(new List<string> { "LeadNeck", "AnchorSide" }, "Scorpion"),
-        new KeyValuePair<List<string>, string>(new List<string> { "AnchorNeck", "LeadSide" }, "Dark Scorpion")
+        new KeyValuePair<List<string>, string>(new List<string> { "AnchorNeck", "LeadSide" }, "Dark Scorpion"),
+        new KeyValuePair<List<string>, string>(new List<string> { "LeadNeck", "AnchorNeck" }, "Necklace"),
+        new KeyValuePair<List<string>, string>(new List<string> { "AnchorNeck", "LeadNeck" }, "Necklace"),
+        new KeyValuePair<List<string>, string>(new List<string> { "LeadSide", "AnchorSide" }, "Belt"),
+        new KeyValuePair<List<string>, string>(new List<string> { "AnchorSide", "LeadSide" }, "Belt"),
+        new KeyValuePair<List<string>, string>(new List<string> { "AnchorNeck", "LeadNeck", "LeadSide", "AnchorSide" }, "Butterfly"),
     };
 
     private bool _isWallPlane = true;
@@ -117,7 +121,7 @@ public class BindingStack : Singleton<BindingStack>
         {
             RopeDartManager.Instance.StartWrap();
         }
-        else if (connection.Input.StartsWith("Bind"))
+        else if (connection.Input.StartsWith("Twine"))
         {
             // remove a previous "Spin" binding from the stack
             RemoveLastBindingWithId("Spin");
