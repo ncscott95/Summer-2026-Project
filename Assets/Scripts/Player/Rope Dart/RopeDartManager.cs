@@ -16,6 +16,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
     // down spin = CW on lead side, CCW on anchor side
     // up spin   = CCW on lead side, CW on anchor side
     public bool IsDownSpin => IsClockwise == IsLeadSide;
+    public bool IsWallPlane => BindingStack.Instance.GetIsWallPlane();
 
     // 0 = up, 90 = right, 180 = down, 270 = left
     public float RawAngle { get; private set; } = 0f;
@@ -89,62 +90,32 @@ public class RopeDartManager : Singleton<RopeDartManager>
             if (_debugTimer >= _debugCastDuration)
             {
                 _debugTimer = 0f;
-                OnEndRetrieve();
+                OnRetrieveEnd();
             }
         }
     }
 
     public void StartSpin()
     {
-    //     if (CurrentState != RopeDartState.Idle && CurrentState != RopeDartState.Retrieving)
-    //         return;
-
-    //     // TODO: this won't work since you can get stuck in a permanent state of idle, need to make sure you can cast or reverse spin from this state to release slack
-    //     // if (BindingStack.Instance.GetRemainingUnits() <= 0)
-    //     // {
-    //     //     // out of slack units, cannot spin
-    //     //     // this is "holding" the dart in place
-    //     //     Debug.LogWarning("Cannot start spin: no remaining units.");
-    //     //     return;
-    //     // }
-
         if (CurrentState == RopeDartState.Idle)
         {
-            // default to a wheel plane down spin
+            // default to a down spin
             IsClockwise = IsDownSpin;
         }
-
-    //     BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Spin");
-    //     _ropeDartVisualManager.UpdateVisuals("Spin" + (IsLeadSide ? "_Lead" : "_Anchor"));
     
         _isSpiraling = false;
         _isStalled = false;
-    //     // TODO: not sure if this is a good idea or not
+        // TODO: not sure if this is a good idea or not
         RawAngle = 180f;
-    //     RopeDartStatusUI.Instance.UpdateStatusUI();
 
         CurrentState = RopeDartState.Spinning;
     }
 
     public void Cast()
     {
-        // if (CurrentState != RopeDartState.Spinning)
-        //     return;
-
-        // BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Cast");
-        // if (bindingConnection == null)
-        //     return;
-
         Debug.Log("Casting");
 
-        // BindingGraphNode newOriginNode = BindingStack.Instance.RevertToLastWrappedBinding();
-        // assumes that casts always unwrap any wraps and revert to root
-        // BindingGraphNode newOriginNode = BindingStack.Instance.RevertToRootBinding();
-
         IsLastCastEast = IsClockwise ? RawAngle > 315 || RawAngle > 0f && RawAngle < 135f : RawAngle > 45f && RawAngle < 225f;
-
-        // _ropeDartVisualManager.UpdateVisuals("Cast_" + (IsLastCastEast ? "East" : "West"));
-        // RopeDartStatusUI.Instance.UpdateStatusUI();
 
         IsLeadSide = IsFrontPlane ? IsLastCastEast : !IsLastCastEast;
         CurrentState = RopeDartState.Casting;
@@ -156,59 +127,17 @@ public class RopeDartManager : Singleton<RopeDartManager>
         OnMaxLength();
     }
 
-    // public void TwineSimple()
-    // {
-    //     // TODO: pick an elbow depending on which side the player is spinning on (lead/anchor)
-    //     Twine("Bind Lead");
-    // }
-
-    // public void Twine(string bindingInput)
-    // {
-    //     if (CurrentState != RopeDartState.Spinning)
-    //         return;
-
-    //     BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding(bindingInput);
-    //     if (bindingConnection == null)
-    //         return;
-
-    //     // TODO: temp, always pop the binding before this one to get rid of the extra spin binding
-    //     // BindingStack.Instance.RemoveBindingAtIndex(BindingStack.Instance.CurrentBindings.Count - 2);
-
-    //     if (BindingStack.Instance.PeekBinding().DoesDecay)
-    //     {
-    //         _isSpiraling = true;
-    //         _spiralTimer = 0f;
-    //         _spiralStartAngle = 180f;
-    //     }
-
-    //     _ropeDartVisualManager.UpdateVisuals(bindingConnection);
-    //     RopeDartStatusUI.Instance.UpdateStatusUI();
-    // }
-
     public void StartWrap()
     {
-        BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
+        string wrapId = BindingStack.Instance.DetectWrap();
+        HandleWrapBuff(wrapId);
 
-        // if (currentBinding == null)
-        // {
-        //     Debug.LogWarning("Cannot start wrap: no current binding.");
-        //     return;
-        // }
-
-        // BindingGraphConnection bindingConnection = BindingStack.Instance.TryPushBinding("Wrap");
-        // if (bindingConnection == null)
-        //     return;
-
-        // TODO: wrap detection algorithm
-        // from current binding, step backwards until match is found?
-
-        HandleWrapBuff(currentBinding.NodeId);
+        BindingStack.Instance.TryPushBinding("Spin");
     }
 
-    // TODO: this should probably be moved out to a separate class eventually
-    private void HandleWrapBuff(string bindingId)
+    private void HandleWrapBuff(string wrapId)
     {
-        switch (bindingId)
+        switch (wrapId)
         {
             case "Dragon":
                 Debug.Log("Starting wrap buff for Dragon");
@@ -223,16 +152,9 @@ public class RopeDartManager : Singleton<RopeDartManager>
                 Debug.Log("Starting wrap buff for Dark Scorpion");
                 break;
             default:
-                Debug.LogWarning($"No wrap buff defined for binding {bindingId}");
+                Debug.LogWarning($"No wrap buff defined for binding {wrapId}");
                 break;
         }
-    }
-
-    // unused since wraps have been changed from hold to fire-and-forget
-    public void EndWrap()
-    {
-        // TODO: unsure what should happen if you release a wrap while still spinning
-        RopeDartStatusUI.Instance.UpdateStatusUI();
     }
 
     // public void ShiftPlane(Vector2 direction)
@@ -281,7 +203,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
         CurrentState = RopeDartState.Retrieving;
     }
 
-    public void OnEndRetrieve()
+    public void OnRetrieveEnd()
     {
         // Reset();
         BindingStack.Instance.TryPushBinding("Spin");
@@ -294,16 +216,6 @@ public class RopeDartManager : Singleton<RopeDartManager>
         RopeDartStatusUI.Instance.UpdateStatusUI();
         CurrentState = RopeDartState.Idle;
         RawAngle = 180f;
-    }
-
-    public void FailCombo()
-    {
-        Reset();
-    }
-
-    public void CollideWithGround()
-    {
-        CurrentState = RopeDartState.Extended;
     }
 
     public void FlipLeadAnchor()
@@ -321,7 +233,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     public void FlipPlane()
     {
-        IsFrontPlane = !IsFrontPlane;
+        // TODO: figure out how to track being in "dark plane" beyond the raw value of IsWallPlane
     }
 }
 

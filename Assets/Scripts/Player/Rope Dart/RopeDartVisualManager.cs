@@ -10,10 +10,10 @@ public class RopeDartVisualManager : MonoBehaviour
         UpdateVisuals(bindingConnection.Animation);
     }
 
-    public void UpdateVisuals(string animationClip)
+    public void UpdateVisuals(string animationClipRoot)
     {
-        string playerClip = CreatePlayerClipString(animationClip);
-        string ropeDartClip = CreateRopeDartClipString(animationClip);
+        string playerClip = CreatePlayerClipString(animationClipRoot);
+        string ropeDartClip = CreateRopeDartClipString(animationClipRoot);
         Debug.Log($"Playing animation clips: {playerClip}, {ropeDartClip}");
 
         _playerAnimator.Play(playerClip);
@@ -29,11 +29,11 @@ public class RopeDartVisualManager : MonoBehaviour
         }
     }
 
-    private string CreatePlayerClipString(string bindingConnectionAnimation)
+    private string CreatePlayerClipString(string animationClipRoot)
     {
-        string output = "Player@" + bindingConnectionAnimation;
+        string output = "Player@" + animationClipRoot;
 
-        if (!bindingConnectionAnimation.StartsWith("Cast"))
+        if (animationClipRoot != "Cast")
         {
             output += RopeDartManager.Instance.IsLeadSide ? "_Lead" : "_Anchor";
             output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
@@ -51,11 +51,11 @@ public class RopeDartVisualManager : MonoBehaviour
         return output;
     }
 
-    private string CreateRopeDartClipString(string bindingConnectionAnimation)
+    private string CreateRopeDartClipString(string animationClipRoot)
     {
         string output = "Rope@";
 
-        if (bindingConnectionAnimation.StartsWith("Spin"))
+        if (animationClipRoot == "Spin")
         {
             output += "Spin";
             output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
@@ -63,7 +63,7 @@ public class RopeDartVisualManager : MonoBehaviour
             // TODO: temp add "_Loop", eventually replace with "_Start" clip
             output += "_Loop";
         }
-        else if (bindingConnectionAnimation.StartsWith("Cast") || bindingConnectionAnimation.StartsWith("Retrieve"))
+        else if (animationClipRoot == "Cast" || animationClipRoot == "Retrieve")
         {
             output += "Cast";
             output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";

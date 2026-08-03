@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Rendering;
 
 public class BindingStack : Singleton<BindingStack>
 {
@@ -13,6 +14,17 @@ public class BindingStack : Singleton<BindingStack>
     public BindingGraphData BindingGraph { get; private set; }
 
     [SerializeField] private RopeDartVisualManager _ropeDartVisualManager;
+
+    private static readonly List<KeyValuePair<List<string>, string>> _wrapBindings = new List<KeyValuePair<List<string>, string>>
+    {
+        new KeyValuePair<List<string>, string>(new List<string> { "LeadSide", "AnchorNeck" }, "Dragon"),
+        new KeyValuePair<List<string>, string>(new List<string> { "AnchorSide", "LeadNeck" }, "Dark Dragon"),
+        new KeyValuePair<List<string>, string>(new List<string> { "LeadNeck", "AnchorSide" }, "Scorpion"),
+        new KeyValuePair<List<string>, string>(new List<string> { "AnchorNeck", "LeadSide" }, "Dark Scorpion")
+    };
+
+    private bool _isWallPlane = true;
+    public bool GetIsWallPlane() { return _isWallPlane; }
 
     public override void Awake()
     {
@@ -31,7 +43,7 @@ public class BindingStack : Singleton<BindingStack>
             List<BindingGraphConnection> possibleConnections = lastBindingNode.Connections.FindAll(c => c.Input == bindingInput);
             if (possibleConnections.Count == 0)
             {
-                Debug.LogWarning($"No valid connections found for input {bindingInput} from binding {lastBindingId}.");
+                Debug.LogWarning($"No connections found for input {bindingInput} from binding {lastBindingId}.");
                 return null;
             }
 
@@ -39,12 +51,12 @@ public class BindingStack : Singleton<BindingStack>
             {
                 if (CanUseConnection(connection))
                 {
-                    Debug.Log($"Using connection {connection.Nickname} from binding {lastBindingId} to {bindingInput}.");
+                    Debug.Log($"Using connection {connection.Nickname} from binding {lastBindingId} with input {bindingInput}.");
                     OnSuccessfulGraphConnection(connection);
                     return connection;
                 }
             }
-            
+
             Debug.LogWarning($"No valid connections could be used for input {bindingInput} from binding {lastBindingId}.");
             return null;
         }
@@ -59,15 +71,14 @@ public class BindingStack : Singleton<BindingStack>
     private bool CanUseConnection(BindingGraphConnection connection)
     {
         if (GetRemainingUnits() < connection.UnitCost) return false;
-        
-        bool meetsLeadReqs, meetsSpinReqs; //, meetsPlaneReqs;
 
-        meetsLeadReqs = connection.IsLeadSideValid && RopeDartManager.Instance.IsLeadSide || connection.IsAnchorSideValid && !RopeDartManager.Instance.IsLeadSide;
+        bool meetsSideReqs, meetsSpinReqs, meetsPlaneReqs;
+
+        meetsSideReqs = connection.IsLeadSideValid && RopeDartManager.Instance.IsLeadSide || connection.IsAnchorSideValid && !RopeDartManager.Instance.IsLeadSide;
         meetsSpinReqs = connection.IsDownSpinValid && RopeDartManager.Instance.IsDownSpin || connection.IsUpSpinValid && !RopeDartManager.Instance.IsDownSpin;
-        // TODO: implement plane states
-        // meetsPlaneReqs = connection.IsWallPlaneValid && RopeDartManager.Instance.IsWallPlane || connection.IsDarkPlaneValid && RopeDartManager.Instance.IsDarkPlane;
+        meetsPlaneReqs = connection.IsWallPlaneValid && RopeDartManager.Instance.IsWallPlane || connection.IsDarkPlaneValid && !RopeDartManager.Instance.IsWallPlane;
 
-        return meetsLeadReqs && meetsSpinReqs; // && meetsPlaneReqs;
+        return meetsSideReqs && meetsSpinReqs && meetsPlaneReqs;
     }
 
     private void OnSuccessfulGraphConnection(BindingGraphConnection connection)
@@ -80,6 +91,9 @@ public class BindingStack : Singleton<BindingStack>
             CurrentBindings.Add(new BindingStackElement(nodeUnitCost.NodeId, nodeUnitCost.UnitCost));
         }
 
+        // remove a previous "Retrieve" binding
+        RemoveLastBindingWithId("Retrieve");
+
         if (connection.FlipsLeadAnchor) RopeDartManager.Instance.FlipLeadAnchor();
         if (connection.FlipsDownUp) RopeDartManager.Instance.FlipSpinDirection();
         if (connection.FlipsWallDark) RopeDartManager.Instance.FlipPlane();
@@ -90,26 +104,107 @@ public class BindingStack : Singleton<BindingStack>
         }
         else if (connection.Input == "Cast")
         {
+            OnCast();
             RopeDartManager.Instance.Cast();
         }
         else if (connection.Input == "Retrieve")
         {
+            // remove a previous "Cast" binding
+            RemoveLastBindingWithId("Cast");
             RopeDartManager.Instance.Retrieve();
         }
         else if (connection.Input == "Wrap")
         {
             RopeDartManager.Instance.StartWrap();
         }
+        else if (connection.Input.StartsWith("Bind"))
+        {
+            // remove a previous "Spin" binding from the stack
+            RemoveLastBindingWithId("Spin");
+        }
 
-        _ropeDartVisualManager.UpdateVisuals(connection);
+        // TODO: temp commented to prevent errors while testing wrap detection and unwrapping
+        // _ropeDartVisualManager.UpdateVisuals(connection);
+    }
+
+    public string DetectWrap()
+    {
+        List<KeyValuePair<List<string>, string>> possibleWrapResults = _wrapBindings.ToList();
+
+        Debug.Log($"Possible wrap results: {string.Join(", ", possibleWrapResults.Select(w => w.Value))}");
+
+        for (int i = 1; i < CurrentBindings.Count; i++)
+        {
+            // skip the last binding since it is always "Wrap"
+            BindingStackElement binding = CurrentBindings[^(i + 1)];
+            if (binding.NodeId == "Wrap") continue;
+
+            foreach (var wrapResult in possibleWrapResults.ToList())
+            {
+                if (wrapResult.Key.Count <= i || wrapResult.Key[^i] != binding.NodeId)
+                {
+                    possibleWrapResults.Remove(wrapResult);
+                }
+                else if (wrapResult.Key.Count == i + 1 && wrapResult.Key[^1] == binding.NodeId)
+                {
+                    return wrapResult.Value;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void OnCast()
+    {
+        // "Spin", "Elbow", "Knee", and "Foot" bindings all automatically unwind when being cast from
+        BindingGraphNode previousBindingNode = GetBindingAtIndex(CurrentBindings.Count - 2);
+        if (previousBindingNode.NodeId.EndsWith("Spin") || previousBindingNode.NodeId.EndsWith("Elbow")
+                || previousBindingNode.NodeId.EndsWith("Knee") || previousBindingNode.NodeId.EndsWith("Foot"))
+        {
+            RemoveBindingAtIndex(CurrentBindings.Count - 2);
+        }
+
+        int wrapIndex = CurrentBindings.FindIndex(BindingStackElement => BindingStackElement.NodeId == "Wrap");
+
+        if (wrapIndex != -1)
+        {
+            while (wrapIndex > 0 && wrapIndex < CurrentBindings.Count - 1)
+            {
+                BindingStackElement beforeWrap = CurrentBindings[wrapIndex - 1];
+                BindingStackElement afterWrap = CurrentBindings[wrapIndex + 1];
+
+                if (beforeWrap.NodeId.StartsWith('L') && afterWrap.NodeId.StartsWith('L') || (beforeWrap.NodeId.StartsWith('A') && afterWrap.NodeId.StartsWith('A')))
+                {
+                    RemoveBindingAtIndex(wrapIndex + 1);
+                    RemoveBindingAtIndex(wrapIndex - 1);
+
+                    if (beforeWrap.NodeId == afterWrap.NodeId) --wrapIndex;
+                    else break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            RemoveBindingAtIndex(wrapIndex);
+        }
+
+        _isWallPlane = CurrentBindings.Count(b => b.NodeId == "LeadNeck" || b.NodeId == "LeadSide" || b.NodeId == "AnchorNeck" || b.NodeId == "AnchorSide") % 2 == 0;
     }
 
     public BindingGraphNode PeekBinding()
     {
-        if (CurrentBindings.Count > 0)
+        return GetBindingAtIndex(CurrentBindings.Count - 1);
+    }
+
+    public BindingGraphNode GetBindingAtIndex(int index)
+    {
+        if (index >= 0 && index < CurrentBindings.Count)
         {
-            BindingStackElement lastBinding = CurrentBindings[CurrentBindings.Count - 1];
-            return BindingGraph.Nodes.Find(n => n.NodeId == lastBinding.NodeId);
+            BindingStackElement binding = CurrentBindings[index];
+            return BindingGraph.Nodes.Find(n => n.NodeId == binding.NodeId);
         }
         return null;
     }
@@ -122,34 +217,13 @@ public class BindingStack : Singleton<BindingStack>
         }
     }
 
-    // Removes bindings from the stack until it finds a wrapped point and returns it
-    // If no points are wrapped, all points are removed and null is returned
-    // This should never return null since Idle is always a wrapped point
-    public BindingGraphNode RevertToLastWrappedBinding()
+    public void RemoveLastBindingWithId(string nodeId)
     {
-        while (CurrentBindings.Count > 0)
+        int lastIndex = CurrentBindings.FindLastIndex(b => b.NodeId == nodeId);
+        if (lastIndex != -1)
         {
-            BindingStackElement lastBinding = CurrentBindings[CurrentBindings.Count - 1];
-
-            if (lastBinding.NodeId == "Wrap" || lastBinding.NodeId == "Idle")
-            {
-                return BindingGraph.Nodes.Find(n => n.NodeId == lastBinding.NodeId);
-            }
-            else
-            {
-                CurrentBindings.RemoveAt(CurrentBindings.Count - 1);
-            }
+            CurrentBindings.RemoveAt(lastIndex);
         }
-
-        return null;
-    }
-
-    public BindingGraphNode RevertToRootBinding()
-    {
-        CurrentBindings.Clear();
-        CurrentBindings.Add(new BindingStackElement("Idle", 0));
-
-        return null;
     }
 
     public void ClearBindings()
@@ -183,7 +257,7 @@ public class BindingStack : Singleton<BindingStack>
         return MaxBindUnits - GetTotalUnitCost();
     }
 
-    // returns a string representing the current stack of bindings, with the root indicated by an asterisk (*)
+    // returns a string representing the current stack of bindings
     public string CurrentBindingsToString()
     {
         return string.Join(", ", CurrentBindings.Select(b => b.NodeId));

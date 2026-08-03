@@ -77,8 +77,6 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleWrapInput()
     {
-        // RopeDartManager.Instance.TryStartWrap();
-
         if (BindingStack.Instance.TryPushBinding("Wrap") != null)
         {
             // successfully started a wrap
@@ -127,8 +125,6 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         else if (angle > 202.5f && angle <= 247.5f) bindingInput = "Bind Anchor Down";
         else if (angle > 247.5f && angle <= 292.5f) bindingInput = "Bind Down";
         else if (angle > 292.5f && angle <= 337.5f) bindingInput = "Bind Lead Down";
-
-        // RopeDartManager.Instance.Twine(bindingInput);
 
         if (BindingStack.Instance.TryPushBinding(bindingInput) != null)
         {
