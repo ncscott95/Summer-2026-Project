@@ -5,14 +5,10 @@ public class LevelSelectButton : MonoBehaviour
 {
     public string LevelIdToLoad;
 
+    [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _levelNameText;
 
     private LevelData _levelData;
-
-    void OnEnable()
-    {
-        Initialize();
-    }
 
     public void Initialize()
     {
@@ -27,12 +23,13 @@ public class LevelSelectButton : MonoBehaviour
         _levelNameText.text = _levelData.LevelName;
     }
 
-    public void LoadLevel()
+    public void OnButtonClick()
     {
         LevelData levelData = LevelDatabase.Instance.GetLevelDataById(LevelIdToLoad);
         if (levelData != null)
         {
-            LevelManager.Instance.LoadLevel(levelData);
+            // LevelManager.Instance.LoadLevel(levelData);
+            GameManager.Instance.StartGameplayLevel(levelData);
         }
         else
         {

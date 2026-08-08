@@ -9,24 +9,12 @@ public class LevelManager : Singleton<LevelManager>
     // 0 = left, 1 = center, 2 = right
     [SerializeField] private List<Transform> _spawnPoints;
 
-    [SerializeField] private LevelData _TEMP_LevelData;
     private LevelData _currentLevelData;
     private int _currentTargetIndex = 0;
-
-    void Start()
-    {
-        if (_TEMP_LevelData != null)
-        {
-            LoadLevel(_TEMP_LevelData);
-        }
-    }
 
     public void LoadLevel(LevelData levelData)
     {
         _currentLevelData = levelData;
-        // TODO: add logic to load the level based on the provided LevelData
-
-        // TODO: temp
         StartLevel();
     }
 
@@ -55,6 +43,7 @@ public class LevelManager : Singleton<LevelManager>
             return;
         }
 
+        // also spawn following target if it is set to spawn with previous
         targetItem = _currentLevelData.LevelTargets[_currentTargetIndex];
         if (targetItem.SpawnType == LevelTargetSpawnType.WithPrevious)
         {
