@@ -12,6 +12,9 @@ public class LevelManager : Singleton<LevelManager>
     private LevelData _currentLevelData;
     private int _currentTargetIndex = 0;
 
+    // 0 = left, 1 = center, 2 = right
+    private LevelTargetItem[] _activeTargets = new LevelTargetItem[3];
+
     public void LoadLevel(LevelData levelData)
     {
         _currentLevelData = levelData;
@@ -21,34 +24,7 @@ public class LevelManager : Singleton<LevelManager>
     public void StartLevel()
     {
         _currentTargetIndex = 0;
-        TrySpawnNextTarget();
-    }
-
-    private void TrySpawnNextTarget()
-    {
-        if (_currentTargetIndex >= _currentLevelData.LevelTargets.Count)
-        {
-            Debug.Log("All targets spawned");
-            return;
-        }
-
-        LevelTargetItem targetItem = _currentLevelData.LevelTargets[_currentTargetIndex];
-        SpawnTarget(targetItem);
-
-        _currentTargetIndex++;
-
-        if (_currentTargetIndex >= _currentLevelData.LevelTargets.Count)
-        {
-            Debug.Log("All targets spawned");
-            return;
-        }
-
-        // also spawn following target if it is set to spawn with previous
-        targetItem = _currentLevelData.LevelTargets[_currentTargetIndex];
-        if (targetItem.SpawnType == LevelTargetSpawnType.WithPrevious)
-        {
-            TrySpawnNextTarget();
-        }
+        SpawnTarget(_currentLevelData.LevelTargets[_currentTargetIndex]);
     }
 
     private void SpawnTarget(LevelTargetItem targetItem)
@@ -59,8 +35,63 @@ public class LevelManager : Singleton<LevelManager>
 
         // use spawn position + 1 to adjust -1, 0, 1 to 0, 1, 2 index
         Transform spawnPoint = _spawnPoints[targetItem.SpawnPosition + 1];
+        if (_activeTargets[targetItem.SpawnPosition + 1] != null)
+        {
+            Debug.LogWarning($"Target already active at position {targetItem.SpawnPosition}. Overwriting but not destroying.");
+        }
+        _activeTargets[targetItem.SpawnPosition + 1] = targetItem;
 
         GameObject instance = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
         instance.GetComponent<LevelTarget>().Initialize(targetItem);
+
+        _currentTargetIndex++;
+
+        if (_currentTargetIndex >= _currentLevelData.LevelTargets.Count)
+        {
+            Debug.Log("All targets spawned");
+            return;
+        }
+
+        // also spawn following target if it is set to spawn with previous
+        LevelTargetItem nextTargetItem = _currentLevelData.LevelTargets[_currentTargetIndex];
+        if (nextTargetItem.SpawnType == LevelTargetSpawnType.WithPrevious)
+        {
+            SpawnTarget(nextTargetItem);
+        }
+    }
+
+    public void OnTargetHit(LevelTargetItem targetItem)
+    {
+        Debug.Log($"Target of type {targetItem.TargetType} hit at position {targetItem.SpawnPosition}");
+
+        // clear the active target at the hit position
+        _activeTargets[targetItem.SpawnPosition + 1] = null;
+
+        if (_currentTargetIndex >= _currentLevelData.LevelTargets.Count)
+        {
+            Debug.Log("All targets spawned");
+            return;
+        }
+
+        LevelTargetItem nextTargetItem = _currentLevelData.LevelTargets[_currentTargetIndex];
+
+        if (nextTargetItem.SpawnType == LevelTargetSpawnType.OnPreviousHit)
+        {
+            if (targetItem.Id == nextTargetItem.Id - 1) SpawnTarget(nextTargetItem);
+        }
+        else if (nextTargetItem.SpawnType == LevelTargetSpawnType.OnAllPreviousHit)
+        {
+            bool allPreviousHit = true;
+            for (int i = 0; i < _activeTargets.Length; i++)
+            {
+                if (_activeTargets[i] != null)
+                {
+                    allPreviousHit = false;
+                    break;
+                }
+            }
+
+            if (allPreviousHit) SpawnTarget(nextTargetItem);
+        }
     }
 }

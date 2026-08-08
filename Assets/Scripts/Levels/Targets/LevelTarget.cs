@@ -12,5 +12,7 @@ public class LevelTarget : MonoBehaviour
     public virtual void OnTargetHit()
     {
         // TODO: add logic for when the target is hit
+        LevelManager.Instance.OnTargetHit(_targetItem);
+        Destroy(gameObject);
     }
 }

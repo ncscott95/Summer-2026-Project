@@ -11,7 +11,7 @@ public class LevelData : ScriptableObject
 }
 
 [Serializable]
-public struct LevelTargetItem
+public class LevelTargetItem
 {
     public int Id;
     public LevelTargetType TargetType;

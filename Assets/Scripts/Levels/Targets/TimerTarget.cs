@@ -28,7 +28,7 @@ public class TimerTarget : LevelTarget
             yield return null;
         }
 
-        // TODO: add logic for what happens when the timer runs out
-        Debug.Log("Timer ran out");
+        // TODO: temp, add logic for what happens when the timer runs out
+        OnTargetHit();
     }
 }
