@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player@Retrieve_Anchor_Front_Loop
+  m_Name: Player@Retrieve_West_Front_Loop
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0

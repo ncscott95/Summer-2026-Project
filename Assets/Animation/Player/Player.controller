@@ -85,7 +85,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player@Retrieve_Lead_Back_Loop
+  m_Name: Player@Retrieve_East_Back_Loop
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -496,7 +496,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player@Retrieve_Lead_Front_Loop
+  m_Name: Player@Retrieve_East_Front_Loop
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -574,7 +574,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player@Retrieve_Anchor_Front_Loop
+  m_Name: Player@Retrieve_West_Front_Loop
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1090,7 +1090,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player@Retrieve_Anchor_Back_Loop
+  m_Name: Player@Retrieve_West_Back_Loop
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

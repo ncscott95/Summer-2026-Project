@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player@Retrieve_Lead_Back_Loop
+  m_Name: Player@Retrieve_East_Front_Loop
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -37,7 +37,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 737399416, guid: f9a3f2ff5774379468b7f205c93b6e79, type: 3}
+      value: {fileID: 1804619695, guid: f9a3f2ff5774379468b7f205c93b6e79, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -69,7 +69,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 737399416, guid: f9a3f2ff5774379468b7f205c93b6e79, type: 3}
+    - {fileID: 1804619695, guid: f9a3f2ff5774379468b7f205c93b6e79, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

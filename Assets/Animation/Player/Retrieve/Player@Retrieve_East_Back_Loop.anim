@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player@Retrieve_Anchor_Back_Loop
+  m_Name: Player@Retrieve_East_Back_Loop
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.640625, y: -0.390625, z: 0}
+        value: {x: 0.640625, y: -0.390625, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -37,7 +37,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1601992149, guid: f9a3f2ff5774379468b7f205c93b6e79, type: 3}
+      value: {fileID: 737399416, guid: f9a3f2ff5774379468b7f205c93b6e79, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -69,7 +69,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1601992149, guid: f9a3f2ff5774379468b7f205c93b6e79, type: 3}
+    - {fileID: 737399416, guid: f9a3f2ff5774379468b7f205c93b6e79, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -97,7 +97,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.640625
+        value: 0.640625
         inSlope: 0
         outSlope: 0
         tangentMode: 136
