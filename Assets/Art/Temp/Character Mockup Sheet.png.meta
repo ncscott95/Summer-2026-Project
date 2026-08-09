@@ -186,7 +186,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -208,7 +208,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -230,7 +230,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -252,7 +252,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -274,7 +274,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -296,7 +296,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 128
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -318,7 +318,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 128
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -340,7 +340,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 128
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -362,7 +362,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 128
         width: 64
         height: 64
       alignment: 0
@@ -384,7 +384,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 128
         width: 64
         height: 64
       alignment: 0
@@ -406,7 +406,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 128
         width: 64
         height: 64
       alignment: 0
@@ -428,7 +428,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 64
+        y: 128
         width: 64
         height: 64
       alignment: 0
@@ -450,7 +450,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 64
         width: 64
         height: 64
       alignment: 0
@@ -472,7 +472,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 64
         width: 64
         height: 64
       alignment: 0
@@ -485,6 +485,94 @@ TextureImporter:
       bones: []
       spriteID: cd38ae93568a94045ae2380e9246eba7
       internalID: -1933845895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character Mockup Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fedb5c7230f920e48b950a9671380b4e
+      internalID: 1804619695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character Mockup Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81b4c504e2e18454eac175f2bd2486e9
+      internalID: -1601992149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character Mockup Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a854d85e241f944184f7367f2df4d9e
+      internalID: 1769658734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character Mockup Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb5869d6f657ab242addfe4dec2421b3
+      internalID: 737399416
       vertices: []
       indices: 
       edges: []
@@ -511,6 +599,10 @@ TextureImporter:
       Character Mockup Sheet_11: 128051863074336891
       Character Mockup Sheet_12: 99346907
       Character Mockup Sheet_13: -1933845895
+      Character Mockup Sheet_14: 1804619695
+      Character Mockup Sheet_15: -1601992149
+      Character Mockup Sheet_16: 1769658734
+      Character Mockup Sheet_17: 737399416
       Character Mockup Sheet_2: -5905721159538220366
       Character Mockup Sheet_3: 2990500859348742120
       Character Mockup Sheet_4: 4458852387828681112
