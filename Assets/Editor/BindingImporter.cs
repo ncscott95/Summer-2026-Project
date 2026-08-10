@@ -8,11 +8,7 @@ using UnityEngine;
 
 public class BindingImporter : EditorWindow
 {
-    // old Graph tab
-    // private string sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=1907152520#gid=1907152520";
-    
-    // new Limited Graph tab
-    private string _sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=1907152520#gid=1907152520";
+    private string _sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=620223261#gid=620223261";
 
     private string _outputPath = "Assets/Resources/BindingGraph.json";
 
@@ -25,9 +21,9 @@ public class BindingImporter : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("Rope Dart Binding Importer (Google Sheets)", EditorStyles.boldLabel);
-        
+
         EditorGUILayout.Space();
-        
+
         _sheetUrl = EditorGUILayout.TextField("Google Sheet URL", _sheetUrl);
         _outputPath = EditorGUILayout.TextField("Output JSON Path", _outputPath);
 
@@ -82,8 +78,8 @@ public class BindingImporter : EditorWindow
         try
         {
             string[] lines = csvText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            List<BindingGraphData.BindingGraphNode> nodes = new List<BindingGraphData.BindingGraphNode>();
-            BindingGraphData.BindingGraphNode currentNode = null;
+            List<BindingGraphNode> nodes = new List<BindingGraphNode>();
+            BindingGraphNode currentNode = null;
 
             for (int i = 1; i < lines.Length; i++)
             {
@@ -98,29 +94,12 @@ public class BindingImporter : EditorWindow
 
                 if (!string.IsNullOrEmpty(idString) && int.TryParse(idString, out _))
                 {
-                    currentNode = new BindingGraphData.BindingGraphNode();
-
-                    currentNode.NodeId = nodeName;
-                    currentNode.IsStable = ParseBool(columns[2]);
-                    currentNode.DoesDecay = ParseBool(columns[3]);
-                    currentNode.CanCast = ParseBool(columns[4]);
-                    currentNode.CanTurn = ParseBool(columns[5]);
-
-                    currentNode.BindPoints = new List<string>();
-                    if (!string.IsNullOrEmpty(columns.Length > 6 ? columns[6].Trim() : ""))
+                    currentNode = new BindingGraphNode
                     {
-                        currentNode.BindPoints.Add(columns.Length > 6 ? columns[6].Trim() : "");
-                    }
-                    if (!string.IsNullOrEmpty(columns.Length > 7 ? columns[7].Trim() : ""))
-                    {
-                        currentNode.BindPoints.Add(columns.Length > 7 ? columns[7].Trim() : "");
-                    }
-                    if (!string.IsNullOrEmpty(columns.Length > 8 ? columns[8].Trim() : ""))
-                    {
-                        currentNode.BindPoints.Add(columns.Length > 8 ? columns[8].Trim() : "");
-                    }
-
-                    currentNode.Connections = new List<BindingGraphData.BindingGraphConnection>();
+                        NodeId = nodeName,
+                        DoesDecay = ParseBool(columns[2]),
+                        Connections = new List<BindingGraphConnection>()
+                    };
 
                     AddConnectionIfValid(currentNode, columns);
                     nodes.Add(currentNode);
@@ -134,7 +113,7 @@ public class BindingImporter : EditorWindow
                 }
             }
 
-            GraphWrapper wrapper = new GraphWrapper { nodes = nodes };
+            GraphWrapper wrapper = new GraphWrapper { Nodes = nodes };
             string jsonOutput = JsonUtility.ToJson(wrapper, true);
 
             File.WriteAllText(_outputPath, jsonOutput);
@@ -149,30 +128,42 @@ public class BindingImporter : EditorWindow
         }
     }
 
-    private void AddConnectionIfValid(BindingGraphData.BindingGraphNode node, string[] columns)
+    private void AddConnectionIfValid(BindingGraphNode node, string[] columns)
     {
-        if (columns.Length > 9)
+        BindingGraphConnection currentConnection = new BindingGraphConnection
         {
-            string targetNode = columns[9].Trim();
-            if (!string.IsNullOrEmpty(targetNode))
-            {
-                string binding = columns.Length > 10 ? columns[10].Trim() : "";
-                int cost = 1;
-                if (columns.Length > 11 && int.TryParse(columns[11], out int parsedCost))
-                {
-                    cost = parsedCost;
-                }
-                string animation = columns.Length > 12 ? columns[12].Trim() : "";
+            Nickname = columns[3].Trim(),
+            Input = columns[4].Trim(),
+            UnitCost = int.TryParse(columns[5], out int totalCost) ? totalCost : 0,
+            IsLeadSideValid = ParseBool(columns[6]),
+            IsAnchorSideValid = ParseBool(columns[7]),
+            IsDownSpinValid = ParseBool(columns[8]),
+            IsUpSpinValid = ParseBool(columns[9]),
+            IsWallPlaneValid = ParseBool(columns[10]),
+            IsDarkPlaneValid = ParseBool(columns[11]),
+            IsCoilingNeeded = ParseBool(columns[12]),
+            IsStalledNeeded = ParseBool(columns[13]),
+            FlipsLeadAnchor = ParseBool(columns[14]),
+            FlipsDownUp = ParseBool(columns[15]),
+            FlipsWallDark = ParseBool(columns[16]),
+            SetsCoiling = ParseBool(columns[17]),
+            NodeSequence = new List<BindingStackElement>(),
+            Animation = columns.Length > 22 ? columns[22].Trim() : ""
+        };
 
-                node.Connections.Add(new BindingGraphData.BindingGraphConnection
-                {
-                    NodeId = targetNode,
-                    Input = binding,
-                    UnitCost = cost,
-                    Animation = animation
-                });
+        currentConnection.NodeSequence = new List<BindingStackElement>();
+        for (int i = 18; i <= 21; i += 2)
+        {
+            if (columns.Length > i + 1 && !string.IsNullOrEmpty(columns[i].Trim()))
+            {
+                string nodeId = columns[i].Trim();
+                int unitCost = int.TryParse(columns[i + 1].Trim(), out int nodeCost) ? nodeCost : 0;
+
+                currentConnection.NodeSequence.Add(new BindingStackElement(nodeId, unitCost));
             }
         }
+
+        node.Connections.Add(currentConnection);
     }
 
     private bool ParseBool(string value)
@@ -211,6 +202,6 @@ public class BindingImporter : EditorWindow
     [Serializable]
     private class GraphWrapper
     {
-        public List<BindingGraphData.BindingGraphNode> nodes;
+        public List<BindingGraphNode> Nodes;
     }
 }

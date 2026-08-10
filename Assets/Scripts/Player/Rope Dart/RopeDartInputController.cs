@@ -2,16 +2,12 @@ using UnityEngine;
 
 public class RopeDartInputController : Singleton<RopeDartInputController>
 {
-    private const float DartDirectionBufferDuration = 0.1f;
-    private const float CastBufferDuration = 0.1f;
-    private const float TwineBufferDuration = 0.1f;
+    private const float DartDirectionBufferDuration = 0.2f;
+    private const float TwineBufferDuration = 0.2f;
     private const float DirectionDeadzone = 0.5f;
 
-    private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => RopeDartManager.Instance.ShiftPlane(direction));
-    private readonly InputBuffer _castBuffer = new(CastBufferDuration, () => RopeDartManager.Instance.Cast());
-    private readonly InputBuffer _twineBuffer = new(TwineBufferDuration, () => RopeDartManager.Instance.TwineSimple());
-
-    private bool _isDirectionConsumed = false;
+    private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => TryTurn(direction));
+    private readonly InputBuffer _twineBuffer = new(TwineBufferDuration, () => TryTwineSimple());
 
     void Update()
     {
@@ -20,27 +16,14 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleSpinRetrieveInput()
     {
-        if (RopeDartManager.Instance.CurrentState == RopeDartState.Idle)
-        {
-            RopeDartManager.Instance.StartSpin();
-        }
-        else if (RopeDartManager.Instance.CurrentState == RopeDartState.Extended || RopeDartManager.Instance.CurrentState == RopeDartState.Casting)
-        {
-            RopeDartManager.Instance.Retrieve();
-        }
+        if (BindingStack.Instance.TryPushBinding("Spin")) return;
+
+        BindingStack.Instance.TryPushBinding("Retrieve");
     }
 
     public void HandleCastInput()
     {
-        if (_dartDirectionBuffer.Interrupt())
-        {
-            HelperCastWithDirection(_dartDirectionBuffer.GetLastBufferedInput());
-            _isDirectionConsumed = true;
-        }
-        else
-        {
-            _castBuffer.StartBuffer();
-        }
+        BindingStack.Instance.TryPushBinding("Cast");
     }
 
     public void HandleTwineInput()
@@ -48,7 +31,6 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         if (_dartDirectionBuffer.Interrupt())
         {
             HelperTwineWithDirection(_dartDirectionBuffer.GetLastBufferedInput());
-            _isDirectionConsumed = true;
         }
         else
         {
@@ -56,36 +38,25 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         }
     }
 
-    public void HandleWrapInput()
+    private static void TryTwineSimple()
     {
-        RopeDartManager.Instance.TryStartWrap();
+        BindingStack.Instance.TryPushBinding("Twine");
     }
 
-    public void HandleWrapInputEnd()
+    public void HandleWrapInput()
     {
-        RopeDartManager.Instance.EndWrap();
+        BindingStack.Instance.TryPushBinding("Wrap");
     }
 
     public void HandleDartDirectionInput(Vector2 input)
     {
         if (input.magnitude < DirectionDeadzone)
         {
-            _isDirectionConsumed = false;
             return;
         }
-
-        if (_isDirectionConsumed)
-            return;
-
-        if (_castBuffer.Interrupt())
-        {
-            HelperCastWithDirection(input);
-            _isDirectionConsumed = true;
-        }
-        else if (_twineBuffer.Interrupt())
+        if (_twineBuffer.Interrupt())
         {
             HelperTwineWithDirection(input);
-            _isDirectionConsumed = true;
         }
         else
         {
@@ -97,35 +68,41 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     {
         string bindingInput = "";
 
+        // 0 = right, 90 = up, 180 = left, 270 = down
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
 
-        if (angle <= 22.5f || angle > 337.5f) bindingInput = "Bind Lead";
-        else if (angle > 22.5f && angle <= 67.5f) bindingInput = "Bind Lead Up";
-        else if (angle > 67.5f && angle <= 112.5f) bindingInput = "Bind Up";
-        else if (angle > 112.5f && angle <= 157.5f) bindingInput = "Bind Anchor Up";
-        else if (angle > 157.5f && angle <= 202.5f) bindingInput = "Bind Anchor";
-        else if (angle > 202.5f && angle <= 247.5f) bindingInput = "Bind Anchor Down";
-        else if (angle > 247.5f && angle <= 292.5f) bindingInput = "Bind Down";
-        else if (angle > 292.5f && angle <= 337.5f) bindingInput = "Bind Lead Down";
+        // perfect 45 degree bindings default to lead and anchor
+        if (angle <= 45f || angle >= 315f) bindingInput = "Twine Lead";
+        else if (angle > 45f && angle < 135f) bindingInput = "Twine Up";
+        else if (angle >= 135f && angle <= 225f) bindingInput = "Twine Anchor";
+        else if (angle > 225f && angle < 315f) bindingInput = "Twine Down";
 
-        RopeDartManager.Instance.Twine(bindingInput);
+        BindingStack.Instance.TryPushBinding(bindingInput);
     }
 
-    private void HelperCastWithDirection(Vector2 direction)
+    private static void TryTurn(Vector2 direction)
     {
+        // 0 = right, 90 = up, 180 = left, 270 = down
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
 
-        if (angle > 247.5f && angle <= 292.5f)
+        if ((angle > 45f && angle < 135f) || (angle > 225f && angle < 315f))
         {
-            // down
-            // TODO: cast with foot
+            // input is not east or west, do nothing
+            return;
+        }
+
+        // after above check, input must be either east or west
+        bool tryTurnEast = angle <= 45f || angle >= 315f;
+
+        if (RopeDartManager.Instance.IsFacingEast == tryTurnEast)
+        {
+            BindingStack.Instance.TryPushBinding("Cross");
         }
         else
         {
-            // all other inputs
-            // TODO: cast with hand
+            BindingStack.Instance.TryPushBinding("Turn");
         }
     }
 }

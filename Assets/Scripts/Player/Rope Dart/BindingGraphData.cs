@@ -4,26 +4,39 @@ using System.Collections.Generic;
 [Serializable]
 public class BindingGraphData
 {
-    [Serializable]
-    public class BindingGraphNode
-    {
-        public string NodeId;
-        public bool IsStable;
-        public bool DoesDecay;
-        public bool CanCast;
-        public bool CanTurn;
-        public List<string> BindPoints;
-        public List<BindingGraphConnection> Connections;
-    }
-
-    [Serializable]
-    public class BindingGraphConnection
-    {
-        public string NodeId;
-        public string Input;
-        public int UnitCost;
-        public string Animation;
-    }
-
     public List<BindingGraphNode> Nodes = new List<BindingGraphNode>();
+}
+
+[Serializable]
+public class BindingGraphNode
+{
+    public string NodeId;
+    public bool DoesDecay;
+    public List<BindingGraphConnection> Connections;
+}
+
+[Serializable]
+public class BindingGraphConnection
+{
+    public string Nickname;
+    public string Input;
+
+    // Requirements
+    public int UnitCost;
+    public bool IsLeadSideValid;
+    public bool IsAnchorSideValid;
+    public bool IsDownSpinValid;
+    public bool IsUpSpinValid;
+    public bool IsWallPlaneValid;
+    public bool IsDarkPlaneValid;
+    public bool IsCoilingNeeded;
+    public bool IsStalledNeeded;
+
+    // Outcomes
+    public bool FlipsLeadAnchor;
+    public bool FlipsDownUp;
+    public bool FlipsWallDark;
+    public bool SetsCoiling;
+    public List<BindingStackElement> NodeSequence;
+    public string Animation;
 }

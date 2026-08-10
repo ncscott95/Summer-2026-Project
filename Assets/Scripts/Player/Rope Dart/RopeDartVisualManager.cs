@@ -5,15 +5,15 @@ public class RopeDartVisualManager : MonoBehaviour
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private Animator _ropeDartAnimator;
 
-    public void UpdateVisuals(BindingGraphData.BindingGraphConnection bindingConnection)
+    public void UpdateVisuals(BindingGraphConnection bindingConnection)
     {
         UpdateVisuals(bindingConnection.Animation);
     }
 
-    public void UpdateVisuals(string animationClip)
+    public void UpdateVisuals(string animationClipRoot)
     {
-        string playerClip = CreatePlayerClipString(animationClip);
-        string ropeDartClip = CreateRopeDartClipString(animationClip);
+        string playerClip = CreatePlayerClipString(animationClipRoot);
+        string ropeDartClip = CreateRopeDartClipString(animationClipRoot);
         Debug.Log($"Playing animation clips: {playerClip}, {ropeDartClip}");
 
         _playerAnimator.Play(playerClip);
@@ -29,12 +29,36 @@ public class RopeDartVisualManager : MonoBehaviour
         }
     }
 
-    private string CreatePlayerClipString(string bindingConnectionAnimation)
+    private string CreatePlayerClipString(string animationClipRoot)
     {
-        string output = "Player@" + bindingConnectionAnimation;
-        output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+        string output = "Player@" + animationClipRoot;
 
-        if (!bindingConnectionAnimation.StartsWith("Cast")) output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
+        if (animationClipRoot == "Cast")
+        {
+            output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+        }
+        else if (animationClipRoot == "Retrieve")
+        {
+            output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+        }
+        else if (animationClipRoot.StartsWith("Elbow") || animationClipRoot.StartsWith("Neck"))
+        {
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+            output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
+        }
+        else if (animationClipRoot.EndsWith("Dragon") || animationClipRoot.EndsWith("Scorpion"))
+        {
+            output += RopeDartManager.Instance.IsLeadSide ? "_Lead" : "_Anchor";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+        }
+        else
+        {
+            output += RopeDartManager.Instance.IsLeadSide ? "_Lead" : "_Anchor";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+            output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
+        }
 
         // TODO: temp add "_Loop", eventually replace with "_Start" clip
         output += "_Loop";
@@ -42,11 +66,11 @@ public class RopeDartVisualManager : MonoBehaviour
         return output;
     }
 
-    private string CreateRopeDartClipString(string bindingConnectionAnimation)
+    private string CreateRopeDartClipString(string animationClipRoot)
     {
         string output = "Rope@";
 
-        if (bindingConnectionAnimation.StartsWith("Spin"))
+        if (animationClipRoot == "Spin")
         {
             output += "Spin";
             output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
@@ -54,9 +78,10 @@ public class RopeDartVisualManager : MonoBehaviour
             // TODO: temp add "_Loop", eventually replace with "_Start" clip
             output += "_Loop";
         }
-        else if (bindingConnectionAnimation.StartsWith("Cast"))
+        else if (animationClipRoot == "Cast" || animationClipRoot == "Retrieve")
         {
-            output += bindingConnectionAnimation;
+            output += "Cast";
+            output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";
 
             // TODO: temp add "_Loop", eventually replace with "_Start" clip
             output += "_Loop";
