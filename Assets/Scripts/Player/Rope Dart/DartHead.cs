@@ -5,10 +5,10 @@ public class DartHead : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        Debug.Log($"DartHead collided with {other.name}");
+        if (other.CompareTag("Target"))
         {
             Debug.Log($"DartHead collided with {other.name}");
-            // Handle collision with enemy
         }
     }
 }
