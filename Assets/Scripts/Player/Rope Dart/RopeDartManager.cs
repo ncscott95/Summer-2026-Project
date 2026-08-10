@@ -129,15 +129,15 @@ public class RopeDartManager : Singleton<RopeDartManager>
             _debugTimer += Time.deltaTime;
             if (_debugTimer >= _debugCastDuration)
             {
-                _debugTimer = 0f;
+                _debugTimer = _debugCastDuration;
                 OnEndCast();
             }
         }
         else if (CurrentState == RopeDartState.Retrieving)
         {
             // TODO: placeholder timer, replace with logic for detecting when the dart has reached max length
-            _debugTimer += Time.deltaTime;
-            if (_debugTimer >= _debugCastDuration)
+            _debugTimer -= Time.deltaTime;
+            if (_debugTimer <= 0f)
             {
                 _debugTimer = 0f;
                 OnRetrieveEnd();
