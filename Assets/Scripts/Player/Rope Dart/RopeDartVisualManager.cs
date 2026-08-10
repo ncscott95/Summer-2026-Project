@@ -33,16 +33,31 @@ public class RopeDartVisualManager : MonoBehaviour
     {
         string output = "Player@" + animationClipRoot;
 
-        if (animationClipRoot != "Cast")
+        if (animationClipRoot == "Cast")
+        {
+            output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+        }
+        else if (animationClipRoot == "Retrieve")
+        {
+            output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+        }
+        else if (animationClipRoot.StartsWith("Elbow") || animationClipRoot.StartsWith("Neck"))
+        {
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+            output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
+        }
+        else if (animationClipRoot.EndsWith("Dragon") || animationClipRoot.EndsWith("Scorpion"))
+        {
+            output += RopeDartManager.Instance.IsLeadSide ? "_Lead" : "_Anchor";
+            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
+        }
+        else
         {
             output += RopeDartManager.Instance.IsLeadSide ? "_Lead" : "_Anchor";
             output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
             output += RopeDartManager.Instance.IsClockwise ? "_CW" : "_CCW";
-        }
-        else
-        {
-            output += RopeDartManager.Instance.IsLastCastEast ? "_East" : "_West";
-            output += RopeDartManager.Instance.IsFrontPlane ? "_Front" : "_Back";
         }
 
         // TODO: temp add "_Loop", eventually replace with "_Start" clip

@@ -29,11 +29,14 @@ public class BindingGraphConnection
     public bool IsUpSpinValid;
     public bool IsWallPlaneValid;
     public bool IsDarkPlaneValid;
+    public bool IsCoilingNeeded;
+    public bool IsStalledNeeded;
 
     // Outcomes
     public bool FlipsLeadAnchor;
     public bool FlipsDownUp;
     public bool FlipsWallDark;
+    public bool SetsCoiling;
     public List<BindingStackElement> NodeSequence;
     public string Animation;
 }

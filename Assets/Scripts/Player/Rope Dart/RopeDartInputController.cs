@@ -9,8 +9,6 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     private readonly InputBuffer<Vector2> _dartDirectionBuffer = new(DartDirectionBufferDuration, (direction) => TryTurn(direction));
     private readonly InputBuffer _twineBuffer = new(TwineBufferDuration, () => TryTwineSimple());
 
-    private bool _isDirectionConsumed = false;
-
     void Update()
     {
         InputBufferList.TickAll(Time.deltaTime);
@@ -18,7 +16,7 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleSpinRetrieveInput()
     {
-        if (BindingStack.Instance.TryPushBinding("Spin") != null) return;
+        if (BindingStack.Instance.TryPushBinding("Spin")) return;
 
         BindingStack.Instance.TryPushBinding("Retrieve");
     }
@@ -30,11 +28,9 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
 
     public void HandleTwineInput()
     {
-        Debug.Log("Twine input received");
         if (_dartDirectionBuffer.Interrupt())
         {
             HelperTwineWithDirection(_dartDirectionBuffer.GetLastBufferedInput());
-            _isDirectionConsumed = true;
         }
         else
         {
@@ -56,18 +52,11 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     {
         if (input.magnitude < DirectionDeadzone)
         {
-            // TODO: this could be problematic
-            _isDirectionConsumed = false;
             return;
         }
-
-        if (_isDirectionConsumed)
-            return;
-
         if (_twineBuffer.Interrupt())
         {
             HelperTwineWithDirection(input);
-            _isDirectionConsumed = true;
         }
         else
         {

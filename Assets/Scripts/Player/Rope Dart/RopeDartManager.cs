@@ -10,6 +10,8 @@ public class RopeDartManager : Singleton<RopeDartManager>
     public bool IsFrontPlane { get; private set; } = true;
     public bool IsClockwise { get; private set; } = true;
     public bool IsLastCastEast { get; private set; } = true;
+    public bool IsCoiling => CurrentState == RopeDartState.Coiling || CurrentState == RopeDartState.Uncoiling;
+    public bool IsStalled => CurrentState == RopeDartState.Stalled;
 
     // facing east = lead side on front plane, anchor side on back plane
     // facing west = anchor side on front plane, lead side on back plane
@@ -27,11 +29,10 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     private float _debugTimer = 0f;
     private float _debugCastDuration = 0.5f;
-    
-    private bool _isSpiraling = false;
-    private float _spiralTimer = 0f;
-    private float _spiralStartAngle = 0f;
-    private bool _isStalled = false;
+
+    private float _coilTimer = 0f;
+    private float _coilStartAngle = 0f;
+    private string _coilNodeType = "";
 
     void Start()
     {
@@ -40,42 +41,87 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     void Update()
     {
+        float oldAngle = RawAngle;
+
         if (CurrentState == RopeDartState.Spinning)
         {
-            float oldAngle = RawAngle;
+            RawAngle += (IsClockwise ? 1 : -1) * BaseSpinSpeed * Time.deltaTime;
+            RawAngle = Mathf.Repeat(RawAngle, 360f);
+        }
+        else if (CurrentState == RopeDartState.Coiling)
+        {
+            _coilTimer += Time.deltaTime;
+            _coilTimer = Mathf.Min(_coilTimer, SpiralDuration);
+            float degreesTraversed = 360f * (3f - Mathf.Sqrt(9f - 6f * _coilTimer));
+            float directionMultiplier = IsClockwise ? 1f : -1f;
+            RawAngle = Mathf.Repeat(_coilStartAngle + directionMultiplier * degreesTraversed, 360f);
 
-            if (!_isSpiraling && !_isStalled)
+            if ((IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (!IsClockwise && oldAngle > 180f && RawAngle <= 180f))
             {
-                RawAngle += (IsClockwise ? 1 : -1) * BaseSpinSpeed * Time.deltaTime;
-                RawAngle = Mathf.Repeat(RawAngle, 360f);
-            }
-            else
-            {
-                _spiralTimer += Time.deltaTime;
-                _spiralTimer = Mathf.Min(_spiralTimer, SpiralDuration);
-                float degreesTraversed = 360f * (3f - Mathf.Sqrt(9f - 6f * _spiralTimer));
-                float directionMultiplier = IsClockwise ? 1f : -1f;
-                RawAngle = Mathf.Repeat(_spiralStartAngle + directionMultiplier * degreesTraversed, 360f);
-
-                if (_spiralTimer >= SpiralDuration)
+                Debug.Log("Coil beat");
+                if (!BindingStack.Instance.TryPushBinding("(Nothing)"))
                 {
-                    _isSpiraling = false;
-                    _isStalled = true;
+                    // ran out of slack, stall the spin
+                    Debug.Log("Stalling spin due to lack of slack");
+                    CurrentState = RopeDartState.Stalled;
+                }
+                
+                if (_coilTimer == SpiralDuration)
+                {
+                    // ran out of slack, stall the spin
+                    Debug.Log("Stalling spin due to lack of slack");
+                    CurrentState = RopeDartState.Stalled;
+                }
+            }
+        }
+        else if (CurrentState == RopeDartState.Uncoiling)
+        {
+            _coilTimer -= Time.deltaTime;
+            _coilTimer = Mathf.Max(_coilTimer, 0f);
+            float degreesTraversed = 360f * (3f - Mathf.Sqrt(9f - 6f * _coilTimer));
+            float directionMultiplier = IsClockwise ? -1f : 1f;
+            RawAngle = Mathf.Repeat(_coilStartAngle + directionMultiplier * degreesTraversed, 360f);
+
+            if (_coilNodeType == "Neck" )
+            {
+                if ((!IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (IsClockwise && oldAngle > 180f && RawAngle <= 180f))
+                {
+                    Debug.Log("Uncoil beat: top of spin");
+                    if (!BindingStack.Instance.RemoveLastBindingWithIdEndingWith("Neck"))
+                    {
+                        CurrentState = RopeDartState.Spinning;
+                        BindingStack.Instance.TryPushBinding("Spin");
+                    }
+
+                    if (_coilTimer == 0f)
+                    {
+                        CurrentState = RopeDartState.Spinning;
+                        BindingStack.Instance.TryPushBinding("Spin");
+                    }
                 }
             }
 
-            // TODO: need to push "(Nothing)" bindings if current binding does decay and the rope has reached an angle specific to that binding
-
-            // detection for additional "beats"
-            if (oldAngle < 180f && RawAngle >= 180f)
+            // TODO: this detects both the top and bottom of the spin, but we only want to detect the bottom
+            if ((IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (!IsClockwise && oldAngle > 180f && RawAngle <= 180f))
             {
-                // Debug.Log("Spin beat");
-                BindingGraphNode currentBinding = BindingStack.Instance.PeekBinding();
-                if (currentBinding != null && currentBinding.DoesDecay)
+                Debug.Log("Uncoil beat: bottom of spin");
+                if (!BindingStack.Instance.RemoveLastBindingWithIdEndingWith(_coilNodeType))
                 {
-                    BindingStack.Instance.UpdateCurrentBindingUnitCost(1);
+                    CurrentState = RopeDartState.Spinning;
+                    BindingStack.Instance.TryPushBinding("Spin");
+                }
+
+                if (_coilTimer == 0f)
+                {
+                    BindingStack.Instance.RemoveLastBindingWithIdEndingWith(_coilNodeType);
+                    CurrentState = RopeDartState.Spinning;
+                    BindingStack.Instance.TryPushBinding("Spin");
                 }
             }
+        }
+        else if (CurrentState == RopeDartState.Stalled)
+        {
+            // do nothing
         }
         else if (CurrentState == RopeDartState.Casting)
         {
@@ -106,9 +152,16 @@ public class RopeDartManager : Singleton<RopeDartManager>
             // default to a down spin
             IsClockwise = IsDownSpin;
         }
+        else if (CurrentState == RopeDartState.Stalled)
+        {
+            CurrentState = RopeDartState.Uncoiling;
+            IsClockwise = !IsClockwise;
+            _coilStartAngle = RawAngle;
+            return;
+        }
     
-        _isSpiraling = false;
-        _isStalled = false;
+        // IsCoiling = false;
+        // _isStalled = false;
         // TODO: not sure if this is a good idea or not
         RawAngle = 180f;
 
@@ -188,6 +241,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
     public void OnRetrieveEnd()
     {
         // Reset();
+        // TODO: replace with push binding "(Nothing)"
         BindingStack.Instance.TryPushBinding("Spin");
     }
 
@@ -204,6 +258,11 @@ public class RopeDartManager : Singleton<RopeDartManager>
     {
         IsLeadSide = !IsLeadSide;
         IsFrontPlane = !IsFrontPlane;
+
+        if (CurrentState == RopeDartState.Coiling)
+        {
+            CurrentState = RopeDartState.Uncoiling;
+        }
     }
 
     public void FlipSpinDirection()
@@ -217,6 +276,27 @@ public class RopeDartManager : Singleton<RopeDartManager>
     {
         // TODO: figure out how to track being in "dark plane" beyond the raw value of IsWallPlane
     }
+
+    public void SetCoiling(bool isCoiling)
+    {
+        if (CurrentState == RopeDartState.Spinning && isCoiling)
+        {
+            CurrentState = RopeDartState.Coiling;
+            RawAngle = 180f;
+            _coilStartAngle = RawAngle;
+
+            BindingGraphNode lastBinding = BindingStack.Instance.PeekBinding();
+            string nodeId = lastBinding != null ? lastBinding.NodeId : "";
+            if (nodeId.EndsWith("Elbow"))
+            {
+                _coilNodeType = "Elbow";
+            }
+            else if (nodeId.EndsWith("Neck"))
+            {
+                _coilNodeType = "Neck";
+            }
+        }
+    }
 }
 
 public enum RopeDartState
@@ -226,5 +306,8 @@ public enum RopeDartState
     Casting,
     Extended,
     Retrieving,
-    Stalling
+    Stalled,
+    Coiling,
+    Uncoiling,
+    Pendulum,
 }

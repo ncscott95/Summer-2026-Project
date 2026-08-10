@@ -21,9 +21,9 @@ public class BindingImporter : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("Rope Dart Binding Importer (Google Sheets)", EditorStyles.boldLabel);
-        
+
         EditorGUILayout.Space();
-        
+
         _sheetUrl = EditorGUILayout.TextField("Google Sheet URL", _sheetUrl);
         _outputPath = EditorGUILayout.TextField("Output JSON Path", _outputPath);
 
@@ -141,17 +141,20 @@ public class BindingImporter : EditorWindow
             IsUpSpinValid = ParseBool(columns[9]),
             IsWallPlaneValid = ParseBool(columns[10]),
             IsDarkPlaneValid = ParseBool(columns[11]),
-            FlipsLeadAnchor = ParseBool(columns[12]),
-            FlipsDownUp = ParseBool(columns[13]),
-            FlipsWallDark = ParseBool(columns[14]),
+            IsCoilingNeeded = ParseBool(columns[12]),
+            IsStalledNeeded = ParseBool(columns[13]),
+            FlipsLeadAnchor = ParseBool(columns[14]),
+            FlipsDownUp = ParseBool(columns[15]),
+            FlipsWallDark = ParseBool(columns[16]),
+            SetsCoiling = ParseBool(columns[17]),
             NodeSequence = new List<BindingStackElement>(),
-            Animation = columns.Length > 19 ? columns[19].Trim() : ""
+            Animation = columns.Length > 22 ? columns[22].Trim() : ""
         };
 
         currentConnection.NodeSequence = new List<BindingStackElement>();
-        for (int i = 15; i <= 18; i++)
+        for (int i = 18; i <= 21; i += 2)
         {
-            if (columns.Length > i+1 && !string.IsNullOrEmpty(columns[i].Trim()))
+            if (columns.Length > i + 1 && !string.IsNullOrEmpty(columns[i].Trim()))
             {
                 string nodeId = columns[i].Trim();
                 int unitCost = int.TryParse(columns[i + 1].Trim(), out int nodeCost) ? nodeCost : 0;
