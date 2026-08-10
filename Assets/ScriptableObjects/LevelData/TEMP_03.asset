@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abef08988c326de488f7c3ffde51393a, type: 3}
+  m_Name: TEMP_03
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  Id: TEMP_03
+  LevelName: Template 3
+  LevelTargets:
+  - Id: 0
+    TargetType: 1
+    SpawnType: 0
+    SpawnPosition: -1
+    PointValue: 0
+    ModValue: 2
+  - Id: 1
+    TargetType: 1
+    SpawnType: 1
+    SpawnPosition: 1
+    PointValue: 0
+    ModValue: 2
+  - Id: 2
+    TargetType: 1
+    SpawnType: 1
+    SpawnPosition: -1
+    PointValue: 0
+    ModValue: 4
+  - Id: 3
+    TargetType: 1
+    SpawnType: 0
+    SpawnPosition: 1
+    PointValue: 0
+    ModValue: 2
+  - Id: 4
+    TargetType: 1
+    SpawnType: 2
+    SpawnPosition: 1
+    PointValue: 0
+    ModValue: 2
