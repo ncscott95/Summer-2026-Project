@@ -42,3 +42,13 @@ public enum LevelTargetSpawnType
     OnPreviousHit,
     OnAllPreviousHit,
 }
+
+public enum LevelRegion
+{
+    Temp,
+    Wood,
+    Fire,
+    Metal,
+    Water,
+    Earth
+}

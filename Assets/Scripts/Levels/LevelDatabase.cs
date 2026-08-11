@@ -29,6 +29,7 @@ public class LevelDatabase : Singleton<LevelDatabase>
             else
             {
                 Debug.LogWarning($"No level data found for region: {regionId}");
+                _levelLists[i] = new LevelList();
             }
         }
     }
@@ -57,5 +58,16 @@ public class LevelDatabase : Singleton<LevelDatabase>
         }
         
         return _levelLists[regionIndex].Levels[levelIndex];
+    }
+
+    public LevelList GetLevelListByRegion(LevelRegion region)
+    {
+        int regionIndex = (int)region;
+        if (regionIndex < 0 || regionIndex >= _levelLists.Length)
+        {
+            Debug.LogError($"Invalid region index: {regionIndex}");
+            return null;
+        }
+        return _levelLists[regionIndex];
     }
 }

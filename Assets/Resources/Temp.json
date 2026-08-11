@@ -2,7 +2,7 @@
     "Levels": [
         {
             "LevelId": "Temp_01",
-            "LevelName": "Test 1",
+            "LevelName": "Basic Targets",
             "LevelTargets": [
                 {
                     "Id": 1,
@@ -14,19 +14,19 @@
                 },
                 {
                     "Id": 2,
-                    "TargetType": 1,
+                    "TargetType": 0,
                     "SpawnType": 1,
                     "SpawnPosition": -1,
                     "PointValue": 0.0,
-                    "ModValue": 3.0
+                    "ModValue": 0.0
                 },
                 {
                     "Id": 3,
-                    "TargetType": 3,
+                    "TargetType": 0,
                     "SpawnType": 1,
                     "SpawnPosition": 1,
                     "PointValue": 0.0,
-                    "ModValue": 1.0
+                    "ModValue": 0.0
                 },
                 {
                     "Id": 4,
@@ -43,28 +43,84 @@
                     "SpawnPosition": 1,
                     "PointValue": 0.0,
                     "ModValue": 0.0
-                }
-            ]
-        },
-        {
-            "LevelId": "Temp_02",
-            "LevelName": "Test 2",
-            "LevelTargets": [
+                },
                 {
-                    "Id": 1,
+                    "Id": 6,
                     "TargetType": 0,
-                    "SpawnType": 0,
+                    "SpawnType": 1,
+                    "SpawnPosition": 1,
+                    "PointValue": 0.0,
+                    "ModValue": 0.0
+                },
+                {
+                    "Id": 7,
+                    "TargetType": 0,
+                    "SpawnType": 1,
                     "SpawnPosition": -1,
                     "PointValue": 0.0,
                     "ModValue": 0.0
                 },
                 {
-                    "Id": 2,
+                    "Id": 8,
                     "TargetType": 0,
                     "SpawnType": 0,
                     "SpawnPosition": 1,
                     "PointValue": 0.0,
                     "ModValue": 0.0
+                }
+            ]
+        },
+        {
+            "LevelId": "Temp_02",
+            "LevelName": "Timed Targets",
+            "LevelTargets": [
+                {
+                    "Id": 1,
+                    "TargetType": 1,
+                    "SpawnType": 0,
+                    "SpawnPosition": -1,
+                    "PointValue": 0.0,
+                    "ModValue": 2.0
+                },
+                {
+                    "Id": 2,
+                    "TargetType": 1,
+                    "SpawnType": 1,
+                    "SpawnPosition": 1,
+                    "PointValue": 0.0,
+                    "ModValue": 2.0
+                },
+                {
+                    "Id": 3,
+                    "TargetType": 1,
+                    "SpawnType": 1,
+                    "SpawnPosition": -1,
+                    "PointValue": 0.0,
+                    "ModValue": 2.0
+                },
+                {
+                    "Id": 4,
+                    "TargetType": 1,
+                    "SpawnType": 0,
+                    "SpawnPosition": 1,
+                    "PointValue": 0.0,
+                    "ModValue": 2.0
+                },
+                {
+                    "Id": 5,
+                    "TargetType": 1,
+                    "SpawnType": 2,
+                    "SpawnPosition": -1,
+                    "PointValue": 0.0,
+                    "ModValue": 2.0
+                },
+                {
+                    "Id": 6,
+                    "TargetType": 1,
+                    "SpawnType": 0,
+                    "SpawnPosition": 1,
+                    "PointValue": 0.0,
+                    "ModValue": 2.0
                 }
             ]
         }

@@ -8,16 +8,6 @@ using UnityEngine;
 
 public class LevelImporter : EditorWindow
 {
-    private enum LevelType
-    {
-        Temp,
-        Wood,
-        Fire,
-        Metal,
-        Water,
-        Earth
-    }
-
     private const string TempSheetUrl = "https://docs.google.com/spreadsheets/d/1OwenMD1B8AkDwHoDRsbulK0GfOEeZNMCWk1HSKSYCRk/edit?gid=799660637#gid=799660637";
     private const string WoodSheetUrl = "https://docs.google.com/spreadsheets/d/1OwenMD1B8AkDwHoDRsbulK0GfOEeZNMCWk1HSKSYCRk/edit?gid=1622219906#gid=1622219906";
     private const string FireSheetUrl = "https://docs.google.com/spreadsheets/d/1OwenMD1B8AkDwHoDRsbulK0GfOEeZNMCWk1HSKSYCRk/edit?gid=1880908761#gid=1880908761";
@@ -25,7 +15,7 @@ public class LevelImporter : EditorWindow
     private const string WaterSheetUrl = "https://docs.google.com/spreadsheets/d/1OwenMD1B8AkDwHoDRsbulK0GfOEeZNMCWk1HSKSYCRk/edit?gid=578282844#gid=578282844";
     private const string EarthSheetUrl = "https://docs.google.com/spreadsheets/d/1OwenMD1B8AkDwHoDRsbulK0GfOEeZNMCWk1HSKSYCRk/edit?gid=1810814273#gid=1810814273";
 
-    private LevelType _selectedLevelType;
+    private LevelRegion _selectedLevelType;
 
     [MenuItem("Tools/Rope Dart/Level Importer")]
     public static void ShowWindow()
@@ -39,7 +29,7 @@ public class LevelImporter : EditorWindow
 
         EditorGUILayout.Space();
 
-        _selectedLevelType = (LevelType)EditorGUILayout.EnumPopup("Select Level Type", LevelType.Temp);
+        _selectedLevelType = (LevelRegion)EditorGUILayout.EnumPopup("Select Level Type", LevelRegion.Temp);
 
         EditorGUILayout.Space();
 
@@ -53,12 +43,12 @@ public class LevelImporter : EditorWindow
     {
         string sheetUrl = _selectedLevelType switch
         {
-            LevelType.Temp => TempSheetUrl,
-            LevelType.Wood => WoodSheetUrl,
-            LevelType.Fire => FireSheetUrl,
-            LevelType.Metal => MetalSheetUrl,
-            LevelType.Water => WaterSheetUrl,
-            LevelType.Earth => EarthSheetUrl,
+            LevelRegion.Temp => TempSheetUrl,
+            LevelRegion.Wood => WoodSheetUrl,
+            LevelRegion.Fire => FireSheetUrl,
+            LevelRegion.Metal => MetalSheetUrl,
+            LevelRegion.Water => WaterSheetUrl,
+            LevelRegion.Earth => EarthSheetUrl,
             _ => throw new ArgumentOutOfRangeException()
         };
 

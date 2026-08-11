@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MainMenuButton : MonoBehaviour
 {
-    public void OnClick()
+    public void OnButtonClick()
     {
         SceneLoader.Instance.LoadScene(SceneIndex.LevelSelect);
     }

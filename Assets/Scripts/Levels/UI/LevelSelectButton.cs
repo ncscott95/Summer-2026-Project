@@ -3,20 +3,18 @@ using TMPro;
 
 public class LevelSelectButton : MonoBehaviour
 {
-    public string LevelIdToLoad;
-
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _levelNameText;
 
     private LevelData _levelData;
 
-    public void Initialize()
+    public void Initialize(LevelData levelData)
     {
-        _levelData = LevelDatabase.Instance.GetLevelDataById(LevelIdToLoad);
+        _levelData = levelData;
 
         if (_levelData == null)
         {
-            Debug.LogError($"Level with ID {LevelIdToLoad} not found in the database.");
+            Debug.LogError("Level data is null. Cannot initialize button.");
             return;
         }
 
@@ -25,15 +23,6 @@ public class LevelSelectButton : MonoBehaviour
 
     public void OnButtonClick()
     {
-        LevelData levelData = LevelDatabase.Instance.GetLevelDataById(LevelIdToLoad);
-        if (levelData != null)
-        {
-            // LevelManager.Instance.LoadLevel(levelData);
-            GameManager.Instance.StartGameplayLevel(levelData);
-        }
-        else
-        {
-            Debug.LogError($"Level with ID {LevelIdToLoad} not found in the database.");
-        }
+        GameManager.Instance.StartGameplayLevel(_levelData);
     }
 }
