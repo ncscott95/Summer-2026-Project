@@ -2,10 +2,16 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Level Data", menuName = "Level Data", order = 1)]
-public class LevelData : ScriptableObject
+[Serializable]
+public class LevelList
 {
-    public string Id;
+    public List<LevelData> Levels = new List<LevelData>();
+}
+
+[Serializable]
+public class LevelData
+{
+    public string LevelId;
     public string LevelName;
     public List<LevelTargetItem> LevelTargets;
 }
@@ -26,8 +32,8 @@ public enum LevelTargetType
 {
     Generic,
     Timer,
-    Turn,
-    Threshold,
+    unknown,
+    Points,
 }
 
 public enum LevelTargetSpawnType

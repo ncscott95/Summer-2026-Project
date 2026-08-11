@@ -113,7 +113,7 @@ public class BindingImporter : EditorWindow
                 }
             }
 
-            GraphWrapper wrapper = new GraphWrapper { Nodes = nodes };
+            GraphWrapper wrapper = new GraphWrapper() { Nodes = nodes };
             string jsonOutput = JsonUtility.ToJson(wrapper, true);
 
             File.WriteAllText(_outputPath, jsonOutput);
