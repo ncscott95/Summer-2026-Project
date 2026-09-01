@@ -8,7 +8,10 @@ using UnityEngine;
 
 public class BindingImporter : EditorWindow
 {
-    private string _sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=620223261#gid=620223261";
+    // original Graph sheet
+    // private string _sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=620223261#gid=620223261";
+    // simplified Graph sheet
+    private string _sheetUrl = "https://docs.google.com/spreadsheets/d/1fxdsfb5c-fsNA_464f_SQK5uAzztmi_CekzrW8lMcHQ/edit?gid=90379414#gid=90379414";
 
     private string _outputPath = "Assets/Resources/BindingGraph.json";
 

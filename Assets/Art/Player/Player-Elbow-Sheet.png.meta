@@ -98,24 +98,6 @@ TextureImporter:
   - first:
       213: -5197062237285768179
     second: Player-Elbow-Sheet_31
-  - first:
-      213: -8923608536825026491
-    second: Player-Elbow-Sheet_32
-  - first:
-      213: -9189433687799389953
-    second: Player-Elbow-Sheet_33
-  - first:
-      213: 8961526670157910340
-    second: Player-Elbow-Sheet_34
-  - first:
-      213: -5359554871109027366
-    second: Player-Elbow-Sheet_35
-  - first:
-      213: 8332502106563593483
-    second: Player-Elbow-Sheet_36
-  - first:
-      213: -1681991606330963330
-    second: Player-Elbow-Sheet_37
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -228,7 +210,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 320
         width: 128
         height: 64
       alignment: 7
@@ -250,7 +232,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 320
         width: 128
         height: 64
       alignment: 7
@@ -272,7 +254,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 64
+        y: 320
         width: 128
         height: 64
       alignment: 7
@@ -294,7 +276,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 64
+        y: 320
         width: 128
         height: 64
       alignment: 7
@@ -316,7 +298,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 64
+        y: 320
         width: 128
         height: 64
       alignment: 7
@@ -338,7 +320,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 64
+        y: 320
         width: 128
         height: 64
       alignment: 7
@@ -359,8 +341,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_6
       rect:
         serializedVersion: 2
-        x: 768
-        y: 64
+        x: 0
+        y: 256
         width: 128
         height: 64
       alignment: 7
@@ -381,8 +363,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_7
       rect:
         serializedVersion: 2
-        x: 896
-        y: 64
+        x: 128
+        y: 256
         width: 128
         height: 64
       alignment: 7
@@ -403,8 +385,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_8
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 64
+        x: 256
+        y: 256
         width: 128
         height: 64
       alignment: 7
@@ -425,8 +407,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_9
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 64
+        x: 384
+        y: 256
         width: 128
         height: 64
       alignment: 7
@@ -447,8 +429,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_10
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 64
+        x: 512
+        y: 256
         width: 128
         height: 64
       alignment: 7
@@ -469,8 +451,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_11
       rect:
         serializedVersion: 2
-        x: 1408
-        y: 64
+        x: 640
+        y: 256
         width: 128
         height: 64
       alignment: 7
@@ -491,8 +473,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_12
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 64
+        x: 0
+        y: 192
         width: 128
         height: 64
       alignment: 7
@@ -513,8 +495,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_13
       rect:
         serializedVersion: 2
-        x: 1664
-        y: 64
+        x: 128
+        y: 192
         width: 128
         height: 64
       alignment: 7
@@ -535,8 +517,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_14
       rect:
         serializedVersion: 2
-        x: 1792
-        y: 64
+        x: 256
+        y: 192
         width: 128
         height: 64
       alignment: 7
@@ -557,8 +539,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_15
       rect:
         serializedVersion: 2
-        x: 1920
-        y: 64
+        x: 384
+        y: 192
         width: 128
         height: 64
       alignment: 7
@@ -579,8 +561,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_16
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 64
+        x: 512
+        y: 192
         width: 128
         height: 64
       alignment: 7
@@ -601,8 +583,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_17
       rect:
         serializedVersion: 2
-        x: 2176
-        y: 64
+        x: 640
+        y: 192
         width: 128
         height: 64
       alignment: 7
@@ -623,8 +605,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_18
       rect:
         serializedVersion: 2
-        x: 2304
-        y: 64
+        x: 0
+        y: 128
         width: 128
         height: 64
       alignment: 7
@@ -645,8 +627,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_19
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 128
+        y: 128
         width: 128
         height: 64
       alignment: 7
@@ -667,8 +649,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_20
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
+        x: 256
+        y: 128
         width: 128
         height: 64
       alignment: 7
@@ -689,8 +671,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_21
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
+        x: 384
+        y: 128
         width: 128
         height: 64
       alignment: 7
@@ -711,8 +693,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_22
       rect:
         serializedVersion: 2
-        x: 384
-        y: 0
+        x: 512
+        y: 128
         width: 128
         height: 64
       alignment: 7
@@ -733,8 +715,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_23
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
+        x: 640
+        y: 128
         width: 128
         height: 64
       alignment: 7
@@ -755,8 +737,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_24
       rect:
         serializedVersion: 2
-        x: 640
-        y: 0
+        x: 0
+        y: 64
         width: 128
         height: 64
       alignment: 7
@@ -777,8 +759,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_25
       rect:
         serializedVersion: 2
-        x: 768
-        y: 0
+        x: 128
+        y: 64
         width: 128
         height: 64
       alignment: 7
@@ -799,8 +781,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_26
       rect:
         serializedVersion: 2
-        x: 896
-        y: 0
+        x: 256
+        y: 64
         width: 128
         height: 64
       alignment: 7
@@ -821,8 +803,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_27
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 0
+        x: 384
+        y: 64
         width: 128
         height: 64
       alignment: 7
@@ -843,8 +825,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_28
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 0
+        x: 512
+        y: 64
         width: 128
         height: 64
       alignment: 7
@@ -865,8 +847,8 @@ TextureImporter:
       name: Player-Elbow-Sheet_29
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 0
+        x: 640
+        y: 64
         width: 128
         height: 64
       alignment: 7
@@ -887,7 +869,7 @@ TextureImporter:
       name: Player-Elbow-Sheet_30
       rect:
         serializedVersion: 2
-        x: 1408
+        x: 0
         y: 0
         width: 128
         height: 64
@@ -909,7 +891,7 @@ TextureImporter:
       name: Player-Elbow-Sheet_31
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 128
         y: 0
         width: 128
         height: 64
@@ -927,143 +909,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Player-Elbow-Sheet_32
-      rect:
-        serializedVersion: 2
-        x: 1664
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 548a6e7a059f82480800000000000000
-      internalID: -8923608536825026491
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Elbow-Sheet_33
-      rect:
-        serializedVersion: 2
-        x: 1792
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ff0a5b7afb2987080800000000000000
-      internalID: -9189433687799389953
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Elbow-Sheet_34
-      rect:
-        serializedVersion: 2
-        x: 1920
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 44193fbb60dbd5c70800000000000000
-      internalID: 8961526670157910340
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Elbow-Sheet_35
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ad9f459ad390f95b0800000000000000
-      internalID: -5359554871109027366
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Elbow-Sheet_36
-      rect:
-        serializedVersion: 2
-        x: 2176
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b05cae7b48ef2a370800000000000000
-      internalID: 8332502106563593483
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Elbow-Sheet_37
-      rect:
-        serializedVersion: 2
-        x: 2304
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e7a447dab8d58a8e0800000000000000
-      internalID: -1681991606330963330
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b3ed69357ed7a3d40ab57d9da398ec58
+    spriteID: bcf7b86305f778648ab6779d02972449
     internalID: 0
     vertices: []
     indices: 
@@ -1101,12 +951,6 @@ TextureImporter:
       Player-Elbow-Sheet_3: 722772426411884873
       Player-Elbow-Sheet_30: 9206203643866493464
       Player-Elbow-Sheet_31: -5197062237285768179
-      Player-Elbow-Sheet_32: -8923608536825026491
-      Player-Elbow-Sheet_33: -9189433687799389953
-      Player-Elbow-Sheet_34: 8961526670157910340
-      Player-Elbow-Sheet_35: -5359554871109027366
-      Player-Elbow-Sheet_36: 8332502106563593483
-      Player-Elbow-Sheet_37: -1681991606330963330
       Player-Elbow-Sheet_4: -7975508211915138725
       Player-Elbow-Sheet_5: -7110795271863146034
       Player-Elbow-Sheet_6: -6470780405954527418

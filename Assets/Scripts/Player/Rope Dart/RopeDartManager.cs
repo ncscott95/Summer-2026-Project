@@ -249,6 +249,7 @@ public class RopeDartManager : Singleton<RopeDartManager>
     {
         BindingStack.Instance.ClearBindings();
         BindingStack.Instance.TryPushBinding("Idle");
+        BindingStack.Instance.TryPushBinding("Spin");
         RopeDartStatusUI.Instance.UpdateStatusUI();
         CurrentState = RopeDartState.Idle;
         RawAngle = 180f;

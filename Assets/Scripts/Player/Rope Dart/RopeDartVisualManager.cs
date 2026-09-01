@@ -7,9 +7,12 @@ public class RopeDartVisualManager : MonoBehaviour
 
     public void UpdateVisuals(BindingGraphConnection bindingConnection)
     {
-        UpdateVisuals(bindingConnection.Animation);
+        // UpdateVisuals(bindingConnection.Animation);
+
+        _playerAnimator.SetTrigger(bindingConnection.Animation);
     }
 
+    // TODO: obsolete with new animation controller-based system
     public void UpdateVisuals(string animationClipRoot)
     {
         string playerClip = CreatePlayerClipString(animationClipRoot);
