@@ -1,0 +1,455 @@
+fileFormatVersion: 2
+guid: 7e3daccbe1b9d174ba1ec29336447fbf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5156305937478723993
+    second: Level-Background-1-Sheet_0
+  - first:
+      213: 2729215602544244395
+    second: Level-Background-1-Sheet_1
+  - first:
+      213: 4547428124407283631
+    second: Level-Background-1-Sheet_2
+  - first:
+      213: 6430324085929688589
+    second: Level-Background-1-Sheet_3
+  - first:
+      213: -7243178804531947689
+    second: Level-Background-1-Sheet_4
+  - first:
+      213: -1120508730570801249
+    second: Level-Background-1-Sheet_5
+  - first:
+      213: -4692458310566881950
+    second: Level-Background-1-Sheet_6
+  - first:
+      213: 3036427882346760944
+    second: Level-Background-1-Sheet_7
+  - first:
+      213: -6848514541694709681
+    second: Level-Background-1-Sheet_8
+  - first:
+      213: -3129884156258955092
+    second: Level-Background-1-Sheet_9
+  - first:
+      213: -7014555210926093851
+    second: Level-Background-1-Sheet_10
+  - first:
+      213: -588383811693251927
+    second: Level-Background-1-Sheet_11
+  - first:
+      213: 5726312250523484550
+    second: Level-Background-1-Sheet_12
+  - first:
+      213: 2855401422313695200
+    second: Level-Background-1-Sheet_13
+  - first:
+      213: 1947593333695225594
+    second: Level-Background-1-Sheet_14
+  - first:
+      213: -6737376127276148120
+    second: Level-Background-1-Sheet_15
+  - first:
+      213: -5506465123933774320
+    second: Level-Background-1-Sheet_16
+  - first:
+      213: -5205564870861649548
+    second: Level-Background-1-Sheet_17
+  - first:
+      213: 2678400324198649201
+    second: Level-Background-1-Sheet_18
+  - first:
+      213: 5692098795979271561
+    second: Level-Background-1-Sheet_19
+  - first:
+      213: 5535072928250889032
+    second: Level-Background-1-Sheet_20
+  - first:
+      213: -2038180469740579130
+    second: Level-Background-1-Sheet_21
+  - first:
+      213: -5140584329014858044
+    second: Level-Background-1-Sheet_22
+  - first:
+      213: 1385892237738087161
+    second: Level-Background-1-Sheet_23
+  - first:
+      213: 2815386971204112300
+    second: Level-Background-1-Sheet_24
+  - first:
+      213: -3778001010705634612
+    second: Level-Background-1-Sheet_25
+  - first:
+      213: -5868298142683377166
+    second: Level-Background-1-Sheet_26
+  - first:
+      213: -2096014740843238022
+    second: Level-Background-1-Sheet_27
+  - first:
+      213: -5513505744317063110
+    second: Level-Background-1-Sheet_28
+  - first:
+      213: -6386089220783724128
+    second: Level-Background-1-Sheet_29
+  - first:
+      213: 8865030475498188072
+    second: Level-Background-1-Sheet_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99928ac4ee0ee8740800000000000000
+      internalID: 5156305937478723993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 360
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba67a19612f10e520800000000000000
+      internalID: 2729215602544244395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 360
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fafbaec29c5bb1f30800000000000000
+      internalID: 4547428124407283631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 360
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0e3a74dfa91d3950800000000000000
+      internalID: 6430324085929688589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 180
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7571c37d04f0b7b90800000000000000
+      internalID: -7243178804531947689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 180
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9f7a9a0f372370f0800000000000000
+      internalID: -1120508730570801249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 180
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 265d45b370a01eeb0800000000000000
+      internalID: -4692458310566881950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 180
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0face51421f832a20800000000000000
+      internalID: 3036427882346760944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f40903f2f4035f0a0800000000000000
+      internalID: -6848514541694709681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-Background-1-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 320
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca0df0651fa6094d0800000000000000
+      internalID: -3129884156258955092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 1ceca9c5b347e0047a968d47decb82d8
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":320.0,"y":180.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Level-Background-1-Sheet_0: 5156305937478723993
+      Level-Background-1-Sheet_1: 2729215602544244395
+      Level-Background-1-Sheet_2: 4547428124407283631
+      Level-Background-1-Sheet_3: 6430324085929688589
+      Level-Background-1-Sheet_4: -7243178804531947689
+      Level-Background-1-Sheet_5: -1120508730570801249
+      Level-Background-1-Sheet_6: -4692458310566881950
+      Level-Background-1-Sheet_7: 3036427882346760944
+      Level-Background-1-Sheet_8: -6848514541694709681
+      Level-Background-1-Sheet_9: -3129884156258955092
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
