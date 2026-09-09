@@ -1,0 +1,2732 @@
+fileFormatVersion: 2
+guid: 9b53cef09a32d664484de75a5d5b66cc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6964256680253629276
+    second: Player-Neck-Sheet_0
+  - first:
+      213: 4527671361398082519
+    second: Player-Neck-Sheet_1
+  - first:
+      213: -3333351378467810132
+    second: Player-Neck-Sheet_2
+  - first:
+      213: 1883228051676767052
+    second: Player-Neck-Sheet_3
+  - first:
+      213: 6471970284778479367
+    second: Player-Neck-Sheet_4
+  - first:
+      213: -5639130558163462640
+    second: Player-Neck-Sheet_5
+  - first:
+      213: 4315358096208719456
+    second: Player-Neck-Sheet_6
+  - first:
+      213: 5329095401719376961
+    second: Player-Neck-Sheet_7
+  - first:
+      213: -4341470476277670633
+    second: Player-Neck-Sheet_8
+  - first:
+      213: 7336783992996243924
+    second: Player-Neck-Sheet_9
+  - first:
+      213: -870392575708781896
+    second: Player-Neck-Sheet_10
+  - first:
+      213: 3585770842533214312
+    second: Player-Neck-Sheet_11
+  - first:
+      213: 3798589559532035591
+    second: Player-Neck-Sheet_12
+  - first:
+      213: 5028234051476213560
+    second: Player-Neck-Sheet_13
+  - first:
+      213: -2833977961359064377
+    second: Player-Neck-Sheet_14
+  - first:
+      213: -7539822943115036227
+    second: Player-Neck-Sheet_15
+  - first:
+      213: 3955866322716754833
+    second: Player-Neck-Sheet_16
+  - first:
+      213: 1495910456515446341
+    second: Player-Neck-Sheet_17
+  - first:
+      213: 1320607233209033088
+    second: Player-Neck-Sheet_18
+  - first:
+      213: 8028809923819438706
+    second: Player-Neck-Sheet_19
+  - first:
+      213: -5596415481271403340
+    second: Player-Neck-Sheet_20
+  - first:
+      213: 173952333729497314
+    second: Player-Neck-Sheet_21
+  - first:
+      213: -2736122270826639162
+    second: Player-Neck-Sheet_22
+  - first:
+      213: -1142361510759085034
+    second: Player-Neck-Sheet_23
+  - first:
+      213: 5847029957986912466
+    second: Player-Neck-Sheet_24
+  - first:
+      213: 170549341959191208
+    second: Player-Neck-Sheet_25
+  - first:
+      213: -2714773802499480904
+    second: Player-Neck-Sheet_26
+  - first:
+      213: -4460804211645169147
+    second: Player-Neck-Sheet_27
+  - first:
+      213: 7410702312570714139
+    second: Player-Neck-Sheet_28
+  - first:
+      213: -5583182105023299017
+    second: Player-Neck-Sheet_29
+  - first:
+      213: 3784919189840578005
+    second: Player-Neck-Sheet_30
+  - first:
+      213: 7527908164329775940
+    second: Player-Neck-Sheet_31
+  - first:
+      213: 6733406031951118072
+    second: Player-Neck-Sheet_32
+  - first:
+      213: -1224918663550170629
+    second: Player-Neck-Sheet_33
+  - first:
+      213: -2534079119973224394
+    second: Player-Neck-Sheet_34
+  - first:
+      213: 4092500857479380091
+    second: Player-Neck-Sheet_35
+  - first:
+      213: -2421673483109741927
+    second: Player-Neck-Sheet_36
+  - first:
+      213: 3091817319302612518
+    second: Player-Neck-Sheet_37
+  - first:
+      213: -6682047630659555789
+    second: Player-Neck-Sheet_38
+  - first:
+      213: 6289015640987041426
+    second: Player-Neck-Sheet_39
+  - first:
+      213: -7614464787978976084
+    second: Player-Neck-Sheet_40
+  - first:
+      213: -7934057647930792877
+    second: Player-Neck-Sheet_41
+  - first:
+      213: 8687425065765021484
+    second: Player-Neck-Sheet_42
+  - first:
+      213: 9050952828615587213
+    second: Player-Neck-Sheet_43
+  - first:
+      213: -5321894137151834409
+    second: Player-Neck-Sheet_44
+  - first:
+      213: 1223925396209267198
+    second: Player-Neck-Sheet_45
+  - first:
+      213: 8466608301656074680
+    second: Player-Neck-Sheet_46
+  - first:
+      213: 1747155504934123165
+    second: Player-Neck-Sheet_47
+  - first:
+      213: 8574966859565546690
+    second: Player-Neck-Sheet_48
+  - first:
+      213: -2785480024083922395
+    second: Player-Neck-Sheet_49
+  - first:
+      213: -2778763874012738595
+    second: Player-Neck-Sheet_50
+  - first:
+      213: 7167636591561349131
+    second: Player-Neck-Sheet_51
+  - first:
+      213: 7901582199205658590
+    second: Player-Neck-Sheet_52
+  - first:
+      213: -2681573280453881835
+    second: Player-Neck-Sheet_53
+  - first:
+      213: 5423717611083421964
+    second: Player-Neck-Sheet_54
+  - first:
+      213: 785380434221933603
+    second: Player-Neck-Sheet_55
+  - first:
+      213: -1075620215346316671
+    second: Player-Neck-Sheet_56
+  - first:
+      213: -1909139940930819601
+    second: Player-Neck-Sheet_57
+  - first:
+      213: -2762455824082406193
+    second: Player-Neck-Sheet_58
+  - first:
+      213: 591240791454416265
+    second: Player-Neck-Sheet_59
+  - first:
+      213: 1079856891439384094
+    second: Player-Neck-Sheet_60
+  - first:
+      213: -1663022869722360944
+    second: Player-Neck-Sheet_61
+  - first:
+      213: 4172965924669145814
+    second: Player-Neck-Sheet_62
+  - first:
+      213: 2391168056212906832
+    second: Player-Neck-Sheet_63
+  - first:
+      213: -5440325856514862109
+    second: Player-Neck-Sheet_64
+  - first:
+      213: -3483546234717641817
+    second: Player-Neck-Sheet_65
+  - first:
+      213: 2342421851568247208
+    second: Player-Neck-Sheet_66
+  - first:
+      213: 2017030004311760637
+    second: Player-Neck-Sheet_67
+  - first:
+      213: -788535839990982903
+    second: Player-Neck-Sheet_68
+  - first:
+      213: 7203584149105010443
+    second: Player-Neck-Sheet_69
+  - first:
+      213: -4017150303346059359
+    second: Player-Neck-Sheet_70
+  - first:
+      213: -4412519570561168998
+    second: Player-Neck-Sheet_71
+  - first:
+      213: 2728243389543140440
+    second: Player-Neck-Sheet_72
+  - first:
+      213: 6028206014455606475
+    second: Player-Neck-Sheet_73
+  - first:
+      213: 8856877399967928287
+    second: Player-Neck-Sheet_74
+  - first:
+      213: 5879896810517065133
+    second: Player-Neck-Sheet_75
+  - first:
+      213: -940158321838036360
+    second: Player-Neck-Sheet_76
+  - first:
+      213: -2456776736756340195
+    second: Player-Neck-Sheet_77
+  - first:
+      213: 1580672044257840647
+    second: Player-Neck-Sheet_78
+  - first:
+      213: -7582705447404683061
+    second: Player-Neck-Sheet_79
+  - first:
+      213: -7311619534559132558
+    second: Player-Neck-Sheet_80
+  - first:
+      213: 8965702864712961282
+    second: Player-Neck-Sheet_81
+  - first:
+      213: 1193259395082629412
+    second: Player-Neck-Sheet_82
+  - first:
+      213: -8991118974627710912
+    second: Player-Neck-Sheet_83
+  - first:
+      213: -5962871047696943191
+    second: Player-Neck-Sheet_84
+  - first:
+      213: -7692260091776783823
+    second: Player-Neck-Sheet_85
+  - first:
+      213: -6977739594958523358
+    second: Player-Neck-Sheet_86
+  - first:
+      213: 7774419119998523794
+    second: Player-Neck-Sheet_87
+  - first:
+      213: -746580082390117057
+    second: Player-Neck-Sheet_88
+  - first:
+      213: -7365011110829762829
+    second: Player-Neck-Sheet_89
+  - first:
+      213: 3589038919636234051
+    second: Player-Neck-Sheet_90
+  - first:
+      213: 4415239943338968965
+    second: Player-Neck-Sheet_91
+  - first:
+      213: 8686936638229502410
+    second: Player-Neck-Sheet_92
+  - first:
+      213: 4127767463974232853
+    second: Player-Neck-Sheet_93
+  - first:
+      213: -6059601080199510876
+    second: Player-Neck-Sheet_94
+  - first:
+      213: -5613411418337771049
+    second: Player-Neck-Sheet_95
+  - first:
+      213: -5142725536951134244
+    second: Player-Neck-Sheet_96
+  - first:
+      213: 678242938032542090
+    second: Player-Neck-Sheet_97
+  - first:
+      213: 3184365910025384548
+    second: Player-Neck-Sheet_98
+  - first:
+      213: 5603830880321575612
+    second: Player-Neck-Sheet_99
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c53a82f6d8206a060800000000000000
+      internalID: 6964256680253629276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7db87d35d1585de30800000000000000
+      internalID: 4527671361398082519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca41ed6059e8db1d0800000000000000
+      internalID: -3333351378467810132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c43ae3b6fe1922a10800000000000000
+      internalID: 1883228051676767052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70fda1d1fae01d950800000000000000
+      internalID: 6471970284778479367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 016dd9e72a8cdb1b0800000000000000
+      internalID: -5639130558163462640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06e6023235b33eb30800000000000000
+      internalID: 4315358096208719456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14ca6a97800c4f940800000000000000
+      internalID: 5329095401719376961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71d9f9a9a9fffb3c0800000000000000
+      internalID: -4341470476277670633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 576
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d920507b2e71d560800000000000000
+      internalID: 7336783992996243924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b2adbd509ebbe3f0800000000000000
+      internalID: -870392575708781896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8683523459733c130800000000000000
+      internalID: 3585770842533214312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70e1a6f141d47b430800000000000000
+      internalID: 3798589559532035591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83f43c5aa30e7c540800000000000000
+      internalID: 5028234051476213560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c248e72f00bba8d0800000000000000
+      internalID: -2833977961359064377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db9b94e1bfa2d5790800000000000000
+      internalID: -7539822943115036227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1938670267f06e630800000000000000
+      internalID: 3955866322716754833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 546456072aa82c410800000000000000
+      internalID: 1495910456515446341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0816c3f184db35210800000000000000
+      internalID: 1320607233209033088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 512
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 272836656101c6f60800000000000000
+      internalID: 8028809923819438706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bc325755c98552b0800000000000000
+      internalID: -5596415481271403340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e00cc3d9b00a6200800000000000000
+      internalID: 173952333729497314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c0d7519a47570ad0800000000000000
+      internalID: -2736122270826639162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61c402a22448520f0800000000000000
+      internalID: -1142361510759085034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d880e494c2d42150800000000000000
+      internalID: 5847029957986912466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aa772019b9ed5200800000000000000
+      internalID: 170549341959191208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b26b703c9f235ad0800000000000000
+      internalID: -2714773802499480904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 502c250343a0812c0800000000000000
+      internalID: -4460804211645169147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1871fc5d7a18d660800000000000000
+      internalID: 7410702312570714139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 448
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 732c4c9d47d8482b0800000000000000
+      internalID: -5583182105023299017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d5c10623fbb68430800000000000000
+      internalID: 3784919189840578005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 443a3a44790887860800000000000000
+      internalID: 7527908164329775940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fe3be66c1dd17d50800000000000000
+      internalID: 6733406031951118072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf9885427f6300fe0800000000000000
+      internalID: -1224918663550170629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 630f24d677425dcd0800000000000000
+      internalID: -2534079119973224394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7c3a0dc8db7bc830800000000000000
+      internalID: 4092500857479380091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99ac2453ccc746ed0800000000000000
+      internalID: -2421673483109741927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 626ce63887758ea20800000000000000
+      internalID: 3091817319302612518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33eeb4a35199443a0800000000000000
+      internalID: -6682047630659555789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29e78e3a762174750800000000000000
+      internalID: 6289015640987041426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca40bc55e9cf35690800000000000000
+      internalID: -7614464787978976084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3542d9b0b9094e190800000000000000
+      internalID: -7934057647930792877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c27afb1c11fef8870800000000000000
+      internalID: 8687425065765021484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d85f274c4a17b9d70800000000000000
+      internalID: 9050952828615587213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d6b4d69a75d426b0800000000000000
+      internalID: -5321894137151834409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_45
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef1f1a8c9a14cf010800000000000000
+      internalID: 1223925396209267198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_46
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b96590746f6f7570800000000000000
+      internalID: 8466608301656074680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_47
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9677f6cca42f3810800000000000000
+      internalID: 1747155504934123165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_48
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ccb6293de6600770800000000000000
+      internalID: 8574966859565546690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_49
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 320
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 522088b1dacf759d0800000000000000
+      internalID: -2785480024083922395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddb48c6aaf8df69d0800000000000000
+      internalID: -2778763874012738595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_51
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b081b17118f887360800000000000000
+      internalID: 7167636591561349131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_52
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edff333552f08ad60800000000000000
+      internalID: 7901582199205658590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_53
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5101e5b1f4329cad0800000000000000
+      internalID: -2681573280453881835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_54
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0958a26e6ae44b40800000000000000
+      internalID: 5423717611083421964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_55
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3242753085b36ea00800000000000000
+      internalID: 785380434221933603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_56
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18abd0fec11a211f0800000000000000
+      internalID: -1075620215346316671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_57
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe9ee4ab65f5185e0800000000000000
+      internalID: -1909139940930819601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_58
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc4fbd96019c9a9d0800000000000000
+      internalID: -2762455824082406193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_59
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 256
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d7c570e52843800800000000000000
+      internalID: 591240791454416265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1680861f1c6cfe00800000000000000
+      internalID: 1079856891439384094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_61
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09319d4d281cbe8e0800000000000000
+      internalID: -1663022869722360944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_62
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d2c6bf266a59e930800000000000000
+      internalID: 4172965924669145814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_63
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 053e4dc9da22f2120800000000000000
+      internalID: 2391168056212906832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_64
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e31f0425741084b0800000000000000
+      internalID: -5440325856514862109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_65
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a36109f725f7afc0800000000000000
+      internalID: -3483546234717641817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_66
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a196d86344f18020800000000000000
+      internalID: 2342421851568247208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_67
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfe9e4c2a1eedfb10800000000000000
+      internalID: 2017030004311760637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_68
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9075ca4d4de8e05f0800000000000000
+      internalID: -788535839990982903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_69
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 192
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b07e90d0e9548f360800000000000000
+      internalID: 7203584149105010443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a794b735173048c0800000000000000
+      internalID: -4017150303346059359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_71
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a990e3044d493c2c0800000000000000
+      internalID: -4412519570561168998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_72
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85cc68e68eaacd520800000000000000
+      internalID: 2728243389543140440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_73
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bccef7c6e6d78a350800000000000000
+      internalID: 6028206014455606475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_74
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdf064cc113f9ea70800000000000000
+      internalID: 8856877399967928287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_75
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dad62d20ff6999150800000000000000
+      internalID: 5879896810517065133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_76
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87a673accf2e3f2f0800000000000000
+      internalID: -940158321838036360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_77
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1ae1311396c7edd0800000000000000
+      internalID: -2456776736756340195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_78
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70e016879dcafe510800000000000000
+      internalID: 1580672044257840647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_79
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc0460b0291d4c690800000000000000
+      internalID: -7582705447404683061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 274cbcd95c8e78a90800000000000000
+      internalID: -7311619534559132558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_81
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20d0becc0439c6c70800000000000000
+      internalID: 8965702864712961282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_82
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4213cc0091f4f8010800000000000000
+      internalID: 1193259395082629412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_83
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0487a08fde0293380800000000000000
+      internalID: -8991118974627710912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_84
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a7ff80ff50af3da0800000000000000
+      internalID: -5962871047696943191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_85
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13a2bbda33a9f3590800000000000000
+      internalID: -7692260091776783823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_86
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 224b15bdec61a2f90800000000000000
+      internalID: -6977739594958523358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_87
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 299548ebff844eb60800000000000000
+      internalID: 7774419119998523794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_88
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3551c0ee5d93a5f0800000000000000
+      internalID: -746580082390117057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_89
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f6df2c8a693ac990800000000000000
+      internalID: -7365011110829762829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34f28f1c1e3dec130800000000000000
+      internalID: 3589038919636234051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_91
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587c5d4e555164d30800000000000000
+      internalID: 4415239943338968965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_92
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac9defbd8d23e8870800000000000000
+      internalID: 8686936638229502410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_93
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 513699d73a6c84930800000000000000
+      internalID: 4127767463974232853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_94
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a482263ce8f7eba0800000000000000
+      internalID: -6059601080199510876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_95
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d10bdf5e082912b0800000000000000
+      internalID: -5613411418337771049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_96
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd792b81f5e51a8b0800000000000000
+      internalID: -5142725536951134244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_97
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a81d8d0db5a996900800000000000000
+      internalID: 678242938032542090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_98
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4623de57ce3213c20800000000000000
+      internalID: 3184365910025384548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Neck-Sheet_99
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cba9eeace7ec4cd40800000000000000
+      internalID: 5603830880321575612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7cf27d7084ba1c747be27f989f3affb9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Player-Neck-Sheet_0: 6964256680253629276
+      Player-Neck-Sheet_1: 4527671361398082519
+      Player-Neck-Sheet_10: -870392575708781896
+      Player-Neck-Sheet_11: 3585770842533214312
+      Player-Neck-Sheet_12: 3798589559532035591
+      Player-Neck-Sheet_13: 5028234051476213560
+      Player-Neck-Sheet_14: -2833977961359064377
+      Player-Neck-Sheet_15: -7539822943115036227
+      Player-Neck-Sheet_16: 3955866322716754833
+      Player-Neck-Sheet_17: 1495910456515446341
+      Player-Neck-Sheet_18: 1320607233209033088
+      Player-Neck-Sheet_19: 8028809923819438706
+      Player-Neck-Sheet_2: -3333351378467810132
+      Player-Neck-Sheet_20: -5596415481271403340
+      Player-Neck-Sheet_21: 173952333729497314
+      Player-Neck-Sheet_22: -2736122270826639162
+      Player-Neck-Sheet_23: -1142361510759085034
+      Player-Neck-Sheet_24: 5847029957986912466
+      Player-Neck-Sheet_25: 170549341959191208
+      Player-Neck-Sheet_26: -2714773802499480904
+      Player-Neck-Sheet_27: -4460804211645169147
+      Player-Neck-Sheet_28: 7410702312570714139
+      Player-Neck-Sheet_29: -5583182105023299017
+      Player-Neck-Sheet_3: 1883228051676767052
+      Player-Neck-Sheet_30: 3784919189840578005
+      Player-Neck-Sheet_31: 7527908164329775940
+      Player-Neck-Sheet_32: 6733406031951118072
+      Player-Neck-Sheet_33: -1224918663550170629
+      Player-Neck-Sheet_34: -2534079119973224394
+      Player-Neck-Sheet_35: 4092500857479380091
+      Player-Neck-Sheet_36: -2421673483109741927
+      Player-Neck-Sheet_37: 3091817319302612518
+      Player-Neck-Sheet_38: -6682047630659555789
+      Player-Neck-Sheet_39: 6289015640987041426
+      Player-Neck-Sheet_4: 6471970284778479367
+      Player-Neck-Sheet_40: -7614464787978976084
+      Player-Neck-Sheet_41: -7934057647930792877
+      Player-Neck-Sheet_42: 8687425065765021484
+      Player-Neck-Sheet_43: 9050952828615587213
+      Player-Neck-Sheet_44: -5321894137151834409
+      Player-Neck-Sheet_45: 1223925396209267198
+      Player-Neck-Sheet_46: 8466608301656074680
+      Player-Neck-Sheet_47: 1747155504934123165
+      Player-Neck-Sheet_48: 8574966859565546690
+      Player-Neck-Sheet_49: -2785480024083922395
+      Player-Neck-Sheet_5: -5639130558163462640
+      Player-Neck-Sheet_50: -2778763874012738595
+      Player-Neck-Sheet_51: 7167636591561349131
+      Player-Neck-Sheet_52: 7901582199205658590
+      Player-Neck-Sheet_53: -2681573280453881835
+      Player-Neck-Sheet_54: 5423717611083421964
+      Player-Neck-Sheet_55: 785380434221933603
+      Player-Neck-Sheet_56: -1075620215346316671
+      Player-Neck-Sheet_57: -1909139940930819601
+      Player-Neck-Sheet_58: -2762455824082406193
+      Player-Neck-Sheet_59: 591240791454416265
+      Player-Neck-Sheet_6: 4315358096208719456
+      Player-Neck-Sheet_60: 1079856891439384094
+      Player-Neck-Sheet_61: -1663022869722360944
+      Player-Neck-Sheet_62: 4172965924669145814
+      Player-Neck-Sheet_63: 2391168056212906832
+      Player-Neck-Sheet_64: -5440325856514862109
+      Player-Neck-Sheet_65: -3483546234717641817
+      Player-Neck-Sheet_66: 2342421851568247208
+      Player-Neck-Sheet_67: 2017030004311760637
+      Player-Neck-Sheet_68: -788535839990982903
+      Player-Neck-Sheet_69: 7203584149105010443
+      Player-Neck-Sheet_7: 5329095401719376961
+      Player-Neck-Sheet_70: -4017150303346059359
+      Player-Neck-Sheet_71: -4412519570561168998
+      Player-Neck-Sheet_72: 2728243389543140440
+      Player-Neck-Sheet_73: 6028206014455606475
+      Player-Neck-Sheet_74: 8856877399967928287
+      Player-Neck-Sheet_75: 5879896810517065133
+      Player-Neck-Sheet_76: -940158321838036360
+      Player-Neck-Sheet_77: -2456776736756340195
+      Player-Neck-Sheet_78: 1580672044257840647
+      Player-Neck-Sheet_79: -7582705447404683061
+      Player-Neck-Sheet_8: -4341470476277670633
+      Player-Neck-Sheet_80: -7311619534559132558
+      Player-Neck-Sheet_81: 8965702864712961282
+      Player-Neck-Sheet_82: 1193259395082629412
+      Player-Neck-Sheet_83: -8991118974627710912
+      Player-Neck-Sheet_84: -5962871047696943191
+      Player-Neck-Sheet_85: -7692260091776783823
+      Player-Neck-Sheet_86: -6977739594958523358
+      Player-Neck-Sheet_87: 7774419119998523794
+      Player-Neck-Sheet_88: -746580082390117057
+      Player-Neck-Sheet_89: -7365011110829762829
+      Player-Neck-Sheet_9: 7336783992996243924
+      Player-Neck-Sheet_90: 3589038919636234051
+      Player-Neck-Sheet_91: 4415239943338968965
+      Player-Neck-Sheet_92: 8686936638229502410
+      Player-Neck-Sheet_93: 4127767463974232853
+      Player-Neck-Sheet_94: -6059601080199510876
+      Player-Neck-Sheet_95: -5613411418337771049
+      Player-Neck-Sheet_96: -5142725536951134244
+      Player-Neck-Sheet_97: 678242938032542090
+      Player-Neck-Sheet_98: 3184365910025384548
+      Player-Neck-Sheet_99: 5603830880321575612
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
