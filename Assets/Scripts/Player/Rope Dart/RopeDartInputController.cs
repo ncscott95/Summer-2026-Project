@@ -34,21 +34,10 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         InputBufferList.TickAll(Time.deltaTime);
     }
 
-    public void TEMP_TestBindings()
-    {
-        // Necklace -> Dragon
-        BindingStack.Instance.TryPushBinding("Twine Up");
-        BindingStack.Instance.TryPushBinding("(Nothing)");
-        BindingStack.Instance.TryPushBinding("Twine Down");
-        BindingStack.Instance.TryPushBinding("(Nothing)");
-    }
-
-    public void HandleSpinRetrieveInput()
-    {
-        if (BindingStack.Instance.TryPushBinding("Spin")) return;
-
-        BindingStack.Instance.TryPushBinding("Retrieve");
-    }
+    // public void HandleSpinInput()
+    // {
+    //     BindingStack.Instance.TryPushBinding("Spin");
+    // }
 
     public void HandleCastInput()
     {
@@ -70,11 +59,6 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     private static void TryTwineSimple()
     {
         BindingStack.Instance.TryPushBinding("Twine Back");
-    }
-
-    public void HandleWrapInput()
-    {
-        BindingStack.Instance.TryPushBinding("Wrap");
     }
 
     public void HandleDartDirectionInput(Vector2 input)
@@ -102,37 +86,12 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
         if (angle < 0) angle += 360f;
 
         // perfect 45 degree bindings default to east and west
-        if (angle <= 45f || angle >= 315f) bindingInput = "Twine" + (RopeDartManager.Instance.IsFacingEast ? " Face" : " Back");
+        if (angle <= 45f || angle >= 315f) bindingInput = "Twine" + (RopeDartManager.Instance.IsLeadSide ? " Face" : " Back");
         else if (angle > 45f && angle < 135f) bindingInput = "Twine Up";
-        else if (angle >= 135f && angle <= 225f) bindingInput = "Twine " + (RopeDartManager.Instance.IsFacingEast ? " Back" : " Face");
+        else if (angle >= 135f && angle <= 225f) bindingInput = "Twine " + (RopeDartManager.Instance.IsLeadSide ? " Back" : " Face");
         else if (angle > 225f && angle < 315f) bindingInput = "Twine Down";
 
         BindingStack.Instance.TryPushBinding(bindingInput);
-    }
-
-    private static void TryTurn(Vector2 direction)
-    {
-        // 0 = right, 90 = up, 180 = left, 270 = down
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360f;
-
-        if ((angle > 45f && angle < 135f) || (angle > 225f && angle < 315f))
-        {
-            // input is not east or west, do nothing
-            return;
-        }
-
-        // after above check, input must be either east or west
-        bool tryTurnEast = angle <= 45f || angle >= 315f;
-
-        if (RopeDartManager.Instance.IsFacingEast == tryTurnEast)
-        {
-            BindingStack.Instance.TryPushBinding("Cross");
-        }
-        else
-        {
-            BindingStack.Instance.TryPushBinding("Turn");
-        }
     }
 
     public void StartCastEndBuffer()

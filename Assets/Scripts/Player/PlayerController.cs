@@ -1,15 +1,11 @@
 using UnityEngine;
 
-public class PlayerController : Singleton<PlayerController>
+public class PlayerController : MonoBehaviour
 {
-    public Transform Camera { get; protected set; }
     public InputSystem_Actions Actions { get; private set; }
 
-    public override void Awake()
+    void Awake()
     {
-        base.Awake();
-
-        Instance.Camera = UnityEngine.Camera.main.transform;
         Actions = new InputSystem_Actions();
     }
 
@@ -17,27 +13,19 @@ public class PlayerController : Singleton<PlayerController>
     {
         Actions.Player.Enable();
 
-        Actions.Player.Spin.performed += ctx => RopeDartInputController.Instance.HandleSpinRetrieveInput();
+        // Actions.Player.Spin.performed += ctx => RopeDartInputController.Instance.HandleSpinInput();
         Actions.Player.Cast.performed += ctx => RopeDartInputController.Instance.HandleCastInput();
         Actions.Player.Twine.performed += ctx => RopeDartInputController.Instance.HandleTwineInput();
-        // Actions.Player.Wrap.performed += ctx => RopeDartInputController.Instance.HandleWrapInput();
         Actions.Player.DartDirection.performed += ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
-
-        // TEMP: for testing bindings
-        Actions.Player.Wrap.performed += ctx => RopeDartInputController.Instance.TEMP_TestBindings();
     }
 
     public void OnDisable()
     {
         Actions.Player.Disable();
 
-        Actions.Player.Spin.performed -= ctx => RopeDartInputController.Instance.HandleSpinRetrieveInput();
+        // Actions.Player.Spin.performed -= ctx => RopeDartInputController.Instance.HandleSpinInput();
         Actions.Player.Cast.performed -= ctx => RopeDartInputController.Instance.HandleCastInput();
         Actions.Player.Twine.performed -= ctx => RopeDartInputController.Instance.HandleTwineInput();
-        // Actions.Player.Wrap.performed -= ctx => RopeDartInputController.Instance.HandleWrapInput();
         Actions.Player.DartDirection.performed -= ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
-
-        // TEMP: for testing bindings
-        Actions.Player.Wrap.performed -= ctx => RopeDartInputController.Instance.TEMP_TestBindings();
     }
 }

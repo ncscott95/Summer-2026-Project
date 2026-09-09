@@ -6,7 +6,6 @@ using TMPro;
 public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
 {
     [SerializeField] private GameObject _barSegmentContainer;
-    [SerializeField] private Transform _angleIndicator;
     [SerializeField] private TextMeshProUGUI _bindingStackText;
     [SerializeField] private TextMeshProUGUI _stateText;
     [SerializeField] private TextMeshProUGUI _unitCostText;
@@ -17,13 +16,6 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
         { "Spin",           new Color32(255, 0, 0, 255) },
         { "Cast",           new Color32(0, 255, 0, 255) },
         { "Retrieve",       new Color32(0, 0, 255, 255) },
-        // { "Wrap",           new Color32(255, 255, 0, 255) },
-        // { "LeadElbow",      new Color32(0, 255, 255, 255) },
-        // { "AnchorElbow",    new Color32(128, 0, 128, 255) },
-        // { "LeadNeck",       new Color32(255, 165, 0, 255) },
-        // { "AnchorNeck",     new Color32(0, 128, 0, 255) },
-        // { "LeadSide",       new Color32(0, 0, 255, 255) },
-        // { "AnchorSide",     new Color32(128, 128, 128, 255) },
         { "Dragon",         new Color32(255, 255, 0, 255) },
         { "D Dragon",       new Color32(128, 128, 0, 255) },
         { "Necklace",       new Color32(255, 0, 255, 255) },
@@ -35,7 +27,6 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
     };
 
     private List<Image> _bindingImages = new List<Image>();
-    private Color32 _spinColor = new Color32(255, 0, 0, 255);
     private Color32 _slackColor = new Color32(0, 0, 0, 255);
 
     public override void Awake()
@@ -48,13 +39,10 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
     void Update()
     {
         UpdateStatusUI();
-        if (_angleIndicator != null) _angleIndicator.localRotation = Quaternion.Euler(0f, 0f, -RopeDartManager.Instance.RawAngle);
         if (_bindingStackText != null) _bindingStackText.text = $"Binding: {BindingStack.Instance.CurrentBindingsToString()}";
-        string stateText = $"State: {RopeDartManager.Instance.CurrentState}, {(RopeDartManager.Instance.IsFrontPlane ? "F" : "B")}/{(RopeDartManager.Instance.IsLeadSide ? "L" : "A")}/{(RopeDartManager.Instance.IsDownSpin ? "D" : "U")}/{(RopeDartManager.Instance.IsClockwise ? "CW" : "CCW")}/{(RopeDartManager.Instance.IsLastCastEast ? "E" : "W")}/{(RopeDartManager.Instance.IsCoiling ? "C" : "-")}";
+        string stateText = $"State: S:{(RopeDartManager.Instance.IsLeadSide ? "L" : "A")}";
         if (_stateText != null) _stateText.text = stateText;
-        // string unitCostText = $"Unit Cost: {BindingStack.Instance.GetAllTotalUnitCost()}/{BindingStack.MaxAllBindUnits} (Live: {BindingStack.Instance.GetLiveTotalUnitCost()}/{BindingStack.MaxLiveBindUnits})";
-        string unitCostText = $"Unit Cost: {BindingStack.Instance.GetAllTotalUnitCost()}/{BindingStack.MaxAllBindUnits}";
-        if (_unitCostText != null) _unitCostText.text = unitCostText;
+        if (_unitCostText != null) _unitCostText.text = $"Unit Cost: {BindingStack.Instance.GetAllTotalUnitCost()}/{BindingStack.MaxAllBindUnits}";
     }
 
     public void UpdateStatusUI()
