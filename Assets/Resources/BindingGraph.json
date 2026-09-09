@@ -6,7 +6,7 @@
             "Connections": [
                 {
                     "Nickname": "Spin",
-                    "Input": "Spin",
+                    "Input": "(Nothing)",
                     "UnitCost": 0,
                     "IsLeadSideValid": true,
                     "IsAnchorSideValid": true,
@@ -46,7 +46,7 @@
                     "IsDarkPlaneValid": true,
                     "IsCoilingNeeded": false,
                     "IsStalledNeeded": false,
-                    "FlipsLeadAnchor": false,
+                    "FlipsLeadAnchor": true,
                     "FlipsDownUp": false,
                     "FlipsWallDark": false,
                     "SetsCoiling": false,
@@ -59,9 +59,33 @@
                     "Animation": "Cast"
                 },
                 {
-                    "Nickname": "Elbow",
-                    "Input": "Twine",
-                    "UnitCost": 0,
+                    "Nickname": "Elbow Shot",
+                    "Input": "Twine Back",
+                    "UnitCost": 1,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 1
+                        }
+                    ],
+                    "Animation": "Elbow"
+                },
+                {
+                    "Nickname": "Knee Shot",
+                    "Input": "Twine Face",
+                    "UnitCost": 1,
                     "IsLeadSideValid": true,
                     "IsAnchorSideValid": true,
                     "IsDownSpinValid": true,
@@ -77,10 +101,58 @@
                     "NodeSequence": [
                         {
                             "NodeId": "Cast",
-                            "UnitCost": 0
+                            "UnitCost": 1
                         }
                     ],
-                    "Animation": "Elbow"
+                    "Animation": "Knee"
+                },
+                {
+                    "Nickname": "Dragon",
+                    "Input": "Twine Down",
+                    "UnitCost": 1,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Dragon",
+                            "UnitCost": 1
+                        }
+                    ],
+                    "Animation": "Dragon"
+                },
+                {
+                    "Nickname": "Necklace",
+                    "Input": "Twine Up",
+                    "UnitCost": 1,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Necklace",
+                            "UnitCost": 1
+                        }
+                    ],
+                    "Animation": "Necklace"
                 }
             ]
         },
@@ -90,14 +162,14 @@
             "Connections": [
                 {
                     "Nickname": "Retrieve",
-                    "Input": "Retrieve",
+                    "Input": "(Nothing)",
                     "UnitCost": 0,
                     "IsLeadSideValid": true,
                     "IsAnchorSideValid": true,
                     "IsDownSpinValid": true,
                     "IsUpSpinValid": true,
                     "IsWallPlaneValid": true,
-                    "IsDarkPlaneValid": false,
+                    "IsDarkPlaneValid": true,
                     "IsCoilingNeeded": false,
                     "IsStalledNeeded": false,
                     "FlipsLeadAnchor": false,
@@ -111,6 +183,126 @@
                         }
                     ],
                     "Animation": "Retrieve"
+                },
+                {
+                    "Nickname": "Retrieve",
+                    "Input": "Retrieve",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Retrieve",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": "Retrieve"
+                },
+                {
+                    "Nickname": "Scorpion",
+                    "Input": "",
+                    "UnitCost": 1,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Scorpion",
+                            "UnitCost": 1
+                        }
+                    ],
+                    "Animation": "Scorpion"
+                },
+                {
+                    "Nickname": "Belt",
+                    "Input": "",
+                    "UnitCost": 1,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Belt",
+                            "UnitCost": 1
+                        }
+                    ],
+                    "Animation": "Belt"
+                },
+                {
+                    "Nickname": "Manacle",
+                    "Input": "",
+                    "UnitCost": 3,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Manacle",
+                            "UnitCost": 3
+                        }
+                    ],
+                    "Animation": "Manacle"
+                },
+                {
+                    "Nickname": "Overlord",
+                    "Input": "",
+                    "UnitCost": 3,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Overlord",
+                            "UnitCost": 3
+                        }
+                    ],
+                    "Animation": "Overlord"
                 }
             ]
         },
@@ -120,7 +312,7 @@
             "Connections": [
                 {
                     "Nickname": "Spin",
-                    "Input": "Spin",
+                    "Input": "(Nothing)",
                     "UnitCost": 0,
                     "IsLeadSideValid": true,
                     "IsAnchorSideValid": true,
@@ -141,6 +333,529 @@
                         }
                     ],
                     "Animation": "Spin"
+                },
+                {
+                    "Nickname": "Cast",
+                    "Input": "Cast",
+                    "UnitCost": 1,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 1
+                        }
+                    ],
+                    "Animation": "Cast"
+                },
+                {
+                    "Nickname": "Elbow Shot",
+                    "Input": "Twine Back",
+                    "UnitCost": 1,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 1
+                        }
+                    ],
+                    "Animation": "Elbow"
+                },
+                {
+                    "Nickname": "Knee Shot",
+                    "Input": "Twine Face",
+                    "UnitCost": 1,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 1
+                        }
+                    ],
+                    "Animation": "Knee"
+                }
+            ]
+        },
+        {
+            "NodeId": "Dragon",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "Wrap",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": "Spin"
+                },
+                {
+                    "Nickname": "Dragon Shot",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "D Dragon",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "Wrap",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": "Spin"
+                },
+                {
+                    "Nickname": "Dragon Shot",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "Necklace",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "Wrap",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": "Spin"
+                },
+                {
+                    "Nickname": "Neck Shot",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "D Necklace",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "Wrap",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": "Spin"
+                },
+                {
+                    "Nickname": "Neck Shot",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "Scorpion",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "Wrap",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": "Spin"
+                },
+                {
+                    "Nickname": "",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "Belt",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "Wrap",
+                    "Input": "(Nothing)",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": true,
+                    "IsUpSpinValid": true,
+                    "IsWallPlaneValid": true,
+                    "IsDarkPlaneValid": true,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Spin",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": "Spin"
+                },
+                {
+                    "Nickname": "",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "Manacle",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "Overlord",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": true,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [],
+                    "Animation": ""
+                },
+                {
+                    "Nickname": "",
+                    "Input": "",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": false,
+                    "IsAnchorSideValid": false,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [],
+                    "Animation": ""
+                }
+            ]
+        },
+        {
+            "NodeId": "Stuck",
+            "DoesDecay": false,
+            "Connections": [
+                {
+                    "Nickname": "Unstuck",
+                    "Input": "Unstuck",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [],
+                    "Animation": "Unstuck"
+                },
+                {
+                    "Nickname": "Throw",
+                    "Input": "Cast",
+                    "UnitCost": 0,
+                    "IsLeadSideValid": true,
+                    "IsAnchorSideValid": true,
+                    "IsDownSpinValid": false,
+                    "IsUpSpinValid": false,
+                    "IsWallPlaneValid": false,
+                    "IsDarkPlaneValid": false,
+                    "IsCoilingNeeded": false,
+                    "IsStalledNeeded": false,
+                    "FlipsLeadAnchor": false,
+                    "FlipsDownUp": false,
+                    "FlipsWallDark": false,
+                    "SetsCoiling": false,
+                    "NodeSequence": [
+                        {
+                            "NodeId": "Cast",
+                            "UnitCost": 0
+                        }
+                    ],
+                    "Animation": "Throw"
                 }
             ]
         }

@@ -20,8 +20,11 @@ public class PlayerController : Singleton<PlayerController>
         Actions.Player.Spin.performed += ctx => RopeDartInputController.Instance.HandleSpinRetrieveInput();
         Actions.Player.Cast.performed += ctx => RopeDartInputController.Instance.HandleCastInput();
         Actions.Player.Twine.performed += ctx => RopeDartInputController.Instance.HandleTwineInput();
-        Actions.Player.Wrap.performed += ctx => RopeDartInputController.Instance.HandleWrapInput();
+        // Actions.Player.Wrap.performed += ctx => RopeDartInputController.Instance.HandleWrapInput();
         Actions.Player.DartDirection.performed += ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
+
+        // TEMP: for testing bindings
+        Actions.Player.Wrap.performed += ctx => RopeDartInputController.Instance.TEMP_TestBindings();
     }
 
     public void OnDisable()
@@ -31,7 +34,10 @@ public class PlayerController : Singleton<PlayerController>
         Actions.Player.Spin.performed -= ctx => RopeDartInputController.Instance.HandleSpinRetrieveInput();
         Actions.Player.Cast.performed -= ctx => RopeDartInputController.Instance.HandleCastInput();
         Actions.Player.Twine.performed -= ctx => RopeDartInputController.Instance.HandleTwineInput();
-        Actions.Player.Wrap.performed -= ctx => RopeDartInputController.Instance.HandleWrapInput();
+        // Actions.Player.Wrap.performed -= ctx => RopeDartInputController.Instance.HandleWrapInput();
         Actions.Player.DartDirection.performed -= ctx => RopeDartInputController.Instance.HandleDartDirectionInput(ctx.ReadValue<Vector2>());
+
+        // TEMP: for testing bindings
+        Actions.Player.Wrap.performed -= ctx => RopeDartInputController.Instance.TEMP_TestBindings();
     }
 }

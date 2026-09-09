@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class RopeDartVisualManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class RopeDartVisualManager : MonoBehaviour
         // UpdateVisuals(bindingConnection.Animation);
 
         _playerAnimator.SetTrigger(bindingConnection.Animation);
+    }
+
+    public void SetDarkTrigger()
+    {
+        _playerAnimator.SetTrigger("IsDark");
     }
 
     // TODO: obsolete with new animation controller-based system

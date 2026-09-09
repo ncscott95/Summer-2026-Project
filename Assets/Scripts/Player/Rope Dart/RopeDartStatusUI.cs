@@ -16,14 +16,22 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
         { "Idle",           new Color32(0, 0, 0, 255) },
         { "Spin",           new Color32(255, 0, 0, 255) },
         { "Cast",           new Color32(0, 255, 0, 255) },
-        { "Retrieve",       new Color32(255, 0, 255, 255) },
-        { "Wrap",           new Color32(255, 255, 0, 255) },
-        { "LeadElbow",      new Color32(0, 255, 255, 255) },
-        { "AnchorElbow",    new Color32(128, 0, 128, 255) },
-        { "LeadNeck",       new Color32(255, 165, 0, 255) },
-        { "AnchorNeck",     new Color32(0, 128, 0, 255) },
-        { "LeadSide",       new Color32(0, 0, 255, 255) },
-        { "AnchorSide",     new Color32(128, 128, 128, 255) },
+        { "Retrieve",       new Color32(0, 0, 255, 255) },
+        // { "Wrap",           new Color32(255, 255, 0, 255) },
+        // { "LeadElbow",      new Color32(0, 255, 255, 255) },
+        // { "AnchorElbow",    new Color32(128, 0, 128, 255) },
+        // { "LeadNeck",       new Color32(255, 165, 0, 255) },
+        // { "AnchorNeck",     new Color32(0, 128, 0, 255) },
+        // { "LeadSide",       new Color32(0, 0, 255, 255) },
+        // { "AnchorSide",     new Color32(128, 128, 128, 255) },
+        { "Dragon",         new Color32(255, 255, 0, 255) },
+        { "D Dragon",       new Color32(128, 128, 0, 255) },
+        { "Necklace",       new Color32(255, 0, 255, 255) },
+        { "D Necklace",     new Color32(128, 0, 128, 255) },
+        { "Scorpion",       new Color32(0, 255, 255, 255) },
+        { "D Scorpion",     new Color32(0, 128, 128, 255) },
+        { "Belt",           new Color32(255, 255, 255, 255) },
+        { "D Belt",         new Color32(128, 128, 128, 255) },
     };
 
     private List<Image> _bindingImages = new List<Image>();
@@ -64,18 +72,6 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
                 segmentIndex++;
             }
         }
-
-        // set the next up to 3 segments to the spin color if the player is currently spinning or idle
-        // if (RopeDartManager.Instance.CurrentState == RopeDartState.Spinning || RopeDartManager.Instance.CurrentState == RopeDartState.Idle)
-        // {
-        //     for (int i = 0; i < 3; i++)
-        //     {
-        //         if (segmentIndex >= _bindingImages.Count) break;
-
-        //         _bindingImages[segmentIndex].color = _spinColor;
-        //         segmentIndex++;
-        //     }
-        // }
 
         // set the remaining segments to the slack color
         for (int i = segmentIndex; i < _bindingImages.Count; i++)

@@ -41,108 +41,108 @@ public class RopeDartManager : Singleton<RopeDartManager>
 
     void Update()
     {
-        float oldAngle = RawAngle;
+        // float oldAngle = RawAngle;
 
-        if (CurrentState == RopeDartState.Spinning)
-        {
-            RawAngle += (IsClockwise ? 1 : -1) * BaseSpinSpeed * Time.deltaTime;
-            RawAngle = Mathf.Repeat(RawAngle, 360f);
-        }
-        else if (CurrentState == RopeDartState.Coiling)
-        {
-            _coilTimer += Time.deltaTime;
-            _coilTimer = Mathf.Min(_coilTimer, SpiralDuration);
-            float degreesTraversed = 360f * (3f - Mathf.Sqrt(9f - 6f * _coilTimer));
-            float directionMultiplier = IsClockwise ? 1f : -1f;
-            RawAngle = Mathf.Repeat(_coilStartAngle + directionMultiplier * degreesTraversed, 360f);
+        // if (CurrentState == RopeDartState.Spinning)
+        // {
+        //     RawAngle += (IsClockwise ? 1 : -1) * BaseSpinSpeed * Time.deltaTime;
+        //     RawAngle = Mathf.Repeat(RawAngle, 360f);
+        // }
+        // else if (CurrentState == RopeDartState.Coiling)
+        // {
+        //     _coilTimer += Time.deltaTime;
+        //     _coilTimer = Mathf.Min(_coilTimer, SpiralDuration);
+        //     float degreesTraversed = 360f * (3f - Mathf.Sqrt(9f - 6f * _coilTimer));
+        //     float directionMultiplier = IsClockwise ? 1f : -1f;
+        //     RawAngle = Mathf.Repeat(_coilStartAngle + directionMultiplier * degreesTraversed, 360f);
 
-            if ((IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (!IsClockwise && oldAngle > 180f && RawAngle <= 180f))
-            {
-                Debug.Log("Coil beat");
-                if (!BindingStack.Instance.TryPushBinding("(Nothing)"))
-                {
-                    // ran out of slack, stall the spin
-                    Debug.Log("Stalling spin due to lack of slack");
-                    CurrentState = RopeDartState.Stalled;
-                }
+        //     if ((IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (!IsClockwise && oldAngle > 180f && RawAngle <= 180f))
+        //     {
+        //         Debug.Log("Coil beat");
+        //         if (!BindingStack.Instance.TryPushBinding("(Nothing)"))
+        //         {
+        //             // ran out of slack, stall the spin
+        //             Debug.Log("Stalling spin due to lack of slack");
+        //             CurrentState = RopeDartState.Stalled;
+        //         }
                 
-                if (_coilTimer == SpiralDuration)
-                {
-                    // ran out of slack, stall the spin
-                    Debug.Log("Stalling spin due to lack of slack");
-                    CurrentState = RopeDartState.Stalled;
-                }
-            }
-        }
-        else if (CurrentState == RopeDartState.Uncoiling)
-        {
-            _coilTimer -= Time.deltaTime;
-            _coilTimer = Mathf.Max(_coilTimer, 0f);
-            float degreesTraversed = 360f * (3f - Mathf.Sqrt(9f - 6f * _coilTimer));
-            float directionMultiplier = IsClockwise ? -1f : 1f;
-            RawAngle = Mathf.Repeat(_coilStartAngle + directionMultiplier * degreesTraversed, 360f);
+        //         if (_coilTimer == SpiralDuration)
+        //         {
+        //             // ran out of slack, stall the spin
+        //             Debug.Log("Stalling spin due to lack of slack");
+        //             CurrentState = RopeDartState.Stalled;
+        //         }
+        //     }
+        // }
+        // else if (CurrentState == RopeDartState.Uncoiling)
+        // {
+        //     _coilTimer -= Time.deltaTime;
+        //     _coilTimer = Mathf.Max(_coilTimer, 0f);
+        //     float degreesTraversed = 360f * (3f - Mathf.Sqrt(9f - 6f * _coilTimer));
+        //     float directionMultiplier = IsClockwise ? -1f : 1f;
+        //     RawAngle = Mathf.Repeat(_coilStartAngle + directionMultiplier * degreesTraversed, 360f);
 
-            if (_coilNodeType == "Neck" )
-            {
-                if ((!IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (IsClockwise && oldAngle > 180f && RawAngle <= 180f))
-                {
-                    Debug.Log("Uncoil beat: top of spin");
-                    if (!BindingStack.Instance.RemoveLastBindingWithIdEndingWith("Neck"))
-                    {
-                        CurrentState = RopeDartState.Spinning;
-                        BindingStack.Instance.TryPushBinding("Spin");
-                    }
+        //     if (_coilNodeType == "Neck" )
+        //     {
+        //         if ((!IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (IsClockwise && oldAngle > 180f && RawAngle <= 180f))
+        //         {
+        //             Debug.Log("Uncoil beat: top of spin");
+        //             if (!BindingStack.Instance.RemoveLastBindingWithIdEndingWith("Neck"))
+        //             {
+        //                 CurrentState = RopeDartState.Spinning;
+        //                 BindingStack.Instance.TryPushBinding("Spin");
+        //             }
 
-                    if (_coilTimer == 0f)
-                    {
-                        CurrentState = RopeDartState.Spinning;
-                        BindingStack.Instance.TryPushBinding("Spin");
-                    }
-                }
-            }
+        //             if (_coilTimer == 0f)
+        //             {
+        //                 CurrentState = RopeDartState.Spinning;
+        //                 BindingStack.Instance.TryPushBinding("Spin");
+        //             }
+        //         }
+        //     }
 
-            // TODO: this detects both the top and bottom of the spin, but we only want to detect the bottom
-            if ((IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (!IsClockwise && oldAngle > 180f && RawAngle <= 180f))
-            {
-                Debug.Log("Uncoil beat: bottom of spin");
-                if (!BindingStack.Instance.RemoveLastBindingWithIdEndingWith(_coilNodeType))
-                {
-                    CurrentState = RopeDartState.Spinning;
-                    BindingStack.Instance.TryPushBinding("Spin");
-                }
+        //     // TODO: this detects both the top and bottom of the spin, but we only want to detect the bottom
+        //     if ((IsClockwise && oldAngle < 180f && RawAngle >= 180f) || (!IsClockwise && oldAngle > 180f && RawAngle <= 180f))
+        //     {
+        //         Debug.Log("Uncoil beat: bottom of spin");
+        //         if (!BindingStack.Instance.RemoveLastBindingWithIdEndingWith(_coilNodeType))
+        //         {
+        //             CurrentState = RopeDartState.Spinning;
+        //             BindingStack.Instance.TryPushBinding("Spin");
+        //         }
 
-                if (_coilTimer == 0f)
-                {
-                    BindingStack.Instance.RemoveLastBindingWithIdEndingWith(_coilNodeType);
-                    CurrentState = RopeDartState.Spinning;
-                    BindingStack.Instance.TryPushBinding("Spin");
-                }
-            }
-        }
-        else if (CurrentState == RopeDartState.Stalled)
-        {
-            // do nothing
-        }
-        else if (CurrentState == RopeDartState.Casting)
-        {
-            // TODO: placeholder timer, replace with logic for detecting when the dart has reached max length
-            _debugTimer += Time.deltaTime;
-            if (_debugTimer >= _debugCastDuration)
-            {
-                _debugTimer = _debugCastDuration;
-                OnEndCast();
-            }
-        }
-        else if (CurrentState == RopeDartState.Retrieving)
-        {
-            // TODO: placeholder timer, replace with logic for detecting when the dart has reached max length
-            _debugTimer -= Time.deltaTime;
-            if (_debugTimer <= 0f)
-            {
-                _debugTimer = 0f;
-                OnRetrieveEnd();
-            }
-        }
+        //         if (_coilTimer == 0f)
+        //         {
+        //             BindingStack.Instance.RemoveLastBindingWithIdEndingWith(_coilNodeType);
+        //             CurrentState = RopeDartState.Spinning;
+        //             BindingStack.Instance.TryPushBinding("Spin");
+        //         }
+        //     }
+        // }
+        // else if (CurrentState == RopeDartState.Stalled)
+        // {
+        //     // do nothing
+        // }
+        // else if (CurrentState == RopeDartState.Casting)
+        // {
+        //     // TODO: placeholder timer, replace with logic for detecting when the dart has reached max length
+        //     _debugTimer += Time.deltaTime;
+        //     if (_debugTimer >= _debugCastDuration)
+        //     {
+        //         _debugTimer = _debugCastDuration;
+        //         OnEndCast();
+        //     }
+        // }
+        // else if (CurrentState == RopeDartState.Retrieving)
+        // {
+        //     // TODO: placeholder timer, replace with logic for detecting when the dart has reached max length
+        //     _debugTimer -= Time.deltaTime;
+        //     if (_debugTimer <= 0f)
+        //     {
+        //         _debugTimer = 0f;
+        //         OnRetrieveEnd();
+        //     }
+        // }
     }
 
     public void StartSpin()
@@ -179,9 +179,9 @@ public class RopeDartManager : Singleton<RopeDartManager>
         _debugTimer = 0f;
     }
 
-    public void OnEndCast()
+    public void OnCastEnd()
     {
-        OnMaxLength();
+        BindingStack.Instance.TryPushBinding("(Nothing)");
     }
 
     public void StartWrap()
@@ -223,9 +223,14 @@ public class RopeDartManager : Singleton<RopeDartManager>
         }
     }
 
-    public void OnMaxLength()
+    public void OnDragonEnd()
     {
-        CurrentState = RopeDartState.Extended;
+        BindingStack.Instance.TryPushBinding("(Nothing)");
+    }
+
+    public void OnNeckEnd()
+    {
+        BindingStack.Instance.TryPushBinding("(Nothing)");
     }
 
     public void Retrieve()
@@ -241,15 +246,14 @@ public class RopeDartManager : Singleton<RopeDartManager>
     public void OnRetrieveEnd()
     {
         // Reset();
-        // TODO: replace with push binding "(Nothing)"
-        BindingStack.Instance.TryPushBinding("Spin");
+        BindingStack.Instance.TryPushBinding("(Nothing)");
     }
 
     public void Reset()
     {
         BindingStack.Instance.ClearBindings();
         BindingStack.Instance.TryPushBinding("Idle");
-        BindingStack.Instance.TryPushBinding("Spin");
+        BindingStack.Instance.TryPushBinding("(Nothing)");
         RopeDartStatusUI.Instance.UpdateStatusUI();
         CurrentState = RopeDartState.Idle;
         RawAngle = 180f;

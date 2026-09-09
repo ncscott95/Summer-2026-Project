@@ -5,11 +5,12 @@ using System.Linq;
 public class BindingStack : Singleton<BindingStack>
 {
     public List<BindingStackElement> AllCurrentBindings { get; private set; } = new List<BindingStackElement>();
+    public (int start, int end) PrimedBindingRange { get; private set; } = (-1, -1);
     // public List<BindingStackElement> LiveCurrentBindings { get; private set; } = new List<BindingStackElement>();
 
     // Units are used only for calculating behind-the-scenes "costs" of wrapping and binding.
     // These are not the same as physical length, but will be directly proportional to it.
-    public const int MaxAllBindUnits = 9;
+    public const int MaxAllBindUnits = 3;
     // public const int MaxLiveBindUnits = 3;
     // private int _liveMaxBindUnits = MaxAllBindUnits;
 
@@ -28,6 +29,21 @@ public class BindingStack : Singleton<BindingStack>
         new KeyValuePair<List<string>, string>(new List<string> { "LeadSide", "AnchorSide" }, "Belt"),
         new KeyValuePair<List<string>, string>(new List<string> { "AnchorSide", "LeadSide" }, "Belt"),
         new KeyValuePair<List<string>, string>(new List<string> { "AnchorNeck", "LeadNeck", "LeadSide", "AnchorSide" }, "Butterfly"),
+    };
+
+    // these work in backwards order: if the top binding is Dragon, the next binding down must be Belt to prime
+    private static readonly List<KeyValuePair<string, List<string>>> _primingBindings = new List<KeyValuePair<string, List<string>>>
+    {
+        new KeyValuePair<string, List<string>>("Dragon", new List<string> { "D Scorpion", "D Belt" }),
+        new KeyValuePair<string, List<string>>("D Dragon", new List<string> { "Scorpion", "Belt" }),
+        new KeyValuePair<string, List<string>>("Necklace", new List<string> { "D Dragon", "D Necklace" }),
+        new KeyValuePair<string, List<string>>("D Necklace", new List<string> { "Dragon", "Necklace" }),
+        new KeyValuePair<string, List<string>>("Scorpion", new List<string> { "D Dragon", "D Necklace" }),
+        new KeyValuePair<string, List<string>>("D Scorpion", new List<string> { "Dragon", "Necklace" }),
+        new KeyValuePair<string, List<string>>("Belt", new List<string> { "D Scorpion", "D Belt" }),
+        new KeyValuePair<string, List<string>>("D Belt", new List<string> { "Scorpion", "Belt" }),
+        // new KeyValuePair<string, List<string>>("Manacle", new List<string> { "Manacle" }),
+        // new KeyValuePair<string, List<string>>("Overlord", new List<string> { "Overlord" }),
     };
 
     private bool _isWallPlane = true;
@@ -89,7 +105,7 @@ public class BindingStack : Singleton<BindingStack>
         //     return false;
         // }
 
-        bool meetsSideReqs, meetsSpinReqs, meetsPlaneReqs, meetsCoilReq, meetsStallReq;
+        bool meetsSideReqs; //, meetsSpinReqs, meetsPlaneReqs, meetsCoilReq, meetsStallReq;
 
         meetsSideReqs = (connection.IsLeadSideValid && RopeDartManager.Instance.IsLeadSide) || (connection.IsAnchorSideValid && !RopeDartManager.Instance.IsLeadSide);
         if (!meetsSideReqs)
@@ -98,35 +114,35 @@ public class BindingStack : Singleton<BindingStack>
             return false;
         }
 
-        meetsSpinReqs = (connection.IsDownSpinValid && RopeDartManager.Instance.IsDownSpin) || (connection.IsUpSpinValid && !RopeDartManager.Instance.IsDownSpin);
-        if (!meetsSpinReqs)
-        {
-            Debug.Log($"FAIL: Cannot use connection {connection.Nickname} because spin requirements not met. Connection requires down spin: {connection.IsDownSpinValid}, up spin: {connection.IsUpSpinValid}. Current state is down spin: {RopeDartManager.Instance.IsDownSpin}.");
-            return false;
-        }
+        // meetsSpinReqs = (connection.IsDownSpinValid && RopeDartManager.Instance.IsDownSpin) || (connection.IsUpSpinValid && !RopeDartManager.Instance.IsDownSpin);
+        // if (!meetsSpinReqs)
+        // {
+        //     Debug.Log($"FAIL: Cannot use connection {connection.Nickname} because spin requirements not met. Connection requires down spin: {connection.IsDownSpinValid}, up spin: {connection.IsUpSpinValid}. Current state is down spin: {RopeDartManager.Instance.IsDownSpin}.");
+        //     return false;
+        // }
 
-        meetsPlaneReqs = (connection.IsWallPlaneValid && RopeDartManager.Instance.IsWallPlane) || (connection.IsDarkPlaneValid && !RopeDartManager.Instance.IsWallPlane);
-        if (!meetsPlaneReqs)
-        {
-            Debug.Log($"FAIL: Cannot use connection {connection.Nickname} because plane requirements not met. Connection requires wall plane: {connection.IsWallPlaneValid}, dark plane: {connection.IsDarkPlaneValid}. Current state is wall plane: {RopeDartManager.Instance.IsWallPlane}.");
-            return false;
-        }
+        // meetsPlaneReqs = (connection.IsWallPlaneValid && RopeDartManager.Instance.IsWallPlane) || (connection.IsDarkPlaneValid && !RopeDartManager.Instance.IsWallPlane);
+        // if (!meetsPlaneReqs)
+        // {
+        //     Debug.Log($"FAIL: Cannot use connection {connection.Nickname} because plane requirements not met. Connection requires wall plane: {connection.IsWallPlaneValid}, dark plane: {connection.IsDarkPlaneValid}. Current state is wall plane: {RopeDartManager.Instance.IsWallPlane}.");
+        //     return false;
+        // }
 
-        meetsCoilReq = (connection.IsCoilingNeeded && RopeDartManager.Instance.IsCoiling) || (!connection.IsCoilingNeeded && !RopeDartManager.Instance.IsCoiling);
-        if (!meetsCoilReq)
-        {
-            Debug.Log($"FAIL: Cannot use connection {connection.Nickname} because coil requirements not met. Connection requires coiling: {connection.IsCoilingNeeded}. Current state is coiling: {RopeDartManager.Instance.IsCoiling}.");
-            return false;
-        }
+        // meetsCoilReq = (connection.IsCoilingNeeded && RopeDartManager.Instance.IsCoiling) || (!connection.IsCoilingNeeded && !RopeDartManager.Instance.IsCoiling);
+        // if (!meetsCoilReq)
+        // {
+        //     Debug.Log($"FAIL: Cannot use connection {connection.Nickname} because coil requirements not met. Connection requires coiling: {connection.IsCoilingNeeded}. Current state is coiling: {RopeDartManager.Instance.IsCoiling}.");
+        //     return false;
+        // }
 
-        meetsStallReq = (connection.IsStalledNeeded && RopeDartManager.Instance.IsStalled) || (!connection.IsStalledNeeded && !RopeDartManager.Instance.IsStalled);
-        if (!meetsStallReq)
-        {
-            Debug.Log($"FAIL: Cannot use connection {connection.Nickname} because stall requirements not met. Connection requires stalled: {connection.IsStalledNeeded}. Current state is stalled: {RopeDartManager.Instance.IsStalled}.");
-            return false;
-        }
+        // meetsStallReq = (connection.IsStalledNeeded && RopeDartManager.Instance.IsStalled) || (!connection.IsStalledNeeded && !RopeDartManager.Instance.IsStalled);
+        // if (!meetsStallReq)
+        // {
+        //     Debug.Log($"FAIL: Cannot use connection {connection.Nickname} because stall requirements not met. Connection requires stalled: {connection.IsStalledNeeded}. Current state is stalled: {RopeDartManager.Instance.IsStalled}.");
+        //     return false;
+        // }
 
-        return meetsSideReqs && meetsSpinReqs && meetsPlaneReqs && meetsCoilReq && meetsStallReq;
+        return meetsSideReqs; // && meetsSpinReqs && meetsPlaneReqs && meetsCoilReq && meetsStallReq;
     }
 
     private void OnSuccessfulGraphConnection(BindingGraphConnection connection)
@@ -144,10 +160,10 @@ public class BindingStack : Singleton<BindingStack>
         RemoveLastBindingWithId("Retrieve");
 
         if (connection.FlipsLeadAnchor) RopeDartManager.Instance.FlipLeadAnchor();
-        if (connection.FlipsDownUp) RopeDartManager.Instance.FlipSpinDirection();
-        if (connection.FlipsWallDark) RopeDartManager.Instance.FlipPlane();
-        _isWallPlane = AllCurrentBindings.Count(b => b.NodeId == "LeadNeck" || b.NodeId == "LeadSide" || b.NodeId == "AnchorNeck" || b.NodeId == "AnchorSide") % 2 == 0;
-        RopeDartManager.Instance.SetCoiling(connection.SetsCoiling);
+        // if (connection.FlipsDownUp) RopeDartManager.Instance.FlipSpinDirection();
+        // if (connection.FlipsWallDark) RopeDartManager.Instance.FlipPlane();
+        // _isWallPlane = AllCurrentBindings.Count(b => b.NodeId == "LeadNeck" || b.NodeId == "LeadSide" || b.NodeId == "AnchorNeck" || b.NodeId == "AnchorSide") % 2 == 0;
+        // RopeDartManager.Instance.SetCoiling(connection.SetsCoiling);
 
         if (connection.Input == "Spin")
         {
@@ -158,20 +174,22 @@ public class BindingStack : Singleton<BindingStack>
             //     _liveMaxBindUnits = Mathf.Min(MaxLiveBindUnits, MaxAllBindUnits - GetAllTotalUnitCost());
             // }
 
-            RopeDartManager.Instance.StartSpin();
+            // RopeDartManager.Instance.StartSpin();
         }
         else if (connection.Input == "Cast")
         {
-            OnCast();
+            RemoveLastBindingWithId("Spin");
+            HandleCastUnwind();
+            RopeDartInputController.Instance.StartCastEndBuffer();
 
-            RopeDartManager.Instance.Cast();
+            // RopeDartManager.Instance.Cast();
         }
         else if (connection.Input == "Retrieve")
         {
-            // remove a previous "Cast" binding
             RemoveLastBindingWithId("Cast");
+            RopeDartInputController.Instance.StartRetrieveEndBuffer();
 
-            RopeDartManager.Instance.Retrieve();
+            // RopeDartManager.Instance.Retrieve();
         }
         else if (connection.Input == "Wrap")
         {
@@ -181,16 +199,47 @@ public class BindingStack : Singleton<BindingStack>
         }
         else if (connection.Input.StartsWith("Twine"))
         {
-            if (GetBindingAtIndex(AllCurrentBindings.Count - 2).NodeId.EndsWith("Elbow"))
+            // if (GetBindingAtIndex(AllCurrentBindings.Count - 2).NodeId.EndsWith("Elbow"))
+            // {
+            //     // _liveMaxBindUnits = Mathf.Min(MaxLiveBindUnits, MaxAllBindUnits - GetAllTotalUnitCost());
+            // }
+            // else
+            // {
+            //     // _liveMaxBindUnits = MaxAllBindUnits;
+            //     // remove a previous "Spin" binding from the stack
+            //     // assumes that twines to all points other than elbows release the lead hand
+            //     RemoveLastBindingWithId("Spin");
+            // }
+
+            RemoveLastBindingWithId("Spin");
+            if (connection.Nickname == "Elbow Shot")
             {
-                // _liveMaxBindUnits = Mathf.Min(MaxLiveBindUnits, MaxAllBindUnits - GetAllTotalUnitCost());
+                RopeDartInputController.Instance.StartElbowEndBuffer();
+                HandleCastUnwind();
             }
-            else
+            else if (connection.Nickname == "Dragon" || connection.Nickname == "Necklace" || connection.Nickname == "Scorpion" || connection.Nickname == "Belt")
             {
-                // _liveMaxBindUnits = MaxAllBindUnits;
-                // remove a previous "Spin" binding from the stack
-                // assumes that twines to all points other than elbows release the lead hand
-                RemoveLastBindingWithId("Spin");
+                string newBindingName = ResolveWrapBindingName(connection.Nickname);
+                RenameBindingAtIndex(AllCurrentBindings.Count - 1, newBindingName);
+                DetectPrimedBindings();
+
+                if (connection.Nickname == "Dragon")
+                {
+                    RopeDartInputController.Instance.StartDragonEndBuffer();
+                }
+                else if (connection.Nickname == "Necklace")
+                {
+                    RopeDartInputController.Instance.StartNeckEndBuffer();
+                }
+            }
+        }
+        else if (connection.Input == "(Nothing)")
+        {
+            // make (Nothing) behave properly as a retrieve call
+            if (connection.Nickname == "Retrieve")
+            {
+                RemoveLastBindingWithId("Cast");
+                RopeDartInputController.Instance.StartRetrieveEndBuffer();
             }
         }
         else
@@ -198,8 +247,46 @@ public class BindingStack : Singleton<BindingStack>
             // Debug.LogWarning($"Unhandled input {connection.Input} for binding {connection.Nickname}");
         }
 
-        // TODO: temp commented to prevent errors while testing wrap detection and unwrapping
-        if (connection.Input != "(Nothing)") _ropeDartVisualManager.UpdateVisuals(connection);
+        _ropeDartVisualManager.UpdateVisuals(connection);
+    }
+
+    private string ResolveWrapBindingName(string bindingName)
+    {
+        string previousBindingName = AllCurrentBindings[AllCurrentBindings.Count - 2].NodeId;
+        string darkBindingName = "D " + bindingName;
+
+        // if there is a previous wrap binding, automatically use the version that primes with the previous binding
+
+        KeyValuePair<string, List<string>> lightPrimingBindings = _primingBindings.Find(p => p.Key == bindingName);
+        KeyValuePair<string, List<string>> darkPrimingBindings = _primingBindings.Find(p => p.Key == darkBindingName);
+
+        if (lightPrimingBindings.Value != null && lightPrimingBindings.Value.Contains(previousBindingName))
+        {
+            return bindingName;
+        }
+
+        if (darkPrimingBindings.Value != null && darkPrimingBindings.Value.Contains(previousBindingName))
+        {
+            _ropeDartVisualManager.SetDarkTrigger();
+            return darkBindingName;
+        }
+
+        // if there is no previous wrap binding, use the default version based on whether the player is lead or anchor side
+        // lead:   dragon = dark,  necklace = light, scorpion = dark,  belt = dark
+        // anchor: dragon = light, necklace = dark,  scorpion = light, belt = light
+
+        if (bindingName == "Dragon" || bindingName == "Scorpion" || bindingName == "Belt")
+        {
+            if (RopeDartManager.Instance.IsLeadSide) _ropeDartVisualManager.SetDarkTrigger();
+            return RopeDartManager.Instance.IsLeadSide ? darkBindingName : bindingName;
+        }
+        else if (bindingName == "Necklace")
+        {
+            if (!RopeDartManager.Instance.IsLeadSide) _ropeDartVisualManager.SetDarkTrigger();
+            return !RopeDartManager.Instance.IsLeadSide ? darkBindingName : bindingName;
+        }
+
+        return bindingName;
     }
 
     public string DetectWrap()
@@ -230,54 +317,107 @@ public class BindingStack : Singleton<BindingStack>
         return null;
     }
 
-    public void OnCast()
+    public void HandleCastUnwind()
     {
-        // "Spin", "Elbow", "Knee", and "Foot" bindings all automatically unwind when being cast from
-        BindingGraphNode previousBindingNode = GetBindingAtIndex(AllCurrentBindings.Count - 2);
-        bool wasCastFromElbow = previousBindingNode.NodeId.EndsWith("Elbow");
-        if (previousBindingNode.NodeId.EndsWith("Spin") || previousBindingNode.NodeId.EndsWith("Elbow"))
-        {
-            RemoveBindingAtIndex(AllCurrentBindings.Count - 2);
-        }
+        // // "Spin", "Elbow", "Knee", and "Foot" bindings all automatically unwind when being cast from
+        // BindingGraphNode previousBindingNode = GetBindingAtIndex(AllCurrentBindings.Count - 2);
+        // bool wasCastFromElbow = previousBindingNode.NodeId.EndsWith("Elbow");
+        // if (previousBindingNode.NodeId.EndsWith("Spin") || previousBindingNode.NodeId.EndsWith("Elbow"))
+        // {
+        //     RemoveBindingAtIndex(AllCurrentBindings.Count - 2);
+        // }
 
-        // remove all "Elbow" bindings from the top of the stack until we reach a binding that is not an "Elbow" binding
-        if (wasCastFromElbow)
+        // // remove all "Elbow" bindings from the top of the stack until we reach a binding that is not an "Elbow" binding
+        // if (wasCastFromElbow)
+        // {
+        //     while (true)
+        //     {
+        //         previousBindingNode = GetBindingAtIndex(AllCurrentBindings.Count - 2);
+        //         if (!previousBindingNode.NodeId.EndsWith("Elbow")) break;
+        //         RemoveBindingAtIndex(AllCurrentBindings.Count - 2);
+        //     }
+        // }
+
+        // int wrapIndex = AllCurrentBindings.FindIndex(BindingStackElement => BindingStackElement.NodeId == "Wrap");
+
+        // if (wrapIndex != -1)
+        // {
+        //     while (wrapIndex > 0 && wrapIndex < AllCurrentBindings.Count - 1)
+        //     {
+        //         BindingStackElement beforeWrap = AllCurrentBindings[wrapIndex - 1];
+        //         BindingStackElement afterWrap = AllCurrentBindings[wrapIndex + 1];
+
+        //         if (beforeWrap.NodeId.StartsWith('L') && afterWrap.NodeId.StartsWith('L') || (beforeWrap.NodeId.StartsWith('A') && afterWrap.NodeId.StartsWith('A')))
+        //         {
+        //             RemoveBindingAtIndex(wrapIndex + 1);
+        //             RemoveBindingAtIndex(wrapIndex - 1);
+
+        //             if (beforeWrap.NodeId == afterWrap.NodeId) --wrapIndex;
+        //             else break;
+        //         }
+        //         else
+        //         {
+        //             break;
+        //         }
+        //     }
+
+        //     RemoveBindingAtIndex(wrapIndex);
+        // }
+
+        // _isWallPlane = AllCurrentBindings.Count(b => b.NodeId == "LeadNeck" || b.NodeId == "LeadSide" || b.NodeId == "AnchorNeck" || b.NodeId == "AnchorSide") % 2 == 0;
+
+        int topNonCastIndex = AllCurrentBindings.FindLastIndex(b => b.NodeId != "Cast");
+        int primedBindingCount = PrimedBindingRange.end - PrimedBindingRange.start + 1;
+        if (topNonCastIndex == PrimedBindingRange.end && primedBindingCount > 1)
         {
-            while (true)
+            for (int i = 0; i < primedBindingCount; i++)
             {
-                previousBindingNode = GetBindingAtIndex(AllCurrentBindings.Count - 2);
-                if (!previousBindingNode.NodeId.EndsWith("Elbow")) break;
-                RemoveBindingAtIndex(AllCurrentBindings.Count - 2);
+                RemoveBindingAtIndex(PrimedBindingRange.start);
             }
+            PrimedBindingRange = (-1, -1);
         }
+    }
 
-        int wrapIndex = AllCurrentBindings.FindIndex(BindingStackElement => BindingStackElement.NodeId == "Wrap");
+    // working backwards from the top binding, check if the binding below it is a valid priming binding
+    // once an invalid priming binding is found, stop checking and set the primed binding range to the last valid priming binding found
+    // if the first pair of bindings checked is invalid, start over at the next binding down
+    // if no valid priming bindings are found, set the primed binding range to (-1, -1)
+    public void DetectPrimedBindings()
+    {
+        int topValidPrimingIndex = -1;
+        int lastValidPrimingIndex = -1;
 
-        if (wrapIndex != -1)
+        for (int i = AllCurrentBindings.Count - 1; i > 0; --i)
         {
-            while (wrapIndex > 0 && wrapIndex < AllCurrentBindings.Count - 1)
+            // TODO: finiding the initial priming list should not be inside the loop
+            BindingStackElement currentBinding = AllCurrentBindings[i];
+            BindingStackElement previousBinding = AllCurrentBindings[i - 1];
+            KeyValuePair<string, List<string>> primingBinding = _primingBindings.Find(p => p.Key == currentBinding.NodeId);
+
+            if (primingBinding.Key != null && primingBinding.Value.Contains(previousBinding.NodeId))
             {
-                BindingStackElement beforeWrap = AllCurrentBindings[wrapIndex - 1];
-                BindingStackElement afterWrap = AllCurrentBindings[wrapIndex + 1];
-
-                if (beforeWrap.NodeId.StartsWith('L') && afterWrap.NodeId.StartsWith('L') || (beforeWrap.NodeId.StartsWith('A') && afterWrap.NodeId.StartsWith('A')))
+                if (topValidPrimingIndex == -1) topValidPrimingIndex = i;
+                lastValidPrimingIndex = i - 1;
+            }
+            else
+            {
+                if (lastValidPrimingIndex != -1)
                 {
-                    RemoveBindingAtIndex(wrapIndex + 1);
-                    RemoveBindingAtIndex(wrapIndex - 1);
-
-                    if (beforeWrap.NodeId == afterWrap.NodeId) --wrapIndex;
-                    else break;
-                }
-                else
-                {
+                    PrimedBindingRange = (lastValidPrimingIndex, topValidPrimingIndex);
                     break;
                 }
             }
-
-            RemoveBindingAtIndex(wrapIndex);
         }
 
-        _isWallPlane = AllCurrentBindings.Count(b => b.NodeId == "LeadNeck" || b.NodeId == "LeadSide" || b.NodeId == "AnchorNeck" || b.NodeId == "AnchorSide") % 2 == 0;
+        if (lastValidPrimingIndex == -1)
+        {
+            PrimedBindingRange = (-1, -1);
+        }
+
+        string primedBindingsString = PrimedBindingRange.start != -1 && PrimedBindingRange.end != -1
+            ? string.Join(", ", AllCurrentBindings.GetRange(PrimedBindingRange.start, PrimedBindingRange.end - PrimedBindingRange.start + 1).Select(b => b.NodeId))
+            : "None";
+        Debug.Log($"Primed bindings: {primedBindingsString}");
     }
 
     public BindingGraphNode PeekBinding()
@@ -351,20 +491,20 @@ public class BindingStack : Singleton<BindingStack>
         return totalCost;
     }
 
-    // public int GetLiveTotalUnitCost()
-    // {
-    //     int totalCost = 0;
-    //     foreach (var point in LiveCurrentBindings)
-    //     {
-    //         totalCost += point.UnitCost;
-    //     }
-    //     return totalCost;
-    // }
-
     // returns a string representing the current stack of bindings
     public string CurrentBindingsToString()
     {
         return string.Join(", ", AllCurrentBindings.Select(b => $"{b.NodeId} ({b.UnitCost})"));
+    }
+
+    public void RenameBindingAtIndex(int index, string newName)
+    {
+        if (index >= 0 && index < AllCurrentBindings.Count)
+        {
+            BindingStackElement binding = AllCurrentBindings[index];
+            binding.NodeId = newName;
+            AllCurrentBindings[index] = binding;
+        }
     }
 }
 
