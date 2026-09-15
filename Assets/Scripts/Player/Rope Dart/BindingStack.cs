@@ -204,20 +204,6 @@ public class BindingStack : Singleton<BindingStack>
         return bindingName;
     }
 
-    public void HandleCastUnwind()
-    {
-        int topNonCastIndex = AllCurrentBindings.FindLastIndex(b => b.NodeId != "Cast");
-        int primedBindingCount = PrimedBindingRange.end - PrimedBindingRange.start + 1;
-        if (topNonCastIndex == PrimedBindingRange.end && primedBindingCount > 1)
-        {
-            for (int i = 0; i < primedBindingCount; i++)
-            {
-                RemoveBindingAtIndex(PrimedBindingRange.start);
-            }
-            PrimedBindingRange = (-1, -1);
-        }
-    }
-
     // working backwards from the top binding, check if the binding below it is a valid priming binding
     // once an invalid priming binding is found, stop checking and set the primed binding range to the last valid priming binding found
     // if the first pair of bindings checked is invalid, start over at the next binding down
@@ -229,7 +215,6 @@ public class BindingStack : Singleton<BindingStack>
 
         for (int i = AllCurrentBindings.Count - 1; i > 0; --i)
         {
-            // TODO: finiding the initial priming list should not be inside the loop
             BindingStackElement currentBinding = AllCurrentBindings[i];
             BindingStackElement previousBinding = AllCurrentBindings[i - 1];
             KeyValuePair<string, List<string>> primingBinding = _primingBindings.Find(p => p.Key == currentBinding.NodeId);
@@ -238,14 +223,15 @@ public class BindingStack : Singleton<BindingStack>
             {
                 if (topValidPrimingIndex == -1) topValidPrimingIndex = i;
                 lastValidPrimingIndex = i - 1;
+
+                // TODO: this hard codes primings to only ever be two bindings long
+                PrimedBindingRange = (lastValidPrimingIndex, topValidPrimingIndex);
+                break;
             }
-            else
+            else if (lastValidPrimingIndex != -1)
             {
-                if (lastValidPrimingIndex != -1)
-                {
-                    PrimedBindingRange = (lastValidPrimingIndex, topValidPrimingIndex);
-                    break;
-                }
+                PrimedBindingRange = (lastValidPrimingIndex, topValidPrimingIndex);
+                break;
             }
         }
 
@@ -258,6 +244,20 @@ public class BindingStack : Singleton<BindingStack>
             ? string.Join(", ", AllCurrentBindings.GetRange(PrimedBindingRange.start, PrimedBindingRange.end - PrimedBindingRange.start + 1).Select(b => b.NodeId))
             : "None";
         Debug.Log($"Primed bindings: {primedBindingsString}");
+    }
+
+    public void HandleCastUnwind()
+    {
+        int topNonCastIndex = AllCurrentBindings.FindLastIndex(b => b.NodeId != "Cast");
+        int primedBindingCount = PrimedBindingRange.end - PrimedBindingRange.start + 1;
+        if (topNonCastIndex == PrimedBindingRange.end && primedBindingCount > 1)
+        {
+            for (int i = 0; i < primedBindingCount; i++)
+            {
+                RemoveBindingAtIndex(PrimedBindingRange.start);
+            }
+            PrimedBindingRange = (-1, -1);
+        }
     }
 
     public BindingGraphNode PeekBinding()

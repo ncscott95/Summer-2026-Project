@@ -174,50 +174,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-Retrieve-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ce16cfe3563547670800000000000000
-      internalID: 8535538888087462380
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Retrieve-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 64
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b38a6fd1e25fb1620800000000000000
-      internalID: 2746057976232454203
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Player-Retrieve-Sheet_3
       rect:
         serializedVersion: 2
@@ -233,8 +189,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 93e5d1ff9fe9fc030800000000000000
-      internalID: 3517204630563806777
+      spriteID: ce16cfe3563547670800000000000000
+      internalID: 8535538888087462380
       vertices: []
       indices: 
       edges: []
@@ -255,8 +211,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 48924b868baec0c10800000000000000
-      internalID: 2021248410534029700
+      spriteID: b38a6fd1e25fb1620800000000000000
+      internalID: 2746057976232454203
       vertices: []
       indices: 
       edges: []
@@ -265,8 +221,8 @@ TextureImporter:
       name: Player-Retrieve-Sheet_5
       rect:
         serializedVersion: 2
-        x: 640
-        y: 64
+        x: 0
+        y: 0
         width: 128
         height: 64
       alignment: 7
@@ -277,8 +233,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1f33471bb0972d080800000000000000
-      internalID: -9164129200616754191
+      spriteID: 93e5d1ff9fe9fc030800000000000000
+      internalID: 3517204630563806777
       vertices: []
       indices: 
       edges: []
@@ -287,8 +243,8 @@ TextureImporter:
       name: Player-Retrieve-Sheet_6
       rect:
         serializedVersion: 2
-        x: 768
-        y: 64
+        x: 128
+        y: 0
         width: 128
         height: 64
       alignment: 7
@@ -299,8 +255,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a8133514f2698b9f0800000000000000
-      internalID: -452446632847134326
+      spriteID: 48924b868baec0c10800000000000000
+      internalID: 2021248410534029700
       vertices: []
       indices: 
       edges: []
@@ -309,7 +265,7 @@ TextureImporter:
       name: Player-Retrieve-Sheet_7
       rect:
         serializedVersion: 2
-        x: 0
+        x: 256
         y: 0
         width: 128
         height: 64
@@ -328,11 +284,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-Retrieve-Sheet_8
+      name: Player-Retrieve-Sheet_1
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
+        y: 64
         width: 128
         height: 64
       alignment: 7
@@ -341,20 +297,20 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f047817a2b564ad00800000000000000
-      internalID: 983022436655592463
+      spriteID: 70e311726ee3e6041b1c48994c6857fb
+      internalID: 2055866828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-Retrieve-Sheet_9
+      name: Player-Retrieve-Sheet_2
       rect:
         serializedVersion: 2
         x: 256
-        y: 0
+        y: 64
         width: 128
         height: 64
       alignment: 7
@@ -363,16 +319,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3efaa4390b93a2610800000000000000
-      internalID: 1597152448404434915
+      spriteID: 3d03a5831f797d84eb946f4a054cf6e9
+      internalID: 656811680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-Retrieve-Sheet_10
+      name: Player-Retrieve-Sheet_8
       rect:
         serializedVersion: 2
         x: 384
@@ -385,16 +341,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c52f46c9f9275bc50800000000000000
-      internalID: 6680371652123226716
+      spriteID: c04732346844c37499bcc7f241876e96
+      internalID: -2119227429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-Retrieve-Sheet_11
+      name: Player-Retrieve-Sheet_9
       rect:
         serializedVersion: 2
         x: 512
@@ -407,54 +363,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e8340b08b01137000800000000000000
-      internalID: 32388363423073166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Retrieve-Sheet_12
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 77deb1d64481c31c0800000000000000
-      internalID: -4522713243619431049
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Retrieve-Sheet_13
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 86e45226169b6df70800000000000000
-      internalID: 9211753915742506600
+      spriteID: cdf06f3bf22b01449a17104b59c917fd
+      internalID: -2058576861
       vertices: []
       indices: 
       edges: []
@@ -476,19 +388,15 @@ TextureImporter:
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Player-Retrieve-Sheet_0: -315987011031564947
-      Player-Retrieve-Sheet_1: 8535538888087462380
-      Player-Retrieve-Sheet_10: 6680371652123226716
-      Player-Retrieve-Sheet_11: 32388363423073166
-      Player-Retrieve-Sheet_12: -4522713243619431049
-      Player-Retrieve-Sheet_13: 9211753915742506600
-      Player-Retrieve-Sheet_2: 2746057976232454203
-      Player-Retrieve-Sheet_3: 3517204630563806777
-      Player-Retrieve-Sheet_4: 2021248410534029700
-      Player-Retrieve-Sheet_5: -9164129200616754191
-      Player-Retrieve-Sheet_6: -452446632847134326
+      Player-Retrieve-Sheet_1: 2055866828
+      Player-Retrieve-Sheet_2: 656811680
+      Player-Retrieve-Sheet_3: 8535538888087462380
+      Player-Retrieve-Sheet_4: 2746057976232454203
+      Player-Retrieve-Sheet_5: 3517204630563806777
+      Player-Retrieve-Sheet_6: 2021248410534029700
       Player-Retrieve-Sheet_7: 1019719663453376851
-      Player-Retrieve-Sheet_8: 983022436655592463
-      Player-Retrieve-Sheet_9: 1597152448404434915
+      Player-Retrieve-Sheet_8: -2119227429
+      Player-Retrieve-Sheet_9: -2058576861
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
