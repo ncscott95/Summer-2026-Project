@@ -156,8 +156,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 128
+        y: 192
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -177,9 +177,9 @@ TextureImporter:
       name: Player-Retrieve-Sheet_3
       rect:
         serializedVersion: 2
-        x: 384
-        y: 64
-        width: 128
+        x: 768
+        y: 192
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -199,9 +199,9 @@ TextureImporter:
       name: Player-Retrieve-Sheet_4
       rect:
         serializedVersion: 2
-        x: 512
-        y: 64
-        width: 128
+        x: 0
+        y: 128
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -221,9 +221,9 @@ TextureImporter:
       name: Player-Retrieve-Sheet_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
+        x: 256
+        y: 128
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -243,9 +243,9 @@ TextureImporter:
       name: Player-Retrieve-Sheet_6
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
+        x: 0
+        y: 64
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -266,8 +266,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 0
-        width: 128
+        y: 64
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -287,9 +287,9 @@ TextureImporter:
       name: Player-Retrieve-Sheet_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
-        width: 128
+        x: 256
+        y: 192
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -309,9 +309,9 @@ TextureImporter:
       name: Player-Retrieve-Sheet_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 64
-        width: 128
+        x: 512
+        y: 192
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -331,9 +331,9 @@ TextureImporter:
       name: Player-Retrieve-Sheet_8
       rect:
         serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
+        x: 512
+        y: 64
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -353,9 +353,9 @@ TextureImporter:
       name: Player-Retrieve-Sheet_9
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
-        width: 128
+        x: 768
+        y: 64
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -367,6 +367,50 @@ TextureImporter:
       bones: []
       spriteID: cdf06f3bf22b01449a17104b59c917fd
       internalID: -2058576861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Retrieve-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c4c5b07f94b5aa42b0f7fa15af551e4
+      internalID: 744720029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Retrieve-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1468a3d659141a49aa474be09b8ac67
+      internalID: -261670935
       vertices: []
       indices: 
       edges: []
@@ -385,10 +429,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Player-Retrieve-Sheet_0: -315987011031564947
       Player-Retrieve-Sheet_1: 2055866828
+      Player-Retrieve-Sheet_10: 744720029
+      Player-Retrieve-Sheet_11: -261670935
       Player-Retrieve-Sheet_2: 656811680
       Player-Retrieve-Sheet_3: 8535538888087462380
       Player-Retrieve-Sheet_4: 2746057976232454203

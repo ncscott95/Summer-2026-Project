@@ -174,8 +174,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 128
+        y: 192
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -195,9 +195,9 @@ TextureImporter:
       name: Player-Cast-Sheet_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
-        width: 128
+        x: 256
+        y: 192
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -217,9 +217,9 @@ TextureImporter:
       name: Player-Cast-Sheet_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 64
-        width: 128
+        x: 512
+        y: 192
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -239,9 +239,9 @@ TextureImporter:
       name: Player-Cast-Sheet_3
       rect:
         serializedVersion: 2
-        x: 384
-        y: 64
-        width: 128
+        x: 768
+        y: 192
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -261,9 +261,9 @@ TextureImporter:
       name: Player-Cast-Sheet_4
       rect:
         serializedVersion: 2
-        x: 512
-        y: 64
-        width: 128
+        x: 0
+        y: 128
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -283,9 +283,9 @@ TextureImporter:
       name: Player-Cast-Sheet_5
       rect:
         serializedVersion: 2
-        x: 640
-        y: 64
-        width: 128
+        x: 256
+        y: 128
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -305,9 +305,9 @@ TextureImporter:
       name: Player-Cast-Sheet_6
       rect:
         serializedVersion: 2
-        x: 768
+        x: 0
         y: 64
-        width: 128
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -329,7 +329,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -349,9 +349,9 @@ TextureImporter:
       name: Player-Cast-Sheet_11
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 0
-        width: 128
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -368,12 +368,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-Cast-Sheet_12
+      name: Player-Cast-Sheet_7
       rect:
         serializedVersion: 2
         x: 256
-        y: 0
-        width: 128
+        y: 64
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -381,43 +381,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7e60ce042187d5080800000000000000
-      internalID: -9197062844226730265
+      spriteID: dbe931efe985a024b87b57bdd548a154
+      internalID: 5125523459534190973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-Cast-Sheet_13
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0d3ac14dd48ea3e40800000000000000
-      internalID: 5637073304576369616
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Cast-Sheet_14
+      name: Player-Cast-Sheet_8
       rect:
         serializedVersion: 2
         x: 512
-        y: 0
-        width: 128
+        y: 64
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -425,43 +403,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9671eb04bb3e80280800000000000000
-      internalID: -9076754655580645527
+      spriteID: 6c5e8daca034a374eba9d45b8af44925
+      internalID: 6927864885493544494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player-Cast-Sheet_15
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: becd56c9ec086bcd0800000000000000
-      internalID: -2542703314728526613
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player-Cast-Sheet_16
+      name: Player-Cast-Sheet_9
       rect:
         serializedVersion: 2
         x: 768
-        y: 0
-        width: 128
+        y: 64
+        width: 256
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -469,10 +425,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5f1e32a82c5dd94f0800000000000000
-      internalID: -820264525593583115
+      spriteID: 64ac441448e276c469034da3716b9ef3
+      internalID: -3852497605764476942
       vertices: []
       indices: 
       edges: []
@@ -491,20 +447,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Player-Cast-Sheet_0: -7304850620236955724
       Player-Cast-Sheet_1: -123967013411789922
       Player-Cast-Sheet_10: 8333019493806605095
       Player-Cast-Sheet_11: 1812074873633969972
-      Player-Cast-Sheet_12: -9197062844226730265
-      Player-Cast-Sheet_13: 5637073304576369616
-      Player-Cast-Sheet_14: -9076754655580645527
-      Player-Cast-Sheet_15: -2542703314728526613
-      Player-Cast-Sheet_16: -820264525593583115
-      Player-Cast-Sheet_17: -8578260844843017473
-      Player-Cast-Sheet_18: -2307807788307607513
-      Player-Cast-Sheet_19: 5982654287852100418
       Player-Cast-Sheet_2: 8498862123307847364
       Player-Cast-Sheet_3: -9174960631085921077
       Player-Cast-Sheet_4: -2623468409916300498

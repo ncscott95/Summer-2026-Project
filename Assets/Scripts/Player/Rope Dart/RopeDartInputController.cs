@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class RopeDartInputController : Singleton<RopeDartInputController>
 {
-    private const float DartDirectionBufferDuration = 0.2f;
-    private const float TwineBufferDuration = 0.2f;
+    private const float DartDirectionBufferDuration = 0.1f;
+    private const float TwineBufferDuration = 0.1f;
     private const float DirectionDeadzone = 0.5f;
 
     // Animation timing values
     private const float AnimationFrameDuration = 0.05f; // 20 frames per second
-    private const int CastAnimationFrameLength = 7;
-    private const int ElbowAnimationFrameLength = 16;
-    private const int ExtendedAnimationFrameLength = 2;
-    private const int RetrieveAnimationFrameLength = 7;
+    private const int CastAnimationFrameLength = 6;
+    private const int ElbowAnimationFrameLength = 15;
+    private const int ExtendedAnimationFrameLength = 1;
+    private const int RetrieveAnimationFrameLength = 6;
     private const int DragonAnimationFrameLength = 16;
     private const int NeckAnimationFrameLength = 13;
     private const int NeckOppAnimationFrameLength = 37;
