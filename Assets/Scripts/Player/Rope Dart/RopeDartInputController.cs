@@ -11,7 +11,7 @@ public class RopeDartInputController : Singleton<RopeDartInputController>
     private const int CastAnimationFrameLength = 6;
     private const int ElbowAnimationFrameLength = 15;
     private const int ExtendedAnimationFrameLength = 1;
-    private const int RetrieveAnimationFrameLength = 6;
+    private const int RetrieveAnimationFrameLength = 5;
     private const int DragonAnimationFrameLength = 16;
     private const int NeckAnimationFrameLength = 13;
     private const int NeckOppAnimationFrameLength = 37;
