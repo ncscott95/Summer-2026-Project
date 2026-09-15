@@ -26,8 +26,16 @@ public class LevelTarget : MonoBehaviour
 
     public virtual void OnTargetHit()
     {
-        // TODO: add logic for when the target is hit
-        LevelManager.Instance.OnTargetHit(_targetItem);
+        if (RopeDartManager.Instance.TryHitTarget())
+        {
+            LevelManager.Instance.OnTargetHit(_targetItem);
+            Destroy(gameObject);
+        }
+    }
+
+    public virtual void OnTargetExpire()
+    {
+        LevelManager.Instance.OnTargetExpire(_targetItem);
         Destroy(gameObject);
     }
 

@@ -12,9 +12,11 @@ public class TimerTarget : LevelTarget
         StartCoroutine(TimerCoroutine());
     }
 
-    public override void OnTargetHit()
+    public override void OnTargetExpire()
     {
-        base.OnTargetHit();
+        // TODO: add visual feedback for target expiration
+
+        base.OnTargetExpire();
     }
 
     private IEnumerator TimerCoroutine()
@@ -28,7 +30,6 @@ public class TimerTarget : LevelTarget
             yield return null;
         }
 
-        // TODO: temp, add logic for what happens when the timer runs out
-        OnTargetHit();
+        OnTargetExpire();
     }
 }

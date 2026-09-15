@@ -14,6 +14,7 @@ public class BindingStack : Singleton<BindingStack>
     public BindingGraphData BindingGraph { get; private set; }
 
     [SerializeField] private RopeDartVisualManager _ropeDartVisualManager;
+    [SerializeField] private ScoringSystem _scoringSystem;
 
     // these work in backwards order: if the top binding is Dragon, the next binding down must be Belt to prime
     private static readonly List<KeyValuePair<string, List<string>>> _primingBindings = new List<KeyValuePair<string, List<string>>>
@@ -117,6 +118,8 @@ public class BindingStack : Singleton<BindingStack>
         {
             RemoveLastBindingWithId("Spin");
             HandleCastUnwind();
+            _scoringSystem.AddBinding(connection.Nickname, connection.BasePoints);
+            RopeDartManager.Instance.ResetHitCount();
             RopeDartInputController.Instance.StartCastEndBuffer();
         }
         else if (connection.Input == "Retrieve")
@@ -129,14 +132,17 @@ public class BindingStack : Singleton<BindingStack>
             RemoveLastBindingWithId("Spin");
             if (connection.Nickname == "Elbow Shot")
             {
-                RopeDartInputController.Instance.StartElbowEndBuffer();
                 HandleCastUnwind();
+                _scoringSystem.AddBinding(connection.Nickname, connection.BasePoints);
+                RopeDartManager.Instance.ResetHitCount();
+                RopeDartInputController.Instance.StartElbowEndBuffer();
             }
             else if (connection.Nickname == "Dragon" || connection.Nickname == "Necklace" || connection.Nickname == "Scorpion" || connection.Nickname == "Belt")
             {
                 string newBindingName = ResolveWrapBindingName(connection.Nickname);
                 RenameBindingAtIndex(AllCurrentBindings.Count - 1, newBindingName);
                 DetectPrimedBindings();
+                _scoringSystem.AddBinding(newBindingName, connection.BasePoints);
 
                 if (connection.Nickname == "Dragon")
                 {

@@ -151,7 +151,8 @@ public class BindingImporter : EditorWindow
             FlipsWallDark = ParseBool(columns[16]),
             SetsCoiling = ParseBool(columns[17]),
             NodeSequence = new List<BindingStackElement>(),
-            Animation = columns.Length > 22 ? columns[22].Trim() : ""
+            Animation = columns[22].Trim(),
+            BasePoints = int.TryParse(columns[23], out int basePoints) ? basePoints : 0,
         };
 
         currentConnection.NodeSequence = new List<BindingStackElement>();

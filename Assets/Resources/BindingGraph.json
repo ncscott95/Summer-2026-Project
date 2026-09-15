@@ -26,7 +26,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Spin"
+                    "Animation": "Spin",
+                    "BasePoints": 0
                 }
             ]
         },
@@ -56,7 +57,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Cast"
+                    "Animation": "Cast",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Elbow Shot",
@@ -80,7 +82,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Elbow"
+                    "Animation": "Elbow",
+                    "BasePoints": 5
                 },
                 {
                     "Nickname": "Knee Shot",
@@ -104,7 +107,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Knee"
+                    "Animation": "Knee",
+                    "BasePoints": 5
                 },
                 {
                     "Nickname": "Dragon",
@@ -128,7 +132,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Dragon"
+                    "Animation": "Dragon",
+                    "BasePoints": 10
                 },
                 {
                     "Nickname": "Necklace",
@@ -152,7 +157,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Necklace"
+                    "Animation": "Necklace",
+                    "BasePoints": 10
                 }
             ]
         },
@@ -182,7 +188,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Retrieve"
+                    "Animation": "Retrieve",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Retrieve",
@@ -206,7 +213,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Retrieve"
+                    "Animation": "Retrieve",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Scorpion",
@@ -230,7 +238,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Scorpion"
+                    "Animation": "Scorpion",
+                    "BasePoints": 10
                 },
                 {
                     "Nickname": "Belt",
@@ -254,7 +263,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Belt"
+                    "Animation": "Belt",
+                    "BasePoints": 10
                 },
                 {
                     "Nickname": "Manacle",
@@ -278,7 +288,8 @@
                             "UnitCost": 3
                         }
                     ],
-                    "Animation": "Manacle"
+                    "Animation": "Manacle",
+                    "BasePoints": 20
                 },
                 {
                     "Nickname": "Overlord",
@@ -302,7 +313,8 @@
                             "UnitCost": 3
                         }
                     ],
-                    "Animation": "Overlord"
+                    "Animation": "Overlord",
+                    "BasePoints": 20
                 }
             ]
         },
@@ -332,7 +344,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Spin"
+                    "Animation": "Spin",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Cast",
@@ -356,7 +369,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Cast"
+                    "Animation": "Cast",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Elbow Shot",
@@ -380,7 +394,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Elbow"
+                    "Animation": "Elbow",
+                    "BasePoints": 5
                 },
                 {
                     "Nickname": "Knee Shot",
@@ -404,7 +419,8 @@
                             "UnitCost": 1
                         }
                     ],
-                    "Animation": "Knee"
+                    "Animation": "Knee",
+                    "BasePoints": 5
                 }
             ]
         },
@@ -434,7 +450,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Spin"
+                    "Animation": "Spin",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Dragon Shot",
@@ -458,7 +475,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 10
                 }
             ]
         },
@@ -488,7 +506,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Spin"
+                    "Animation": "Spin",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Dragon Shot",
@@ -512,7 +531,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 10
                 }
             ]
         },
@@ -542,7 +562,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Spin"
+                    "Animation": "Spin",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Neck Shot",
@@ -566,7 +587,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 10
                 }
             ]
         },
@@ -596,7 +618,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Spin"
+                    "Animation": "Spin",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Neck Shot",
@@ -620,7 +643,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 10
                 }
             ]
         },
@@ -650,7 +674,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Spin"
+                    "Animation": "Spin",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "",
@@ -669,7 +694,8 @@
                     "FlipsWallDark": false,
                     "SetsCoiling": false,
                     "NodeSequence": [],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 0
                 }
             ]
         },
@@ -699,7 +725,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Spin"
+                    "Animation": "Spin",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "",
@@ -718,7 +745,8 @@
                     "FlipsWallDark": false,
                     "SetsCoiling": false,
                     "NodeSequence": [],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 0
                 }
             ]
         },
@@ -743,7 +771,8 @@
                     "FlipsWallDark": false,
                     "SetsCoiling": false,
                     "NodeSequence": [],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "",
@@ -762,7 +791,8 @@
                     "FlipsWallDark": false,
                     "SetsCoiling": false,
                     "NodeSequence": [],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 0
                 }
             ]
         },
@@ -787,7 +817,8 @@
                     "FlipsWallDark": false,
                     "SetsCoiling": false,
                     "NodeSequence": [],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "",
@@ -806,7 +837,8 @@
                     "FlipsWallDark": false,
                     "SetsCoiling": false,
                     "NodeSequence": [],
-                    "Animation": ""
+                    "Animation": "",
+                    "BasePoints": 0
                 }
             ]
         },
@@ -831,7 +863,8 @@
                     "FlipsWallDark": false,
                     "SetsCoiling": false,
                     "NodeSequence": [],
-                    "Animation": "Unstuck"
+                    "Animation": "Unstuck",
+                    "BasePoints": 0
                 },
                 {
                     "Nickname": "Throw",
@@ -855,7 +888,8 @@
                             "UnitCost": 0
                         }
                     ],
-                    "Animation": "Throw"
+                    "Animation": "Throw",
+                    "BasePoints": 0
                 }
             ]
         }

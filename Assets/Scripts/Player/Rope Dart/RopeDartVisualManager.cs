@@ -3,7 +3,6 @@ using UnityEngine;
 public class RopeDartVisualManager : MonoBehaviour
 {
     [SerializeField] private Animator _playerAnimator;
-    [SerializeField] private Animator _ropeDartAnimator;
 
     public void UpdateVisuals(BindingGraphConnection bindingConnection)
     {

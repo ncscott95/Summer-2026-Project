@@ -39,4 +39,5 @@ public class BindingGraphConnection
     public bool SetsCoiling;
     public List<BindingStackElement> NodeSequence;
     public string Animation;
+    public int BasePoints;
 }
