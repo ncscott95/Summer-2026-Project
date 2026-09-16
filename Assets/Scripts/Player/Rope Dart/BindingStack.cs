@@ -56,7 +56,7 @@ public class BindingStack : Singleton<BindingStack>
             {
                 if (CanUseConnection(connection))
                 {
-                    Debug.Log($"Using connection {connection.Nickname} from binding {lastBindingId} with input {bindingInput}.");
+                    // Debug.Log($"Using connection {connection.Nickname} from binding {lastBindingId} with input {bindingInput}.");
                     OnSuccessfulGraphConnection(connection);
                     return connection;
                 }

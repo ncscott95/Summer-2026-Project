@@ -15,7 +15,7 @@ public class RopeDartVisualManager : Singleton<RopeDartVisualManager>
 
     public void SetBufferedBinding(string binding)
     {
-        Debug.Log($"Setting buffered binding to {binding}.");
+        Debug.Log($"Setting buffered binding to {binding}, current animation: {_currentAnimation}.");
         _bufferedBinding = binding;
     }
 
@@ -31,22 +31,38 @@ public class RopeDartVisualManager : Singleton<RopeDartVisualManager>
     private void PushBufferedBinding()
     {
         AnimatorStateInfo previousState = _playerAnimator.GetCurrentAnimatorStateInfo(0);
+        BindingGraphConnection connection;
 
-        BindingGraphConnection connection = BindingStack.Instance.TryPushBinding(_bufferedBinding);
-        if (connection == null) connection = BindingStack.Instance.TryPushBinding("(Nothing)");
+        // trying to bind to Dragon from Spin triggers at 0.75 normalized time
+        // if input happened between 0.75 and 1.0, continue spinning but keep the buffered binding
+        // TODO: this might cause issues if twine down happens at a weird time, like a retrieval
+        if (_bufferedBinding == "Twine Down")
+        {
+            connection = BindingStack.Instance.TryPushBinding("(Nothing)");
 
-        Debug.Log($"Setting trigger {connection.Animation}.");
-        _playerAnimator.SetTrigger(connection.Animation);
+            _playerAnimator.SetTrigger(connection.Animation);
 
-        _currentAnimation = connection.Animation;
-        _bufferedBinding = "(Nothing)";
-        StartCoroutine(AwaitAnimationEndCoroutine(previousState));
+            _currentAnimation = connection.Animation;
+            _bufferedBinding = "Twine Down";
+
+            StartCoroutine(AwaitAnimationEndCoroutine(previousState));
+        }
+        else
+        {
+            connection = BindingStack.Instance.TryPushBinding(_bufferedBinding);
+            if (connection == null) connection = BindingStack.Instance.TryPushBinding("(Nothing)");
+
+            _playerAnimator.SetTrigger(connection.Animation);
+
+            _currentAnimation = connection.Animation;
+            _bufferedBinding = "(Nothing)";
+
+            StartCoroutine(AwaitAnimationEndCoroutine(previousState));
+        }
     }
 
     private IEnumerator AwaitAnimationEndCoroutine(AnimatorStateInfo previousState)
     {
-        Debug.Log($"Awaiting animation {_currentAnimation} to end...");
-
         // Wait until the trigger starts a transition. The source state may already be at normalized time 1.
         yield return null;
 
@@ -64,12 +80,22 @@ public class RopeDartVisualManager : Singleton<RopeDartVisualManager>
             yield return null;
         }
 
-        while (_playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        while (_playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.75f)
         {
             yield return null;
         }
 
-        // Debug.Log($"Animation {_currentAnimation} ended.");
+        // allow transition to Dragon state at 0.75 normalized time
+        if (_bufferedBinding == "Twine Down")
+        {
+            HandleDragonTwine();
+            yield break;
+        }
+
+        while (_playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+            yield return null;
+        }
 
         OnAnimationEnd();
     }
@@ -95,7 +121,24 @@ public class RopeDartVisualManager : Singleton<RopeDartVisualManager>
                 break;
         }
 
-        Debug.Log($"Post-{_currentAnimation} execution ended. Pushing buffered binding: {_bufferedBinding}");
         PushBufferedBinding();
+    }
+
+    private void HandleDragonTwine()
+    {
+        AnimatorStateInfo previousState = _playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+        BindingGraphConnection connection = BindingStack.Instance.TryPushBinding(_bufferedBinding);
+        if (connection == null)
+        {
+            _bufferedBinding = "(Nothing)";
+            return;
+        }
+
+        _playerAnimator.SetTrigger(connection.Animation);
+
+        _currentAnimation = connection.Animation;
+        _bufferedBinding = "(Nothing)";
+        StartCoroutine(AwaitAnimationEndCoroutine(previousState));
     }
 }
