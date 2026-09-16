@@ -12,31 +12,6 @@ public class RopeDartManager : Singleton<RopeDartManager>
         RopeDartStatusUI.Instance.UpdateStatusUI();
     }
 
-    // public void OnSpinEnd()
-    // {
-    //     BindingStack.Instance.TryPushBinding("(Nothing)");
-    // }
-
-    // public void OnCastEnd()
-    // {
-    //     BindingStack.Instance.TryPushBinding("(Nothing)");
-    // }
-
-    // public void OnDragonEnd()
-    // {
-    //     BindingStack.Instance.TryPushBinding("(Nothing)");
-    // }
-
-    // public void OnNeckEnd()
-    // {
-    //     BindingStack.Instance.TryPushBinding("(Nothing)");
-    // }
-
-    // public void OnRetrieveEnd()
-    // {
-    //     BindingStack.Instance.TryPushBinding("(Nothing)");
-    // }
-
     public void Reset()
     {
         BindingStack.Instance.ClearBindings();

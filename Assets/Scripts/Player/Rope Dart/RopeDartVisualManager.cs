@@ -101,24 +101,7 @@ public class RopeDartVisualManager : Singleton<RopeDartVisualManager>
 
     private void OnAnimationEnd()
     {
-        switch (_currentAnimation)
-        {
-            case "Spin":
-                ScoringSystem.Instance.DoMultiplierDecay();
-                break;
-            case "Cast":
-                break;
-            case "Elbow":
-                break;
-            case "Dragon":
-                break;
-            case "Necklace":
-                break;
-            case "Retrieve":
-                break;
-            default:
-                break;
-        }
+        if (_currentAnimation == "Spin") ScoringSystem.Instance.DoMultiplierDecay();
 
         PushBufferedBinding();
     }

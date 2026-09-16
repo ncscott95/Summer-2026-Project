@@ -12,7 +12,7 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
 
     public readonly Dictionary<string, Color32> BindingToColorLookup = new Dictionary<string, Color32>
     {
-        { "Idle",           new Color32(0, 0, 0, 255) },
+        { "Idle",           new Color32(64, 64, 64, 255) },
         { "Spin",           new Color32(255, 0, 0, 255) },
         { "Cast",           new Color32(0, 255, 0, 255) },
         { "Retrieve",       new Color32(0, 0, 255, 255) },
@@ -27,7 +27,7 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
     };
 
     private List<Image> _bindingImages = new List<Image>();
-    private Color32 _slackColor = new Color32(0, 0, 0, 255);
+    private Color32 _slackColor = new Color32(64, 64, 64, 255);
 
     public override void Awake()
     {
