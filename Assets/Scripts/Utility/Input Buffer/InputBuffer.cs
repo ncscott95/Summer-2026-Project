@@ -14,6 +14,7 @@ public class InputBuffer : IInputBuffer
     private bool _isActive = false;
     private float _duration;
     private float _timer;
+    private int _activationVersion;
 
     public InputBuffer(float duration, Action onBufferEnd)
     {
@@ -23,9 +24,16 @@ public class InputBuffer : IInputBuffer
 
     public void StartBuffer()
     {
+        _activationVersion++;
         _timer = _duration;
         _isActive = true;
         InputBufferList.AddBuffer(this);
+    }
+
+    public void StartBuffer(float duration)
+    {
+        _duration = duration;
+        StartBuffer();
     }
 
     public void Tick(float deltaTime)
@@ -35,8 +43,12 @@ public class InputBuffer : IInputBuffer
         _timer -= deltaTime;
         if (_timer <= 0f)
         {
+            int completedActivationVersion = _activationVersion;
             _onBufferEnd?.Invoke();
-            EndBuffer();
+            if (_activationVersion == completedActivationVersion)
+            {
+                EndBuffer();
+            }
         }
     }
 
@@ -52,8 +64,12 @@ public class InputBuffer : IInputBuffer
     {
         if (!_isActive) return false;
 
+        int completedActivationVersion = _activationVersion;
         _onBufferEnd?.Invoke();
-        EndBuffer();
+        if (_activationVersion == completedActivationVersion)
+        {
+            EndBuffer();
+        }
         return true;
     }
 
@@ -73,6 +89,7 @@ public class InputBuffer<T> : IInputBuffer
     private bool _isActive = false;
     private float _duration;
     private float _timer;
+    private int _activationVersion;
 
     public InputBuffer(float duration, Action<T> onBufferEnd)
     {
@@ -83,9 +100,16 @@ public class InputBuffer<T> : IInputBuffer
     public void StartBuffer(T bufferedInput)
     {
         this._bufferedInput = bufferedInput;
+        _activationVersion++;
         _timer = _duration;
         _isActive = true;
         InputBufferList.AddBuffer(this);
+    }
+
+    public void StartBuffer(float duration, T bufferedInput)
+    {
+        _duration = duration;
+        StartBuffer(bufferedInput);
     }
 
     public void Tick(float deltaTime)
@@ -95,8 +119,12 @@ public class InputBuffer<T> : IInputBuffer
         _timer -= deltaTime;
         if (_timer <= 0f)
         {
+            int completedActivationVersion = _activationVersion;
             _onBufferEnd?.Invoke(_bufferedInput);
-            EndBuffer();
+            if (_activationVersion == completedActivationVersion)
+            {
+                EndBuffer();
+            }
         }
     }
 
@@ -112,8 +140,12 @@ public class InputBuffer<T> : IInputBuffer
     {
         if (!_isActive) return false;
 
+        int completedActivationVersion = _activationVersion;
         _onBufferEnd?.Invoke(_bufferedInput);
-        EndBuffer();
+        if (_activationVersion == completedActivationVersion)
+        {
+            EndBuffer();
+        }
         return true;
     }
 

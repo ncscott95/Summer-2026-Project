@@ -13,9 +13,6 @@ public class BindingStack : Singleton<BindingStack>
 
     public BindingGraphData BindingGraph { get; private set; }
 
-    [SerializeField] private RopeDartVisualManager _ropeDartVisualManager;
-    [SerializeField] private ScoringSystem _scoringSystem;
-
     // these work in backwards order: if the top binding is Dragon, the next binding down must be Belt to prime
     private static readonly List<KeyValuePair<string, List<string>>> _primingBindings = new List<KeyValuePair<string, List<string>>>
     {
@@ -41,7 +38,7 @@ public class BindingStack : Singleton<BindingStack>
         BindingGraph = JsonUtility.FromJson<BindingGraphData>(Resources.Load<TextAsset>("BindingGraph").text);
     }
 
-    public bool TryPushBinding(string bindingInput)
+    public BindingGraphConnection TryPushBinding(string bindingInput)
     {
         if (AllCurrentBindings.Count > 0)
         {
@@ -52,7 +49,7 @@ public class BindingStack : Singleton<BindingStack>
             if (possibleConnections.Count == 0)
             {
                 Debug.LogWarning($"No connections found for input {bindingInput} from binding {lastBindingId}.");
-                return false;
+                return null;
             }
 
             foreach (BindingGraphConnection connection in possibleConnections)
@@ -61,18 +58,18 @@ public class BindingStack : Singleton<BindingStack>
                 {
                     Debug.Log($"Using connection {connection.Nickname} from binding {lastBindingId} with input {bindingInput}.");
                     OnSuccessfulGraphConnection(connection);
-                    return true;
+                    return connection;
                 }
             }
 
             Debug.LogWarning($"No valid connections could be used for input {bindingInput} from binding {lastBindingId}.");
-            return false;
+            return null;
         }
         else
         {
             AllCurrentBindings.Add(new BindingStackElement("Idle", 0));
 
-            return false;
+            return null;
         }
     }
 
@@ -110,22 +107,24 @@ public class BindingStack : Singleton<BindingStack>
 
         if (connection.FlipsLeadAnchor) RopeDartManager.Instance.FlipLeadAnchor();
 
-        if (connection.Input == "Spin")
+        if (connection.Input == "(Start)")
         {
-            
+            // required to start first animation after starting the level
+            // _ropeDartVisualManager.StartAnimation(connection.Animation, false);
+            RopeDartVisualManager.Instance.StartAnimation(connection.Animation);
         }
         else if (connection.Input == "Cast")
         {
             RemoveLastBindingWithId("Spin");
             HandleCastUnwind();
-            _scoringSystem.AddBinding(connection.Nickname, connection.BasePoints);
+            ScoringSystem.Instance.AddBinding(connection.Nickname, connection.BasePoints);
             RopeDartManager.Instance.ResetHitCount();
-            RopeDartInputController.Instance.StartCastEndBuffer();
+            // RopeDartInputController.Instance.StartCastEndBuffer();
         }
         else if (connection.Input == "Retrieve")
         {
             RemoveLastBindingWithId("Cast");
-            RopeDartInputController.Instance.StartRetrieveEndBuffer();
+            // RopeDartInputController.Instance.StartRetrieveEndBuffer();
         }
         else if (connection.Input.StartsWith("Twine"))
         {
@@ -133,42 +132,64 @@ public class BindingStack : Singleton<BindingStack>
             if (connection.Nickname == "Elbow Shot")
             {
                 HandleCastUnwind();
-                _scoringSystem.AddBinding(connection.Nickname, connection.BasePoints);
+                ScoringSystem.Instance.AddBinding(connection.Nickname, connection.BasePoints);
                 RopeDartManager.Instance.ResetHitCount();
-                RopeDartInputController.Instance.StartElbowEndBuffer();
+                // RopeDartInputController.Instance.StartElbowEndBuffer();
             }
             else if (connection.Nickname == "Dragon" || connection.Nickname == "Necklace" || connection.Nickname == "Scorpion" || connection.Nickname == "Belt")
             {
                 string newBindingName = ResolveWrapBindingName(connection.Nickname);
                 RenameBindingAtIndex(AllCurrentBindings.Count - 1, newBindingName);
                 DetectPrimedBindings();
-                _scoringSystem.AddBinding(newBindingName, connection.BasePoints);
+                ScoringSystem.Instance.AddBinding(newBindingName, connection.BasePoints);
 
                 if (connection.Nickname == "Dragon")
                 {
-                    RopeDartInputController.Instance.StartDragonEndBuffer();
+                    // RopeDartInputController.Instance.StartDragonEndBuffer();
                 }
                 else if (connection.Nickname == "Necklace")
                 {
-                    RopeDartInputController.Instance.StartNeckEndBuffer();
+                    // RopeDartInputController.Instance.StartNeckEndBuffer();
                 }
             }
         }
         else if (connection.Input == "(Nothing)")
         {
-            // make (Nothing) behave properly as a retrieve call
-            if (connection.Nickname == "Retrieve")
+            if (connection.Nickname == "Spin")
+            {
+                // do not decay multiplier on first spin after another action
+                // ScoringSystem.Instance.DoMultiplierDecay();
+                // RopeDartInputController.Instance.StartSpinEndBuffer();
+            }
+            else if (connection.Nickname == "Continue Spin")
+            {
+                RemoveLastBindingWithId("Spin");
+                ScoringSystem.Instance.DoMultiplierDecay();
+                // RopeDartInputController.Instance.StartSpinEndBuffer();
+            }
+            else if (connection.Nickname == "Retrieve")
             {
                 RemoveLastBindingWithId("Cast");
-                RopeDartInputController.Instance.StartRetrieveEndBuffer();
+                // RopeDartInputController.Instance.StartRetrieveEndBuffer();
             }
         }
         else
         {
-            // Debug.LogWarning($"Unhandled input {connection.Input} for binding {connection.Nickname}");
+            Debug.LogWarning($"Unhandled input {connection.Input} for binding {connection.Nickname}");
         }
 
-        _ropeDartVisualManager.UpdateVisuals(connection);
+        // _ropeDartVisualManager.UpdateVisuals(connection);
+        // if (connection.Input == "(Start)")
+        // {
+        //     required to start first animation after starting the level
+        //     _ropeDartVisualManager.StartAnimation(connection.Animation, false);
+        //     RopeDartVisualManager.Instance.StartAnimation(connection.Animation, false);
+        // }
+        // else
+        // {
+        //     _ropeDartVisualManager.SetBufferedAnimation(connection);
+            
+        // }
     }
 
     private string ResolveWrapBindingName(string bindingName)
@@ -188,7 +209,7 @@ public class BindingStack : Singleton<BindingStack>
 
         if (darkPrimingBindings.Value != null && darkPrimingBindings.Value.Contains(previousBindingName))
         {
-            _ropeDartVisualManager.SetDarkTrigger();
+            RopeDartVisualManager.Instance.SetDarkTrigger();
             return darkBindingName;
         }
 
@@ -198,12 +219,12 @@ public class BindingStack : Singleton<BindingStack>
 
         if (bindingName == "Dragon" || bindingName == "Scorpion" || bindingName == "Belt")
         {
-            if (RopeDartManager.Instance.IsLeadSide) _ropeDartVisualManager.SetDarkTrigger();
+            if (RopeDartManager.Instance.IsLeadSide) RopeDartVisualManager.Instance.SetDarkTrigger();
             return RopeDartManager.Instance.IsLeadSide ? darkBindingName : bindingName;
         }
         else if (bindingName == "Necklace")
         {
-            if (!RopeDartManager.Instance.IsLeadSide) _ropeDartVisualManager.SetDarkTrigger();
+            if (!RopeDartManager.Instance.IsLeadSide) RopeDartVisualManager.Instance.SetDarkTrigger();
             return !RopeDartManager.Instance.IsLeadSide ? darkBindingName : bindingName;
         }
 

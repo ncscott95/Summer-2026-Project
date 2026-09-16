@@ -9,7 +9,6 @@ public class RopeDartStatusUI : Singleton<RopeDartStatusUI>
     [SerializeField] private TextMeshProUGUI _bindingStackText;
     [SerializeField] private TextMeshProUGUI _stateText;
     [SerializeField] private TextMeshProUGUI _unitCostText;
-    [SerializeField] private TextMeshProUGUI _scoreText;
 
     public readonly Dictionary<string, Color32> BindingToColorLookup = new Dictionary<string, Color32>
     {

@@ -3,7 +3,6 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private TargetSpawner _targetSpawner;
-    [SerializeField] private ScoringSystem _scoringSystem;
 
     private LevelData _currentLevelData;
 
@@ -23,7 +22,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         Debug.Log($"Target of type {targetItem.TargetType} hit at position {targetItem.SpawnPosition}");
         _targetSpawner.OnTargetDestroy(targetItem);
-        _scoringSystem.ScoreHit(targetItem);
+        ScoringSystem.Instance.ScoreHit(targetItem);
     }
 
     public void OnTargetExpire(LevelTargetItem targetItem)

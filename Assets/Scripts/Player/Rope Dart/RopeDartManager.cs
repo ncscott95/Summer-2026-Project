@@ -9,34 +9,39 @@ public class RopeDartManager : Singleton<RopeDartManager>
     void Start()
     {
         Reset();
+        RopeDartStatusUI.Instance.UpdateStatusUI();
     }
 
-    public void OnCastEnd()
-    {
-        BindingStack.Instance.TryPushBinding("(Nothing)");
-    }
+    // public void OnSpinEnd()
+    // {
+    //     BindingStack.Instance.TryPushBinding("(Nothing)");
+    // }
 
-    public void OnDragonEnd()
-    {
-        BindingStack.Instance.TryPushBinding("(Nothing)");
-    }
+    // public void OnCastEnd()
+    // {
+    //     BindingStack.Instance.TryPushBinding("(Nothing)");
+    // }
 
-    public void OnNeckEnd()
-    {
-        BindingStack.Instance.TryPushBinding("(Nothing)");
-    }
+    // public void OnDragonEnd()
+    // {
+    //     BindingStack.Instance.TryPushBinding("(Nothing)");
+    // }
 
-    public void OnRetrieveEnd()
-    {
-        BindingStack.Instance.TryPushBinding("(Nothing)");
-    }
+    // public void OnNeckEnd()
+    // {
+    //     BindingStack.Instance.TryPushBinding("(Nothing)");
+    // }
+
+    // public void OnRetrieveEnd()
+    // {
+    //     BindingStack.Instance.TryPushBinding("(Nothing)");
+    // }
 
     public void Reset()
     {
         BindingStack.Instance.ClearBindings();
         BindingStack.Instance.TryPushBinding("Idle");
-        BindingStack.Instance.TryPushBinding("(Nothing)");
-        RopeDartStatusUI.Instance.UpdateStatusUI();
+        BindingStack.Instance.TryPushBinding("(Start)");
     }
 
     public void FlipLeadAnchor()
