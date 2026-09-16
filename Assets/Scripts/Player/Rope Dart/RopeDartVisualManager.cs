@@ -101,8 +101,6 @@ public class RopeDartVisualManager : Singleton<RopeDartVisualManager>
 
     private void OnAnimationEnd()
     {
-        if (_currentAnimation == "Spin") ScoringSystem.Instance.DoMultiplierDecay();
-
         PushBufferedBinding();
     }
 
