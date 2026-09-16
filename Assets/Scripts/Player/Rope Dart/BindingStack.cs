@@ -103,8 +103,6 @@ public class BindingStack : Singleton<BindingStack>
             AllCurrentBindings.Add(new BindingStackElement(nodeUnitCost.NodeId, nodeUnitCost.UnitCost));
         }
 
-        RemoveLastBindingWithId("Retrieve");
-
         if (connection.FlipsLeadAnchor) RopeDartManager.Instance.FlipLeadAnchor();
 
         if (connection.Input == "(Start)")
@@ -116,6 +114,7 @@ public class BindingStack : Singleton<BindingStack>
         else if (connection.Input == "Cast")
         {
             RemoveLastBindingWithId("Spin");
+            RemoveLastBindingWithId("Retrieve");
             HandleCastUnwind();
             ScoringSystem.Instance.AddBinding(connection.Nickname, connection.BasePoints);
             RopeDartManager.Instance.ResetHitCount();
@@ -129,6 +128,8 @@ public class BindingStack : Singleton<BindingStack>
         else if (connection.Input.StartsWith("Twine"))
         {
             RemoveLastBindingWithId("Spin");
+            RemoveLastBindingWithId("Retrieve");
+
             if (connection.Nickname == "Elbow Shot")
             {
                 HandleCastUnwind();
@@ -160,6 +161,7 @@ public class BindingStack : Singleton<BindingStack>
                 // do not decay multiplier on first spin after another action
                 // ScoringSystem.Instance.DoMultiplierDecay();
                 // RopeDartInputController.Instance.StartSpinEndBuffer();
+                RemoveLastBindingWithId("Retrieve");
             }
             else if (connection.Nickname == "Continue Spin")
             {

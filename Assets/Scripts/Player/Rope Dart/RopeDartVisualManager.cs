@@ -35,8 +35,7 @@ public class RopeDartVisualManager : Singleton<RopeDartVisualManager>
 
         // trying to bind to Dragon from Spin triggers at 0.75 normalized time
         // if input happened between 0.75 and 1.0, continue spinning but keep the buffered binding
-        // TODO: this might cause issues if twine down happens at a weird time, like a retrieval
-        if (_bufferedBinding == "Twine Down")
+        if (_currentAnimation == "Spin" && _bufferedBinding == "Twine Down")
         {
             connection = BindingStack.Instance.TryPushBinding("(Nothing)");
 
@@ -85,8 +84,8 @@ public class RopeDartVisualManager : Singleton<RopeDartVisualManager>
             yield return null;
         }
 
-        // allow transition to Dragon state at 0.75 normalized time
-        if (_bufferedBinding == "Twine Down")
+        // allow transition to Dragon state from Spin at 0.75 normalized time
+        if (_currentAnimation == "Spin" && _bufferedBinding == "Twine Down")
         {
             HandleDragonTwine();
             yield break;

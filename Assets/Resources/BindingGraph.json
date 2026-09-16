@@ -242,31 +242,6 @@
                     "BasePoints": 0
                 },
                 {
-                    "Nickname": "Retrieve",
-                    "Input": "Retrieve",
-                    "UnitCost": 0,
-                    "IsLeadSideValid": true,
-                    "IsAnchorSideValid": true,
-                    "IsDownSpinValid": true,
-                    "IsUpSpinValid": true,
-                    "IsWallPlaneValid": true,
-                    "IsDarkPlaneValid": true,
-                    "IsCoilingNeeded": false,
-                    "IsStalledNeeded": false,
-                    "FlipsLeadAnchor": false,
-                    "FlipsDownUp": false,
-                    "FlipsWallDark": false,
-                    "SetsCoiling": false,
-                    "NodeSequence": [
-                        {
-                            "NodeId": "Retrieve",
-                            "UnitCost": 0
-                        }
-                    ],
-                    "Animation": "Retrieve",
-                    "BasePoints": 0
-                },
-                {
                     "Nickname": "Scorpion",
                     "Input": "",
                     "UnitCost": 1,
