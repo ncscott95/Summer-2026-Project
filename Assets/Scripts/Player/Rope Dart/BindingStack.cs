@@ -149,6 +149,7 @@ public class BindingStack : Singleton<BindingStack>
             else if (connection.Nickname == "Retrieve")
             {
                 RemoveLastBindingWithId("Cast");
+                ScoringSystem.Instance.ClearQueue();
             }
         }
         else

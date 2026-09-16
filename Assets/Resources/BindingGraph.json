@@ -375,7 +375,7 @@
                 {
                     "Nickname": "Cast",
                     "Input": "Cast",
-                    "UnitCost": 1,
+                    "UnitCost": 0,
                     "IsLeadSideValid": true,
                     "IsAnchorSideValid": true,
                     "IsDownSpinValid": true,
@@ -391,7 +391,7 @@
                     "NodeSequence": [
                         {
                             "NodeId": "Cast",
-                            "UnitCost": 1
+                            "UnitCost": 0
                         }
                     ],
                     "Animation": "Cast",

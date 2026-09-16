@@ -17,6 +17,8 @@ public class ScoringSystem : Singleton<ScoringSystem>
     }
 
     private const float MultiplierDecayRate = 0.5f; // Decay rate per spin
+    private const float MultiplierGainRate = 0.5f; // Gain rate per successful binding
+    private const float MaxMultiplier = 3f; // Maximum multiplier value
 
     public int CurrentScore { get; private set; } = 0;
     public float CurrentMultiplier { get; private set; } = 1f;
@@ -36,7 +38,7 @@ public class ScoringSystem : Singleton<ScoringSystem>
     public void AddBinding(string bindingId, float scoreValue)
     {
         _scoreQueue.Add(new ScoreEntry(bindingId, scoreValue));
-        CurrentMultiplier += 0.5f;
+        CurrentMultiplier = Mathf.Min(MaxMultiplier, CurrentMultiplier + MultiplierGainRate);
 
         GameObject queueEntry = Instantiate(_queueEntryPrefab, _queueContainer.transform);
         TextMeshProUGUI queueEntryText = queueEntry.GetComponentInChildren<TextMeshProUGUI>();
@@ -48,6 +50,16 @@ public class ScoringSystem : Singleton<ScoringSystem>
     public void DoMultiplierDecay()
     {
         CurrentMultiplier = Mathf.Max(1f, CurrentMultiplier - MultiplierDecayRate);
+        UpdateUI();
+    }
+
+    public void ClearQueue()
+    {
+        _scoreQueue.Clear();
+        foreach (Transform child in _queueContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
         UpdateUI();
     }
 
