@@ -9,7 +9,7 @@
                     "TargetType": 0,
                     "SpawnType": 0,
                     "SpawnPosition": 1,
-                    "PointValue": 0.0,
+                    "PointValue": 10.0,
                     "ModValue": 0.0
                 },
                 {
@@ -17,7 +17,7 @@
                     "TargetType": 0,
                     "SpawnType": 1,
                     "SpawnPosition": -1,
-                    "PointValue": 0.0,
+                    "PointValue": 10.0,
                     "ModValue": 0.0
                 },
                 {
@@ -25,7 +25,7 @@
                     "TargetType": 0,
                     "SpawnType": 1,
                     "SpawnPosition": 1,
-                    "PointValue": 0.0,
+                    "PointValue": 10.0,
                     "ModValue": 0.0
                 },
                 {
@@ -33,7 +33,7 @@
                     "TargetType": 0,
                     "SpawnType": 0,
                     "SpawnPosition": -1,
-                    "PointValue": 0.0,
+                    "PointValue": 10.0,
                     "ModValue": 0.0
                 },
                 {
@@ -41,7 +41,7 @@
                     "TargetType": 0,
                     "SpawnType": 2,
                     "SpawnPosition": 1,
-                    "PointValue": 0.0,
+                    "PointValue": 10.0,
                     "ModValue": 0.0
                 },
                 {
@@ -49,7 +49,7 @@
                     "TargetType": 0,
                     "SpawnType": 1,
                     "SpawnPosition": 1,
-                    "PointValue": 0.0,
+                    "PointValue": 10.0,
                     "ModValue": 0.0
                 },
                 {
@@ -57,7 +57,7 @@
                     "TargetType": 0,
                     "SpawnType": 1,
                     "SpawnPosition": -1,
-                    "PointValue": 0.0,
+                    "PointValue": 10.0,
                     "ModValue": 0.0
                 },
                 {
@@ -65,7 +65,7 @@
                     "TargetType": 0,
                     "SpawnType": 0,
                     "SpawnPosition": 1,
-                    "PointValue": 0.0,
+                    "PointValue": 10.0,
                     "ModValue": 0.0
                 }
             ]
@@ -79,48 +79,48 @@
                     "TargetType": 1,
                     "SpawnType": 0,
                     "SpawnPosition": -1,
-                    "PointValue": 0.0,
-                    "ModValue": 2.0
+                    "PointValue": 20.0,
+                    "ModValue": 5.0
                 },
                 {
                     "Id": 2,
                     "TargetType": 1,
                     "SpawnType": 1,
                     "SpawnPosition": 1,
-                    "PointValue": 0.0,
-                    "ModValue": 2.0
+                    "PointValue": 20.0,
+                    "ModValue": 5.0
                 },
                 {
                     "Id": 3,
                     "TargetType": 1,
                     "SpawnType": 1,
                     "SpawnPosition": -1,
-                    "PointValue": 0.0,
-                    "ModValue": 2.0
+                    "PointValue": 20.0,
+                    "ModValue": 5.0
                 },
                 {
                     "Id": 4,
                     "TargetType": 1,
                     "SpawnType": 0,
                     "SpawnPosition": 1,
-                    "PointValue": 0.0,
-                    "ModValue": 2.0
+                    "PointValue": 20.0,
+                    "ModValue": 5.0
                 },
                 {
                     "Id": 5,
                     "TargetType": 1,
                     "SpawnType": 2,
                     "SpawnPosition": -1,
-                    "PointValue": 0.0,
-                    "ModValue": 2.0
+                    "PointValue": 20.0,
+                    "ModValue": 5.0
                 },
                 {
                     "Id": 6,
                     "TargetType": 1,
                     "SpawnType": 0,
                     "SpawnPosition": 1,
-                    "PointValue": 0.0,
-                    "ModValue": 2.0
+                    "PointValue": 20.0,
+                    "ModValue": 5.0
                 }
             ]
         }
